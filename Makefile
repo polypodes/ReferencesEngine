@@ -32,17 +32,6 @@ createDb:
 	@php app/console doctrine:database:create
 	@php app/console doctrine:schema:update --force
 
-createFr:
-	@echo
-	@echo "Creating a FRENCH default website http://references (local=fr)..."
-	@php app/console sonata:page:create-site --default=true --locale="fr" --enabled=true --name="References" --relativePath="/" --host="references" --enabledFrom="now" --enabledTo="+10 years"
-
-routes:
-	@echo
-	@echo "Creating routes & snapshots..."
-	@php app/console sonata:page:update-core-routes --site=all
-	@php app/console sonata:page:create-snapshots --site=all
-
 clear:
 	@echo
 	@echo "Resetting cache..."
@@ -59,7 +48,7 @@ done:
 	@echo "\tpassword: lol (to match with the behat tests)"
 	@echo
 
-install: createDb createFr routes clear done
+install: createDb clear done
 
 reinstall: dropDb install
 
