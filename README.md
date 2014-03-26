@@ -1,5 +1,8 @@
 # References Engine
-##_a Symfony2-based References Books Generator_
+## Summary
+
+References Engine is a Symfony2-based References Books Generator.  
+It purposes is to give our salesforce unicorns a way to generate neat PDFs of our best references, to be attached to their call for tender / competing offers bids. 
 
 MIT licensed by [Les Polypodes](http://www.lespolypodes.com) (Nantes, France)
 
@@ -72,7 +75,9 @@ Preview is not available, so here's a cat instead:
 
 ##  Limits
 
-## Sonata bundle in use
+We have no limits.
+
+## Sonata bundles in use
 
 * [Symfony2 v2.3 documentation](http://symfony.com/doc/2.3/book/installation.html)
 * [Sonata Block](http://sonata-project.org/bundles/block/master/doc/reference/installation.html)
@@ -81,7 +86,7 @@ Preview is not available, so here's a cat instead:
 * [Sonata Media](http://sonata-project.org/bundles/media/master/doc/reference/installation.html)
 * [a Sonata CMS tutorial](http://www.coolcoyote.net/php-mysql/installation-du-cms-sonata-page)
 
-Note that [Sonata Page](http://sonata-project.org/bundles/page/master/doc/reference/installation.html) is NOT part of this project for now.
+Note that [Sonata Page](http://sonata-project.org/bundles/page/master/doc/reference/installation.html) is not part of this project for now.
 
 ## Support
 
