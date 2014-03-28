@@ -1,3 +1,7 @@
+application_refactor_reference:
+    resource: "@ApplicationRefactorReferenceBundle/Resources/config/routing.xml"
+    prefix:   /
+
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
     prefix: /media/gallery
