@@ -64,6 +64,8 @@ doctrine:
                     SonataMediaBundle: ~
                     ApplicationSonataUserBundle: ~
                     SonataUserBundle: ~
+                    FOSUserBundle: ~
+
 
 # Swiftmailer Configuration
 swiftmailer:
