@@ -1,7 +1,7 @@
 <?php
 
 namespace Application\Refactor\ReferenceBundle\Entity;
-use Application\Refactor\ReferenceBundle\Model\Fiche as FicheModel; 
+use Application\Refactor\ReferenceBundle\Model\Fiche as FicheModel;
 
 
 /**

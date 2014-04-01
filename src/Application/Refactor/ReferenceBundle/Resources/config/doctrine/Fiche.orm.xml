@@ -16,6 +16,11 @@
       <index name="search_idx" columns="title"/>
     </indexes>
     <field name="title" type="string" column="title" length="255" nullable="false"/>
+    <field name="title2" type="string" column="title2" length="255" nullable="true"/>
+    <field name="date" type="datetime" column="date" length="255" nullable="false"/>
+    <field name="description" type="text" column="description" nullable="true"/>
+    <field name="image_url" type="string" column="image_url" length="255" nullable="false"/>
+    <field name="image_alt" type="string" column="image_alt" length="255" nullable="true"/>
     <field name="created_at" type="datetime" column="created_at" nullable="false"/>
     <field name="updated_at" type="datetime" column="updated_at" nullable="true"/>
     <lifecycle-callbacks>

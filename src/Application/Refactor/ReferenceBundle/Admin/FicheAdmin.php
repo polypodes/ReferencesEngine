@@ -13,7 +13,12 @@ class FicheAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', 'text', array('label' => 'Post Title'))
+            ->add('title', null, array('label' => 'Title'))
+            ->add('title2', null, array('label' => 'Subtitle', 'required' => false))
+            ->add('date', null, array('label' => 'Date', 'widget' => 'single_text'))
+            ->add('description', null, array('label' => 'Description'))
+            ->add('image_url', null, array('label' => 'Image URL'))
+            ->add('image_alt', null, array('label' => 'Image alt', 'required' => false))
         ;
     }
 
@@ -22,6 +27,7 @@ class FicheAdmin extends Admin
     {
         $datagridMapper
             ->add('title')
+            ->add('date')
         ;
     }
 
@@ -30,7 +36,7 @@ class FicheAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('title')
-            // ->add('description')
+            ->add('date')
         ;
     }
 }
