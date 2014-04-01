@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "66ac0e268bbb43c0da87327b3c196ebb",
+    "hash": "63c4c6d3bae201550239234d9f1c7a0f",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -1242,17 +1242,17 @@
         },
         {
             "name": "genemu/form-bundle",
-            "version": "v2.2.2",
+            "version": "v2.2.0",
             "target-dir": "Genemu/Bundle/FormBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/genemu/GenemuFormBundle.git",
-                "reference": "9fecbe7a12fba1761228909e843301c4d1a11e7c"
+                "reference": "5d9984a259c586d75a25956d0d318a3ed44a564f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/genemu/GenemuFormBundle/zipball/9fecbe7a12fba1761228909e843301c4d1a11e7c",
-                "reference": "9fecbe7a12fba1761228909e843301c4d1a11e7c",
+                "url": "https://api.github.com/repos/genemu/GenemuFormBundle/zipball/5d9984a259c586d75a25956d0d318a3ed44a564f",
+                "reference": "5d9984a259c586d75a25956d0d318a3ed44a564f",
                 "shasum": ""
             },
             "require": {
@@ -1264,6 +1264,7 @@
                 "doctrine/doctrine-bundle": "1.*",
                 "doctrine/mongodb-odm-bundle": "*",
                 "doctrine/orm": "2.*",
+                "phpunit/phpunit": "3.7.*",
                 "propel/propel-bundle": "*",
                 "symfony/doctrine-bridge": "~2.3",
                 "symfony/finder": "2.*"
@@ -1308,7 +1309,7 @@
                 "extra form",
                 "form"
             ],
-            "time": "2014-03-23 12:12:05"
+            "time": "2013-06-05 17:09:18"
         },
         {
             "name": "imagine/imagine",

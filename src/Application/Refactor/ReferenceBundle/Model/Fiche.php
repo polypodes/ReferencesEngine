@@ -45,7 +45,12 @@ class Fiche
     /**
      * @var string $image_url
      */
-    protected $image_url;
+    //protected $image_url;
+
+    /**
+     * @var string $image
+     */
+    protected $image;
 
     /**
      * @var string $image_alt
@@ -218,21 +223,44 @@ class Fiche
      * @param string $url
      * @return Fiche
      */
-    public function setImageUrl($url)
+    /*public function setImageUrl($url)
     {
         $this->image_url = $url;
 
         return $this;
-    }
+    }*/
 
     /**
      * Get image_url
      *
      * @return string
      */
-    public function getImageUrl()
+    /*public function getImageUrl()
     {
         return $this->image_url;
+    }*/
+
+    /**
+     * Set image
+     *
+     * @param Application\Sonata\MediaBundle\Entity\Media $media
+     * @return Fiche
+     */
+    public function setImage($media)
+    {
+        $this->image = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 
     /**

@@ -34,13 +34,19 @@ class FicheAdmin extends Admin
             'source_field'   => 'rawContent',
             'source_field_options'      => array(
                 'attr' => array('class' => 'span10', 'rows' => 20)
-                ),
+            ),
             'listener'       => true,
             'target_field'   => 'content',
             'ckeditor_context'     => 'default',
             'ckeditor_toolbar_icons' => $ckeditor_toolbar_icons,
-            ))
-        ->add('image_url', null, array('label' => 'Image URL'))
+        ))
+        //->add('image_url', null, array('label' => 'Image URL'))
+        ->add('image', 'sonata_type_model_list', array(), array(
+            'link_parameters' => array(
+                'context' => 'default',
+                'provider' => 'sonata.media.provider.image',
+            )
+        ))
         ->add('image_alt', null, array('label' => 'Image alt', 'required' => false))
         ;
     }
@@ -67,7 +73,7 @@ class FicheAdmin extends Admin
         ;
 
         $errorElement
-        ->with('image_url')
+        ->with('image')
         ->assertNotBlank()
         ->assertNotNull()
         ->end()
@@ -81,7 +87,7 @@ class FicheAdmin extends Admin
     {
         $datagridMapper
         ->add('title')
-        ->add('date')
+        ->add('date', 'doctrine_orm_datetime', array(), 'genemu_jquerydate', array('widget' => 'single_text', 'required' => false, 'attr' => array('class' => 'datepicker')))
         ;
     }
 
@@ -89,8 +95,21 @@ class FicheAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+        ->add('image', null, array('format' => 'small'))
         ->addIdentifier('title')
         ->add('date')
         ;
+    }
+
+    public function getPersistentParameters()
+    {
+        if (!$this->getRequest()) {
+            return array();
+        }
+
+        return array(
+            'provider' => $this->getRequest()->get('provider'),
+            'context'  => $this->getRequest()->get('context'),
+        );
     }
 }
