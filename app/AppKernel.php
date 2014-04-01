@@ -24,6 +24,12 @@ class AppKernel extends Kernel
             new Sonata\jQueryBundle\SonatajQueryBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
+            # Formatter-related
+            new Sonata\MarkItUpBundle\SonataMarkItUpBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Sonata\FormatterBundle\SonataFormatterBundle(),
+
             # App-specific Sonata bundles
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
