@@ -28,9 +28,19 @@ class Fiche
     protected $date;
 
     /**
-     * @var text $description
+     * @var string content
      */
-    protected $description;
+    protected $content;
+
+    /**
+     * @var string content
+     */
+    protected $rawContent;
+
+    /**
+     * @var string content
+     */
+    protected $contentFormatter;
 
     /**
      * @var string $image_url
@@ -147,26 +157,59 @@ class Fiche
     }
 
     /**
-     * Set description
+     * Set content
      *
-     * @param text $description
-     * @return Fiche
+     * @param string $content
+     * @return Atelier
      */
-    public function setDescription($description)
+    public function setContent($content)
     {
-        $this->description = $description;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get content
      *
-     * @return text
+     * @return string
      */
-    public function getDescription()
+    public function getContent()
     {
-        return $this->description;
+        return $this->content;
+    }
+
+    public function setRawContent($rawContent)
+    {
+        $this->rawContent = $rawContent;
+
+        return $this;
+    }
+
+    /**
+     * Get rawContent
+     */
+    public function getRawContent()
+    {
+        return $this->rawContent;
+    }
+
+    /**
+     * Set contentFormatter
+     */
+    public function setContentFormatter($contentFormatter)
+    {
+        $this->contentFormatter = $contentFormatter;
+
+        return $this;
+    }
+
+    /**
+     * Get contentFormatter
+     */
+    public function getContentFormatter()
+    {
+        return $this->contentFormatter;
     }
 
     /**

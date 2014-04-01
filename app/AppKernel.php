@@ -42,6 +42,9 @@ class AppKernel extends Kernel
             new Application\Sonata\AdminBundle\ApplicationSonataAdminBundle(),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Application\Refactor\ReferenceBundle\ApplicationRefactorReferenceBundle(),
+
+            # Tiers bundles
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

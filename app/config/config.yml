@@ -102,3 +102,6 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
+
+genemu_form:
+    date: ~

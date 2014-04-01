@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5ef778e973d218da8de0dadd9c7ff582",
+    "hash": "66ac0e268bbb43c0da87327b3c196ebb",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -612,12 +612,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "bf9bcb39506047de069066ec63f57978f0d7b135"
+                "reference": "f7138381aa884c0f679da4de41e369b94ead9cd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/bf9bcb39506047de069066ec63f57978f0d7b135",
-                "reference": "bf9bcb39506047de069066ec63f57978f0d7b135",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/f7138381aa884c0f679da4de41e369b94ead9cd3",
+                "reference": "f7138381aa884c0f679da4de41e369b94ead9cd3",
                 "shasum": ""
             },
             "require": {
@@ -664,7 +664,7 @@
                 "migrations",
                 "schema"
             ],
-            "time": "2014-03-16 11:00:13"
+            "time": "2014-03-20 14:48:55"
         },
         {
             "name": "doctrine/inflector",
@@ -1239,6 +1239,76 @@
                 "uploadable"
             ],
             "time": "2014-01-12 16:34:06"
+        },
+        {
+            "name": "genemu/form-bundle",
+            "version": "v2.2.2",
+            "target-dir": "Genemu/Bundle/FormBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/genemu/GenemuFormBundle.git",
+                "reference": "9fecbe7a12fba1761228909e843301c4d1a11e7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/genemu/GenemuFormBundle/zipball/9fecbe7a12fba1761228909e843301c4d1a11e7c",
+                "reference": "9fecbe7a12fba1761228909e843301c4d1a11e7c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/form": "~2.3",
+                "symfony/framework-bundle": "~2.3"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "1.*",
+                "doctrine/mongodb-odm-bundle": "*",
+                "doctrine/orm": "2.*",
+                "propel/propel-bundle": "*",
+                "symfony/doctrine-bridge": "~2.3",
+                "symfony/finder": "2.*"
+            },
+            "suggest": {
+                "symfony/doctrine-bundle": "In order to use some form types with Doctrine",
+                "symfony/finder": "For an image type",
+                "symfony/mongodb-odm-bundle": "For MongoDB integration",
+                "symfony/twig-bridge": "For integration into Twig templates"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Genemu\\Bundle\\FormBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Chauvel",
+                    "email": "olivier@generation-multiple.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/genemu/GenemuFormBundle/contributors"
+                },
+                {
+                    "name": "Bilal Amarni",
+                    "email": "bilal.amarni@gmail.com"
+                }
+            ],
+            "description": "Extra form types for your Symfony2 projects",
+            "keywords": [
+                "extra form",
+                "form"
+            ],
+            "time": "2014-03-23 12:12:05"
         },
         {
             "name": "imagine/imagine",
@@ -2389,16 +2459,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "6225b22de9dcf36546be3a0b2fa8e3d986153f57"
+                "reference": "392ef35fd470638e08d0160d6b1cbab63cb23174"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/6225b22de9dcf36546be3a0b2fa8e3d986153f57",
-                "reference": "6225b22de9dcf36546be3a0b2fa8e3d986153f57",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/392ef35fd470638e08d0160d6b1cbab63cb23174",
+                "reference": "392ef35fd470638e08d0160d6b1cbab63cb23174",
                 "shasum": ""
             },
             "require": {
@@ -2406,11 +2476,11 @@
                 "psr/log": "~1.0"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "~2.4.8",
-                "doctrine/couchdb": "dev-master",
-                "mlehner/gelf-php": "1.0.*",
+                "aws/aws-sdk-php": "~2.4, >2.4.8",
+                "doctrine/couchdb": "~1.0@dev",
+                "graylog2/gelf-php": "~1.0",
                 "phpunit/phpunit": "~3.7.0",
-                "raven/raven": "0.5.*",
+                "raven/raven": "~0.5",
                 "ruflin/elastica": "0.90.*"
             },
             "suggest": {
@@ -2418,19 +2488,20 @@
                 "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
-                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "raven/raven": "Allow sending log messages to a Sentry server",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
                 "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.8.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Monolog": "src/"
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2452,7 +2523,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2013-11-14 19:48:31"
+            "time": "2014-03-23 19:50:26"
         },
         {
             "name": "mopa/bootstrap-bundle",
@@ -3653,16 +3724,16 @@
         },
         {
             "name": "sonata-project/google-authenticator",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/GoogleAuthenticator.git",
-                "reference": "0bb0f409a93da46fd76fe641b3f0c5aa52d3c063"
+                "reference": "72f47caddd09d09c0d3c3e046f6b435e0c004cd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/GoogleAuthenticator/zipball/0bb0f409a93da46fd76fe641b3f0c5aa52d3c063",
-                "reference": "0bb0f409a93da46fd76fe641b3f0c5aa52d3c063",
+                "url": "https://api.github.com/repos/sonata-project/GoogleAuthenticator/zipball/72f47caddd09d09c0d3c3e046f6b435e0c004cd4",
+                "reference": "72f47caddd09d09c0d3c3e046f6b435e0c004cd4",
                 "shasum": ""
             },
             "require": {
@@ -3699,7 +3770,7 @@
             "keywords": [
                 "google authenticator"
             ],
-            "time": "2014-02-14 12:23:00"
+            "time": "2014-03-31 09:18:53"
         },
         {
             "name": "sonata-project/intl-bundle",
@@ -4530,20 +4601,21 @@
         },
         {
             "name": "symfony/icu",
-            "version": "v1.0.0",
+            "version": "v1.2.1",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Icu.git",
-                "reference": "cac3fdfb111adbe590155f491594636d45129783"
+                "reference": "98e197da54df1f966dd5e8a4992135703569c987"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/cac3fdfb111adbe590155f491594636d45129783",
-                "reference": "cac3fdfb111adbe590155f491594636d45129783",
+                "url": "https://api.github.com/repos/symfony/Icu/zipball/98e197da54df1f966dd5e8a4992135703569c987",
+                "reference": "98e197da54df1f966dd5e8a4992135703569c987",
                 "shasum": ""
             },
             "require": {
+                "lib-icu": ">=4.4",
                 "php": ">=5.3.3",
                 "symfony/intl": "~2.3"
             },
@@ -4573,7 +4645,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-06-03 18:32:07"
+            "time": "2013-10-04 10:06:38"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -5909,12 +5981,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "2c8b000e697281e33e95eeac1134e9e03a9b9f9b"
+                "reference": "5f3b795d37488439fc08ca6c7b33ec8fb28f643d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/2c8b000e697281e33e95eeac1134e9e03a9b9f9b",
-                "reference": "2c8b000e697281e33e95eeac1134e9e03a9b9f9b",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/5f3b795d37488439fc08ca6c7b33ec8fb28f643d",
+                "reference": "5f3b795d37488439fc08ca6c7b33ec8fb28f643d",
                 "shasum": ""
             },
             "require": {
@@ -5974,7 +6046,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2014-03-19 14:04:42"
+            "time": "2014-03-19 14:23:26"
         },
         {
             "name": "phpspec/prophecy",
@@ -6033,16 +6105,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "1.2.16",
+            "version": "1.2.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "69e55e68481cf708a6db43aff0b504e31402fe27"
+                "reference": "6ef2bf3a1c47eca07ea95f0d8a902a6340390b34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/69e55e68481cf708a6db43aff0b504e31402fe27",
-                "reference": "69e55e68481cf708a6db43aff0b504e31402fe27",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6ef2bf3a1c47eca07ea95f0d8a902a6340390b34",
+                "reference": "6ef2bf3a1c47eca07ea95f0d8a902a6340390b34",
                 "shasum": ""
             },
             "require": {
@@ -6090,7 +6162,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-02-25 03:34:05"
+            "time": "2014-03-28 10:53:45"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -6277,16 +6349,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "3.7.32",
+            "version": "3.7.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2752cbb9ea5bd84c2811b34b6953f76965ec7a2f"
+                "reference": "248d6ce95e6ca7f0e3135252c0b984bbe1f52f19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2752cbb9ea5bd84c2811b34b6953f76965ec7a2f",
-                "reference": "2752cbb9ea5bd84c2811b34b6953f76965ec7a2f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/248d6ce95e6ca7f0e3135252c0b984bbe1f52f19",
+                "reference": "248d6ce95e6ca7f0e3135252c0b984bbe1f52f19",
                 "shasum": ""
             },
             "require": {
@@ -6295,11 +6367,11 @@
                 "ext-reflection": "*",
                 "ext-spl": "*",
                 "php": ">=5.3.3",
-                "phpunit/php-code-coverage": "~1.2.1",
-                "phpunit/php-file-iterator": ">=1.3.1",
-                "phpunit/php-text-template": ">=1.1.1",
-                "phpunit/php-timer": ">=1.0.4",
-                "phpunit/phpunit-mock-objects": "~1.2.0",
+                "phpunit/php-code-coverage": "~1.2",
+                "phpunit/php-file-iterator": "~1.3",
+                "phpunit/php-text-template": "~1.1",
+                "phpunit/php-timer": "~1.0",
+                "phpunit/phpunit-mock-objects": "~1.2",
                 "symfony/yaml": "~2.0"
             },
             "require-dev": {
@@ -6309,7 +6381,7 @@
                 "ext-json": "*",
                 "ext-simplexml": "*",
                 "ext-tokenizer": "*",
-                "phpunit/php-invoker": ">=1.1.0,<1.2.0"
+                "phpunit/php-invoker": "~1.1"
             },
             "bin": [
                 "composer/bin/phpunit"
@@ -6347,7 +6419,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-02-25 03:47:29"
+            "time": "2014-03-28 11:04:36"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
