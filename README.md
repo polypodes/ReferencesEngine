@@ -64,7 +64,7 @@ bin/behat -dl --lang=fr
 To test your scenarii:
 
 ```bash
-bin/behat --lang=fr "@ApplicationSonataAdminBundle"
+bin/behat --lang=fr "@ApplicationRefactorReferenceBundle"
 ```
 
 ## Preview
