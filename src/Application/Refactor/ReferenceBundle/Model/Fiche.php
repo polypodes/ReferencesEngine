@@ -2,6 +2,10 @@
 
 namespace Application\Refactor\ReferenceBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Application\Refactor\ReferenceBundle\Entity\FicheRender;
+use Application\Refactor\ReferenceBundle\Entity\FicheMedia;
+
 /**
  * @author <yourname> <youremail>
  */
@@ -43,11 +47,6 @@ class Fiche
     protected $contentFormatter;
 
     /**
-     * @var string $image_url
-     */
-    //protected $image_url;
-
-    /**
      * @var string $image
      */
     protected $image;
@@ -56,6 +55,16 @@ class Fiche
      * @var string $image_alt
      */
     protected $image_alt;
+
+    /**
+     * @var string $renders
+     */
+    protected $renders;
+
+    /**
+     * @var string $medias
+     */
+    protected $medias;
 
     /**
      * @var \Datetime created_at
@@ -67,13 +76,19 @@ class Fiche
      */
     protected $updated_at;
 
+    /**
+     * @var boolean published
+     */
+    protected $published;
+
 
     /**
      * .ctor()
      */
     public function __construct()
     {
-
+        $this->renders = new ArrayCollection();
+        $this->medias = new ArrayCollection();
     }
 
     public function __toString()
@@ -218,29 +233,6 @@ class Fiche
     }
 
     /**
-     * Set image_url
-     *
-     * @param string $url
-     * @return Fiche
-     */
-    /*public function setImageUrl($url)
-    {
-        $this->image_url = $url;
-
-        return $this;
-    }*/
-
-    /**
-     * Get image_url
-     *
-     * @return string
-     */
-    /*public function getImageUrl()
-    {
-        return $this->image_url;
-    }*/
-
-    /**
      * Set image
      *
      * @param Application\Sonata\MediaBundle\Entity\Media $media
@@ -286,6 +278,85 @@ class Fiche
         return $this->image_alt;
     }
 
+
+    /**
+     * Get renders
+     *
+     * @return Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getRenders()
+    {
+        return $this->renders;
+    }
+
+    /**
+     * Set renders
+     *
+     * @param Application\Sonata\MediaBundle\Entity\Media $media
+     */
+    public function setRenders($ficheRenders)
+    {
+        //$this->renders = new ArrayCollection();
+
+        foreach($ficheRenders as $r)
+        {
+            $r->setFiche($this);
+            $this->addRender($r);
+        }
+    }
+
+    public function addRender($ficheRender)
+    {
+        $this->renders[] = $ficheRender;
+        return $this;
+    }
+
+    public function removeRender($ficheRender)
+    {
+        return $this->renders->removeElement($ficheRender);
+    }
+
+
+    /**
+     * Get medias
+     *
+     * @return Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    /**
+     * Set medias
+     *
+     * @param Application\Sonata\MediaBundle\Entity\Media $medias
+     */
+    public function setMedias($ficheMedias)
+    {
+        //$this->medias = new ArrayCollection();
+
+        foreach($ficheMedias as $m)
+        {
+            $m->setFiche($this);
+            $this->addMedia($m);
+        }
+
+        return $this;
+    }
+
+    public function addMedia($ficheMedia)
+    {
+        $this->medias[] = $ficheMedia;
+        return $this;
+    }
+
+    public function removeMedia($ficheMedia)
+    {
+        return $this->medias->removeElement($ficheMedia);
+    }
+
+
     /**
      * Set created_at
      *
@@ -330,6 +401,29 @@ class Fiche
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean published
+     * @return Fiche
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
     }
 
   }

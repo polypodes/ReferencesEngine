@@ -10,6 +10,20 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 
 class FicheAdmin extends Admin
 {
+    /**
+     * Default Datagrid values
+     *
+     * @var array
+     */
+    protected $datagridValues = array(
+        '_page' => 1,            // display the first page (default = 1)
+        '_sort_order' => 'DESC', // reverse order (default = 'ASC')
+        '_sort_by' => 'created_at'  // name of the ordered field
+                                 // (default = the model's id field, if any)
+
+        // the '_sort_by' key can be of the form 'mySubModel.mySubSubModel.myField'.
+    );
+
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -19,9 +33,10 @@ class FicheAdmin extends Admin
                 '-', 'Undo', 'Redo',
                 '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
                 '-', 'Blockquote',
-                '-', 'Image', 'Link', 'Unlink', 'Table'),
+                '-', 'Image', 'Link', 'Unlink', 'Table'
+            ),
             2 => array('Maximize', 'Source')
-            );
+        );
 
         $formMapper
         ->add('title', null, array('label' => 'Title'))
@@ -40,7 +55,6 @@ class FicheAdmin extends Admin
             'ckeditor_context'     => 'default',
             'ckeditor_toolbar_icons' => $ckeditor_toolbar_icons,
         ))
-        //->add('image_url', null, array('label' => 'Image URL'))
         ->add('image', 'sonata_type_model_list', array(), array(
             'link_parameters' => array(
                 'context' => 'default',
@@ -48,6 +62,44 @@ class FicheAdmin extends Admin
             )
         ))
         ->add('image_alt', null, array('label' => 'Image alt', 'required' => false))
+
+        ->add('renders', 'sonata_type_collection',
+            array(
+                'label' => 'Renders',
+                'required' => false,
+                'cascade_validation' => true,
+                'by_reference' => true,
+                //'expanded' => true,
+                //'multiple' => true,
+            ),
+            array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+                'link_parameters' => array(
+                    'context' => 'default',
+                    'provider' => 'sonata.media.provider.image',
+                )
+            )
+        )
+        ->add('medias', 'sonata_type_collection',
+            array(
+                'label' => 'Associated medias',
+                'required' => false,
+                //'expanded' => true,
+                //'multiple' => true,
+            ),
+            array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+                'link_parameters' => array(
+                    'context' => 'default',
+                    //'provider' => 'sonata.media.provider.image',
+                )
+            )
+        )
+        ->add('published', null, array('label' => 'Published', 'required' => false))
         ;
     }
 
@@ -97,7 +149,15 @@ class FicheAdmin extends Admin
         $listMapper
         ->add('image', null, array('format' => 'small'))
         ->addIdentifier('title')
-        ->add('date')
+        ->add('date', 'date', array('format' => 'F Y'))
+        ->add('published', 'boolean', array('editable' => true))
+        ->add('_action', 'actions', array(
+            'actions' => array(
+                'show' => array(),
+                'edit' => array(),
+                'delete' => array(),
+            )
+        ))
         ;
     }
 
@@ -111,5 +171,17 @@ class FicheAdmin extends Admin
             'provider' => $this->getRequest()->get('provider'),
             'context'  => $this->getRequest()->get('context'),
         );
+    }
+
+    public function prePersist($fiche)
+    {
+        $fiche->setRenders($fiche->getRenders());
+        $fiche->setMedias($fiche->getMedias());
+    }
+
+    public function preUpdate($fiche)
+    {
+        $fiche->setRenders($fiche->getRenders());
+        $fiche->setMedias($fiche->getMedias());
     }
 }

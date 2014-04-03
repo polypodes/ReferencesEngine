@@ -103,5 +103,27 @@ services:
         calls:
             - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
 
+    application.refactor.reference.admin.fiche_render:
+        class: Application\Refactor\ReferenceBundle\Admin\FicheRenderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "FicheRender", show_in_dashboard: false }
+        arguments:
+            - ~
+            - Application\Refactor\ReferenceBundle\Entity\FicheRender
+            - ~
+        calls:
+            - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
+
+    application.refactor.reference.admin.fiche_media:
+        class: Application\Refactor\ReferenceBundle\Admin\FicheMediaAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "FicheMedia", show_in_dashboard: false }
+        arguments:
+            - ~
+            - Application\Refactor\ReferenceBundle\Entity\FicheMedia
+            - ~
+        calls:
+            - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
+
 genemu_form:
     date: ~
