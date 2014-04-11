@@ -8,12 +8,12 @@
             xml mapping          : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/xml-mapping/en
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
-  <entity name="Application\Refactor\ReferenceBundle\Entity\FicheRender" table="reference__fiche_render">
+  <entity name="Application\Refactor\ReferenceBundle\Entity\FicheTag" table="reference__fiche_tag">
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
-    <many-to-one field="fiche" target-entity="Application\Refactor\ReferenceBundle\Entity\Fiche" inversed-by="renders"/>
-    <many-to-one field="media" target-entity="Application\Sonata\MediaBundle\Entity\Media"/>
+    <many-to-one field="fiche" target-entity="Application\Refactor\ReferenceBundle\Entity\Fiche" inversed-by="tags"/>
+    <many-to-one field="tag" target-entity="Application\Refactor\ReferenceBundle\Entity\Tag"/>
     <field name="order" type="integer" column="`order`" length="10" nullable="false"/>
   </entity>
 </doctrine-mapping>

@@ -5,6 +5,7 @@ namespace Application\Refactor\ReferenceBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Application\Refactor\ReferenceBundle\Entity\FicheRender;
 use Application\Refactor\ReferenceBundle\Entity\FicheMedia;
+use Application\Refactor\ReferenceBundle\Entity\FicheTag;
 
 /**
  * @author <yourname> <youremail>
@@ -67,6 +68,11 @@ class Fiche
     protected $medias;
 
     /**
+     * @var string $tags
+     */
+    protected $tags;
+
+    /**
      * @var \Datetime created_at
      */
     protected $created_at;
@@ -89,6 +95,7 @@ class Fiche
     {
         $this->renders = new ArrayCollection();
         $this->medias = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function __toString()
@@ -256,30 +263,6 @@ class Fiche
     }
 
     /**
-     * Set image_alt
-     *
-     * @param string $description
-     * @return Fiche
-     */
-    public function setImageAlt($alt)
-    {
-        $this->image_alt = $alt;
-
-        return $this;
-    }
-
-    /**
-     * Get image_alt
-     *
-     * @return string
-     */
-    public function getImageAlt()
-    {
-        return $this->image_alt;
-    }
-
-
-    /**
      * Get renders
      *
      * @return Application\Sonata\MediaBundle\Entity\Media
@@ -356,6 +339,44 @@ class Fiche
         return $this->medias->removeElement($ficheMedia);
     }
 
+    /**
+     * Get tags
+     *
+     * @return Application\Refactor\ReferenceBundle\Entity\FicheTag
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Set tags
+     *
+     * @param Application\Refactor\ReferenceBundle\Entity\FicheTag $tags
+     */
+    public function setTags($tags)
+    {
+        //$this->medias = new ArrayCollection();
+
+        foreach($tags as $t)
+        {
+            $t->setFiche($this);
+            $this->addTag($t);
+        }
+
+        return $this;
+    }
+
+    public function addTag($tag)
+    {
+        $this->tags[] = $tag;
+        return $this;
+    }
+
+    public function removeTag($tag)
+    {
+        return $this->tags->removeElement($tag);
+    }
 
     /**
      * Set created_at

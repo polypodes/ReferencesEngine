@@ -95,13 +95,16 @@ services:
     application.refactor.reference.admin.fiche:
         class: Application\Refactor\ReferenceBundle\Admin\FicheAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Fiche" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "References" }
         arguments:
             - ~
             - Application\Refactor\ReferenceBundle\Entity\Fiche
             - ~
         calls:
             - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
+            - [ setTemplate, [list, ApplicationRefactorReferenceBundle:Fiche:list.html.twig]]
+            - [ setTemplate, [orm_one_to_many, ApplicationRefactorReferenceBundle:Fiche:list_orm_one_to_many.html.twig]]
+
 
     application.refactor.reference.admin.fiche_render:
         class: Application\Refactor\ReferenceBundle\Admin\FicheRenderAdmin
@@ -125,5 +128,50 @@ services:
         calls:
             - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
 
+    application.refactor.reference.admin.tag:
+        class: Application\Refactor\ReferenceBundle\Admin\TagAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Tags" }
+        arguments:
+            - ~
+            - Application\Refactor\ReferenceBundle\Entity\Tag
+            - ~
+        calls:
+            - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
+
+    application.refactor.reference.admin.fiche_tag:
+        class: Application\Refactor\ReferenceBundle\Admin\FicheTagAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "FicheTag", show_in_dashboard: false }
+        arguments:
+            - ~
+            - Application\Refactor\ReferenceBundle\Entity\FicheTag
+            - ~
+        calls:
+            - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
+
+    application_refactor_reference.admin.book:
+        class: Application\Refactor\ReferenceBundle\Admin\BookAdmin
+        arguments:
+            - ~
+            - Application\Refactor\ReferenceBundle\Entity\Book
+            - ~
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Content", label: "Books"}
+        calls:
+            - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
+
+    application_refactor_reference.admin.fiche_book:
+        class: Application\Refactor\ReferenceBundle\Admin\FicheBookAdmin
+        arguments:
+            - ~
+            - Application\Refactor\ReferenceBundle\Entity\FicheBook
+            - ~
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: "Content", label: "FicheBook", show_in_dashboard: false}
+        calls:
+            - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
+
 genemu_form:
     date: ~
+

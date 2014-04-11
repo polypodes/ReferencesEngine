@@ -151,10 +151,34 @@ class Tag
     {
         $this->created_at = new \DateTime;
         $this->updated_at = $this->created_at;
+
+        $slug = $this->getSlug();
+        if (empty($slug))
+        {
+            $this->slug = $this->slugify($this->getTitle());
+        } else {
+            $this->slug = $this->slugify($this->getSlug());
+        }
     }
 
     public function preUpdate()
     {
         $this->updated_at = new \DateTime;
+
+        $slug = $this->getSlug();
+        if (empty($slug))
+        {
+            $this->slug = $this->slugify($this->getTitle());
+        } else {
+            $this->slug = $this->slugify($this->getSlug());
+        }
+    }
+
+    public function slugify($str, $char = '-')
+    {
+        //$str = strtolower( trim( preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', iconv('UTF-8', 'ASCII//TRANSLIT', $str) ), $char ) );
+        //$str = preg_replace("/[\/_|+ -]+/", $char, $str);
+        //return $str;
+        return strtolower(trim(preg_replace('~[^0-9a-z]+~i', $char, html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($str, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), $char));
     }
 }

@@ -8,39 +8,20 @@
             xml mapping          : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/xml-mapping/en
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
-  <entity name="Application\Refactor\ReferenceBundle\Entity\Fiche" table="reference__fiche">
+  <entity name="Application\Refactor\ReferenceBundle\Entity\Tag" table="reference__tag">
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
     <indexes>
       <index name="search_idx" columns="title"/>
     </indexes>
+
     <field name="title" type="string" column="title" length="255" nullable="false"/>
-    <field name="title2" type="string" column="title2" length="255" nullable="true"/>
-    <field name="date" type="date" column="date" length="255" nullable="false"/>
-    <field name="content" type="text" column="content" nullable="true"/>
-    <field name="rawContent" column="raw_content" type="text" nullable="true"/>
-    <field name="contentFormatter" column="content_formatter" type="string" nullable="true"/>
-    <!--<field name="image_url" type="string" column="image_url" length="255" nullable="false"/>-->
-    <many-to-one field="image" target-entity="Application\Sonata\MediaBundle\Entity\Media">
-      <cascade>
-        <cascade-all/>
-      </cascade>
-    </many-to-one>
-    <field name="image_alt" type="string" column="image_alt" length="255" nullable="true"/>
-    <one-to-many field="renders" target-entity="Application\Refactor\ReferenceBundle\Entity\FicheRender" mapped-by="fiche">
-      <cascade>
-        <cascade-all/>
-      </cascade>
-    </one-to-many>
-    <one-to-many field="medias" target-entity="Application\Refactor\ReferenceBundle\Entity\FicheMedia" mapped-by="fiche">
-      <cascade>
-        <cascade-all/>
-      </cascade>
-    </one-to-many>
+    <field name="slug" column="slug" type="string" nullable="true"/>
+
     <field name="created_at" type="datetime" column="created_at" nullable="false"/>
     <field name="updated_at" type="datetime" column="updated_at" nullable="true"/>
-    <field name="published" type="boolean" column="published" length="1" nullable="false"/>
+
     <lifecycle-callbacks>
       <lifecycle-callback type="prePersist" method="prePersist"/>
       <lifecycle-callback type="preUpdate" method="preUpdate"/>

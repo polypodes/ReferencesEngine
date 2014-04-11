@@ -27,13 +27,17 @@
         <cascade-all/>
       </cascade>
     </many-to-one>
-    <field name="image_alt" type="string" column="image_alt" length="255" nullable="true"/>
     <one-to-many field="renders" target-entity="Application\Refactor\ReferenceBundle\Entity\FicheRender" mapped-by="fiche">
       <cascade>
         <cascade-all/>
       </cascade>
     </one-to-many>
     <one-to-many field="medias" target-entity="Application\Refactor\ReferenceBundle\Entity\FicheMedia" mapped-by="fiche">
+      <cascade>
+        <cascade-all/>
+      </cascade>
+    </one-to-many>
+    <one-to-many field="tags" target-entity="Application\Refactor\ReferenceBundle\Entity\FicheTag" mapped-by="fiche">
       <cascade>
         <cascade-all/>
       </cascade>
