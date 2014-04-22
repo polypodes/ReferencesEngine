@@ -160,6 +160,7 @@ services:
             - {name: sonata.admin, manager_type: orm, group: "Content", label: "Books"}
         calls:
             - [ setTranslationDomain, [ApplicationRefactorReferenceBundle]]
+            - [ setTemplate, [list, ApplicationRefactorReferenceBundle:Book:list.html.twig]]
 
     application_refactor_reference.admin.fiche_book:
         class: Application\Refactor\ReferenceBundle\Admin\FicheBookAdmin

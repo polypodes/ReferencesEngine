@@ -5,9 +5,9 @@
 {% extends 'SonataAdminBundle:CRUD:list.html.twig' %}
 
 {% block actions %}
-    <div class="sonata-actions btn-group">
+    <!--<div class="sonata-actions btn-group">
         {% include 'SonataAdminBundle:Core:create_button.html.twig' %}
-    </div>
+    </div>-->
 {% endblock %}
 
 {% block side_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active'}, 'list') }}{% endblock %}
@@ -17,7 +17,7 @@
     {{ sonata_block_render_event('sonata.admin.list.table.top', { 'admin': admin }) }}
 
     {% block list_header %}
-        <h1>References</h1>
+        <h1>Books</h1>
     {% endblock %}
 
     {% set batchactions = admin.batchactions %}
@@ -26,6 +26,24 @@
         <form action="{{ admin.generateUrl('batch', {'filter': admin.filterParameters}) }}" method="POST" >
             <input type="hidden" name="_sonata_csrf_token" value="{{ csrf_token }}">
         {% endif %}
+            <section class="entities-list">
+                {# dump(admin.list.elements) #}
+                <article class="new">
+                    {% include 'SonataAdminBundle:Core:create_button.html.twig' %}
+                </article>
+
+                {% for object in admin.datagrid.results %}
+                <article class="element">
+                    <h1>{{ object.title }}</h1>
+                    <h2>{{ object.clientName }}</h2>
+                    {# include 'SonataAdminBundle:CRUD:list__action.html.twig' #}
+                    <div class="actions">
+                        {# include admin.getTemplate('_action_edit') #}
+                        {# include admin.getTemplate('_action_delete') #}
+                    </div>
+                </article>
+                {% endfor %}
+            </section>
             <table class="table table-bordered table-striped">
                 {% block table_header %}
                     <thead>

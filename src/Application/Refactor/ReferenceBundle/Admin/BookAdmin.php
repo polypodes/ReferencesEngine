@@ -35,6 +35,7 @@ class BookAdmin extends Admin
             ->add('clientName')
             ->add('projectName')
             ->add('date')
+            ->add('fiches')
             ->add('published')
             ->add('_action', 'actions', array(
                 'actions' => array(
