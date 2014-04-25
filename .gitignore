@@ -18,3 +18,5 @@ build/*
 bin/*
 composer.phar
 
+# Mac Files
+*.DS_Store
