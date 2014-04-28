@@ -4,6 +4,9 @@ namespace Application\Refactor\ReferenceBundle\Entity;
 
 //use Doctrine\Common\Collections\ArrayCollection;
 
+use app\Faker\autoload;
+use Faker;
+
 
 class Tag
 {
@@ -180,5 +183,16 @@ class Tag
         //$str = preg_replace("/[\/_|+ -]+/", $char, $str);
         //return $str;
         return strtolower(trim(preg_replace('~[^0-9a-z]+~i', $char, html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($str, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), $char));
+    }
+
+    public function getFake()
+    {
+        $faker = Faker\Factory::create();
+        $this->setTitle($faker->word);
+        $this->setSlug($faker->word);
+        $this->setCreatedAt($faker->dateTime($max = 'now'));
+        $this->setUpdatedAt($faker->dateTime($max = 'now'));
+        return $this;
+
     }
 }

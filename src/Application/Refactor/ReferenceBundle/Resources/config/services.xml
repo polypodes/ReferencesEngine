@@ -7,10 +7,15 @@
 
     <services>
         <service id="application_refactor_reference.example" class="%application_refactor_reference.example.class%">
-            <argument type="service" id="service_id" />
+                <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>
         </service>
     </services>
     -->
+    <services>
+        <service id="myreference.fakergenerator" class="Application\Refactor\ReferenceBundle\Services\FakerGenerator\FakerGenerator">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+    </services>
 </container>

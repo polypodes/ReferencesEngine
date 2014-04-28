@@ -4,6 +4,9 @@ namespace Application\Refactor\ReferenceBundle\Entity;
 
 //use Doctrine\ORM\Mapping as ORM;
 
+use app\Faker\autoload;
+use Faker;
+
 /**
  * Book
  */
@@ -277,5 +280,16 @@ class Book
     public function preUpdate()
     {
         $this->updated_at = new \DateTime;
+    }
+    public function getFake()
+    {
+        $faker = Faker\Factory::create();
+        $this->setTitle($faker->sentence($nbWords=6));
+        $this->setClientName($faker->name);
+        $this->setProjectName($faker->sentence($nbWords=6));
+        $this->setDate($faker->dateTime($max = 'now'));
+        $this->setUpdatedAt($faker->dateTime($max = 'now'));
+        $this->setCreatedAt($faker->dateTime($max = 'now'));
+        $this->setPublished(true);
     }
 }

@@ -446,5 +446,4 @@ class Fiche
     {
         return $this->published;
     }
-
   }
