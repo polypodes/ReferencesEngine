@@ -32,7 +32,6 @@ class Fiche extends FicheModel
         $this->setContent($faker->text);
         $this->setRawContent($faker->text);
         $this->setContentFormatter('null');
-        // $this->setImage($faker->imageUrl($width = 640, $height = 480));
         $this->setPublished(true);
     }
 

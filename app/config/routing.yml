@@ -1,5 +1,5 @@
 application_refactor_reference:
-    resource: "@ApplicationRefactorReferenceBundle/Resources/config/routing.xml"
+    resource: "@ApplicationRefactorReferenceBundle/Resources/config/routing.yml"
     prefix:   /
 
 gallery:

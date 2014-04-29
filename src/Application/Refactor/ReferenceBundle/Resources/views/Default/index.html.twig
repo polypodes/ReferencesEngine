@@ -1,1 +1,52 @@
-Hello {{ name }}!
+{% extends "::layout.html.twig" %}
+{% block body %}
+<p>
+	<h2>
+		<div class="row">
+		    <div class="col-lg-3">
+		    	Liste des Books :
+		    </div>
+		    <div class="col-lg-4">
+		    	<form class="form-inline" role="form">
+  					<div class="form-group">
+    					<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Client, Tag, Année">
+  					</div>
+  					<button type="submit" class="btn btn-default">
+  						Recherche
+  					</button>
+		  		</form>
+			</div>
+		</div>
+	</h2>
+</p>
+<div class = "item-container">
+	<div class="row">
+		<div class="col-xs-6 col-md-3">
+			<div class="thumbnail">
+	      		<div class="caption" style="text-align:center;">
+			<button type="button" class="btn btn-primary btn-lg">Nouveau Cahier</button>
+						    </div>
+			</div>
+		</div>
+	{% for project in projects %}
+	  	<div class="col-xs-6 col-md-3">
+	    	<div class="thumbnail">
+	      		<div class="caption">
+	        		<h4>{{project.title}}<p><small>{{project.clientName}}</small></h4></p>
+	        		<p>
+	        			<a href="#" class="btn label-warning" role="button">
+		        		<span class="glyphicon glyphicon-edit"></span>
+		        		<span class="glyphicon-class" style="color:white;">Modifier</span>
+	          			</a> 
+			        	<a class="label-danger btn btn-remove" role="button" data-id = "{{project.id}}" data-title="{{project.title}}">
+			        		<span class="glyphicon glyphicon-remove"></span>
+			        		<span class="glyphicon-class" style="color:white;" data-layout="center" data-type="confirm">Suprimer</span>
+			        	</a>
+			        </p>
+			    </div>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+</div>
+{% endblock %}

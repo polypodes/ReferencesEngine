@@ -50,6 +50,7 @@ class FakerGenerator
 	        $em->persist($fichemedia);
 	        $em->flush();
 	    }
+	    // Need to be updated for Renders
 	    for ($i=0; $i < 2; $i++) { 
 	        $book = new Book();
 	        $book->getFake();

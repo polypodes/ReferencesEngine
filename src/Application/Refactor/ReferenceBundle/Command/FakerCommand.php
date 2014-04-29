@@ -20,24 +20,11 @@ class FakerCommand extends ContainerAwareCommand
         $this
             ->setName('generate:faker:project')
             ->setDescription('Genererate projects')
-            // ->addArgument(
-            //     'number',
-            //     InputArgument::OPTIONAL,
-            //     'How much?'
-            // )
-            // ->addOption(
-            //    '',
-            //    null,
-            //    InputOption::VALUE_NONE,
-            //    ''
-            // )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
-        $text = 
         if($this->getContainer()->get('myreference.fakergenerator'))
             $text = 'Database updated!';
         else

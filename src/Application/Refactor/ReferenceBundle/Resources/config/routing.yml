@@ -1,0 +1,3 @@
+refactor_project:
+    path:  /
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:index}
