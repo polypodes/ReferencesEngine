@@ -18,8 +18,8 @@ class FakerCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('generate:faker:project')
-            ->setDescription('Genererate projects')
+            ->setName('generate:faker')
+            ->setDescription('Genererate base of test')
         ;
     }
 

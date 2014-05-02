@@ -10,3 +10,25 @@ body { padding-top: 70px; }
 {
 	padding-top: 20px;
 }
+.project-img:hover
+{
+	opacity: 0.2;
+}
+.project
+{
+	width: 350px;
+}
+.project-mouseover
+{
+	height: 350px;
+}
+.project-btn
+{
+	display: none;
+}
+ul
+{
+	list-style-type: none;
+	margin:0;
+padding:0;
+}

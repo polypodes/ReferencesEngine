@@ -29,6 +29,7 @@ twig:
     form:
         resources:
             - 'SonataFormatterBundle:Form:formatter.html.twig'
+            - 'ApplicationRefactorReferenceBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -175,4 +176,19 @@ services:
 
 genemu_form:
     date: ~
+sonata_media:
+    # if you don't use default namespace configuration
+    #class:
+    #    media: MyVendor\MediaBundle\Entity\Media
+    #    gallery: MyVendor\MediaBundle\Entity\Gallery
+    #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
+    default_context: default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        default:  # the default context is mandatory
+            formats:
+                small: { width: 100 , quality: 70}
+                thumbnail: { width: 340 , quality: 70}
+                big:   { width: 500 , quality: 70}
+
 

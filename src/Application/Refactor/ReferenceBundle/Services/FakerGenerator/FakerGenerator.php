@@ -9,6 +9,7 @@ use Application\Refactor\ReferenceBundle\Entity\FicheTag;
 use Application\Refactor\ReferenceBundle\Entity\FicheMedia;
 use Application\Refactor\ReferenceBundle\Entity\Book;
 use Application\Refactor\ReferenceBundle\Entity\FicheBook;
+use Application\Refactor\ReferenceBundle\Entity\FicheRender;
 
 use app\Faker\autoload;
 use Faker;
@@ -23,8 +24,9 @@ class FakerGenerator
 	}
 	public function getFake()
 	{
+		//Create some tags
 		$datatag = [];
-		 $em = $this->em;
+		$em = $this->em;
 		for ($i=0; $i < 10; $i++) { 
 	        $tag = new Tag();
 	        $tag->getFake();
@@ -32,10 +34,10 @@ class FakerGenerator
 	        $em->persist($tag);
 	        $em->flush();
 	    }
+	    //Create some Fiches
 	    $datafiche = [];
 	    for ($i=0; $i < 20; $i++) { 
 	        $fiche = new Fiche();
-	        $fichemedia = new FicheMedia();
 	        $fiche->getFake();
 	        for ($j=0; $j < rand(1,3); $j++) { 
 		        $fichetag = new FicheTag();
@@ -43,14 +45,24 @@ class FakerGenerator
 		        $fichetag->setTag($datatag[rand(0,9)]);
 		        $em->persist($fichetag);
 		    }
-	        $fichemedia->setFiche($fiche);
-	        $fichemedia->setMedia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(1));
+		    for ($j=0; $j < rand(1,3); $j++) { 
+		        $ficherender = new FicheRender();
+		        $ficherender->setFiche($fiche);
+		        $ficherender->setMedia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
+		        $em->persist($ficherender);
+		    }
+		    for ($j=0; $j < rand(1,3); $j++) { 
+		        $fichemedia = new FicheMedia();
+		        $fichemedia->setFiche($fiche);
+		        $fichemedia->setMedia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
+		        $em->persist($fichemedia);
+		    }
+	        $fiche->setImage($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(1));
 	        $datafiche[$i]=$fiche;
 	        $em->persist($fiche);
-	        $em->persist($fichemedia);
 	        $em->flush();
 	    }
-	    // Need to be updated for Renders
+	    //Create some books
 	    for ($i=0; $i < 2; $i++) { 
 	        $book = new Book();
 	        $book->getFake();
