@@ -2,44 +2,58 @@
 
 namespace Application\Refactor\ReferenceBundle\Entity;
 
-//use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
-
+/**
+ * FicheBook
+ *
+ * @ORM\Table(name="reference__fiche_book")
+ * @ORM\Entity
+ */
 class FicheBook
 {
-
     /**
-     * @var integer $id
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
-     * @var Fiche $fiche
-     * */
-    protected $fiche;
-
-    /**
-     * @var Application\Refactor\ReferenceBundle\Entity\Book $tag
-     * */
-    protected $book;
-
-    /**
-     * @var integer $order
+     * @var integer
+     *
+     * @ORM\Column(name="order", type="integer", nullable=false)
      */
-    protected $order = 0;
+    private $order;
+
+    /**
+     * @var \Book
+     *
+     * @ORM\ManyToOne(targetEntity="Book")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="book_id", referencedColumnName="id")
+     * })
+     */
+    private $book;
+
+    /**
+     * @var \Fiche
+     *
+     * @ORM\ManyToOne(targetEntity="Fiche")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fiche_id", referencedColumnName="id")
+     * })
+     */
+    private $fiche;
 
 
-    // Getter, Setters, _Construct, __toString
-
-    public function __toString()
-    {
-        return $this->getFiche()->getTitle();
-    }
 
     /**
      * Get id
      *
-     * @return integer $id
+     * @return integer 
      */
     public function getId()
     {
@@ -47,45 +61,45 @@ class FicheBook
     }
 
     /**
-     * Set fiche
+     * Set order
      *
-     * @param Fiche $fiche
-     * @return FicheTag
+     * @param integer $order
+     * @return FicheBook
      */
-    public function setFiche($fiche)
+    public function setOrder($order)
     {
-        $this->fiche = $fiche;
-
+        $this->order = $order;
+    
         return $this;
     }
 
     /**
-     * Get fiche
+     * Get order
      *
-     * @return Fiche
+     * @return integer 
      */
-    public function getFiche()
+    public function getOrder()
     {
-        return $this->fiche;
+        return $this->order;
     }
 
     /**
-     * Set tag
+     * Set book
      *
-     * @param Application\Refactor\ReferenceBundle\Entity\FicheBook $book
-     * @return FicheTag
+     * @param \Application\Refactor\ReferenceBundle\Entity\Book $book
+     * @return FicheBook
      */
-    public function setBook($book)
+    public function setBook(\Application\Refactor\ReferenceBundle\Entity\Book $book = null)
     {
         $this->book = $book;
-
+    
         return $this;
     }
 
     /**
-     * Get tag
+     * Get book
      *
-     * @return Application\Refactor\ReferenceBundle\Entity\Book
+     * @return \Application\Refactor\ReferenceBundle\Entity\Book 
      */
     public function getBook()
     {
@@ -93,26 +107,25 @@ class FicheBook
     }
 
     /**
-     * Set order
+     * Set fiche
      *
-     * @param integer $order
-     * @return FicheTag
+     * @param \Application\Refactor\ReferenceBundle\Entity\Fiche $fiche
+     * @return FicheBook
      */
-    public function setOrder($order)
+    public function setFiche(\Application\Refactor\ReferenceBundle\Entity\Fiche $fiche = null)
     {
-        $this->order = $order;
-
+        $this->fiche = $fiche;
+    
         return $this;
     }
 
     /**
-     * Get order
+     * Get fiche
      *
-     * @return integer
+     * @return \Application\Refactor\ReferenceBundle\Entity\Fiche 
      */
-    public function getOrder()
+    public function getFiche()
     {
-        return $this->order;
+        return $this->fiche;
     }
-
 }

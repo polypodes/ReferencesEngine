@@ -10,7 +10,7 @@ use Application\Refactor\ReferenceBundle\Entity\FicheTag;
 /**
  * @author <yourname> <youremail>
  */
-class Fiche
+class FicheModel
 {
     /**
      * @var integer $id

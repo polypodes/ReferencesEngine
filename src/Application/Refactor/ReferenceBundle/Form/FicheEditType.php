@@ -19,14 +19,23 @@ class FicheEditType extends FicheType
     	->remove('rawContent')
     	->remove('contentFormatter')
     	->add('tags' , 'collection', array(
-    		'type' => new FicheTagType(),
+    		'type' => new TagType(),
     		'allow_add' => true,
     		'by_reference' => false,
     		// 'options' => array(
       //    		'data_class' => null),
-    	// 	'allow_delete' =>true,
+    	 	'allow_delete' =>true,
 
     		))
+      //       ->add('medias' , 'collection', array(
+      //   'type' => new MediaType(),
+      //   'allow_add' => true,
+      //   'by_reference' => false,
+      //   // 'options' => array(
+      // //        'data_class' => null),
+      //   'allow_delete' =>true,
+
+      //   ))
     	// ->add('tags', 'collection', array(
     	// 	'type' => new FicheTagType(),
      //    	'options' => array(

@@ -102,7 +102,15 @@ class Fiche
     */
     private $tags;
 
+    /**
+    * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+    */
+    private $renders;
 
+    /**
+    * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+    */
+    private $medias;
 
 
 
@@ -473,7 +481,5 @@ class Fiche
         $this->setRawContent($faker->text);
         $this->setContentFormatter('null');
         $this->setPublished(true);
-        $this->prePersist();
-        $this->setCreatedAt($faker->dateTime($max = 'now') );
     }
 }

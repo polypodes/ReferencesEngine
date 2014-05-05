@@ -4,9 +4,6 @@ namespace Application\Refactor\ReferenceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use app\Faker\autoload;
-use Faker;
-
 /**
  * Book
  *
@@ -20,7 +17,7 @@ class Book
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -72,11 +69,6 @@ class Book
      * @ORM\Column(name="published", type="boolean", nullable=false)
      */
     private $published;
-
-    /**
-    * @ORM\OneToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Fiche", mappedBy="Book")
-    */
-    private $fiches;
 
 
 
@@ -249,28 +241,5 @@ class Book
     public function getPublished()
     {
         return $this->published;
-    }
-
-    public function prePersist()
-    {
-        $this->created_at = new \DateTime;
-        $this->updated_at = $this->created_at;
-    }
-
-    public function preUpdate()
-    {
-        $this->updated_at = new \DateTime;
-    }
-
-    public function getFake()
-    {
-        $faker = Faker\Factory::create();
-        $this->setTitle($faker->sentence($nbWords=6));
-        $this->setClientName($faker->name);
-        $this->setProjectName($faker->sentence($nbWords=6));
-        $this->setDate($faker->dateTime($max = 'now'));
-        $this->setUpdatedAt($faker->dateTime($max = 'now'));
-        $this->setCreatedAt($faker->dateTime($max = 'now'));
-        $this->setPublished(true);
     }
 }

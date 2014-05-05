@@ -2,55 +2,42 @@
 
 namespace Application\Refactor\ReferenceBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+//use Doctrine\Common\Collections\ArrayCollection;
 
 use app\Faker\autoload;
 use Faker;
 
-/**
- * Tag
- *
- * @ORM\Table(name="reference__tag")
- * @ORM\Entity
- */
+
 class Tag
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @var integer $id
      */
-    private $title;
+    protected $id;
+
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=255, nullable=true)
+     * @var string $title
      */
-    private $slug;
+    protected $title;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @var string $slug
      */
-    private $createdAt;
+    protected $slug;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @var \Datetime created_at
      */
-    private $updatedAt;
+    protected $created_at;
+
+    /**
+     * @var \Datetime updated_at
+     */
+    protected $updated_at;
+
+
 
     // Getter, Setters, _Construct, __toString
 
@@ -59,11 +46,10 @@ class Tag
         return $this->getTitle();
     }
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer $id
      */
     public function getId()
     {
@@ -79,14 +65,14 @@ class Tag
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -102,14 +88,14 @@ class Tag
     public function setSlug($slug)
     {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -117,52 +103,52 @@ class Tag
     }
 
     /**
-     * Set createdAt
+     * Set created_at
      *
      * @param \DateTime $createdAt
      * @return Tag
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
-    
+        $this->created_at = $createdAt;
+
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     /**
-     * Set updatedAt
+     * Set updated_at
      *
      * @param \DateTime $updatedAt
      * @return Tag
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
-    
+        $this->updated_at = $updatedAt;
+
         return $this;
     }
 
     /**
-     * Get updatedAt
+     * Get updated_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
 
-     // Events
+    // Events
 
     public function prePersist()
     {
@@ -199,7 +185,7 @@ class Tag
         return strtolower(trim(preg_replace('~[^0-9a-z]+~i', $char, html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($str, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), $char));
     }
 
-        public function getFake()
+    public function getFake()
     {
         $faker = Faker\Factory::create();
         $this->setTitle($faker->word);
@@ -207,6 +193,6 @@ class Tag
         $this->setCreatedAt($faker->dateTime($max = 'now'));
         $this->setUpdatedAt($faker->dateTime($max = 'now'));
         return $this;
-    }
 
+    }
 }

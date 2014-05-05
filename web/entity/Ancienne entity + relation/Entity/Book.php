@@ -2,88 +2,66 @@
 
 namespace Application\Refactor\ReferenceBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+//use Doctrine\ORM\Mapping as ORM;
 
 use app\Faker\autoload;
 use Faker;
 
 /**
  * Book
- *
- * @ORM\Table(name="reference__book")
- * @ORM\Entity
  */
 class Book
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="client_name", type="string", length=255, nullable=false)
      */
     private $clientName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="project_name", type="string", length=255, nullable=false)
      */
     private $projectName;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="date", nullable=false)
      */
     private $date;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @var string $fiches
      */
-    private $createdAt;
+    protected $fiches;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @var \Datetime created_at
      */
-    private $updatedAt;
+    protected $created_at;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="published", type="boolean", nullable=false)
+     * @var \Datetime updated_at
      */
-    private $published;
+    protected $updated_at;
 
     /**
-    * @ORM\OneToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Fiche", mappedBy="Book")
-    */
-    private $fiches;
-
+     * @var boolean published
+     */
+    protected $published;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -99,14 +77,14 @@ class Book
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -122,14 +100,14 @@ class Book
     public function setClientName($clientName)
     {
         $this->clientName = $clientName;
-    
+
         return $this;
     }
 
     /**
      * Get clientName
      *
-     * @return string 
+     * @return string
      */
     public function getClientName()
     {
@@ -145,14 +123,14 @@ class Book
     public function setProjectName($projectName)
     {
         $this->projectName = $projectName;
-    
+
         return $this;
     }
 
     /**
      * Get projectName
      *
-     * @return string 
+     * @return string
      */
     public function getProjectName()
     {
@@ -168,14 +146,14 @@ class Book
     public function setDate($date)
     {
         $this->date = $date;
-    
+
         return $this;
     }
 
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -183,73 +161,115 @@ class Book
     }
 
     /**
-     * Set createdAt
+     * Get fiches
+     *
+     * @return Application\Refactor\ReferenceBundle\Entity\FicheFiche
+     */
+    public function getFiches()
+    {
+        return $this->fiches;
+    }
+
+    /**
+     * Set fiches
+     *
+     * @param Application\Refactor\ReferenceBundle\Entity\FicheFiche $fiches
+     */
+    public function setFiches($fiches)
+    {
+        //$this->medias = new ArrayCollection();
+
+        foreach($fiches as $t)
+        {
+            $t->setFiche($this);
+            $this->addFiche($t);
+        }
+
+        return $this;
+    }
+
+    public function addFiche($fiche)
+    {
+        $this->fiches[] = $fiche;
+        return $this;
+    }
+
+    public function removeFiche($fiche)
+    {
+        return $this->fiches->removeElement($fiche);
+    }
+
+    /**
+     * Set created_at
      *
      * @param \DateTime $createdAt
-     * @return Book
+     * @return Fiche
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
-    
+        $this->created_at = $createdAt;
+
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get created_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     /**
-     * Set updatedAt
+     * Set updated_at
      *
      * @param \DateTime $updatedAt
-     * @return Book
+     * @return Fiche
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
-    
+        $this->updated_at = $updatedAt;
+
         return $this;
     }
 
     /**
-     * Get updatedAt
+     * Get updated_at
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
 
     /**
      * Set published
      *
-     * @param boolean $published
-     * @return Book
+     * @param boolean published
+     * @return Fiche
      */
     public function setPublished($published)
     {
         $this->published = $published;
-    
+
         return $this;
     }
 
     /**
      * Get published
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublished()
     {
         return $this->published;
     }
+
+
+
 
     public function prePersist()
     {
@@ -261,7 +281,6 @@ class Book
     {
         $this->updated_at = new \DateTime;
     }
-
     public function getFake()
     {
         $faker = Faker\Factory::create();

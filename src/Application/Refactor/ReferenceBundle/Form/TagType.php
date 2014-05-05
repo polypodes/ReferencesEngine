@@ -17,7 +17,7 @@ class TagType extends AbstractType
         $builder
             // ->add('tag', 'entity', array('class' => 'Application\Refactor\ReferenceBundle\Entity\Tag'))
             ->add('title')
-            ->add('slug')
+            // ->add('slug')
         ;
     }
     

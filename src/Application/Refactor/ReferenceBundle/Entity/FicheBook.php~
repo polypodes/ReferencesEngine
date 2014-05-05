@@ -5,19 +5,19 @@ namespace Application\Refactor\ReferenceBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * FicheTag
+ * FicheBook
  *
- * @ORM\Table(name="reference__fiche_tag")
+ * @ORM\Table(name="reference__fiche_book")
  * @ORM\Entity
  */
-class FicheTag
+class FicheBook
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -29,14 +29,14 @@ class FicheTag
     private $order;
 
     /**
-     * @var \Tag
+     * @var \Book
      *
-     * @ORM\ManyToOne(targetEntity="Tag")
+     * @ORM\ManyToOne(targetEntity="Book")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="book_id", referencedColumnName="id")
      * })
      */
-    private $tag;
+    private $book;
 
     /**
      * @var \Fiche
@@ -64,7 +64,7 @@ class FicheTag
      * Set order
      *
      * @param integer $order
-     * @return FicheTag
+     * @return FicheBook
      */
     public function setOrder($order)
     {
@@ -84,33 +84,33 @@ class FicheTag
     }
 
     /**
-     * Set tag
+     * Set book
      *
-     * @param \Application\Refactor\ReferenceBundle\Entity\Tag $tag
-     * @return FicheTag
+     * @param \Application\Refactor\ReferenceBundle\Entity\Book $book
+     * @return FicheBook
      */
-    public function setTag(\Application\Refactor\ReferenceBundle\Entity\Tag $tag = null)
+    public function setBook(\Application\Refactor\ReferenceBundle\Entity\Book $book = null)
     {
-        $this->tag = $tag;
+        $this->book = $book;
     
         return $this;
     }
 
     /**
-     * Get tag
+     * Get book
      *
-     * @return \Application\Refactor\ReferenceBundle\Entity\Tag 
+     * @return \Application\Refactor\ReferenceBundle\Entity\Book 
      */
-    public function getTag()
+    public function getBook()
     {
-        return $this->tag;
+        return $this->book;
     }
 
     /**
      * Set fiche
      *
      * @param \Application\Refactor\ReferenceBundle\Entity\Fiche $fiche
-     * @return FicheTag
+     * @return FicheBook
      */
     public function setFiche(\Application\Refactor\ReferenceBundle\Entity\Fiche $fiche = null)
     {
