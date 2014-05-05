@@ -27,6 +27,14 @@ class FicheEditType extends FicheType
     	 	'allow_delete' =>true,
 
     		))
+//       ->add('medias', 'sonata_media_type', array(
+//      'provider' => 'sonata.media.provider.youtube',
+//      'context'  => 'default'
+// ))
+
+
+
+
       //       ->add('medias' , 'collection', array(
       //   'type' => new MediaType(),
       //   'allow_add' => true,

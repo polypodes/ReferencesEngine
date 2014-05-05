@@ -101,6 +101,16 @@ class Fiche
     * @ORM\ManyToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Tag", cascade={"persist"})
     */
     private $tags;
+     /**
+    * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+    */
+    private $medias;
+     /**
+    * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+    */
+    private $renders;
+
+
 
 
 
