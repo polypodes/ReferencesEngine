@@ -119,7 +119,7 @@ class Fiche
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -135,14 +135,14 @@ class Fiche
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -158,14 +158,14 @@ class Fiche
     public function setTitle2($title2)
     {
         $this->title2 = $title2;
-    
+
         return $this;
     }
 
     /**
      * Get title2
      *
-     * @return string 
+     * @return string
      */
     public function getTitle2()
     {
@@ -181,14 +181,14 @@ class Fiche
     public function setDate($date)
     {
         $this->date = $date;
-    
+
         return $this;
     }
 
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -204,14 +204,14 @@ class Fiche
     public function setContent($content)
     {
         $this->content = $content;
-    
+
         return $this;
     }
 
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -227,14 +227,14 @@ class Fiche
     public function setRawContent($rawContent)
     {
         $this->rawContent = $rawContent;
-    
+
         return $this;
     }
 
     /**
      * Get rawContent
      *
-     * @return string 
+     * @return string
      */
     public function getRawContent()
     {
@@ -250,14 +250,14 @@ class Fiche
     public function setContentFormatter($contentFormatter)
     {
         $this->contentFormatter = $contentFormatter;
-    
+
         return $this;
     }
 
     /**
      * Get contentFormatter
      *
-     * @return string 
+     * @return string
      */
     public function getContentFormatter()
     {
@@ -273,14 +273,14 @@ class Fiche
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -296,14 +296,14 @@ class Fiche
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    
+
         return $this;
     }
 
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -319,14 +319,14 @@ class Fiche
     public function setPublished($published)
     {
         $this->published = $published;
-    
+
         return $this;
     }
 
     /**
      * Get published
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublished()
     {
@@ -342,14 +342,14 @@ class Fiche
     public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
     {
         $this->image = $image;
-    
+
         return $this;
     }
 
     /**
      * Get image
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getImage()
     {
@@ -362,7 +362,7 @@ class Fiche
     {
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Add tags
      *
@@ -372,7 +372,7 @@ class Fiche
     public function addTag(\Application\Refactor\ReferenceBundle\Entity\Tag $tags)
     {
         $this->tags[] = $tags;
-    
+
         return $this;
     }
 
@@ -389,7 +389,7 @@ class Fiche
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -405,7 +405,7 @@ class Fiche
     public function addRender(\Application\Sonata\MediaBundle\Entity\Media $renders)
     {
         $this->renders[] = $renders;
-    
+
         return $this;
     }
 
@@ -422,7 +422,7 @@ class Fiche
     /**
      * Get renders
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getRenders()
     {
@@ -438,7 +438,7 @@ class Fiche
     public function addMedia(\Application\Sonata\MediaBundle\Entity\Media $medias)
     {
         $this->medias[] = $medias;
-    
+
         return $this;
     }
 
@@ -455,7 +455,7 @@ class Fiche
     /**
      * Get medias
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMedias()
     {

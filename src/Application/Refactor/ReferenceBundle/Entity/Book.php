@@ -83,7 +83,7 @@ class Book
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -99,14 +99,14 @@ class Book
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -122,14 +122,14 @@ class Book
     public function setClientName($clientName)
     {
         $this->clientName = $clientName;
-    
+
         return $this;
     }
 
     /**
      * Get clientName
      *
-     * @return string 
+     * @return string
      */
     public function getClientName()
     {
@@ -145,14 +145,14 @@ class Book
     public function setProjectName($projectName)
     {
         $this->projectName = $projectName;
-    
+
         return $this;
     }
 
     /**
      * Get projectName
      *
-     * @return string 
+     * @return string
      */
     public function getProjectName()
     {
@@ -168,14 +168,14 @@ class Book
     public function setDate($date)
     {
         $this->date = $date;
-    
+
         return $this;
     }
 
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -191,14 +191,14 @@ class Book
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -214,14 +214,14 @@ class Book
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    
+
         return $this;
     }
 
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -237,14 +237,14 @@ class Book
     public function setPublished($published)
     {
         $this->published = $published;
-    
+
         return $this;
     }
 
     /**
      * Get published
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublished()
     {
