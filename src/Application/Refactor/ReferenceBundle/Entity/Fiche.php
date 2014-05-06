@@ -99,16 +99,19 @@ class Fiche
 
     /**
     * @ORM\ManyToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Tag", cascade={"persist"})
+    * @ORM\JoinTable(name="reference__fiche_tag")
     */
     private $tags;
      /**
     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
-    */
-    private $medias;
-     /**
-    * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+    * @ORM\JoinTable(name="reference__fiche_render")
     */
     private $renders;
+     /**
+    * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+    * @ORM\JoinTable(name="reference__fiche_media")
+    */
+    private $medias;
 
 
 

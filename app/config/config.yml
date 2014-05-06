@@ -29,7 +29,7 @@ twig:
     form:
         resources:
             - 'SonataFormatterBundle:Form:formatter.html.twig'
-            - 'SonataMediaBundle:Form:media_widgets.html.twig'
+            # - 'SonataMediaBundle:Form:media_widgets.html.twig'
             # - 'ApplicationRefactorReferenceBundle:Form:fields.html.twig'
 
 # Assetic Configuration

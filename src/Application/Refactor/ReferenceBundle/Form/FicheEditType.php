@@ -7,6 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Application\Refactor\ReferenceBundle\Form\FicheTagType;
 use Application\Refactor\ReferenceBundle\Form\Mediatype;
 use Application\Refactor\ReferenceBundle\Form\TagType;
+use Application\Sonata\MediaBundle\Entity\Media;
 
 class FicheEditType extends FicheType
 {
@@ -22,47 +23,64 @@ class FicheEditType extends FicheType
     		'type' => new TagType(),
     		'allow_add' => true,
     		'by_reference' => false,
-    		// 'options' => array(
-      //    		'data_class' => null),
     	 	'allow_delete' =>true,
 
     		))
-//       ->add('medias', 'sonata_media_type', array(
-//      'provider' => 'sonata.media.provider.youtube',
-//      'context'  => 'default'
-// ))
+        ->add('medias' , 'collection', array(
+            'type' => new MediaType(),
+            'allow_add' => true,
+            'by_reference' => false,
+            'allow_delete' =>true,
+            'required' => false
 
+            ))
+        ->add('renders' , 'collection', array(
+            'type' => new MediaType(),
+            'allow_add' => true,
+            'by_reference' => false,
+            'allow_delete' =>true,
+            'required' => false
 
+            ))
 
-
-      //       ->add('medias' , 'collection', array(
-      //   'type' => new MediaType(),
-      //   'allow_add' => true,
-      //   'by_reference' => false,
-      //   // 'options' => array(
-      // //        'data_class' => null),
-      //   'allow_delete' =>true,
-
+      // ->add('medias' , 'sonata_type_collection', array(
+      //       'required' => false,
+      //       'type' => 'sonata_media_type',
+      //       'cascade_validation' => true,
+      //       'by_reference' => false,
+      //       'type_options' => array(
+      //           'provider' => 'sonata.media.provider.image',
+      //           'context'  => 'default',
+      //           'auto_initialize' => false
+      //           )
+      //       ),
+      //       array(
+      //       'edit' => 'inline',
+      //       'inline' => 'table',
+      //       'allow_delete' => true,
+      //       'allow_add' => true,
+      //       'sortable' => 'position'
       //   ))
-    	// ->add('tags', 'collection', array(
-    	// 	'type' => new FicheTagType(),
-     //    	'options' => array(
-     //    		'data_class' => 'Application\Refactor\ReferenceBundle\Entity\FicheTag'),
-    	// 	'allow_add' => true,
-    	// 	'allow_delete' =>true,
-    		// 'by_reference' => false,
-    		// 'multiple' =>true,
-    		// 'expanded' =>true
+      // ->add('medias' , 'sonata_type_collection', array(
+      //       'required' => false,
+      //       'by_reference' => false,
+      //       'cascade_validation' => true,
+      //       'type' => 'sonata_media_type',
+      //       'type_options' => array(
+      //           'provider' => 'sonata.media.provider.image',
+      //           'context'  => 'default',
+      //           'auto_initialize' => false
+      //           )
+      //       ),
+      //       array(
+      //       'edit' => 'inline',
+      //       'inline' => 'table',
+      //       'allow_delete' => true,
+      //       'allow_add' => true,
+      //       'sortable' => 'position'
+      //   ))
+        ->getForm()
 
-    	// )
-    	// ->add('medias', 'collection', array(
-    	// 	)
-    	// ->add('tags', 'entity', array(
-     //    'class'    => 'ApplicationRefactorReferenceBundle:tag',
-     //    'property' => 'title',
-     //    'multiple' => true,
-     //    'expanded' => false)
-    	// )
 ;
   }
 

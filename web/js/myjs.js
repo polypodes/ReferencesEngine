@@ -1,29 +1,37 @@
-var collectionHolder = $('ul.tags');
-
+var collectionTagsHolder = $('ul.tags');
 var $addTagLink = $('<a href="#" class="add_tag_link">Add tag</a>');
-var $newLinkLi = $('<ul></ul>').append($addTagLink);
+var $newLinkLiTag = $('<ul></ul>').append($addTagLink);
 
-function addTagForm(collectionHolder, $newLinkLi) {
+
+var collectionMediasHolder = $('ul.medias');
+var $addMediaLink = $('<a href="#" class="add_media_link">Add Media</a>');
+var $newLinkLiMedia = $('<ul></ul>').append($addMediaLink);
+
+
+var collectionRendersHolder = $('ul.renders');
+var $addRenderLink = $('<a href="#" class="add_render_link">Add Render</a>');
+var $newLinkLiRender = $('<ul></ul>').append($addRenderLink);
+
+function addForm(collectionHolder, $newLinkLi) {
     var prototype = collectionHolder.attr('data-prototype');
 
     var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
 
     var $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
-    addTagFormDeleteLink($newFormLi);
+    addFormDeleteLink($newFormLi);
 }
 
-function addTagFormDeleteLink($tagFormLi) {
+function addFormDeleteLink($MediaFormLi)
+{
     var $removeFormA = $('<a href="#"><span class="glyphicon glyphicon-remove"></span></a>');
-    $tagFormLi.append($removeFormA);
-
+    $MediaFormLi.append($removeFormA);
     $removeFormA.on('click', function(e) {
-
         e.preventDefault();
-
-        $tagFormLi.remove();
+        $MediaFormLi.remove();
     });
 }
+
 
 $(document).ready(function () {
 	$(".fancybox").fancybox({
@@ -73,21 +81,34 @@ $(document).ready(function () {
     	$(this).children(".project-btn").hide();
     	$(this).children(".project-img").show();
   });
-  // $(".btn-edit").on('click', function (){
-  // 		var value = $(this).parent().children(".value-form");
-  // 		 $(this).append('<input type="text" name="'+'"value/>');
-  // 		alert(value.text());
 
-  // });
-	collectionHolder.append($newLinkLi);
 
-    $addTagLink.on('click', function(e) {
 
-        e.preventDefault();
+	collectionTagsHolder.append($newLinkLiTag);
+  $addTagLink.on('click', function(e) {
+    e.preventDefault();
+    addForm(collectionTagsHolder, $newLinkLiTag);
+  });
+  collectionTagsHolder.find('li').each(function() {
+    addFormDeleteLink($(this));
+  });
 
-        addTagForm(collectionHolder, $newLinkLi);
-        });
-    collectionHolder.find('li').each(function() {
-        addTagFormDeleteLink($(this));
-    });
+
+  collectionMediasHolder.append($newLinkLiMedia);
+  $addMediaLink.on('click', function(e) {
+    e.preventDefault();
+    addForm(collectionMediasHolder, $newLinkLiMedia);
+  });
+  collectionMediasHolder.find('li').each(function() {
+    addFormDeleteLink($(this));
+  });
+  collectionRendersHolder.append($newLinkLiRender);
+  $addRenderLink.on('click', function(e) {
+    e.preventDefault();
+    addForm(collectionRendersHolder, $newLinkLiRender);
+  });
+  collectionRendersHolder.find('li').each(function() {
+    addFormDeleteLink($(this));
+  });
+
 });

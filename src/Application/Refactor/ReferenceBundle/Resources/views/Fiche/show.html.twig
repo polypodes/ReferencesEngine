@@ -6,6 +6,12 @@
 		    <div class="col-lg-4">
 		    	{{project.title}}
 		    </div>
+		    <div class="col-lg-2">
+			    <a href="{{ path('refactor_edit_projects', {'id': project.id}) }}" class="btn label-warning btn-lg" role="button">
+					<span class="glyphicon glyphicon-edit"></span>
+					<span class="glyphicon-class" style="color:white;">Modifier</span>
+				</a>
+			</div>
 		</div>
 	</h2>
 </p>
@@ -14,7 +20,7 @@
 
 		<div class="col-6 col-sm-6 col-lg-8">
 			<a id ="single_1" rel="group" href="{% path project.image, 'reference' %}" title="{{project.title }}">
-	<img id ="Main_image"src="{% path project.image, 'big' %}" ></a>
+	<img id ="Main_image" src="{% path project.image, 'big' %}" ></a>
 		</div>
 		<div class="col-6 col-sm-6 col-lg-4">
 			<p>
@@ -65,6 +71,7 @@
 		</h4>
 	</div>
 </div>
+
 <div class="row">
 	<div class="jumbotron col-lg-9" style="padding:20px;">
 	{% for render in renders %}
@@ -76,5 +83,8 @@
 		</div>
 		{% endfor %}
 	</div>
+
+
+
 
 {% endblock %}

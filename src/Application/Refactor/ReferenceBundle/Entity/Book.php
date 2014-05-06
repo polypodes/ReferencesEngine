@@ -273,4 +273,44 @@ class Book
         $this->setCreatedAt($faker->dateTime($max = 'now'));
         $this->setPublished(true);
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->fiches = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add fiches
+     *
+     * @param \Application\Refactor\ReferenceBundle\Entity\Fiche $fiches
+     * @return Book
+     */
+    public function addFiche(\Application\Refactor\ReferenceBundle\Entity\Fiche $fiches)
+    {
+        $this->fiches[] = $fiches;
+    
+        return $this;
+    }
+
+    /**
+     * Remove fiches
+     *
+     * @param \Application\Refactor\ReferenceBundle\Entity\Fiche $fiches
+     */
+    public function removeFiche(\Application\Refactor\ReferenceBundle\Entity\Fiche $fiches)
+    {
+        $this->fiches->removeElement($fiches);
+    }
+
+    /**
+     * Get fiches
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFiches()
+    {
+        return $this->fiches;
+    }
 }

@@ -41,43 +41,29 @@ class FakerGenerator
 	        $fiche = new Fiche();
 	        $fiche->getFake();
 	        for ($j=0; $j < rand(1,3); $j++) { 
-		        // $fichetag = new FicheTag();
-		        // $fichetag->setFiche($fiche);
-		        // $fichetag->setTag($datatag[rand(0,9)]);
-		        // $em->persist($fichetag);
 		        $fiche->addTag($datatag[$j]);
 		    }
-		//     for ($j=0; $j < rand(1,3); $j++) { 
-		//         $ficherender = new FicheRender();
-		//         $ficherender->setFiche($fiche);
-		//         $ficherender->setMedia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
-		//         $em->persist($ficherender);
-		//     }
-		//     for ($j=0; $j < rand(1,3); $j++) { 
-		//         $fichemedia = new FicheMedia();
-		//         $fichemedia->setFiche($fiche);
-		//         $fichemedia->setOrder($j);
-		//         $fichemedia->setMedia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
-		//         $em->persist($fichemedia);
-		//     }
-	 //        $fiche->setImage($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(1));
-	 //        $datafiche[$i]=$fiche;
+		     for ($j=0; $j < rand(1,1); $j++) { 
+		        $fiche->addRender($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
+		    }
+		    for ($j=0; $j < rand(1,1); $j++) { 
+		        $fiche->addMEdia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
+		    }
+	        $fiche->setImage($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(1));
+	        $datafiche[$i]=$fiche;
 	        $em->persist($fiche);
 	        $em->flush();
 	    }
-	 //    //Create some books
-	 //    for ($i=0; $i < 2; $i++) { 
-	 //        $book = new Book();
-	 //        $book->getFake();
-	 //        for ($j=0; $j < rand(2, 4); $j++) { 
-		//         $fichebook = new FicheBook();
-		//         $fichebook->setBook($book);
-		//         $fichebook->setFiche($datafiche[rand(0,19)]);
-		//         $em->persist($fichebook);
-		//     }
-	 //        $em->persist($book);
-	 //        $em->flush();
-	 //    }
+	    //Create some books
+	    for ($i=0; $i < 2; $i++) { 
+	        $book = new Book();
+	        $book->getFake();
+	        for ($j=0; $j < rand(2, 4); $j++) { 
+	            $book->addFiche($datafiche[rand(0,19)]);
+		    }
+	        $em->persist($book);
+	        $em->flush();
+	    }
 
         return(true);
 	}

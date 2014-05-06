@@ -59,7 +59,11 @@ class Tag
         return $this->getTitle();
     }
 
-
+        public function __construct()
+    {
+        $this->created_at = new \DateTime;
+        $this->updated_at = $this->created_at;
+    }
     /**
      * Get id
      *
@@ -166,8 +170,8 @@ class Tag
 
     public function prePersist()
     {
-        $this->created_at = new \DateTime;
-        $this->updated_at = $this->created_at;
+        $this->setCreatedAt(new \DateTime);
+        $this->setUpdatedAt($this->createdAt);
 
         $slug = $this->getSlug();
         if (empty($slug))
@@ -180,7 +184,7 @@ class Tag
 
     public function preUpdate()
     {
-        $this->updated_at = new \DateTime;
+        $this->updatedAt = new \DateTime;
 
         $slug = $this->getSlug();
         if (empty($slug))
