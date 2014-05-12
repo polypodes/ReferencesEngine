@@ -1,5 +1,5 @@
 {% extends "::layout.html.twig" %}
-{% block book_active %}class="active"{% endblock %}
+
 {% block body %}
 <p>
 	<h2>
@@ -23,7 +23,7 @@
 <div class = "item-container">
 	<div class="row">
 		<div class="col-xs-6 col-md-3">
-			<div class="thumbnail">
+			<div class="thumbnail"  onclick="location.href='{#{ path('refactor_show_projects', {'id': project.id}) }#}';" style="cursor:pointer;">
 	      		<div class="caption" style="text-align:center;">
 			<button type="button" class="btn btn-primary btn-lg">Nouveau Cahier</button>
 						    </div>
@@ -35,7 +35,7 @@
 	      		<div class="caption">
 	        		<h4>{{book.title}}<p><small>{{book.clientName}}</small></h4></p>
 	        		<p>
-	        			<a href="#" class="btn label-warning" role="button">
+	        			<a href="{{ path('refactor_edit_books', {'id': book.id}) }}" class="btn label-warning" role="button">
 		        		<span class="glyphicon glyphicon-edit"></span>
 		        		<span class="glyphicon-class" style="color:white;">Modifier</span>
 	          			</a> 

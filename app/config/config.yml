@@ -189,7 +189,7 @@ sonata_media:
         default:  # the default context is mandatory
             formats:
                 small: { width: 100 , quality: 70}
-                thumbnail: { width: 340 , quality: 70}
+                thumbnail: { width: 320 , quality: 70}
                 big:   { width: 500 , quality: 70}
 
 

@@ -64,8 +64,13 @@
 	<div>
 	<h3>Medias Complémentaire</h3>
 	{% for media in medias %}
-	<p><a href="{% path media , 'reference' %}">
-		{{media.name }}</a>
+	<p>
+		{% thumbnail media, 'small' %}
+		{% if media.providerName == "sonata.media.provider.image" or media.providerName == "sonata.media.provider.file" %}
+		<a href="{% path media , 'reference' %}">{{media.name }}</a>
+		{% else %}
+		<a href="{{ path('sonata_media_download', {'id': media|sonata_urlsafeid }) }}">{{media.name }}</a>
+		{% endif %}
 	</p>	
 		{% endfor %}
 		</h4>

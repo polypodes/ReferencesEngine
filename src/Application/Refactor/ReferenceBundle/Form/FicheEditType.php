@@ -4,10 +4,8 @@ namespace Application\Refactor\ReferenceBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Application\Refactor\ReferenceBundle\Form\FicheTagType;
-use Application\Refactor\ReferenceBundle\Form\Mediatype;
-use Application\Refactor\ReferenceBundle\Form\TagType;
-use Application\Sonata\MediaBundle\Entity\Media;
+use Application\Refactor\ReferenceBundle\Form\FicheType;
+
 
 class FicheEditType extends FicheType
 {
@@ -15,33 +13,10 @@ class FicheEditType extends FicheType
   {
     parent::buildForm($builder, $options);
     $builder
-    	->remove('created_at')
-    	->remove('updated_at')
-    	->remove('rawContent')
-    	->remove('contentFormatter')
-    	->add('tags' , 'collection', array(
-    		'type' => new TagType(),
-    		'allow_add' => true,
-    		'by_reference' => false,
-    	 	'allow_delete' =>true,
-
-    		))
-        ->add('medias' , 'collection', array(
-            'type' => new MediaType(),
-            'allow_add' => true,
-            'by_reference' => false,
-            'allow_delete' =>true,
-            'required' => false
-
-            ))
-        ->add('renders' , 'collection', array(
-            'type' => new MediaType(),
-            'allow_add' => true,
-            'by_reference' => false,
-            'allow_delete' =>true,
-            'required' => false
-
-            ))
+    	// ->remove('created_at')
+    	// ->remove('updated_at')
+    	// ->remove('rawContent')
+    	// ->remove('contentFormatter')
 
       // ->add('medias' , 'sonata_type_collection', array(
       //       'required' => false,

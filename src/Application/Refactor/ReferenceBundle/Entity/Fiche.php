@@ -119,6 +119,8 @@ class Fiche
 
 
 
+
+
     /**
      * Get id
      *
@@ -364,6 +366,7 @@ class Fiche
     public function __construct()
     {
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date = new \DateTime;
     }
 
     /**
@@ -467,13 +470,13 @@ class Fiche
 
     public function prePersist()
     {
-        $this->created_at = new \DateTime;
-        $this->updated_at = $this->created_at;
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = $this->createdAt;
     }
 
     public function preUpdate()
     {
-        $this->updated_at = new \DateTime;
+        $this->updatedAt = new \DateTime;
     }
 
     public function getFake()
@@ -489,4 +492,5 @@ class Fiche
         $this->prePersist();
         $this->setCreatedAt($faker->dateTime($max = 'now') );
     }
+
 }
