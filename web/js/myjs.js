@@ -239,7 +239,7 @@ $(document).ready(function () {
     {
       // project_array[i]['project_select'] = true;
       // console.log('change to : '+project_array[i]['project_id']+'='+project_array[i]['project_select']);
-      $(this).before("<input type='hidden' name='"+i+"' value='"+projects[i]['project_id']+"'/>");
+      $(this).before("<input type='hidden' name='project["+i+"]' value='"+projects[i]['project_id']+"'/>");
     }
   };
   })

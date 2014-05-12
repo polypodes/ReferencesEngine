@@ -254,13 +254,13 @@ class Book
 
     public function prePersist()
     {
-        $this->created_at = new \DateTime;
-        $this->updated_at = $this->created_at;
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = $this->createdAt;
     }
 
     public function preUpdate()
     {
-        $this->updated_at = new \DateTime;
+        $this->updatedAt = new \DateTime;
     }
 
     public function getFake()

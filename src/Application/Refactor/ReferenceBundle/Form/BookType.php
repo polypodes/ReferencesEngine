@@ -25,7 +25,9 @@ class BookType extends AbstractType
             ->add('clientName')
             ->add('projectName')
             ->add('date')
-            ->add('published')
+            ->add('published', 'checkbox', array(
+                'required' => false
+                ))
             ->add('fiches', 'collection', array(
                 'type' => new FicheType,
                 'allow_add' => true,
@@ -51,7 +53,7 @@ class BookType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Application\Refactor\ReferenceBundle\Entity\Book',
-            'cascade_validation' =>true
+            // 'cascade_validation' =>true
         ));
     }
 

@@ -43,7 +43,7 @@
 	{% for project in projects %}
 	  	<div class="col-lg-4">
 	    	<div class="thumbnail project-mouseover project">
-	    		<input type="hidden" value="{{project.id}}">
+	    		<input type="hidden" name="project[{{project.id}}]" value="{{project.id}}">
 	    		<div class="project-img">
 	    		{% media project.image, 'thumbnail' %} 
 	    	</div>
