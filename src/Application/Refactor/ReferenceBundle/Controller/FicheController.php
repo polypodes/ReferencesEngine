@@ -10,6 +10,7 @@ use Application\Refactor\ReferenceBundle\Entity\Tag;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\MediaBundle\Entity\MediaManager;
 use Application\Sonata\MediaBundle\Entity\Media;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class FicheController extends Controller
 {
@@ -24,6 +25,11 @@ class FicheController extends Controller
     	'projects' =>$projects,
         ));
     }
+
+    /**
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
     public function removeAction($id)
     {
         $em  =$this->getDoctrine()->getManager();
@@ -37,6 +43,11 @@ class FicheController extends Controller
          $em->flush();
         return $this->redirect( $this->generateURL('refactor_projects'));
     }
+
+    /**
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
     public function addAction()
     {
         $fiche = new Fiche;
@@ -60,6 +71,7 @@ class FicheController extends Controller
                 'form' => $form->createView()
             ));
     }
+
     public function showAction($id)
     {
         $em  =$this->getDoctrine()->getManager();
@@ -87,6 +99,11 @@ class FicheController extends Controller
             'renders' => $renders
             ));
     }
+
+    /**
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
     public function editAction($id)
     {
         $em  =$this->getDoctrine()->getManager();

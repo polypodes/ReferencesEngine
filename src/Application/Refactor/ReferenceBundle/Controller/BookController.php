@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Application\Refactor\ReferenceBundle\Entity\Book;
 use Application\Refactor\ReferenceBundle\Form\BookType;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class BookController extends Controller
 {
@@ -18,6 +19,11 @@ class BookController extends Controller
     	'books' =>$books
         ));
     }
+
+    /**
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
     public function removeAction($id)
     {
         $em  =$this->getDoctrine()->getManager();
@@ -35,6 +41,11 @@ class BookController extends Controller
 
 
     }
+
+    /**
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
     public function editAction($id)
     {
         $em  =$this->getDoctrine()->getManager();
@@ -47,7 +58,11 @@ class BookController extends Controller
             ));
     }
 
-        public function addAction()
+    /**
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
+    public function addAction()
     {
         $book = new Book();
         $form = $this->createForm(new BookType, $book);
