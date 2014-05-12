@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Application\Refactor\ReferenceBundle\Form\Mediatype;
+use Application\Refactor\ReferenceBundle\Form\Rendertype;
 
 class FicheType extends AbstractType
 {
@@ -18,14 +19,33 @@ class FicheType extends AbstractType
         $builder
             ->add('title')
             ->add('title2')
-            ->add('date')
+            ->add('date', 'date', array("attr" => array('class'=>'form-control')))
             ->add('content')
-            ->add('rawContent')
-            ->add('contentFormatter')
-            ->add('created_at')
-            ->add('updated_at')
             ->add('published','checkbox', array('required' => false))
             ->add('image', 'entity', array('class' => 'Application\Sonata\MediaBundle\Entity\Media'))
+            ->add('tags' , 'collection', array(
+            'type' => new TagType(),
+            'allow_add' => true,
+            'by_reference' => false,
+            'allow_delete' =>true,
+
+            ))
+            ->add('medias' , 'collection', array(
+            'type' => new MediaType(),
+            'allow_add' => true,
+            'by_reference' => false,
+            'allow_delete' =>true,
+            'required' => false
+
+            ))
+            ->add('renders' , 'collection', array(
+            'type' => new RenderType(),
+            'allow_add' => true,
+            'by_reference' => false,
+            'allow_delete' =>true,
+            'required' => false
+
+            ))
             // ->add('image', 'sonata_media_type', array(
             //     'provider' => 'sonata.media.provider.image',
             //     'context'  => 'default'

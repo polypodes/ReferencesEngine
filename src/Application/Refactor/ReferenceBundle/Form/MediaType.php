@@ -18,8 +18,23 @@ class MediaType extends AbstractType
         $builder
             ->add('binaryContent', 'file' , array(
                 'label' => false,
+                'attr' => array(
+                    'class' => 'providerInput'
+                    ),
                 // 'attr' => array(
                 //     "name" => "file")
+                ))
+            ->add('providerName', 'choice', array(
+                'attr' => array(
+                    'class' => 'providerSelector'
+                    ),
+                'choices' => array(
+                    'sonata.media.provider.image' => 'Image',
+                    'sonata.media.provider.youtube' => 'Youtube',
+                    'sonata.media.provider.dailymotion' => 'Dailymotion',
+                    'sonata.media.provider.vimeo' => 'Vimeo',
+                    'sonata.media.provider.file' => 'File',
+                    )
                 ));
             // ->add('binaryContent', 'sonata_media_type', array(
             //     'provider' => 'sonata.media.provider.image',

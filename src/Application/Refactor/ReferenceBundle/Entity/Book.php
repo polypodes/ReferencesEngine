@@ -74,7 +74,8 @@ class Book
     private $published;
 
     /**
-    * @ORM\OneToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Fiche", mappedBy="Book")
+    * @ORM\ManyToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Fiche", cascade={"persist"})
+    * @ORM\JoinTable(name="reference__fiche_book")
     */
     private $fiches;
 
@@ -281,6 +282,7 @@ class Book
         $this->fiches = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
+
     /**
      * Add fiches
      *

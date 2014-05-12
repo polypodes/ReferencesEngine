@@ -17,6 +17,7 @@ body { padding-top: 70px; }
 .project
 {
 	width: 350px;
+	text-align: center;
 }
 .project-mouseover
 {

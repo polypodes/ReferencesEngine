@@ -9,7 +9,7 @@ use Application\Refactor\ReferenceBundle\Entity\Fiche;
 use Application\Refactor\ReferenceBundle\Entity\Tag;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\MediaBundle\Entity\MediaManager;
-use ApplicatiSonata\MediaBundle\Entity\Media;
+use Application\Sonata\MediaBundle\Entity\Media;
 
 class FicheController extends Controller
 {
@@ -20,7 +20,7 @@ class FicheController extends Controller
         // foreach ($projects as $project) {
         //     $project->setImage($em->getRepository('ApplicationSonataMediaBundle:Media')->findOnebyId($project->getImage()));
         // }
-        return $this->render('ApplicationRefactorReferenceBundle:Fiche:index.html.twig', array(
+        return $this->render('ApplicationRefactorReferenceBundle:Fiche:showList.html.twig', array(
     	'projects' =>$projects,
         ));
     }
@@ -33,39 +33,6 @@ class FicheController extends Controller
             throw $this->createNotFoundException('Fiche inexistant(id = '.$id.')');
         }
         // echo "<script>alert(\"".$project->getTitle()."\")</script>"; 
-        $project->setImage(null);
-        $liste_book = $em->getRepository('ApplicationRefactorReferenceBundle:FicheBook')->findAll();
-        foreach($liste_book as $book)
-        {
-            if($book->getFiche() == $project)
-            {
-                $em->remove($book);
-            }
-        }
-        $liste_render = $em->getRepository('ApplicationRefactorReferenceBundle:FicheRender')->findAll();
-        foreach($liste_render as $render)
-        {
-            if($render->getFiche() == $project)
-            {
-                $em->remove($render);
-            }
-        }
-        $liste_media = $em->getRepository('ApplicationRefactorReferenceBundle:FicheMedia')->findAll();
-        foreach($liste_media as $media)
-        {
-            if($media->getFiche() == $project)
-            {
-                $em->remove($media);
-            }
-        }
-        $liste_tag = $em->getRepository('ApplicationRefactorReferenceBundle:FicheTag')->findAll();
-        foreach($liste_tag as $tag)
-        {
-            if($tag->getFiche() == $project)
-            {
-                $em->remove($tag);
-            }
-        }
          $em->remove($project);
          $em->flush();
         return $this->redirect( $this->generateURL('refactor_projects'));
@@ -82,10 +49,11 @@ class FicheController extends Controller
 
             if($form->isValid())
             {
-                $em = $this->getDoctrine->getManager();
+                $em = $this->getDoctrine()->getManager();
+                $fiche->prePersist();
                 $em->persist($fiche);
                 $em->flush();
-                return $this->redirect($this->generateUrl('refactor_projects:'));
+                return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $fiche->getId())));
             }
         }
         return $this->render('ApplicationRefactorReferenceBundle:Fiche:add.html.twig', array(
@@ -170,7 +138,6 @@ class FicheController extends Controller
                 foreach ($form->get('medias')->getData() as $media) {
                     // $tag->setCreatedAt(new \DateTime);
                     $media->setContext('default');
-                    $media->setProviderName('sonata.media.provider.image');
                     $project->addMedia($media);
                     $MediaManager->save($media);
                     $em->persist($media);

@@ -61,8 +61,8 @@ class Tag
 
         public function __construct()
     {
-        $this->created_at = new \DateTime;
-        $this->updated_at = $this->created_at;
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = $this->createdAt;
     }
     /**
      * Get id

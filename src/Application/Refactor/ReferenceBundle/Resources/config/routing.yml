@@ -1,11 +1,27 @@
 refactor_books:
     path:  /
     defaults: { _controller: ApplicationRefactorReferenceBundle:Book:index}
-refactor_remove:
+refactor_books_remove:
     path:  /remove/{id}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Book:remove}
     requirements:
         id:  \d+
+refactor_add_books:
+    path:  /books/add/
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:add}
+refactor_show_books:
+    path:  /books/show/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:show}
+    requirements:
+        id:  \d+
+refactor_edit_books:
+    path:  /books/edit/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:edit}
+    requirements:
+        id:  \d+
+
+
+
 refactor_projects:
     path:  /projects/
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:index}
