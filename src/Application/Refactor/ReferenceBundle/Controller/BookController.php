@@ -53,7 +53,7 @@ class BookController extends Controller
         $liste_projects = $book->getFiches();
         return $this->render('ApplicationRefactorReferenceBundle:Book:edit.html.twig', array(
             'projects' => $liste_projects,
-            // 'book' => $book,
+            'book' => $book,
             // 'form' => $form->createView()
             ));
     }

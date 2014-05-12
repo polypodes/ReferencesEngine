@@ -1,0 +1,12 @@
+rest_Refactor : 
+  type : rest
+  resource: "@ApplicationRefactorReferenceBundle/Resources/config/routing_rest.yml"
+
+sonata_api_media:
+    type:         rest
+    prefix:       /api_
+    resource:     "@SonataMediaBundle/Resources/config/routing/api.xml"
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

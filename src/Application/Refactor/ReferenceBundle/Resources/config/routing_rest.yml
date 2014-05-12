@@ -1,0 +1,8 @@
+project : 
+    type: rest
+    resource:     "Application\Refactor\ReferenceBundle\Controller\FicheRestController"
+    name_prefix:  api_
+book : 
+    type: rest
+    resource:     "Application\Refactor\ReferenceBundle\Controller\BookRestController"
+    name_prefix:  api_

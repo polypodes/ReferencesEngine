@@ -48,6 +48,11 @@ class AppKernel extends Kernel
 
             # Tiers bundles
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+
+            # Api bundles
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
