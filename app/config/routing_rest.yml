@@ -4,8 +4,13 @@ rest_Refactor :
 
 sonata_api_media:
     type:         rest
-    prefix:       /api_
+    prefix:       /api
     resource:     "@SonataMediaBundle/Resources/config/routing/api.xml"
+
+sonata_api_user:
+    type:         rest
+    prefix:       /api/user
+    resource:     "@SonataUserBundle/Resources/config/routing/api.xml"
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"

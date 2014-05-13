@@ -6,3 +6,7 @@ book :
     type: rest
     resource:     "Application\Refactor\ReferenceBundle\Controller\BookRestController"
     name_prefix:  api_
+salt : 
+    type: rest
+    resource:     "Application\Refactor\ReferenceBundle\Controller\SaltUserRestController"
+    name_prefix:  api_

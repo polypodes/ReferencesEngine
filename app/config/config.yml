@@ -83,7 +83,7 @@ swiftmailer:
 
 fos_user:
     db_driver:      orm # can be orm or odm
-    firewall_name:  main
+    firewall_name:  wsse_secured
     user_class:     Application\Sonata\UserBundle\Entity\User
 
     group:
@@ -92,6 +92,7 @@ fos_user:
 
     service:
         user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm
+
 
 services:
     application.refactor.reference.admin.fiche:
@@ -207,3 +208,9 @@ sensio_framework_extra:
     request: { converters: true }
 
 nelmio_api_doc: ~
+
+escape_wsse_authentication:
+    authentication_provider_class: Escape\WSSEAuthenticationBundle\Security\Core\Authentication\Provider\Provider
+    authentication_listener_class: Escape\WSSEAuthenticationBundle\Security\Http\Firewall\Listener
+    authentication_entry_point_class: Escape\WSSEAuthenticationBundle\Security\Http\EntryPoint\EntryPoint
+    authentication_encoder_class: Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder
