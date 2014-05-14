@@ -41,3 +41,9 @@ refactor_edit_projects:
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:edit}
     requirements:
         id:  \d+
+
+
+
+refactor_medias:
+    path:  /medias/
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Media:index}
