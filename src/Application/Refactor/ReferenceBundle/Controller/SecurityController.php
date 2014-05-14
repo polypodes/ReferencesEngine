@@ -33,9 +33,6 @@ class SecurityController extends Controller
         $username = $request->get('username');
         $password = $request->get('password');
 
-        //$csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
-        //$data = array('csrf_token' => $csrfToken,);
-
         $em  =$this->getDoctrine()->getManager();
         $user = $em->getRepository('ApplicationSonataUserBundle:User')->findOneByUsername($username);
         $encoder_service = $this->get('security.encoder_factory');

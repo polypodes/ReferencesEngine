@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Application\Refactor\ReferenceBundle\Form\Mediatype;
 use Application\Refactor\ReferenceBundle\Form\Rendertype;
+use Symfony\Component\Form\FormEvents;
 
 class FicheType extends AbstractType
 {
