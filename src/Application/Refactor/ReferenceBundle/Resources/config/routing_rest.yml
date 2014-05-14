@@ -2,11 +2,18 @@ project :
     type: rest
     resource:     "Application\Refactor\ReferenceBundle\Controller\FicheRestController"
     name_prefix:  api_
+    prefix:       /get
 book : 
     type: rest
     resource:     "Application\Refactor\ReferenceBundle\Controller\BookRestController"
     name_prefix:  api_
+    prefix:       /get
 salt : 
     type: rest
     resource:     "Application\Refactor\ReferenceBundle\Controller\SaltUserRestController"
+    name_prefix:  api_
+    prefix:       /get
+token:
+    type: rest
+    resource:     "Application\Refactor\ReferenceBundle\Controller\SecurityController"
     name_prefix:  api_

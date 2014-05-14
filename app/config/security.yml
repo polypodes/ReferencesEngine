@@ -31,7 +31,7 @@ security:
                 path:           /admin/logout
             anonymous:          true
         wsse_secured:
-            pattern:   /api/.*
+            pattern:   /api/get/.*
             stateless:    true
             wsse: true
             anonymous : true

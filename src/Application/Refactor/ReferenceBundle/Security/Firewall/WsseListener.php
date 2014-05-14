@@ -28,11 +28,10 @@ class WsseListener implements ListenerInterface
         $request = $event->getRequest();
         $wsseRegex = '/UsernameToken Username="([^"]+)", PasswordDigest="([^"]+)", Nonce="([^"]+)", Created="([^"]+)"/';
         if (!$request->headers->has('x-wsse') || 1 !== preg_match($wsseRegex, $request->headers->get('x-wsse'), $matches)) {
-            throw new AuthenticationException("Bad Header...");
+            // throw new AuthenticationException("Bad Header...");
 
             return;
         }
-        var_dump("expression");
         $token = new WsseUserToken();
         $token->setUser($matches[1]);
 
