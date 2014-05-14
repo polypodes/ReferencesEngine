@@ -31,17 +31,10 @@ security:
                 path:           /admin/logout
             anonymous:          true
         wsse_secured:
-            pattern:   ^/api/fiches/.*
-            wsse:
-                lifetime: 300
-                realm: "Secured API"
-                profile: "UsernameToken"
-                encoder:
-                    algorithm: sha512
-                    encodeHashBase64: true
-                    iterations: 1
+            pattern:   /api/.*
+            stateless:    true
+            wsse: true
             anonymous : true
-
 
         main:
             pattern:             .*
@@ -72,5 +65,5 @@ security:
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/api/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/, role: IS_AUTHENTICATED_ANONYMOUSLY }

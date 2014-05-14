@@ -11,8 +11,6 @@ class FicheRestController extends Controller
 {
 
     /**
-     * Get Fiche action
-     * @var integer $id Id of the Fiche
 	 * @return array
      * @View(serializerGroups={"sonata_api_read", "Fiche"}, serializerEnableMaxDepthChecks=true)
      * 
@@ -20,10 +18,11 @@ class FicheRestController extends Controller
 	public function getFicheAction($id){
   	    $em  =$this->getDoctrine()->getManager();
     	$fiche = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findOneById($id);
-    	if(!is_object($fiche)){
+    	if(!($fiche)){
     		throw $this->createNotFoundException();
     	}
-    	return array('fiche' => $fiche,
+    	return array(
+            'fiche' => $fiche,
             );
     }
 

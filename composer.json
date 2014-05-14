@@ -70,7 +70,7 @@
 
         "friendsofsymfony/rest-bundle":             "@dev",
         "nelmio/api-doc-bundle":                    "@stable",
-        "escapestudios/wsse-authentication-bundle": "2.3.x-dev"
+
 
     },
     "require-dev":{

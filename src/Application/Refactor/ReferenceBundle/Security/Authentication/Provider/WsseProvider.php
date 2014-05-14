@@ -57,7 +57,7 @@ class WsseProvider implements AuthenticationProviderInterface
 
         // Valide le Secret
         $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
-
+        // var_dump($digest."   ".$expected);
         if($digest !== $expected){
             throw new AuthenticationException("Bad credentials ! Digest is not as expected.".$digest."   ".$expected);
         }
