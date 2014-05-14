@@ -14,6 +14,12 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class FicheController extends Controller
 {
+    public function chooseMedias()
+    {
+        $em  =$this->getDoctrine()->getManager();
+        $medias = $em->getRepository('ApplicationSonataMediaBundle:Media')->findAll();
+
+    }
     public function indexAction()
     {
     	$em  =$this->getDoctrine()->getManager();
@@ -107,6 +113,7 @@ class FicheController extends Controller
     public function editAction($id)
     {
         $em  =$this->getDoctrine()->getManager();
+        $allMedia = $em->getRepository('ApplicationSonataMediaBundle:Media')->findAll();
         $project = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findOneById($id);
         $liste_tags = new ArrayCollection();
         $liste_medias = new ArrayCollection();
@@ -125,7 +132,7 @@ class FicheController extends Controller
 
             $liste_renders->add($render);
         }
-        $form = $this->createForm(new FicheEditType(), $project);
+        $form = $this->createForm(new FicheEditType(), $project, array('em' => $this->getDoctrine()->getManager(),));
 
         $request = $this->get('request');
 
