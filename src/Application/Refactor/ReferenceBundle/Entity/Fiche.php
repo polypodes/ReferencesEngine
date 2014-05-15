@@ -4,6 +4,11 @@ namespace Application\Refactor\ReferenceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
+
 use app\Faker\autoload;
 use Faker;
 
@@ -12,6 +17,9 @@ use Faker;
  *
  * @ORM\Table(name="reference__fiche")
  * @ORM\Entity
+ *
+ * @ExclusionPolicy("all")
+ *
  */
 class Fiche
 {
@@ -21,6 +29,8 @@ class Fiche
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $id;
 
@@ -28,6 +38,8 @@ class Fiche
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $title;
 
@@ -35,6 +47,8 @@ class Fiche
      * @var string
      *
      * @ORM\Column(name="title2", type="string", length=255, nullable=true)
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $title2;
 
@@ -42,6 +56,8 @@ class Fiche
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date", nullable=false)
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $date;
 
@@ -49,6 +65,8 @@ class Fiche
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=true)
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $content;
 
@@ -56,6 +74,8 @@ class Fiche
      * @var string
      *
      * @ORM\Column(name="raw_content", type="text", nullable=true)
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $rawContent;
 
@@ -63,6 +83,8 @@ class Fiche
      * @var string
      *
      * @ORM\Column(name="content_formatter", type="string", length=255, nullable=true)
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $contentFormatter;
 
@@ -70,6 +92,8 @@ class Fiche
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $createdAt;
 
@@ -77,6 +101,8 @@ class Fiche
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $updatedAt;
 
@@ -84,6 +110,8 @@ class Fiche
      * @var boolean
      *
      * @ORM\Column(name="published", type="boolean", nullable=false)
+     * @Expose
+     * @Groups({"Fiche"}) 
      */
     private $published;
 
@@ -94,22 +122,30 @@ class Fiche
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      * })
+     * @Groups({"sonata_api_read"})
+     * @Expose
      */
     private $image;
 
     /**
     * @ORM\ManyToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Tag", cascade={"persist"})
     * @ORM\JoinTable(name="reference__fiche_tag")
+    * @Groups({"Fiche"}) 
+    * @Expose
     */
     private $tags;
      /**
     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
     * @ORM\JoinTable(name="reference__fiche_render")
+    * @Groups({"sonata_api_read"})
+    * @Expose
     */
     private $renders;
      /**
     * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
     * @ORM\JoinTable(name="reference__fiche_media")
+    * @Groups({"sonata_api_read"})
+    * @Expose
     */
     private $medias;
 

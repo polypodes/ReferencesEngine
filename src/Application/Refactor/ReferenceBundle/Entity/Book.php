@@ -4,6 +4,11 @@ namespace Application\Refactor\ReferenceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
+
 use app\Faker\autoload;
 use Faker;
 
@@ -12,6 +17,9 @@ use Faker;
  *
  * @ORM\Table(name="reference__book")
  * @ORM\Entity
+ *
+ * @ExclusionPolicy("all")
+ *
  */
 class Book
 {
@@ -21,6 +29,8 @@ class Book
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
+     * @Groups({"Book"})
      */
     private $id;
 
@@ -28,6 +38,8 @@ class Book
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @Expose
+     * @Groups({"Book"})
      */
     private $title;
 
@@ -35,6 +47,8 @@ class Book
      * @var string
      *
      * @ORM\Column(name="client_name", type="string", length=255, nullable=false)
+     * @Expose
+     * @Groups({"Book"})
      */
     private $clientName;
 
@@ -42,6 +56,8 @@ class Book
      * @var string
      *
      * @ORM\Column(name="project_name", type="string", length=255, nullable=false)
+     * @Expose
+     * @Groups({"Book"})
      */
     private $projectName;
 
@@ -49,6 +65,8 @@ class Book
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date", nullable=false)
+     * @Expose
+     * @Groups({"Book"})
      */
     private $date;
 
@@ -56,6 +74,8 @@ class Book
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @Expose
+     * @Groups({"Book"})
      */
     private $createdAt;
 
@@ -63,6 +83,8 @@ class Book
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @Expose
+     * @Groups({"Book"})
      */
     private $updatedAt;
 
@@ -70,12 +92,16 @@ class Book
      * @var boolean
      *
      * @ORM\Column(name="published", type="boolean", nullable=false)
+     * @Expose
+     * @Groups({"Book"})
      */
     private $published;
 
     /**
     * @ORM\ManyToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Fiche", cascade={"persist"})
     * @ORM\JoinTable(name="reference__fiche_book")
+    * @Expose
+     * @Groups({"Fiche"})
     */
     private $fiches;
 
@@ -254,13 +280,13 @@ class Book
 
     public function prePersist()
     {
-        $this->created_at = new \DateTime;
-        $this->updated_at = $this->created_at;
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = $this->createdAt;
     }
 
     public function preUpdate()
     {
-        $this->updated_at = new \DateTime;
+        $this->updatedAt = new \DateTime;
     }
 
     public function getFake()

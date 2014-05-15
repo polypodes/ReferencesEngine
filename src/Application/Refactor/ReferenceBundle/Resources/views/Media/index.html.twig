@@ -1,0 +1,17 @@
+{% extends "::layout.html.twig" %}
+{% block media_active %}class="active"{% endblock %}
+{% block body %}
+<div class = "item-container">
+	<div class="row">
+	{% for media in medias %}
+	  	<div class="col-lg-4">
+	    	<div class="thumbnail" style="text-align:center;">
+	    		<div class="img">
+	    			{% media media, 'thumbnail' %} 
+	    		</div>
+			</div>
+		</div>
+	{% endfor %}
+	</div>
+</div>
+{% endblock %}

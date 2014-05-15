@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Application\Refactor\ReferenceBundle\Entity\Book;
 use Application\Refactor\ReferenceBundle\Form\BookType;
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class BookController extends Controller
 {
@@ -18,6 +19,11 @@ class BookController extends Controller
     	'books' =>$books
         ));
     }
+
+    /**
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
     public function removeAction($id)
     {
         $em  =$this->getDoctrine()->getManager();
@@ -35,6 +41,11 @@ class BookController extends Controller
 
 
     }
+
+    /**
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
     public function editAction($id)
     {
         $em  =$this->getDoctrine()->getManager();
@@ -42,27 +53,32 @@ class BookController extends Controller
         $liste_projects = $book->getFiches();
         return $this->render('ApplicationRefactorReferenceBundle:Book:edit.html.twig', array(
             'projects' => $liste_projects,
-            // 'book' => $book,
+            'book' => $book,
             // 'form' => $form->createView()
             ));
     }
 
-        public function addAction()
+    /**
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
+    public function addAction()
     {
-        $Book = new Book;
+        $book = new Book();
+        $form = $this->createForm(new BookType, $book);
+
+
         $em = $this->getDoctrine()->getManager();
         $liste_projects = new ArrayCollection();
-        foreach ($_POST as $post =>$id) {
-            $liste_projects->add($em->getRepository('ApplicationRefactorReferenceBundle:fiche')->findOneById($id)); 
-            // $project=$em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findOneById($id);
-            // $Book->addFiche($project);
-            // var_dump($project);
+        if(isset($_POST['project'])){
+        foreach ($_POST['project'] as $post) {
+            $project =$em->getRepository('ApplicationRefactorReferenceBundle:fiche')->findOneById($post);
+            $liste_projects->add($project); 
+            $book->addFiche($project); 
+
+            // echo("<script>console.log('".var_dump($post)."');</script>");
         }
-        // $Book->setTitle('test');
-        // $Book->addFiche($em->getRepository('ApplicationRefactorReferenceBundle:fiche')->findOneById(2));
-        $form = $this->createForm(new BookType, $Book);
-        // $form->setValue('clientName', 'teztetrz');
-        var_dump($form);
+    }
         $request = $this->get('request');
         if($request->getMethod() == 'POST')
         {
@@ -70,10 +86,17 @@ class BookController extends Controller
 
             if($form->isValid())
             {
+                var_dump($liste_projects);
+                foreach ($liste_projects as $project) {
+                  $book->addFiche($project); 
+                  echo("<script>console.log('projefjzefzojebfbisdfsdbfsdbvsdbuv');</script>");
+                }
+                $em = $this->getDoctrine()->getManager();
                 $book->prePersist();
                 $em->persist($book);
                 $em->flush();
-                return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $book->getId())));
+
+                // return $this->redirect($this->generateUrl('refactor_projects'));
             }
         }
         return $this->render('ApplicationRefactorReferenceBundle:Book:add.html.twig', array(
