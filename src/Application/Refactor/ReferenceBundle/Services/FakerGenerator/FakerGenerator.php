@@ -29,7 +29,7 @@ class FakerGenerator extends Controller
 		//Create some tags
 		$datatag = [];
 		$em = $this->em;
-		for ($i=0; $i < 10; $i++) { 
+		for ($i=0; $i < 10; $i++) {
 	        $tag = new Tag();
 	        $tag->getFake();
 	        $datatag[$i]= $tag;
@@ -39,16 +39,17 @@ class FakerGenerator extends Controller
 
 	    $datafiche = [];
 	    //Create some Fiches
-	    for ($i=0; $i < 20; $i++) { 
+	    for ($i=0; $i < 20; $i++) {
 	        $fiche = new Fiche();
 	        $fiche->getFake();
-	        for ($j=0; $j < rand(1,3); $j++) { 
+	        for ($j=0; $j < rand(1,3); $j++) {
 		        $fiche->addTag($datatag[$j]);
 		    }
-		     for ($j=0; $j < rand(1,1); $j++) { 
+		     for ($j=0; $j < rand(1,1); $j++) {
+                 //TODO: insert 2 images first
 		        $fiche->addRender($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
 		    }
-		    for ($j=0; $j < rand(1,1); $j++) { 
+		    for ($j=0; $j < rand(1,1); $j++) {
 		        $fiche->addMedia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
 		    }
 	        $fiche->setImage($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(1));
@@ -60,10 +61,10 @@ class FakerGenerator extends Controller
 
 
 	    	    //Create some books
-	    for ($i=0; $i < 2; $i++) { 
+	    for ($i=0; $i < 2; $i++) {
 	        $book = new Book();
 	        $book->getFake();
-	        for ($j=0; $j < rand(4,10); $j++) { 
+	        for ($j=0; $j < rand(4,10); $j++) {
 		        $book->addFiche($datafiche[$j]);
 		    }
 	        $em->persist($book);
