@@ -67,6 +67,16 @@ To test your scenarii:
 bin/behat --lang=fr "@ApplicationRefactorReferenceBundle"
 ```
 
+
+## API
+
+cURL usage:
+
+```bash
+curl --data "username=admin&password=lol" http://referencesengine:8080/api/tokens/create
+```
+
+
 ## Preview
 
 Preview is not available, so here's a cat instead:
