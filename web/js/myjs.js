@@ -259,8 +259,13 @@ $(document).ready(function () {
     }
   };
   })
-
-
+    $( ".tagInput").autocomplete({
+      source: availableTags,
+      messages: {
+        noResults: '',
+        results: function() {}
+    }
+    });
   // $('li.tag').on('click', function () {
   //   // alert($(this).parent().parent('.tag_container').find('.tagInput').val($(this).html())+'           '+$(this).html());
   //   $(this).parent().parent('.tag_container').find('.tagInput').val($(this).html());  

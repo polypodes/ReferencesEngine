@@ -225,7 +225,7 @@ class FicheController extends Controller
 
         return $this->render('ApplicationRefactorReferenceBundle:Fiche:edit.html.twig', array(
             'project' => $project,
-            'tags' =>json_encode($allTags),
+            'tags' =>$allTags,
             // 'medias' => $liste_media,
             'image' => $project->getImage(),
             // 'renders' => $liste_render,

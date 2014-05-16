@@ -120,8 +120,18 @@
 		<span class="glyphicon-class" style="color:white;">Annuler</span>
 	</a>
 </div>
+<script type="text/javascript">
 
+    var availableTags = [
+    {% for tag in tags %}
+    '{{tag.title}}',
+    {% endfor %}
+    ];
+    // $( ".input_tags" ).autocomplete({
+    //   source: availableTags
+    // });
 
+</script>
 
 
 
