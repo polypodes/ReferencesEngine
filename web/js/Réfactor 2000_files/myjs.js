@@ -1,26 +1,27 @@
-// var selectMedia = '<option value="add_media" selected="selected">Add a media</option>';
-var test ="<input type='text'>"
+var addSelectImage = "<option value='add_image'>Add Image</option>";
+var addSelectMedia = "<option value='add_media' selected='selected'>Add Media</option>";
 
 var collectionTagsHolder = $('ul.tags');
 var $addTagLink = $('<a href="#" class="add_tag_link">Add tag</a>');
 var $newLinkLiTag = $('<ul></ul>').append($addTagLink);
 
-
 var collectionMediasHolder = $('ul.medias');
 var $addMediaLink = $('<a href="#" class="add_media_link">Add Media</a>');
 var $newLinkLiMedia = $('<ul></ul>').append($addMediaLink);
 
-
 var collectionRendersHolder = $('ul.renders');
 var $addRenderLink = $('<a href="#" class="add_render_link">Add Render</a>');
 var $newLinkLiRender = $('<ul></ul>').append($addRenderLink);
+
+
+
 
 function addForm(collectionHolder, $newLinkLi) {
     var prototype = collectionHolder.attr('data-prototype');
 
     var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
 
-    var $newFormLi = $('<li class="input"></li>').append(newForm);
+    var $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
     addFormDeleteLink($newFormLi);
     $($newFormLi).find('.providerSelector').change(function(){
@@ -33,35 +34,16 @@ function addForm(collectionHolder, $newLinkLi) {
         if (valueSelected == "File" || valueSelected == "Image"){
           changeTypeInput(input, "file");
       }
-    });
-    $($newFormLi).find('.mediaSelector').change(function(){
-      var valueSelected=$('option:selected', this).text();
-      var input =$(this).parent().parent().find(".providerInput");
-      var selector =$(this).parent().parent().find(".providerSelector");
-      if(valueSelected == "Add media")
-      {
-        input.show();
-        selector.show();
-      }else{
-        input.hide();
-        selector.hide();
-      }
-    });
-    $($newFormLi).find('.renderSelector').change(function(){
-      var valueSelected=$('option:selected', this).text();
-      var input =$(this).parent().parent().find(".providerInput");
-      var selector =$(this).parent().parent().find(".providerSelector");
-      if(valueSelected == "Add render")
-      {
-        input.show();
-        selector.show();
-      }else{
-        input.hide();
-        selector.hide();
-      }
-    });
+      });
+
+    // $($newFormLi).find('.MediaSelector').prepend(addSelectMedia);
+    // $(newFormLi).find(".MediaSelector").prepend(addSelectImage);
 
 }
+
+
+
+
 
 function setProject(project_array, id)
 {
@@ -75,6 +57,12 @@ function setProject(project_array, id)
   return project_array;
 }
 
+
+
+
+
+
+
 function unsetProject(project_array, id)
 {
   for (var i = 0; i < project_array.length; i++) {
@@ -87,6 +75,11 @@ function unsetProject(project_array, id)
   return project_array;
 }
 
+
+
+
+
+
 function addFormDeleteLink($MediaFormLi)
 {
     var $removeFormA = $('<a href="#"><span class="glyphicon glyphicon-remove"></span></a>');
@@ -96,6 +89,11 @@ function addFormDeleteLink($MediaFormLi)
         $MediaFormLi.remove();
     });
 }
+
+
+
+
+
 
 function changeTypeInput(input, type)
 {
@@ -107,16 +105,18 @@ function changeTypeInput(input, type)
   input.remove();
 }
 
+
+
+
+
 $(document).ready(function () {
-  // $('.providerInput').remove();
+  // $('#application_refactor_referencebundle_edit_fiche_main_image_add').hide();
+  $(".MediaSelector").prepend(addSelectImage);
   var nbProject = $(".project").length;
   var projects = new Array(nbProject);
   for (var i = 0; i < nbProject; i++ ) {
       projects[i] = new Array(2);
   }
-
-
-
 
   var nbProjectSelected=0;
 	$(".fancybox").fancybox({
@@ -174,7 +174,7 @@ $(document).ready(function () {
     e.preventDefault();
     addForm(collectionTagsHolder, $newLinkLiTag);
   });
-  collectionTagsHolder.find('li.input').each(function() {
+  collectionTagsHolder.find('li').each(function() {
     addFormDeleteLink($(this));
   });
 
@@ -183,6 +183,23 @@ $(document).ready(function () {
   $addMediaLink.on('click', function(e) {
     e.preventDefault();
     addForm(collectionMediasHolder, $newLinkLiMedia);
+
+
+  //   $(".MediaSelector").on('change', function(){
+  //   input=$(this).parent().parent().find('.providerInput');
+  //   selector=$(this).parent().parent().find('.providerSelector');
+  //   if($(this).val() == "add_media"){
+  //     input.show();
+  //     selector.show();
+  //   }else{
+  //     input.hide();
+  //     selector.hide();
+  //   }
+  // })
+
+
+
+
   });
   collectionMediasHolder.find('li').each(function() {
     addFormDeleteLink($(this));
@@ -191,6 +208,18 @@ $(document).ready(function () {
   $addRenderLink.on('click', function(e) {
     e.preventDefault();
     addForm(collectionRendersHolder, $newLinkLiRender);
+
+
+  //       $(".MediaSelector").on('change', function(){
+  //   input=$(this).parent().parent().find('.providerInput');
+  //   if($(this).val() == "add_media"){
+  //     input.show();
+  //   }else{
+  //     input.hide();
+  //   }
+  // })
+
+
   });
   collectionRendersHolder.find('li').each(function() {
     addFormDeleteLink($(this));
@@ -252,32 +281,23 @@ $(document).ready(function () {
 
   })
   $(".addBook").on('click', function(){
+
   for (var i = 0; i < projects.length; i++) {
     if(projects[i]['project_select'] == true)
     {
+      // project_array[i]['project_select'] = true;
+      // console.log('change to : '+project_array[i]['project_id']+'='+project_array[i]['project_select']);
       $(this).before("<input type='hidden' name='project["+i+"]' value='"+projects[i]['project_id']+"'/>");
     }
   };
+  });
+  $("#application_refactor_referencebundle_edit_fiche_image").on('change', function(){
+
+    if($(this).val() == "add_image"){
+      $('#application_refactor_referencebundle_edit_fiche_main_image_add').show();
+    }else{
+      $('#application_refactor_referencebundle_edit_fiche_main_image_add').hide();
+    }
   })
-
-
-  // $('li.tag').on('click', function () {
-  //   // alert($(this).parent().parent('.tag_container').find('.tagInput').val($(this).html())+'           '+$(this).html());
-  //   $(this).parent().parent('.tag_container').find('.tagInput').val($(this).html());  
-  // });
-
-  // $('.tagInput').on('keyup select', function(){
-  //   var input_content = $.trim($(this).val());
-  //   // alert($(this).parent().parent().find('ul.tags_select>li').text());
-  //   if (!input_content) {
-  //          $(this).parent().parent().find('ul.tags_select>li').show();
-  //       } else {
-  //            $(this).parent().parent().find('ul.tags_select>li').show().not(':contains(' + input_content  + ')').hide();
-  //       }
-
-  // });
-  // $('.tagInput').blur('select', function(){
-  //   $(this).parent().parent().find('ul.tags_select').hide();
-  // })
-
+  
 });

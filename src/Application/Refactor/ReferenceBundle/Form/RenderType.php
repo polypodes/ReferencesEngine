@@ -14,7 +14,18 @@ class RenderType extends MediaType
     parent::buildForm($builder, $options);
     $builder
     	->remove('providerName')
-        ->getForm()
+      ->remove('media_selector')
+      ->add('render_selector', 'entity', array(
+                'attr' => array(
+                    'class' => 'renderSelector'
+                    ),
+                "required" =>false,
+                "empty_value" =>"Add render",
+                "empty_data" => null,
+                'mapped' => false,
+                'class' => 'Application\Sonata\MediaBundle\Entity\Media',
+                ))
+
 
 ;
   }

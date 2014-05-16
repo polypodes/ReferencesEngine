@@ -18,6 +18,7 @@ class MediaType extends AbstractType
         $builder
             ->add('binaryContent', 'file' , array(
                 'label' => false,
+                'required' =>false,
                 'attr' => array(
                     'class' => 'providerInput'
                     ),
@@ -25,6 +26,9 @@ class MediaType extends AbstractType
                 //     "name" => "file")
                 ))
             ->add('providerName', 'choice', array(
+                'label' => false,
+                'empty_value' => false,
+                'required' =>false,
                 'attr' => array(
                     'class' => 'providerSelector'
                     ),
@@ -35,12 +39,22 @@ class MediaType extends AbstractType
                     'sonata.media.provider.vimeo' => 'Vimeo',
                     'sonata.media.provider.file' => 'File',
                     )
-                ));
+                ))
+            ->add('media_selector', 'entity', array(
+                'attr' => array(
+                    'class' => 'mediaSelector'
+                    ),
+                "required" =>false,
+                "empty_value" =>"Add media",
+                "empty_data" => null,
+                'mapped' => false,
+                'class' => 'Application\Sonata\MediaBundle\Entity\Media',
+                ))
             // ->add('binaryContent', 'sonata_media_type', array(
             //     'provider' => 'sonata.media.provider.image',
             //     'context'  => 'default'
             //     ))
-            // ;
+            ;
     }
         /**
      * @param OptionsResolverInterface $resolver

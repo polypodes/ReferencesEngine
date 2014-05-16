@@ -86,10 +86,10 @@ class BookController extends Controller
 
             if($form->isValid())
             {
-                var_dump($liste_projects);
+
                 foreach ($liste_projects as $project) {
                   $book->addFiche($project); 
-                  echo("<script>console.log('projefjzefzojebfbisdfsdbfsdbvsdbuv');</script>");
+
                 }
                 $em = $this->getDoctrine()->getManager();
                 $book->prePersist();

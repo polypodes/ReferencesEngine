@@ -106,15 +106,13 @@ class FicheController extends Controller
             ));
     }
 
-    /**
-     * @Secure(roles="ROLE_ADMIN")
-     */
 
     public function editAction($id)
     {
         $em  =$this->getDoctrine()->getManager();
         $allMedia = $em->getRepository('ApplicationSonataMediaBundle:Media')->findAll();
         $project = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findOneById($id);
+        $allTags = $em->getRepository('ApplicationRefactorReferenceBundle:Tag')->findAll();
         $liste_tags = new ArrayCollection();
         $liste_medias = new ArrayCollection();
         $liste_renders = new ArrayCollection();
@@ -132,7 +130,7 @@ class FicheController extends Controller
 
             $liste_renders->add($render);
         }
-        $form = $this->createForm(new FicheEditType(), $project, array('em' => $this->getDoctrine()->getManager(),));
+        $form = $this->createForm(new FicheType(), $project);
 
         $request = $this->get('request');
 
@@ -142,10 +140,24 @@ class FicheController extends Controller
 
             if($form->isValid())
             {
+                if(is_uploaded_file($form->get('image_input')->getData()))
+                {
+                    // echo("<script>alert('test');</script>");
+                    // $image = $form->get('image_input')->getData();
+                    // $project->setImage($image);
+                    // $MediaManager->save($image);
+                    $image= new Media();
+                    $image->setBinaryContent($form->get('image_input')->getData());
+                    $image->setContext('default'); 
+                    $image->setProviderName('sonata.media.provider.image');
+                    $project->setImage($image);
+                    $MediaManager->save($image);
+
+                }
                 $project->getTags()->clear();
                 $project->getMedias()->clear();
                 $project->getRenders()->clear();
-                $em->persist($project);
+                // $em->persist($project);
 
                 foreach ($form->get('tags')->getData() as $tag) {
                     $project->addTag($tag);
@@ -155,16 +167,28 @@ class FicheController extends Controller
                 }
                 foreach ($liste_tags as $tag) {
                     if ($project->getTags()->contains($tag) == false) 
-                        {
+                    {
                         $project->removeTag($tag);
-                        }
                     }
-                foreach ($form->get('medias')->getData() as $media) {
-                    // $tag->setCreatedAt(new \DateTime);
-                    $media->setContext('default');
-                    $project->addMedia($media);
-                    $MediaManager->save($media);
-                    $em->persist($media);
+                }                    // var_dump($form->get('medias')->getData());
+                foreach ($form->get('medias') as $media) {
+                    $media_data= $media->getData();
+                    $media_selector= $media->get('media_selector')->getData();
+                    if ($media_selector == null) {
+                        $media_data->setContext('default');
+                        $project->addMedia($media_data);
+                        $MediaManager->save($media_data);
+                    }else{
+                        $project->addMedia($media_selector);
+                    }
+                    // $tag->setCreatedAt(new \DateTime);;
+                    // $selector = $form->get('media_selector')->getData();
+                    // var_dump($media->getBinaryContent());
+                    // echo("<script>alert('".$form->get('binaryContent')->getData(."');</script>");
+                    // var_dump($form->get('medias')->getData());
+                    // $MediaManager->save($media);
+
+                
                 }
                 foreach ($liste_medias as $media) {
                     if ($project->getMedias()->contains($media) == false) 
@@ -172,12 +196,18 @@ class FicheController extends Controller
                         $project->removeMedia($media);
                         }
                     }
-                foreach ($form->get('renders')->getData() as $render) {
-                    $render->setContext('default');
-                    $render->setProviderName('sonata.media.provider.image');
-                    $project->addRender($render);
-                    $MediaManager->save($render);
-                    $em->persist($render);
+
+                foreach ($form->get('renders') as $render) {
+                    $render_data= $render->getData();
+                    $render_selector= $render->get('render_selector')->getData();
+                    if ($render_selector == null) {
+                        $render_data->setContext('default');
+                        $render_data->setProviderName('sonata.media.provider.image');
+                        $project->addRender($render_data);
+                        $MediaManager->save($render_data);
+                    }else{
+                        $project->addRender($render_selector);
+                    }
                 }
                 foreach ($liste_renders as $render) {
                     if ($project->getRenders()->contains($render) == false) 
@@ -185,13 +215,17 @@ class FicheController extends Controller
                         $project->removeRender($render);
                         }
                     }
+                    $em->persist($project);
                  $em->flush();
                 return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $id)));
             }
         }
 
+        // var_dump($form->getErrorsAsString());
+
         return $this->render('ApplicationRefactorReferenceBundle:Fiche:edit.html.twig', array(
             'project' => $project,
+            'tags' =>json_encode($allTags),
             // 'medias' => $liste_media,
             'image' => $project->getImage(),
             // 'renders' => $liste_render,

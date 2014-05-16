@@ -5,33 +5,32 @@ namespace Application\Refactor\ReferenceBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Sonata\MediaBundle\Form\Type\MediaType as Media;
 
-class TagType extends AbstractType
+class addMediaType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('tag', 'entity', array('class' => 'Application\Refactor\ReferenceBundle\Entity\Tag'))
-            ->add('title', 'text', array(
-                'attr' => array(
-                    'class' => 'tagInput'
-                    ),
-                ))
-            // ->add('slug')
-        ;
+            ->add('binaryContent', 'file' , array(
+                'label' => false,
+                // 'attr' => array(
+                //     'class' => 'providerInput'
+                //     ),
+                // 'required' => false
+                ));
     }
-    
-    /**
+        /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Application\Refactor\ReferenceBundle\Entity\Tag'
+            'data_class' => 'Application\Sonata\MediaBundle\Entity\Media'
         ));
     }
 
@@ -40,6 +39,6 @@ class TagType extends AbstractType
      */
     public function getName()
     {
-        return 'application_refactor_referencebundle_tag';
+        return 'application_refactor_referencebundle_addmedia';
     }
 }

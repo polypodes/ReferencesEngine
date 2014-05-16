@@ -29,7 +29,6 @@ class FicheType extends AbstractType
             ->add('published','checkbox', array('required' => false))
             ->add('image', 'entity', array(
                 'class' => 'Application\Sonata\MediaBundle\Entity\Media',
-                'empty_value' => "Ajouter une image",
 
                 ))
             // ->add('image' , 'sonata_media_type', array(
@@ -38,7 +37,11 @@ class FicheType extends AbstractType
             // 'provider' => 'sonata.media.provider.image',
             // 'context'  => 'default'
             // ))
-
+            ->add('image_input', 'file', array(
+                'mapped' => false,
+                'label' => false,
+                'required' => false
+                ))
 
             ->add('tags' , 'collection', array(
             'type' => new TagType(),
@@ -52,7 +55,6 @@ class FicheType extends AbstractType
             'allow_add' => true,
             'by_reference' => false,
             'allow_delete' =>true,
-            'required' => false
 
             ))
             ->add('renders' , 'collection', array(
@@ -60,7 +62,6 @@ class FicheType extends AbstractType
             'allow_add' => true,
             'by_reference' => false,
             'allow_delete' =>true,
-            'required' => false
 
             ))
 
@@ -97,15 +98,15 @@ class FicheType extends AbstractType
 
 
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
-            $form = $event->getForm();
-            $data = $event->getData();
-            if($data->getImage()->getName() == "Ajouter une image"){
-                $form->remove('image');
-            }
+        // $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+        //     $form = $event->getForm();
+        //     $data = $event->getData();
+        //     if($data->getImage()->getName() == "Ajouter une image"){
+        //         $form->remove('image');
+        //     }
             // $form->add('image', 'text');
             
-        });
+        // });
 
 
     }
@@ -118,13 +119,13 @@ class FicheType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Application\Refactor\ReferenceBundle\Entity\Fiche'
         ));
-        $resolver->setRequired(array(
-            'em',
-        ));
+        // $resolver->setRequired(array(
+        //     'em',
+        // ));
 
-        $resolver->setAllowedTypes(array(
-            'em' => 'Doctrine\Common\Persistence\ObjectManager',
-        ));
+        // $resolver->setAllowedTypes(array(
+        //     'em' => 'Doctrine\Common\Persistence\ObjectManager',
+        // ));
     }
 
     /**
