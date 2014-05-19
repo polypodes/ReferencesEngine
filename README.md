@@ -73,9 +73,13 @@ bin/behat --lang=fr "@ApplicationRefactorReferenceBundle"
 cURL usage:
 
 ```bash
-curl --data "username=admin&password=lol" http://referencesengine:8080/api/tokens/create
+curl --data "username=admin&password=lol" http://referencesengine:8080/api/tokens/creates.json
 ```
+Get clean output and ready to use
 
+```bash
+./generateToken.sh username password
+```
 
 ## Preview
 

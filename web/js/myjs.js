@@ -15,6 +15,27 @@ var collectionRendersHolder = $('ul.renders');
 var $addRenderLink = $('<a href="#" class="add_render_link">Add Render</a>');
 var $newLinkLiRender = $('<ul></ul>').append($addRenderLink);
 
+function searchToArray(string){
+
+  var k =0;
+  string = $.trim(string);
+  var result ="";
+  var array_search = [];
+  for (var i = 0; i<string.length ; i++) {
+    if(string[i] == ','){
+      array_search[k] = $.trim(result);
+      result='';
+      k++;
+      i++;
+    }
+    result += string[i];
+  };
+  if (result != 'undefined') {
+    array_search[k] = $.trim(result);
+  };
+
+  return array_search;
+}
 function addForm(collectionHolder, $newLinkLi) {
     var prototype = collectionHolder.attr('data-prototype');
 
@@ -59,6 +80,13 @@ function addForm(collectionHolder, $newLinkLi) {
         input.hide();
         selector.hide();
       }
+    });
+        $( ".tagInput").autocomplete({
+      source: availableTags,
+      messages: {
+        noResults: '',
+        results: function() {}
+    }
     });
 
 }
@@ -259,6 +287,7 @@ $(document).ready(function () {
     }
   };
   })
+  if (typeof availableTags != "undefined"){
     $( ".tagInput").autocomplete({
       source: availableTags,
       messages: {
@@ -266,6 +295,7 @@ $(document).ready(function () {
         results: function() {}
     }
     });
+  };
   // $('li.tag').on('click', function () {
   //   // alert($(this).parent().parent('.tag_container').find('.tagInput').val($(this).html())+'           '+$(this).html());
   //   $(this).parent().parent('.tag_container').find('.tagInput').val($(this).html());  
@@ -284,5 +314,17 @@ $(document).ready(function () {
   // $('.tagInput').blur('select', function(){
   //   $(this).parent().parent().find('ul.tags_select').hide();
   // })
-
+  
+  $("#project_search_submit").on('click', function(){
+    var search= $(this).parent().find('#project_search').val();
+    if (search != '') {
+       var result= searchToArray(search);
+    for(string in result){
+      if (result[string] == parseInt(result[string]))
+      {
+        // alert(result[string]);
+      }
+    }
+  }
+  });
 });

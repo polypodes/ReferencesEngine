@@ -16,11 +16,11 @@ class WsseListener implements ListenerInterface
     protected $authenticationManager;
     protected $logger;
 
-    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, LoggerInterface $logger)
+    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager/*, LoggerInterface $logger*/)
     {
         $this->securityContext = $securityContext;
         $this->authenticationManager = $authenticationManager;
-        $this->logger = $logger;
+        // $this->logger = $logger;
     }
 
     public function handle(GetResponseEvent $event)
@@ -46,11 +46,9 @@ class WsseListener implements ListenerInterface
             return;
         } catch (AuthenticationException $failed) {
             $failedMessage = 'WSSE Login failed for '.$token->getUsername().'. Why ? '.$failed->getMessage();
-            $this->logger->err($failedMessage);
 
             // Deny authentication with a '403 Forbidden' HTTP response
             $response = new Response();
-            var_dump($failed->getMessage());
             $response->setStatusCode(403);
             $response->setContent($failedMessage);
             $event->setResponse($response);
