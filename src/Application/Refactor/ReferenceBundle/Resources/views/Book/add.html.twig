@@ -7,12 +7,18 @@
 		<div class="col-lg-4">
 			<div class="thumbnail project">
 	      		<div class="caption" style="text-align:center;">
-	      				<!-- {{form(form.fiches)}} -->
-				{{ form_rest(form) }}
+	      		{{form_row(form.title)}}
+	      		{{form_row(form.clientName)}}
+	      		{{form_row(form.projectName)}}
+	      		{{form_row(form.date)}}
+	      		{{form_row(form.published)}}
+	    
+			
+
 			</div>
 			</div>
 		</div>
-	{% for project in projects %}
+		{% for project in projects %}
 	  	<div class="col-lg-4">
 	    	<div class="thumbnail project-mouseover project">
 	    		<input type="hidden" name="project[{{project.id}}]" value="{{project.id}}">
@@ -41,8 +47,15 @@
 			</div>
 		</div>
 	{% endfor %}
+		<ul class="projects" data-prototype="{{form_widget(form.fiches.vars.prototype)|e }}">
+			{#{ include ('ApplicationRefactorReferenceBundle:Fiche:form.html.twig',{'formFiche' : (form.fiches.vars.prototype)|e}) }#}
+			{#{form_widget(form.fiches.vars.prototype.children.title)|e }#}{#{form_widget(form.fiches.vars.prototype)|e }#}
+		</ul>
 	</div>
-					<input type="submit">
-					{{ form_end(form)}}
+	<div style="display:none;">
+		{{ form_rest(form) }}
+	</div>
+<input type="submit">
+					
 </div>
 {% endblock %}

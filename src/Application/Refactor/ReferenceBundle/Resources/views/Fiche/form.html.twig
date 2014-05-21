@@ -1,40 +1,117 @@
+
 <p>
-	<h2>
-		<div class="row">
-		    <div class="col-lg-4">
-		    	Nouveaux projet
-		    </div>
-		    <div class="col-lg-4">
-		    	<form class="form-inline" role="form">
-  					<button type="submit" class="btn btn-default">
-  						Register
-  					</button>
-  					<div class="form-group">
-    					<input type="text" class="form-control" id="Tags" placeholder="Title">
-  					</div>
-  					<div class="form-group">
-    					<input type="text" class="form-control" id="Tags" placeholder="Client, Année">
-  					</div>
-  					<div class="form-group">
-    					<input type="text" class="form-control" id="Tags" placeholder="Client, Année">
-  					</div>
-  					<div class="form-group">
-    					<input type="text" class="form-control" id="Tags" placeholder="Client, Année">
-  					</div>
-  					<div class="form-group">
-    					<input type="text" class="form-control" id="Tags" placeholder="Client, Année">
-  					</div>
-  					<div class="form-group">
-    					<input type="text" class="form-control" id="Tags" placeholder="Client, Année">
-  					</div>
-  					<div class="form-group">
-    					<input type="text" class="form-control" id="Tags" placeholder="Client, Année">
-  					</div>
-  					<div class="form-group">
-    					<input type="text" class="form-control" id="Tags" placeholder="Client, Année">
-  					</div>
-		  		</form>
-			</div>
-		</div>
-	</h2>
+  <h2>
+    <div class="row">
+        <div class="col-lg-6">
+          {{form_label(formFiche.title)}} : {{form_widget(formFiche.title)}}
+        </div>
+    </div>
+  </h2>
 </p>
+<div class="container col-lg-12">
+  <div class="col-lg-9">
+    <div class="jumbotron col-lg-12" style="padding:20px;">
+      <div class="container" style="padding:0px;">
+        <div class="col-6 col-sm-6 col-lg-8">
+          {{form_label(formFiche.image)}} : {{form_widget(formFiche.image)}}{{form_widget(formFiche.image_input)}}
+        </div>
+        <div class="col-6 col-sm-6 col-lg-4">
+          <p>
+            <h3>
+              <span class = "value-form">
+                {{form_label(formFiche.title2)}} : {{form_widget(formFiche.title2)}}
+              </span>
+            </h3>
+          </p>
+        <p>{{form_label(formFiche.date)}} : {{form_widget(formFiche.date)}}</p>
+        <p>{{form_label(formFiche.content)}} : {{form_widget(formFiche.content)}}</p>
+        </div>
+      </div>
+    </div>
+    <div class = "jumbotron col-6 col-sm-6 col-lg-12">
+      <ul class="renders" data-prototype="{{ form_widget(formFiche.renders.vars.prototype)|e }}">
+        {% for render in formFiche.renders%}
+            <div class="col-lg-3">
+              <li>
+                    {% if render.vars.value is not empty and render.vars.value.providerReference %}
+                        <div >
+                            {% thumbnail render.vars.value, 'admin' with {'class': 'img-polaroid media-object'} %}
+                        </div>
+                        {% if sonata_admin_enabled is defined and sonata_admin_enabled %}
+
+                        {% else %}
+                            <strong>{{ render.vars.value.name }}</strong>
+                        {% endif %}
+                    {% endif %}
+
+                </li>
+              </div>
+              <div style="display:none">
+                {{form_widget(render)}} 
+            </div>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  <div class="col-12 col-sm-6 col-lg-3">
+    <p>
+      <div class="checkbox">
+          <label>
+            {{form_label(formFiche.published)}}{{form_widget(formFiche.published)}}
+          </label>
+      </div>
+    </p>
+    <div>
+      <h3>Tags :
+        <p>
+          <small>
+            Comma between each tag
+          </small>
+        </p>
+      </h3>
+      <h4>
+        <ul class="tags" data-prototype="{{ form_widget(formFiche.tags.vars.prototype.title)|e }}">
+              {% for tag in formFiche.tags %}
+                  <li>{{ form_widget(tag.title) }}</li>
+              {% endfor %}
+            </ul>
+      </h4>
+    </div>
+    <div>
+      <h3>Medias Complémentaire : </h3>
+      <ul class="medias" data-prototype="{{ form_widget(formFiche.medias.vars.prototype)|e }}">
+        {% for media in formFiche.medias%}
+          <div class="container">
+            <div class="col-lg-12">
+              <li>
+                    {% if media.vars.value is not empty and media.vars.value.providerReference %}
+                        <div >
+                            {% thumbnail media.vars.value, 'admin' with {'class': 'img-polaroid media-object'} %}
+                        </div>
+                        {% if sonata_admin_enabled is defined and sonata_admin_enabled %}
+                            <a href="{{ url('admin_sonata_media_media_edit', {id: media.vars.value.id}) }}"><strong>{{ media.vars.value.name }}</strong></a>
+                        {% else %}
+                            <strong>{{ media.vars.value.name }}</strong>
+                        {% endif %}
+                    {% endif %}
+
+                </li>
+              </div>
+              <div style="display:none">
+                {{form_widget(media)}} 
+            </div>
+          </div>
+        {% endfor %}
+        </ul>
+    </div>
+  </div>
+</div>
+<!-- {{dump(formFiche.vars.value)}} -->
+<div style="display:none;">
+{{form_rest(formFiche)}}
+</div>
+<!-- <p>
+<div class = "col-6 col-sm-6 col-lg-12">
+  <input class="btn btn-default" type="submit"/>
+</div>
+</p> -->

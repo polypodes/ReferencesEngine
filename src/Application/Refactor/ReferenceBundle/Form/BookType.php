@@ -8,7 +8,8 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Application\Refactor\ReferenceBundle\Entity\Fiche;
-use Application\Refactor\ReferenceBundle\Form\Fichetype;
+use Application\Refactor\ReferenceBundle\Form\FicheChooseType;
+use Application\Refactor\ReferenceBundle\Form\FicheType;
 
 class BookType extends AbstractType
 {
@@ -29,12 +30,31 @@ class BookType extends AbstractType
                 'required' => false
                 ))
             ->add('fiches', 'collection', array(
-                'type' => new FicheType,
+                'type' => new FicheChooseType,
                 'allow_add' => true,
                 'by_reference' => false,
                 'allow_delete' =>true,
-                'required' => false
                 ))
+            // ->add('fiche_add', 'collection', array(
+            //     'mapped' => false,
+            //     'type' => new FicheType,
+            //     'allow_add' => true,
+            //     'by_reference' => false,
+            //     'allow_delete' =>true,
+            //     ))
+            // ->add('fiche', 'entity', array(
+            // 'attr' => array(
+            //     'class' => 'ficheSelector'
+            //     ),
+            // "required" =>false,
+            // "empty_value" =>false,
+            // "empty_data" => null,
+            // 'mapped' => false,
+            // 'class' => 'Application\Refactor\ReferenceBundle\Entity\Fiche',
+            // ));
+            // ->add('fiches', 'entity', array(
+            //     'class' => 'Application\Refactor\ReferenceBundle\Entity\Fiche'
+            //   ))
         ;
       //   $factory = $builder->getFormFactory();
       //   $builder->addEventListener(

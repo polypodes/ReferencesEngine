@@ -29,7 +29,6 @@
 							</span>
 						</h3>
 					</p>
-<!-- 			<p>{{form_label(form.date)}} : {{form_widget(form.date)}}</p> -->
 				<p>{{form_label(form.content)}} : {{form_widget(form.content)}}</p>
 				</div>
 			</div>
@@ -121,16 +120,11 @@
 	</a>
 </div>
 <script type="text/javascript">
-
     var availableTags = [
     {% for tag in tags %}
     '{{tag.title}}',
     {% endfor %}
     ];
-    // $( ".input_tags" ).autocomplete({
-    //   source: availableTags
-    // });
-
 </script>
 
 

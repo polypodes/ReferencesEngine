@@ -156,6 +156,10 @@ class Fiche
 
 
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 
     /**
      * Get id

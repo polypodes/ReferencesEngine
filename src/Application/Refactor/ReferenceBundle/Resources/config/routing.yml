@@ -28,6 +28,8 @@ refactor_projects:
 refactor_remove_projects:
     path:  /projects/remove/{id}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:remove}
+    requirements:
+        id:  \d+
 refactor_add_projects:
     path:  /projects/add/
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:add}
@@ -41,6 +43,11 @@ refactor_edit_projects:
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:edit}
     requirements:
         id:  \d+
+refactor_add_projects_ajax:
+    path:  /projects/add/ajax/
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:add}
+    requirements:
+        _method: POST
 
 
 

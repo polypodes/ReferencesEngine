@@ -22,7 +22,6 @@ class FicheType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('title')
             ->add('title2')
             ->add('date', 'date', array("attr" => array('class'=>'form-control')))
             ->add('content')
@@ -64,7 +63,6 @@ class FicheType extends AbstractType
             'allow_delete' =>true,
 
             ))
-
             // ->add('image', 'choice', array(
             //     'choices' => array(
             //         'Upload' => array(

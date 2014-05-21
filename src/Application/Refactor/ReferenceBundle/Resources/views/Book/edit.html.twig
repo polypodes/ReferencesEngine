@@ -1,56 +1,78 @@
 {% extends "::layout.html.twig" %}
 {% block book_active %}class="active"{% endblock %}
 {% block body %}
-<p>
-	<h2>
-		<div class="row">
-		    <div class="col-lg-4">
-		    	{{book.title}}
-		    </div>
-		</div>
-	</h2>
-</p>
+<div class="container">
+<!-- <div class="new_project"> -->
+{#{ form_start(formFiche) }#}
+{#{ form_errors(formFiche) }#}
+
+{#% include "ApplicationRefactorReferenceBundle:Fiche:form.html.twig" %#}
+<!-- <button id="form_add_fiche">valider</button> -->
+{#{form_end(formFiche)}#}
+<!-- </div> -->
+{{ form_start(form) }}
+{{ form_errors(form) }}
+
 <div class = "item-container">
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-lg-4 new_project_button">
 			<div class="thumbnail project">
 	      		<div class="caption" style="text-align:center;">
-	      		<a href="{{ path('refactor_add_projects') }}">
-					<span type="button" class="btn btn-primary btn-lg">Nouveau Projet</span>
-					</a>
-			</div>
-			</div>
-		</div>
-	{% for project in projects %}
-	  	<div class="col-lg-4">
-	    	<div class="thumbnail project-mouseover project" >
-	    		<div class="project-img">
-	    		{% media project.image, 'thumbnail' %} 
-	    	</div>
-	      		<div class="caption project-btn">
-	      			<h2>{{project.title}}
-	      				<div>
-	      					<small>{{project.title}}</small>
-	        			</div>
-	        		</h2>	
-
-		          		<p>
-		        			<a href="{{ path('refactor_edit_projects', {'id': project.id}) }}" class="btn btn-warning col-md-4 btn-sm " role="button">
-			        			<span class="glyphicon glyphicon-edit"></span>
-			        			<span class="glyphicon-class" style="color:white;">Modifier</span>
-		          			</a>
-		          			<div class="col-md-4"> </div>
-
-				        	<a class="label-danger btn btn-remove col-md-4 btn-sm" role="button" data-id = "{{project.id}}" data-title="{{project.title}}">
-				        		<span class="glyphicon glyphicon-remove"></span>
-				        		<span class="glyphicon-class" style="color:white;" data-layout="center" data-type="confirm">Suprimer</span>
-				        	</a>
-			       		</p>
-			    </div>
+	      		{{form_row(form.title)}}
+	      		{{form_row(form.clientName)}}
+	      		{{form_row(form.projectName)}}
+	      		{{form_row(form.date)}}
+	      		{{form_row(form.published)}}
+				</div>
 			</div>
 		</div>
-	{% endfor %}
+		<ul class="projects" data-prototype="{{ form_widget(form.fiches.vars.prototype)|e }}">
+			{% for project in form.fiches %}
+			  	<div class="col-lg-4">
+			  	<li>
+			    	<div class="thumbnail project-mouseover project" >
+			    		<div class="project-img">
+			    		{% media project.vars.value.image, 'thumbnail' %} 
+			    	</div>
+			      		<div class="caption project-btn">
+			      			<h2>{{project.vars.value.title}}
+			      				<div>
+			      					<small>{{project.vars.value.title}}</small>
+			        			</div>
+			        		</h2>
+			        		<div style="display:none;">
+			        		{{form_widget(project)}}
+			        		</div>
+			        			{#% include 'ApplicationRefactorReferenceBundle:Fiche:form.html.twig' %#}
+			        			{#{ include ('ApplicationRefactorReferenceBundle:Fiche:form.html.twig',{'formFiche' : (form.fiches.vars.prototype)|e}) }#}
+
+
+					    </div>
+					</div>
+					</li>
+				</div>
+
+				
+			{% endfor %}
+		</ul>
 	</div>
+</div>
+<!-- <div class = "col-6 col-sm-6 col-lg-12">
+<ul class="projects_add" data-prototype="{#{ include ("ApplicationRefactorReferenceBundle:Fiche:form.html.twig" , {'formFiche' : form.fiche_add.vars.prototype})|e}#}">	
+{#{ include ("ApplicationRefactorReferenceBundle:Fiche:form.html.twig" , {'formFiche' : form.fiche_add.vars.prototype})|e}#}			
+			{#% for formFiche in form.fiche_add %#}
+			<li>
+				{#% include "ApplicationRefactorReferenceBundle:Fiche:form.html.twig" %#}
+			</li>
+			{#% endfor %#}
+</ul>
+</div> -->
+<div style="display:none;">
+{{form_rest(form)}}
+</div>
+<div class = "col-6 col-sm-6 col-lg-3">
+	<input class="btn btn-default" type="submit"/>
+</div>
 </div>
 
 {% endblock %}

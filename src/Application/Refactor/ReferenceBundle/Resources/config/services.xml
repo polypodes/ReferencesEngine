@@ -24,9 +24,7 @@
          class="Application\Refactor\ReferenceBundle\Security\Firewall\WsseListener" public="false">
            <argument type="service" id="security.context"/>
            <argument type="service" id="security.authentication.manager" />
-           <argument type="service" id="logger" />
-           <tag name="monolog.loger"/>
-           <tag channel="wsse"/>
+
        </service>
         <service id="myreference.fakergenerator" class="Application\Refactor\ReferenceBundle\Services\FakerGenerator\FakerGenerator">
             <argument type="service" id="doctrine.orm.entity_manager" />

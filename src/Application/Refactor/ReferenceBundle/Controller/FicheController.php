@@ -14,10 +14,87 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class FicheController extends Controller
 {
-    public function chooseMedias()
+    public function saveFiche($form, $project, $liste_tags, $liste_medias, $liste_renders, $MediaManager, $em)
     {
-        $em  =$this->getDoctrine()->getManager();
-        $medias = $em->getRepository('ApplicationSonataMediaBundle:Media')->findAll();
+        if(is_uploaded_file($form->get('image_input')->getData()))
+        {
+            $image= new Media();
+            $image->setBinaryContent($form->get('image_input')->getData());
+            $image->setContext('default'); 
+            $image->setProviderName('sonata.media.provider.image');
+            $project->setImage($image);
+            $MediaManager->save($image);
+        }
+        if(is_object($project->getMedias())){
+            $project->getTags()->clear();
+            $project->getMedias()->clear();
+            $project->getRenders()->clear();
+        }
+                // $em->persist($project);
+
+        foreach ($form->get('tags')->getData() as $tag) {
+            $project->addTag($tag);
+            $tag->prePersist();
+            // $tag->setCreatedAt(new \DateTime);
+            $em->persist($tag);
+        }
+        if ($liste_tags!=null) {
+            foreach ($liste_tags as $tag) {
+                if ($project->getTags()->contains($tag) == false) 
+                {
+                    $project->removeTag($tag);
+                }
+            }  
+            foreach ($liste_renders as $render) {
+                if ($project->getRenders()->contains($render) == false) 
+                {
+                    $project->removeRender($render);
+                }
+            }         
+            foreach ($liste_medias as $media) {
+                if ($project->getMedias()->contains($media) == false) 
+                {
+                    $project->removeMedia($media);
+                }
+            }
+        }
+
+               // var_dump($form->get('medias')->getData());
+        foreach ($form->get('medias') as $media) {
+            $media_data= $media->getData();
+            $media_selector= $media->get('media_selector')->getData();            
+            if ($media_selector == null) {
+                // var_dump(expression)
+                $media_data->setContext('default');
+
+                $project->addMedia($media_data);
+                $MediaManager->save($media_data);
+
+            }elseif($project->getMedias()->contains($media_selector) == false){
+          
+                $project->addMedia($media_selector);
+            
+            }             
+        }
+        foreach ($form->get('renders') as $render) {
+            $render_data= $render->getData();
+            $render_selector= $render->get('render_selector')->getData();
+            if ($render_selector == null) {
+                $render_data->setContext('default');
+                $render_data->setProviderName('sonata.media.provider.image');
+                $project->addRender($render_data);
+                $MediaManager->save($render_data);
+            }elseif($project->getRenders()->contains($render_selector) == false){
+                $project->addRender($render_selector);
+            }
+        }
+        if($project->getCreatedAt() == null){
+            $project->prePersist();
+        }else{
+            $project->preUpdate();
+        }
+        $em->persist($project);
+        $em->flush();
 
     }
     public function indexAction()
@@ -56,25 +133,31 @@ class FicheController extends Controller
 
     public function addAction()
     {
+        $MediaManager = $this->container->get('sonata.media.manager.media');
+        $em  =$this->getDoctrine()->getManager();
+        $allTags = $em->getRepository('ApplicationRefactorReferenceBundle:Tag')->findAll();
         $fiche = new Fiche;
         $form = $this->createForm(new FicheType, $fiche);
-
         $request = $this->get('request');
+        if($request->isXmlHttpRequest())
+        {
+           
+            var_dump($request->request->get('test'));
+            // $this->saveFiche($form, $fiche, null, null, null, $MediaManager, $em);
+        }
         if($request->getMethod() == 'POST')
         {
             $form->bind($request);
 
             if($form->isValid())
             {
-                $em = $this->getDoctrine()->getManager();
-                $fiche->prePersist();
-                $em->persist($fiche);
-                $em->flush();
+                $this->saveFiche($form, $fiche, null, null, null, $MediaManager, $em);
                 return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $fiche->getId())));
             }
         }
         return $this->render('ApplicationRefactorReferenceBundle:Fiche:add.html.twig', array(
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'tags' =>$allTags,
             ));
     }
 
@@ -130,7 +213,7 @@ class FicheController extends Controller
 
             $liste_renders->add($render);
         }
-        $form = $this->createForm(new FicheType(), $project);
+        $form = $this->createForm(new FicheEditType(), $project);
 
         $request = $this->get('request');
 
@@ -142,82 +225,92 @@ class FicheController extends Controller
             {
                 if(is_uploaded_file($form->get('image_input')->getData()))
                 {
-                    // echo("<script>alert('test');</script>");
-                    // $image = $form->get('image_input')->getData();
-                    // $project->setImage($image);
-                    // $MediaManager->save($image);
-                    $image= new Media();
-                    $image->setBinaryContent($form->get('image_input')->getData());
-                    $image->setContext('default'); 
-                    $image->setProviderName('sonata.media.provider.image');
-                    $project->setImage($image);
-                    $MediaManager->save($image);
+            // echo("<script>alert('test');</script>");
+            // $image = $form->get('image_input')->getData();
+            // $project->setImage($image);
+            // $MediaManager->save($image);
+            $image= new Media();
+            $image->setBinaryContent($form->get('image_input')->getData());
+            $image->setContext('default'); 
+            $image->setProviderName('sonata.media.provider.image');
+            $project->setImage($image);
+            $MediaManager->save($image);
 
                 }
-                $project->getTags()->clear();
-                $project->getMedias()->clear();
-                $project->getRenders()->clear();
-                // $em->persist($project);
+                // $project->getTags()->clear();
+                // $project->getMedias()->clear();
+                // $project->getRenders()->clear();
+                // // $em->persist($project);
 
-                foreach ($form->get('tags')->getData() as $tag) {
-                    $project->addTag($tag);
-                    $tag->prePersist();
-                    // $tag->setCreatedAt(new \DateTime);
-                    $em->persist($tag);
-                }
-                foreach ($liste_tags as $tag) {
-                    if ($project->getTags()->contains($tag) == false) 
-                    {
-                        $project->removeTag($tag);
-                    }
-                }                    // var_dump($form->get('medias')->getData());
-                foreach ($form->get('medias') as $media) {
-                    $media_data= $media->getData();
-                    $media_selector= $media->get('media_selector')->getData();
-                    if ($media_selector == null) {
-                        $media_data->setContext('default');
-                        $project->addMedia($media_data);
-                        $MediaManager->save($media_data);
-                    }else{
-                        $project->addMedia($media_selector);
-                    }
-                    // $tag->setCreatedAt(new \DateTime);;
-                    // $selector = $form->get('media_selector')->getData();
-                    // var_dump($media->getBinaryContent());
-                    // echo("<script>alert('".$form->get('binaryContent')->getData(."');</script>");
-                    // var_dump($form->get('medias')->getData());
-                    // $MediaManager->save($media);
+                // foreach ($form->get('tags')->getData() as $tag) {
+                //     $project->addTag($tag);
+                //     $tag->prePersist();
+                //     // $tag->setCreatedAt(new \DateTime);
+                //     $em->persist($tag);
+                // }
+                // foreach ($liste_tags as $tag) {
+                //     if ($project->getTags()->contains($tag) == false) 
+                //     {
+                //         $project->removeTag($tag);
+                //     }
+                // }             
+                // foreach ($liste_medias as $media) {
+                //     if ($project->getMedias()->contains($media) == false) 
+                //         {
+                //         $project->removeMedia($media);
+                //         }
+                //     }
+
+                //        // var_dump($form->get('medias')->getData());
+                // foreach ($form->get('medias') as $media) {
+                //     $media_data= $media->getData();
+                //     $media_selector= $media->get('media_selector')->getData();
+            
+                //     if ($media_selector == null) {
+                //         // var_dump(expression)
+                //         $media_data->setContext('default');
+
+                //         $project->addMedia($media_data);
+                //         $MediaManager->save($media_data);
+
+                //     }elseif($project->getMedias()->contains($media_selector) == false){
+          
+                //         $project->addMedia($media_selector);
+            
+                //     }
+                
+                //     // $tag->setCreatedAt(new \DateTime);;
+                //     // $selector = $form->get('media_selector')->getData();
+                //     // var_dump($media->getBinaryContent());
+                //     // echo("<script>alert('".$form->get('binaryContent')->getData(."');</script>");
+                //     // var_dump($form->get('medias')->getData());
+                //     // $MediaManager->save($media);
 
                 
-                }
-                foreach ($liste_medias as $media) {
-                    if ($project->getMedias()->contains($media) == false) 
-                        {
-                        $project->removeMedia($media);
-                        }
-                    }
+                // }
+                // foreach ($liste_renders as $render) {
+                //     if ($project->getRenders()->contains($render) == false) 
+                //         {
+                //         $project->removeRender($render);
+                //         }
+                //     }
 
-                foreach ($form->get('renders') as $render) {
-                    $render_data= $render->getData();
-                    $render_selector= $render->get('render_selector')->getData();
-                    if ($render_selector == null) {
-                        $render_data->setContext('default');
-                        $render_data->setProviderName('sonata.media.provider.image');
-                        $project->addRender($render_data);
-                        $MediaManager->save($render_data);
-                    }else{
-                        $project->addRender($render_selector);
-                    }
-                }
-                foreach ($liste_renders as $render) {
-                    if ($project->getRenders()->contains($render) == false) 
-                        {
-                        $project->removeRender($render);
-                        }
-                    }
-                    $em->persist($project);
-                 $em->flush();
-                return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $id)));
+                // foreach ($form->get('renders') as $render) {
+                //     $render_data= $render->getData();
+                //     $render_selector= $render->get('render_selector')->getData();
+                //     if ($render_selector == null) {
+                //         $render_data->setContext('default');
+                //         $render_data->setProviderName('sonata.media.provider.image');
+                //         $project->addRender($render_data);
+                //         $MediaManager->save($render_data);
+                //     }elseif($project->getRenders()->contains($render_selector) == false){
+                //         $project->addRender($render_selector);
+                //     }
+                // }
+                //     $em->persist($project);
+                //  $em->flush();
+                $this->saveFiche($form, $project, $liste_tags, $liste_medias, $liste_renders, $MediaManager, $em);
+                // return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $id)));
             }
         }
 

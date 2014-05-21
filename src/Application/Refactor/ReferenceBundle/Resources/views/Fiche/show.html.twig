@@ -62,32 +62,34 @@
 		</h4>
 	</div>
 	<div>
-	<h3>Medias Complémentaire</h3>
-	{% for media in medias %}
-	<p>
-		{% thumbnail media, 'small' %}
-		{% if media.providerName == "sonata.media.provider.image" or media.providerName == "sonata.media.provider.file" %}
-		<a href="{% path media , 'reference' %}">{{media.name }}</a>
-		{% else %}
-		<a href="{{ path('sonata_media_download', {'id': media|sonata_urlsafeid }) }}">{{media.name }}</a>
-		{% endif %}
-	</p>	
+		<h3>Medias Complémentaire</h3>
+		{% for media in medias %}
+			<p>
+				{% thumbnail media, 'small' %}
+				{% if media.providerName == "sonata.media.provider.image" or media.providerName == "sonata.media.provider.file" %}
+				<a href="{% path media , 'reference' %}">{{media.name }}</a>
+				{% else %}
+				<a href="{{ path('sonata_media_download', {'id': media|sonata_urlsafeid }) }}">{{media.name }}</a>
+				{% endif %}
+			</p>	
 		{% endfor %}
-		</h4>
+	
 	</div>
 </div>
 
 <div class="row">
 	<div class="jumbotron col-lg-9" style="padding:20px;">
-	{% for render in renders %}
-	<div class="col-xs-6 col-md-3">
-	<div class="thumbnail">
-	<a class="fancybox" rel="group" href="{% path render, 'reference' %}" title="{{render.name }}">
-	<img src="{% path render, 'small' %}"</a>
-</div>
-		</div>
+		{% for render in renders %}
+			<div class="col-xs-6 col-md-3">
+				<div class="thumbnail">
+					<a class="fancybox" rel="group" href="{% path render, 'reference' %}" title="{{render.name }}">
+						<img src="{% path render, 'small' %}">
+					</a>
+				</div>
+			</div>
 		{% endfor %}
 	</div>
+</div>
 
 
 

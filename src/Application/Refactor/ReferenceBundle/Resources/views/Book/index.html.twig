@@ -8,33 +8,31 @@
 		    <div class="col-lg-3">
 		    	Liste des Books :
 		    </div>
-		    <div class="col-lg-4">
-		    	<form class="form-inline" role="form">
-  					<div class="form-group">
-    					<input type="text" class="form-control" id="Tags" placeholder="Client, Tag, Année">
-  					</div>
-  					<button type="submit" class="btn btn-default">
-  						Recherche
-  					</button>
-		  		</form>
+		    <div class="col-lg-6">
+		    <div class="col-lg-6">
+		    	<input type="text" class="form-control" id="book_search" placeholder="Tag, Année" onkeypress="return enter(event)">
+		    	</div>
+  				<span type="button" class="sub btn btn-default" id="book_search_submit">Recherche</span>
 			</div>
 		</div>
 	</h2>
 </p>
 <div class = "item-container">
 	<div class="row">
-		<div class="col-xs-6 col-md-3">
+		<div class="col-xs-6 col-md-3 new_book">
 			<div class="thumbnail"  onclick="location.href='{#{ path('refactor_show_projects', {'id': project.id}) }#}';" style="cursor:pointer;">
 	      		<div class="caption" style="text-align:center;">
-			<button type="button" class="btn btn-primary btn-lg">Nouveau Cahier</button>
+	      		<a href="{{ path('refactor_add_books') }}">
+				<button type="button" class="btn btn-primary btn-lg">Nouveau Cahier</button>
+						   </a>
 						    </div>
 			</div>
 		</div>
 	{% for book in books %}
-	  	<div class="col-xs-6 col-md-3">
+	  	<div class="col-xs-6 col-md-3 book_result {{book.clientName|lower}}" data-name="{{book.clientName|lower}}">
 	    	<div class="thumbnail">
 	      		<div class="caption">
-	        		<h4>{{book.title}}<p><small>{{book.clientName}}</small></h4></p>
+	        		<h4>{{book.title}}<p><small><div class="testname">{{book.clientName}}</div></small></h4></p>
 	        		<p>
 	        			<a href="{{ path('refactor_edit_books', {'id': book.id}) }}" class="btn label-warning" role="button">
 		        		<span class="glyphicon glyphicon-edit"></span>

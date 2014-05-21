@@ -54,6 +54,7 @@ class FicheEditType extends FicheType
       //       'allow_add' => true,
       //       'sortable' => 'position'
       //   ))
+    ->remove('date')
         ->getForm()
 
 ;

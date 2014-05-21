@@ -1,6 +1,3 @@
-// var selectMedia = '<option value="add_media" selected="selected">Add a media</option>';
-var test ="<input type='text'>"
-
 var collectionTagsHolder = $('ul.tags');
 var $addTagLink = $('<a href="#" class="add_tag_link">Add tag</a>');
 var $newLinkLiTag = $('<ul></ul>').append($addTagLink);
@@ -14,6 +11,27 @@ var $newLinkLiMedia = $('<ul></ul>').append($addMediaLink);
 var collectionRendersHolder = $('ul.renders');
 var $addRenderLink = $('<a href="#" class="add_render_link">Add Render</a>');
 var $newLinkLiRender = $('<ul></ul>').append($addRenderLink);
+
+
+var collectionProjectsHolder = $('ul.projects');
+var $addProjectLink = $('<a href="#" class="add_project_link">Choose a project</a>');
+var $newLinkLiProject = $('<ul></ul>').append($addProjectLink);
+
+
+// var collectionProjects_addHolder = $('ul.projects_add');
+// var $addProject_addLink = $('<a href="#" class="add_project_link">Add a project</a>');
+// var $newLinkLiProject_add = $('<ul></ul>').append($addProject_addLink);
+
+
+
+
+function enter(e) {
+    if (e.keyCode == 13) {
+      $(".sub").trigger('click');
+      return false;
+    }
+}
+
 
 function searchToArray(string){
 
@@ -36,6 +54,31 @@ function searchToArray(string){
 
   return array_search;
 }
+
+function stringToArray(string){
+
+  var k =0;
+  string = $.trim(string);
+  var result ="";
+  var array_string = [];
+  for (var i = 0; i<string.length ; i++) {
+    if(string[i] == ' '){
+      array_string[k] = $.trim(result);
+      result='';
+      k++;
+      while(string[i] == ' '){
+        i++;
+      }
+    }
+    result += string[i];
+  };
+  if (result != 'undefined') {
+    array_string[k] = $.trim(result);
+  };
+
+  return array_string;
+}
+
 function addForm(collectionHolder, $newLinkLi) {
     var prototype = collectionHolder.attr('data-prototype');
 
@@ -81,6 +124,7 @@ function addForm(collectionHolder, $newLinkLi) {
         selector.hide();
       }
     });
+    if (typeof(availableTags) != 'undefined') {
         $( ".tagInput").autocomplete({
       source: availableTags,
       messages: {
@@ -88,6 +132,7 @@ function addForm(collectionHolder, $newLinkLi) {
         results: function() {}
     }
     });
+    }
 
 }
 
@@ -206,6 +251,15 @@ $(document).ready(function () {
     addFormDeleteLink($(this));
   });
 
+  collectionProjectsHolder.append($newLinkLiProject);
+  $addProjectLink.on('click', function(e) {
+    e.preventDefault();
+    addForm(collectionProjectsHolder, $newLinkLiProject);
+  });
+  collectionProjectsHolder.find('li').each(function() {
+    addFormDeleteLink($(this));
+  });
+
 
   collectionMediasHolder.append($newLinkLiMedia);
   $addMediaLink.on('click', function(e) {
@@ -223,6 +277,15 @@ $(document).ready(function () {
   collectionRendersHolder.find('li').each(function() {
     addFormDeleteLink($(this));
   });
+  // collectionProjects_addHolder.append($newLinkLiProject_add);
+  // $addProject_addLink.on('click', function(e) {
+  //   e.preventDefault();
+  //   addForm(collectionProjects_addHolder, $newLinkLiProject_add);
+  // });
+  // collectionProjects_addHolder.find('li').each(function() {
+  //   addFormDeleteLink($(this));
+  // });
+
 
   $(".providerSelector").each(function(){
       $(this).change(function(){
@@ -316,15 +379,95 @@ $(document).ready(function () {
   // })
   
   $("#project_search_submit").on('click', function(){
-    var search= $(this).parent().find('#project_search').val();
-    if (search != '') {
-       var result= searchToArray(search);
-    for(string in result){
-      if (result[string] == parseInt(result[string]))
-      {
-        // alert(result[string]);
-      }
+    if($('#no_result').length){
+      $('#no_result').remove();
     }
-  }
+    if ($('#project_search').val() != '') {
+            $('.project_result').hide();
+          };
+    var search= $(this).parent().find('#project_search').val();
+    var list= "";
+    if (search != '') {
+         var result= searchToArray(search);
+      for(string in result){
+        list += '.'+result[string].toLowerCase();
+      }
+      $(list).show();
+      if($('.project_result').is(':visible')){   
+      }else{
+        $('.new_project').after('<h1><p class="highlight col-lg-12" id="no_result">No Result</p></h1>');
+      }
+      
+    }
   });
+  $('#project_search').on('keyup', function(){
+    if ($(this).val() == '') {
+      if($('#no_result').length){
+      $('#no_result').remove();
+    }
+      $('.project_result').show();
+    };
+  })
+  // $('#new_project_add').on('click', function(e){
+  //   e.preventDefault();
+  //   $('.new_project').show();
+  //   $('.new_project_button').hide();
+  // });
+
+
+
+$("#book_search_submit").on('click', function(){
+    if($('#no_result').length){
+      $('#no_result').remove();
+    }
+
+    if ($('#book_search').val() != '') {
+            $('.book_result').hide();
+          };
+    var search= $(this).parent().find('#book_search').val();
+    var list= "";
+    if (search != '') {
+         var result= stringToArray(search);
+      for(string in result){
+        alert(result[string]);
+        $('.book_result[data-name*="'+result[string]+'"]').show();
+        list += '.'+result[string].toLowerCase();
+      }
+      // $(list).show();
+      if($('.book_result').is(':visible')){   
+      }else{
+        $('.new_book').after('<h1><p class="highlight col-lg-12" id="no_result">No Result</p></h1>');
+      }
+      
+    }
+  });
+  $('#book_search').on('keyup', function(){
+    if ($(this).val() == '') {
+      if($('#no_result').length){
+      $('#no_result').remove();
+    }
+      $('.book_result').show();
+    };
+  })
+//   $("#form_add_fiche").on('click', function(){ 
+//     var path= $('#abc').attr('data-path');
+//     var DATA= $('#abc').attr('data-val');
+//     // alert(DATA);
+//     $.ajax({
+//         type: "POST",
+//         url: path,
+//         data: {
+//           'test':DATA
+//         },
+//         cache: false,
+//         dataType : "json",
+//         error:function(request, error) { // Info Debuggage si erreur         
+//                        $('#abc').append("Erreur : responseText: "+request.responseText);
+//                      },
+//         success: function(data){
+//            alert('test');
+//         }
+//     });    
+//     return false;
+// });
 });
