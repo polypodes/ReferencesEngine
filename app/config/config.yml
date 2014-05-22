@@ -208,3 +208,8 @@ sensio_framework_extra:
     request: { converters: true }
 
 nelmio_api_doc: ~
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /usr/bin/wkhtmltopdf
+        options:    []

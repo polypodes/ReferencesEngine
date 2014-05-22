@@ -54,6 +54,10 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
 
+            # Pdf bundles
+            new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

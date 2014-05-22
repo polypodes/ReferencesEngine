@@ -54,3 +54,17 @@ refactor_add_projects_ajax:
 refactor_medias:
     path:  /medias/
     defaults: { _controller: ApplicationRefactorReferenceBundle:Media:index}
+
+
+refactor_pdf_projects:
+    path:  /pdf/project/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:PDF:project}
+refactor_get_pdf_projects:
+    path:  /get/pdf/project/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:PDF:projectPDF}
+refactor_pdf_books:
+    path:  /pdf/book/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:PDF:book}
+refactor_get_pdf_books:
+    path:  /get/pdf/book/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:PDF:bookPDF}

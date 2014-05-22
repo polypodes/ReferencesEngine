@@ -139,12 +139,12 @@ class FicheController extends Controller
         $fiche = new Fiche;
         $form = $this->createForm(new FicheType, $fiche);
         $request = $this->get('request');
-        if($request->isXmlHttpRequest())
-        {
+        // if($request->isXmlHttpRequest())
+        // {
            
-            var_dump($request->request->get('test'));
-            // $this->saveFiche($form, $fiche, null, null, null, $MediaManager, $em);
-        }
+        //     var_dump($request->request->get('test'));
+        //     $this->saveFiche($form, $fiche, null, null, null, $MediaManager, $em);
+        // }
         if($request->getMethod() == 'POST')
         {
             $form->bind($request);
@@ -152,6 +152,7 @@ class FicheController extends Controller
             if($form->isValid())
             {
                 $this->saveFiche($form, $fiche, null, null, null, $MediaManager, $em);
+                // $this->get('knp_snappy.pdf')->generate('http://www.google.fr', '/Users/charlie/Bureau/file.pdf');
                 return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $fiche->getId())));
             }
         }
@@ -169,23 +170,8 @@ class FicheController extends Controller
         {
             throw $this->createNotFoundException('Fiche inexistant(id = '.$id.')');
         }
-        $liste_media= [];
-        $medias = $project->getMedias();
-        // foreach ($medias as $media) {
-        //     $liste_media[]=$media->getMedia();
-        // }
-        $liste_render= [];
-        $renders = $project->getRenders();
-        // foreach ($renders as $render) {
-        //     $liste_render[]=$render->getMedia();
-        // }
-         // $fichemedias= $em->getRepository('ApplicationRefactorReferenceBundle:FicheMedia')->findByFiche($project);
-         // $medias=$em->getRepository('ApplicationSonataMediaBundle:Media')->findByFiche($project);
-
         return $this->render('ApplicationRefactorReferenceBundle:Fiche:show.html.twig', array(
             'project' => $project,
-            'medias' => $medias,
-            'renders' => $renders
             ));
     }
 
@@ -310,7 +296,7 @@ class FicheController extends Controller
                 //     $em->persist($project);
                 //  $em->flush();
                 $this->saveFiche($form, $project, $liste_tags, $liste_medias, $liste_renders, $MediaManager, $em);
-                // return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $id)));
+                return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $id)));
             }
         }
 

@@ -104,7 +104,7 @@ class BookController extends Controller
                         $book->addFiche($fiche_selector);                    
                     }
                 }
-                $bok->preUpdate();
+                $book->preUpdate();
                 $em->persist($book);
                 $em->flush();
 
@@ -160,7 +160,7 @@ class BookController extends Controller
                 $em->persist($book);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('refactor_books'));
+                return $this->redirect($this->generateUrl('refactor_edit_books', array('id' => $book->getId())));
             }
         }
         return $this->render('ApplicationRefactorReferenceBundle:Book:add.html.twig', array(

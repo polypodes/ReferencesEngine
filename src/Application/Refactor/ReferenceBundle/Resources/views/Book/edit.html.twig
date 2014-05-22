@@ -24,6 +24,10 @@
 	      		{{form_row(form.date)}}
 	      		{{form_row(form.published)}}
 				</div>
+				<a href="{{ path('refactor_get_pdf_books', {'id': book.id}) }}" class="btn btn-success col-md-4 btn-sm " role="button">
+	      			<span class="glyphicon-class" style="color:white;">Make a PDF </span>
+			    	<span class="glyphicon glyphicon-hand-left" style="margin-left:5px;"></span>
+		        </a>
 			</div>
 		</div>
 		<ul class="projects" data-prototype="{{ form_widget(form.fiches.vars.prototype)|e }}">

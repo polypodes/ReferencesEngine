@@ -63,7 +63,7 @@
 	</div>
 	<div>
 		<h3>Medias Complémentaire</h3>
-		{% for media in medias %}
+		{% for media in project.medias %}
 			<p>
 				{% thumbnail media, 'small' %}
 				{% if media.providerName == "sonata.media.provider.image" or media.providerName == "sonata.media.provider.file" %}
@@ -79,7 +79,7 @@
 
 <div class="row">
 	<div class="jumbotron col-lg-9" style="padding:20px;">
-		{% for render in renders %}
+		{% for render in project.renders %}
 			<div class="col-xs-6 col-md-3">
 				<div class="thumbnail">
 					<a class="fancybox" rel="group" href="{% path render, 'reference' %}" title="{{render.name }}">

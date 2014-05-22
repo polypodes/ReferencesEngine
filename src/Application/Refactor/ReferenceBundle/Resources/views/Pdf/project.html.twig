@@ -1,0 +1,63 @@
+<page pageset="old">
+	<bookmark title="{{project.title}}" level="0" ></bookmark>
+	<div class="date">
+		{{project.date|date("d M Y")}}
+	</div>
+	<div class="title">
+		{{project.title}}
+	</div>
+	<div class="title2">
+		{{project.title2}}
+	</div>
+	<div class="container">
+		<table>
+			<tr>
+				<td>
+					<span class = "image">
+						<img id ="Main_image" src=".{% path project.image, 'big' %}" >
+					</span>
+				</td>
+				<td>
+					<div>
+						<h1>Tags :</h1>
+					</div>
+					<span class="tags">
+						{% for tag in project.tags %}
+							<h3><small>- {{tag}}<br></small></h3>
+						{% endfor %}
+					</span>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<nobreak>
+		<h1>Content :</h1>
+		<div class="content">
+			{{project.content}}
+		</div>
+	</nobreak>
+	<nobreak>
+		<h1>Creas :</h1>
+		<div class="creas">
+			{% for render in project.renders %}
+				<span class ="render">
+					<img src=".{% path render, 'small' %}">
+					<a href="{{ app.request.host }}{{ path('sonata_media_download', {'id': render|sonata_urlsafeid }) }}">{{render.name }}</a>
+					<!-- <em>{#{render.name }#}</em> -->
+				</span>
+			{% endfor %}
+		</div>
+	</nobreak>
+	<nobreak>
+		<h1>Medias :</h1>
+		<div class="medias">
+			{% for media in project.medias %}
+				<span class ="media">
+					<img src=".{% path media, 'small' %}" >
+					<a href="{{ app.request.host }}{{ path('sonata_media_download', {'id': media|sonata_urlsafeid }) }}">{{media.name }}</a>
+
+				</span>
+			{% endfor %}
+		</div>
+	</nobreak>
+</page>
