@@ -26,8 +26,12 @@
            <argument type="service" id="security.authentication.manager" />
 
        </service>
+               <service id="media.savemedia" class="Application\Refactor\ReferenceBundle\Controller\MediaController">
+        </service>
         <service id="myreference.fakergenerator" class="Application\Refactor\ReferenceBundle\Services\FakerGenerator\FakerGenerator">
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sonata.media.manager.media" />
+            <argument type="service" id="kernel" />
         </service>
     </services>
 </container>

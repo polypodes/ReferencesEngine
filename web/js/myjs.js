@@ -321,6 +321,7 @@ $(document).ready(function () {
         nbProjectSelected++;
         thumbnail.css('border-width', '10px');
         projects=setProject(projects, value);
+        $(this).parents('.project').addClass('selected');
       // for (var i = projects.length - 1; i >= 0; i--) {
       //   console.log(projects[i]['project_id']+'='+projects[i]['project_select']);
       // };
@@ -330,6 +331,7 @@ $(document).ready(function () {
         nbProjectSelected--;
         projects=unsetProject(projects, value);
         thumbnail.css('border-width', '1px');
+        $(this).parents('.project').removeClass('selected');
         $(this).children('.glyphicon-class').text("Ajouter au Cahier");
       }
       $(".numberProject").text(nbProjectSelected);
@@ -384,6 +386,7 @@ $(document).ready(function () {
     }
     if ($('#project_search').val() != '') {
             $('.project_result').hide();
+            $('.selected').parent().show();
           };
     var search= $(this).parent().find('#project_search').val();
     var list= "";
@@ -429,7 +432,6 @@ $("#book_search_submit").on('click', function(){
     if (search != '') {
          var result= stringToArray(search);
       for(string in result){
-        alert(result[string]);
         $('.book_result[data-name*="'+result[string]+'"]').show();
         list += '.'+result[string].toLowerCase();
       }

@@ -42,6 +42,7 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
+#Create route for api
 rest : 
     type : rest 
     resource : "routing_rest.yml"

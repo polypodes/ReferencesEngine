@@ -47,6 +47,10 @@ done:
 	@echo "\tex: 'php app/console fos:user:create admin tech@lespolypodes.com --super-admin'"
 	@echo "\tpassword: lol (to match with the behat tests)"
 	@echo
+	@echo "Populate your Database with:"
+	@echo "\t$ app/console generate:faker"
+	@echo
+
 
 install: createDb clear done
 

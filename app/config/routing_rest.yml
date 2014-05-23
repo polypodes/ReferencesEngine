@@ -1,17 +1,17 @@
-rest_Refactor : 
+rest_Refactor : #create route for referencebundle
   type : rest
   resource: "@ApplicationRefactorReferenceBundle/Resources/config/routing_rest.yml"
 
-sonata_api_media:
+sonata_api_media: #enable route for mediabundle
     type:         rest
     prefix:       /media
     resource:     "@SonataMediaBundle/Resources/config/routing/api.xml"
 
-sonata_api_user:
+sonata_api_user: #enable route for userbundle
     type:         rest
     prefix:       /user
     resource:     "@SonataUserBundle/Resources/config/routing/api.xml"
 
-NelmioApiDocBundle:
+NelmioApiDocBundle: #enable route for apidoc
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /doc

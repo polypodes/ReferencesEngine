@@ -5,7 +5,11 @@ use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Application\Refactor\ReferenceBundle\Entity\Book;
+
+/**
+ * Book Rest Controller
+ * Controle Api for book
+ */
 
 class BookRestController extends Controller
 {

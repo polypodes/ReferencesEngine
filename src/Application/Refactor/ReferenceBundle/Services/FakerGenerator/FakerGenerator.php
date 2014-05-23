@@ -4,32 +4,115 @@ namespace Application\Refactor\ReferenceBundle\Services\FakerGenerator;
 use Doctrine\ORM\EntityManager;
 use Application\Refactor\ReferenceBundle\Entity\Tag;
 use Application\Refactor\ReferenceBundle\Entity\Fiche;
-use Application\Refactor\ReferenceBundle\Entity\FicheTag;
-// use Application\Sonata\MediaBundle\Entity\Media;
-use Application\Refactor\ReferenceBundle\Entity\FicheMedia;
+use Application\Sonata\MediaBundle\Entity\Media;
 use Application\Refactor\ReferenceBundle\Entity\Book;
-use Application\Refactor\ReferenceBundle\Entity\FicheBook;
-use Application\Refactor\ReferenceBundle\Entity\FicheRender;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sonata\MediaBundle\Entity\MediaManager;
 
 use app\Faker\autoload;
 use Faker;
 
 
-class FakerGenerator extends Controller
+class FakerGenerator
 {
-	public function __construct(EntityManager $em)
+	public function __construct(EntityManager $em, MediaManager $MediaManager, $kernel)
 	{
+		//Get Service i need to persist
 		$this->em = $em;
-		$this->getFake();
+		$this->MediaManager=$MediaManager;// to save Media
+		$this->kernel = $kernel; //to get the root Dir
+		$this->getFake();//to generate the DB
 	}
+	/*
+	 * GetRandomUniqueInt($min, $max, $countmin, $countmax)
+	 * $min, $max, $countmin, $countmax int
+	 * $min/$max : extrem of the values used
+	 * $countmin/countmax : extrem of the values needed
+	 * return an array with unique int
+	 */
+
+	public function getRandomUniqueInt($min, $max, $countmin, $countmax)
+	{
+		$data_uniqueInt= [];
+
+		if($max < $countmax){
+			return null;
+		}
+		if ($max < $min) {
+			$tmp = $min;
+			$min= $max;
+			$max= $tmp; 
+		}
+		if ($countmax < $countmin) {
+			$tmp = $countmin;
+			$countmin= $countmax;
+			$countmax= $tmp; 
+		}
+		for ($i=1; $i <= rand($countmin, $countmax); $i++) { 
+			$nb = rand($min, $max);
+			if(in_array($nb, $data_uniqueInt))
+			{
+				$i--;
+			}else{
+				$data_uniqueInt[]=$nb;
+			}
+		}
+		return $data_uniqueInt;
+	}
+	/*
+	 *GetFake()
+	 *Generate Fake Values
+	 */
 	public function getFake()
 	{
+		//Set services as var
+
+		$MediaManager = $this->MediaManager;
+		$kernel= $this->kernel;
+		$em = $this->em;
+
+		//Call Faker generator
+
+		$faker = Faker\Factory::create();
+
+		//Set some var with your affinity
+
+		$nbMediaGenerated = 20;
+
+		$nbTagGenerated = 10;
+		$nbFicheGenerated = 20;
+
+		$nbMinTagByFicheSet = 1;
+		$nbMaxTagByFicheSet = 5;
+
+		$nbMinRenderByFicheSet = 2;
+		$nbMaxRenderByFicheSet = 5;
+
+		$nbMinMediaByFicheSet = 2;
+		$nbMaxMediaByFicheSet = 5;
+
+		$nbBookGenerated = 4;
+
+		$nbMinFicheByBookSet = 4;
+		$nbMaxFicheByBookSet = 10;
+
+		// Create some Medias, only image, to add videos you neeed change the provider and set the BinaryContent to your url (ex:youtube) 
+
+        for ($i=0; $i < $nbMediaGenerated; $i++) {
+	        $media = new Media;
+	        $dir = $kernel->getRootDir()."/../web/uploads/media/tmp/";//route to save the fake binary content
+	        $image=$faker->image($dir, '1280','960');// get BinaryContent, $image is the url of the file downloaded
+	        //save Media
+	        $media->setBinaryContent($image);
+	        $media->setName($faker->city());
+	        $media->setContext('default'); 
+            $media->setProviderName('sonata.media.provider.image');
+	        $MediaManager->save($media);
+	    }
 
 		//Create some tags
+
 		$datatag = [];
-		$em = $this->em;
-		for ($i=0; $i < 10; $i++) {
+		for ($i=0; $i < $nbTagGenerated; $i++) {
 	        $tag = new Tag();
 	        $tag->getFake();
 	        $datatag[$i]= $tag;
@@ -37,36 +120,51 @@ class FakerGenerator extends Controller
 	        $em->flush();
 	    }
 
-	    $datafiche = [];
 	    //Create some Fiches
-	    for ($i=0; $i < 20; $i++) {
+
+	    $datafiche = [];
+
+	    for ($i=0; $i < $nbFicheGenerated; $i++) 
+	    {
 	        $fiche = new Fiche();
-	        $fiche->getFake();
-	        for ($j=0; $j < rand(1,3); $j++) {
-		        $fiche->addTag($datatag[$j]);
-		    }
-		     for ($j=0; $j < rand(1,1); $j++) {
-                 //TODO: insert 2 images first
-		        $fiche->addRender($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
-		    }
-		    for ($j=0; $j < rand(1,1); $j++) {
-		        $fiche->addMedia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(2));
-		    }
-	        $fiche->setImage($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(1));
-	        $datafiche[$i]=$fiche;
+	        $fiche->getFake(); //get a faked Fiche
+
+	        $data_uniqueTagsArray=$this->getRandomUniqueInt('0', $nbTagGenerated-1, $nbMinTagByFicheSet, $nbMaxTagByFicheSet); //get unique array of int for tags
+	        foreach ($data_uniqueTagsArray as $uniqueTag =>$value) 
+	        {
+	        	$fiche->addTag($datatag[$value]);//set tags
+	        }
+
+	        $data_uniqueRendersArray=$this->getRandomUniqueInt('1', $nbMediaGenerated, $nbMinRenderByFicheSet, $nbMaxRenderByFicheSet);
+	        foreach ($data_uniqueRendersArray as $uniqueRender =>$value) 
+	        {
+	        	$fiche->addRender($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById($value));//set renders
+	        }
+
+	        $data_uniqueMediasArray=$this->getRandomUniqueInt('1', $nbMediaGenerated, $nbMinMediaByFicheSet, $nbMaxMediaByFicheSet);
+	        foreach ($data_uniqueMediasArray as $uniqueMedia =>$value) 
+	        {
+	        	$fiche->addMedia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById($value));//set medias
+	        }
+
+	        $fiche->setImage($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(rand(1, $nbMediaGenerated)));//set main images
+	        $datafiche[]=$fiche;
 	        $em->persist($fiche);
 	        $em->flush();
 	    }
 
 
 
-	    	    //Create some books
-	    for ($i=0; $i < 2; $i++) {
+	   	//Create some books
+	    for ($i=0; $i < $nbBookGenerated; $i++) {
 	        $book = new Book();
-	        $book->getFake();
-	        for ($j=0; $j < rand(4,10); $j++) {
-		        $book->addFiche($datafiche[$j]);
-		    }
+	        $book->getFake();//get a faked Book
+
+	        $data_uniqueFichesArray=$this->getRandomUniqueInt('0', $nbFicheGenerated-1, $nbMinFicheByBookSet, $nbMaxFicheByBookSet);
+	        foreach ($data_uniqueFichesArray as $uniqueFiche =>$value) 
+	        {
+	        	$book->addFiche($datafiche[$value]);//set fiches
+	        }
 	        $em->persist($book);
 	        $em->flush();
 	    }

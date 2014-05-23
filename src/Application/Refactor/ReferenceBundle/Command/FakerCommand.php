@@ -8,27 +8,23 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Application\Refactor\ReferenceBundle\Model\Fiche;
 use Doctrine\Common\Annotations\AnnotationReader;
-// use Application\Refactor\ReferenceBundle\Services\Faker;
-// use app\Faker\autoload;
-// use Faker;
-// require_once 'Faker/src/autoload.php';
 
 class FakerCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('generate:faker')
-            ->setDescription('Genererate base of test')
+            ->setName('generate:faker')// set the commande tool
+            ->setDescription('Genererate base of test') //set description
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if($this->getContainer()->get('myreference.fakergenerator'))
-            $text = 'Database updated!';
+            $text = 'Database updated!'; //if command worked
         else
-            $text = 'Oops! An Error Occurred';
-        $output->writeln($text);
+            $text = 'Oops! An Error Occurred'; //if not
+        $output->writeln($text); //output
     }
 }

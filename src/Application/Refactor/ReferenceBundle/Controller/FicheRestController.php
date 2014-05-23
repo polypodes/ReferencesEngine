@@ -7,6 +7,11 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Application\Refactor\ReferenceBundle\Entity\Fiche;
 
+/**
+ * Fiche Rest Controller
+ * Control Fiche Api
+ */
+
 class FicheRestController extends Controller
 {
 

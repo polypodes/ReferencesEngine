@@ -43,6 +43,12 @@ password: lol (to match with the behat tests)
 
 ## Test it
 
+Populate your Database with:
+
+```bash
+app/console generate:faker
+```
+
 Create and customize your test environment variables:
 
 ```bash
