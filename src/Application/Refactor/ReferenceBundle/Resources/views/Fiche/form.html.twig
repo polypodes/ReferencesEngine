@@ -1,9 +1,8 @@
-
 <p>
   <h2>
     <div class="row">
         <div class="col-lg-6">
-          {{form_label(formFiche.title)}} : {{form_widget(formFiche.title)}}
+          {{ 'Title'|trans }} : {{form_widget(formFiche.title)}}
         </div>
     </div>
   </h2>
@@ -13,18 +12,18 @@
     <div class="jumbotron col-lg-12" style="padding:20px;">
       <div class="container" style="padding:0px;">
         <div class="col-6 col-sm-6 col-lg-8">
-          {{form_label(formFiche.image)}} : {{form_widget(formFiche.image)}}{{form_widget(formFiche.image_input)}}
+         {{ 'image'|trans }} : {{form_widget(formFiche.image)}}{{form_widget(formFiche.image_input)}}
         </div>
         <div class="col-6 col-sm-6 col-lg-4">
           <p>
             <h3>
               <span class = "value-form">
-                {{form_label(formFiche.title2)}} : {{form_widget(formFiche.title2)}}
+                {{ 'Subtitle'|trans }} : {{form_widget(formFiche.title2)}}
               </span>
             </h3>
           </p>
-        <p>{{form_label(formFiche.date)}} : {{form_widget(formFiche.date)}}</p>
-        <p>{{form_label(formFiche.content)}} : {{form_widget(formFiche.content)}}</p>
+        <p>{{ 'Date'|trans }} : {{form_widget(formFiche.date)}}</p>
+        <p>{{ 'Content'|trans }} : {{form_widget(formFiche.content)}}</p>
         </div>
       </div>
     </div>
@@ -62,12 +61,7 @@
       </div>
     </p>
     <div>
-      <h3>Tags :
-        <p>
-          <small>
-            Comma between each tag
-          </small>
-        </p>
+      <h3>{{ 'tag.Title'|trans }}
       </h3>
       <h4>
         <ul class="tags" data-prototype="{{ form_widget(formFiche.tags.vars.prototype.title)|e }}">
@@ -78,7 +72,7 @@
       </h4>
     </div>
     <div>
-      <h3>Medias Complémentaire : </h3>
+      <h3>{{ 'media.Title'|trans }}</h3>
       <ul class="medias" data-prototype="{{ form_widget(formFiche.medias.vars.prototype)|e }}">
         {% for media in formFiche.medias%}
           <div class="container">

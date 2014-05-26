@@ -9,10 +9,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpFoundation\Request;
 
-    /**
-     * Book Controller
-     * 
-     */
+/**
+ * Book Controller
+ * 
+ */
 
 class BookController extends Controller
 {
@@ -64,7 +64,7 @@ class BookController extends Controller
     {
         $em  =$this->getDoctrine()->getManager();
         $MediaManager = $this->container->get('sonata.media.manager.media');
-        $PDF = $this->forward('Application\Refactor\ReferenceBundle\Controller\PDFController:bookPDFAction', array('id' => $id));
+        // $PDF = $this->forward('Application\Refactor\ReferenceBundle\Controller\PDFController:bookPDFAction', array('id' => $id));
         $book = $em->getRepository('ApplicationRefactorReferenceBundle:Book')->findOneById($id);
         $liste_fiches = new ArrayCollection();
 

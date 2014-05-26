@@ -20,8 +20,6 @@ class FicheTagType extends AbstractType
             // ->add('tag', 'collection', array('class' => 'Application\Refactor\ReferenceBundle\Entity\Tag'))
             ->add('tag', 'collection',  array(
            'type' => new TagType(),
-     //     'options' => array(
-     //         'data_class' => 'Application\Refactor\ReferenceBundle\Entity\FicheTag'),
           'allow_add' => true,
          'allow_delete' =>true,
           'by_reference' => false,

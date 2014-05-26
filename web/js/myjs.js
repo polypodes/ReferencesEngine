@@ -1,29 +1,9 @@
-var collectionTagsHolder = $('ul.tags');
-var $addTagLink = $('<a href="#" class="add_tag_link">Add tag</a>');
-var $newLinkLiTag = $('<ul></ul>').append($addTagLink);
-
-
-var collectionMediasHolder = $('ul.medias');
-var $addMediaLink = $('<a href="#" class="add_media_link">Add Media</a>');
-var $newLinkLiMedia = $('<ul></ul>').append($addMediaLink);
-
-
-var collectionRendersHolder = $('ul.renders');
-var $addRenderLink = $('<a href="#" class="add_render_link">Add Render</a>');
-var $newLinkLiRender = $('<ul></ul>').append($addRenderLink);
-
-
-var collectionProjectsHolder = $('ul.projects');
-var $addProjectLink = $('<a href="#" class="add_project_link">Choose a project</a>');
-var $newLinkLiProject = $('<ul></ul>').append($addProjectLink);
-
-
 // var collectionProjects_addHolder = $('ul.projects_add');
 // var $addProject_addLink = $('<a href="#" class="add_project_link">Add a project</a>');
 // var $newLinkLiProject_add = $('<ul></ul>').append($addProject_addLink);
 
 
-
+//hold press enter event
 
 function enter(e) {
     if (e.keyCode == 13) {
@@ -32,6 +12,29 @@ function enter(e) {
     }
 }
 
+//Get Translation
+
+function getTranslation()
+{
+  var data={
+      'suppress' : $('#translate').data('translate-suppress'),
+      'cancel' : $('#translate').data('translate-cancel'),
+      'tag_add' : $('#translate').data('translate-tag-add'),
+      'media_add' : $('#translate').data('translate-media-add'),
+      'render_add' : $('#translate').data('translate-render-add'),
+      'project_choose' : $('#translate').data('translate-project-choose'),
+      'yes' : $('#translate').data('translate-yes'),
+      'project_notdeleted' : $('#translate').data('translate-project-notdeleted'),
+      'book_add' : $('#translate').data('translate-book-add'),
+      'book_delete' : $('#translate').data('translate-book-delete'),
+      'noresult' : $('#translate').data('translate-noresult')
+    };
+  return data;
+}
+
+
+
+//Transform a string to an array with , as separator
 
 function searchToArray(string){
 
@@ -54,6 +57,8 @@ function searchToArray(string){
 
   return array_search;
 }
+
+//Transform a string to an array with escape as separator
 
 function stringToArray(string){
 
@@ -79,6 +84,9 @@ function stringToArray(string){
   return array_string;
 }
 
+// Add the form of a collection 
+
+
 function addForm(collectionHolder, $newLinkLi) {
     var prototype = collectionHolder.attr('data-prototype');
 
@@ -102,7 +110,7 @@ function addForm(collectionHolder, $newLinkLi) {
       var valueSelected=$('option:selected', this).text();
       var input =$(this).parent().parent().find(".providerInput");
       var selector =$(this).parent().parent().find(".providerSelector");
-      if(valueSelected == "Add media")
+      if(valueSelected == translate['media_add'])
       {
         input.show();
         selector.show();
@@ -115,7 +123,7 @@ function addForm(collectionHolder, $newLinkLi) {
       var valueSelected=$('option:selected', this).text();
       var input =$(this).parent().parent().find(".providerInput");
       var selector =$(this).parent().parent().find(".providerSelector");
-      if(valueSelected == "Add render")
+      if(valueSelected == translate['render_add'])
       {
         input.show();
         selector.show();
@@ -136,17 +144,20 @@ function addForm(collectionHolder, $newLinkLi) {
 
 }
 
+// Select a project
+
 function setProject(project_array, id)
 {
   for (var i = 0; i < project_array.length; i++) {
     if(project_array[i]['project_id'] == id)
     {
       project_array[i]['project_select'] = true;
-      // console.log('change to : '+project_array[i]['project_id']+'='+project_array[i]['project_select']);
     }
   };
   return project_array;
 }
+
+//unselect a project
 
 function unsetProject(project_array, id)
 {
@@ -154,11 +165,12 @@ function unsetProject(project_array, id)
     if(project_array[i]['project_id'] == id)
     {
       project_array[i]['project_select'] = false;
-      // console.log('change to : '+project_array[i]['project_id']+'='+project_array[i]['project_select']);
     }
   };
   return project_array;
 }
+
+//add a delete link on each form
 
 function addFormDeleteLink($MediaFormLi)
 {
@@ -169,6 +181,8 @@ function addFormDeleteLink($MediaFormLi)
         $MediaFormLi.remove();
     });
 }
+
+//change the type of an input !Warning!
 
 function changeTypeInput(input, type)
 {
@@ -181,16 +195,41 @@ function changeTypeInput(input, type)
 }
 
 $(document).ready(function () {
-  // $('.providerInput').remove();
-  var nbProject = $(".project").length;
-  var projects = new Array(nbProject);
+  var translate= getTranslation();
+
+  // Manage tags collection
+
+  var collectionTagsHolder = $('ul.tags');
+  var $addTagLink = $('<a href="#" class="add_tag_link">'+translate['tag_add']+'</a>');
+  var $newLinkLiTag = $('<ul></ul>').append($addTagLink);
+
+  //Manage Medias collection
+
+  var collectionMediasHolder = $('ul.medias');
+  var $addMediaLink = $('<a href="#" class="add_media_link">'+translate['media_add']+'</a>');
+  var $newLinkLiMedia = $('<ul></ul>').append($addMediaLink);
+
+  //Manage Renders collection
+
+  var collectionRendersHolder = $('ul.renders');
+  var $addRenderLink = $('<a href="#" class="add_render_link">'+translate['render_add']+'</a>');
+  var $newLinkLiRender = $('<ul></ul>').append($addRenderLink);
+
+  //Manage Project collection
+
+  var collectionProjectsHolder = $('ul.projects');
+  var $addProjectLink = $('<a href="#" class="add_project_link">'+translate['project_choose']+'</a>');
+  var $newLinkLiProject = $('<ul></ul>').append($addProjectLink);
+
+
+
+
+
+  var nbProject = $(".project").length; // get the number of project
+  var projects = new Array(nbProject); 
   for (var i = 0; i < nbProject; i++ ) {
       projects[i] = new Array(2);
   }
-
-
-
-
   var nbProjectSelected=0;
 	$(".fancybox").fancybox({
 		helpers: {
@@ -211,7 +250,7 @@ $(document).ready(function () {
 		var id = $(this).data('id');
 		var title = $(this).data('title');
 		noty({
-			text        : 'Supprimer : "'+title+'" ?',
+			text        : translate['suppress']+' : "'+title+'" ?',
 			type        : self.data('type'),
 			dismissQueue: true,
 			layout      : self.data('layout'),
@@ -221,9 +260,9 @@ $(document).ready(function () {
 					document.location.href='./remove/'+id;
 				}
 				},
-				{addClass: 'btn btn-danger', text: 'Annuler', onClick: function ($noty) {
+				{addClass: 'btn btn-danger', text: translate['cancel'], onClick: function ($noty) {
 					$noty.close();
-					noty({force: true, text: 'Le projet n\'a pas été supprimer.', type: 'error', layout: self.data('layout')});
+					noty({force: true, text: translate['project_notdeleted'], type: 'error', layout: self.data('layout')});
 				}
 				}
 			]
@@ -277,16 +316,6 @@ $(document).ready(function () {
   collectionRendersHolder.find('li').each(function() {
     addFormDeleteLink($(this));
   });
-  // collectionProjects_addHolder.append($newLinkLiProject_add);
-  // $addProject_addLink.on('click', function(e) {
-  //   e.preventDefault();
-  //   addForm(collectionProjects_addHolder, $newLinkLiProject_add);
-  // });
-  // collectionProjects_addHolder.find('li').each(function() {
-  //   addFormDeleteLink($(this));
-  // });
-
-
   $(".providerSelector").each(function(){
       $(this).change(function(){
         var valueSelected=$('option:selected', this).text();
@@ -307,9 +336,6 @@ $(document).ready(function () {
         'project_id' : value,
         'project_select' : false
       };
-      // for (var i = projects.length - 1; i >= 0; i--) {
-      //   console.log(projects[i]['project_id']+'='+projects[i]['project_select']);
-      // };
     i++;
     $(this).on('click', function(e){
       e.preventDefault();
@@ -322,17 +348,14 @@ $(document).ready(function () {
         thumbnail.css('border-width', '10px');
         projects=setProject(projects, value);
         $(this).parents('.project').addClass('selected');
-      // for (var i = projects.length - 1; i >= 0; i--) {
-      //   console.log(projects[i]['project_id']+'='+projects[i]['project_select']);
-      // };
-        $(this).children(':last-child').text("Supprimer du Cahier");
+        $(this).children(':last-child').text(translate['book_delete']);
       }else if(thumbnail.css('border-width') == '10px')
       {
         nbProjectSelected--;
         projects=unsetProject(projects, value);
         thumbnail.css('border-width', '1px');
         $(this).parents('.project').removeClass('selected');
-        $(this).children('.glyphicon-class').text("Ajouter au Cahier");
+        $(this).children('.glyphicon-class').text(translate['book_add']);
       }
       $(".numberProject").text(nbProjectSelected);
       if(nbProjectSelected > 0)
@@ -361,25 +384,6 @@ $(document).ready(function () {
     }
     });
   };
-  // $('li.tag').on('click', function () {
-  //   // alert($(this).parent().parent('.tag_container').find('.tagInput').val($(this).html())+'           '+$(this).html());
-  //   $(this).parent().parent('.tag_container').find('.tagInput').val($(this).html());  
-  // });
-
-  // $('.tagInput').on('keyup select', function(){
-  //   var input_content = $.trim($(this).val());
-  //   // alert($(this).parent().parent().find('ul.tags_select>li').text());
-  //   if (!input_content) {
-  //          $(this).parent().parent().find('ul.tags_select>li').show();
-  //       } else {
-  //            $(this).parent().parent().find('ul.tags_select>li').show().not(':contains(' + input_content  + ')').hide();
-  //       }
-
-  // });
-  // $('.tagInput').blur('select', function(){
-  //   $(this).parent().parent().find('ul.tags_select').hide();
-  // })
-  
   $("#project_search_submit").on('click', function(){
     if($('#no_result').length){
       $('#no_result').remove();
@@ -398,7 +402,7 @@ $(document).ready(function () {
       $(list).show();
       if($('.project_result').is(':visible')){   
       }else{
-        $('.new_project').after('<h1><p class="highlight col-lg-12" id="no_result">No Result</p></h1>');
+        $('.new_project').after('<h1><p class="highlight col-lg-12" id="no_result">'+translate['noresult']+'</p></h1>');
       }
       
     }
@@ -411,14 +415,6 @@ $(document).ready(function () {
       $('.project_result').show();
     };
   })
-  // $('#new_project_add').on('click', function(e){
-  //   e.preventDefault();
-  //   $('.new_project').show();
-  //   $('.new_project_button').hide();
-  // });
-
-
-
 $("#book_search_submit").on('click', function(){
     if($('#no_result').length){
       $('#no_result').remove();
@@ -438,7 +434,7 @@ $("#book_search_submit").on('click', function(){
       // $(list).show();
       if($('.book_result').is(':visible')){   
       }else{
-        $('.new_book').after('<h1><p class="highlight col-lg-12" id="no_result">No Result</p></h1>');
+        $('.new_book').after('<h1><p class="highlight col-lg-12" id="no_result">'+translate['noresult']+'</p></h1>');
       }
       
     }
@@ -451,25 +447,4 @@ $("#book_search_submit").on('click', function(){
       $('.book_result').show();
     };
   })
-//   $("#form_add_fiche").on('click', function(){ 
-//     var path= $('#abc').attr('data-path');
-//     var DATA= $('#abc').attr('data-val');
-//     // alert(DATA);
-//     $.ajax({
-//         type: "POST",
-//         url: path,
-//         data: {
-//           'test':DATA
-//         },
-//         cache: false,
-//         dataType : "json",
-//         error:function(request, error) { // Info Debuggage si erreur         
-//                        $('#abc').append("Erreur : responseText: "+request.responseText);
-//                      },
-//         success: function(data){
-//            alert('test');
-//         }
-//     });    
-//     return false;
-// });
 });

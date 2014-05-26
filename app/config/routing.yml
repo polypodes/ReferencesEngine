@@ -1,6 +1,8 @@
 application_refactor_reference:
     resource: "@ApplicationRefactorReferenceBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+        _locale: en|fr
 
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'

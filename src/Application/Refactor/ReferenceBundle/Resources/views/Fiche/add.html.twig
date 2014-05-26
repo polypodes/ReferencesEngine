@@ -6,7 +6,7 @@
 	<h2>
 		<div class="row">
 		    <div class="col-lg-6">
-		    	{{form_label(form.title)}} : {{form_widget(form.title)}}
+		    	{{ 'Title'|trans }} : {{form_widget(form.title)}}
 		    </div>
 		</div>
 	</h2>
@@ -22,16 +22,17 @@
 					<p>
 						<h3>
 							<span class = "value-form">
-								{{form_label(form.title2)}} : {{form_widget(form.title2)}}
+								{{ 'Subtitle'|trans }} : {{form_widget(form.title2)}}
 							</span>
 						</h3>
 					</p>
-				<p>{{form_label(form.date)}} : {{form_widget(form.date)}}</p>
-				<p>{{form_label(form.content)}} : {{form_widget(form.content)}}</p>
+				<p>{{ 'Date'|trans }} : {{form_widget(form.date)}}</p>
+				<p>{{ 'Content'|trans }} : {{form_widget(form.content)}}</p>
 				</div>
 			</div>
 		</div>
 		<div class = "jumbotron col-6 col-sm-6 col-lg-12">
+		{{ 'render.Title'|trans }}
 			<ul class="renders" data-prototype="{{ form_widget(form.renders.vars.prototype)|e }}">
 				{% for render in form.renders%}
 						<div class="col-lg-3">
@@ -60,17 +61,12 @@
 		<p>
 			<div class="checkbox">
 	   			<label>
-	   				{{form_label(form.published)}}{{form_widget(form.published)}}
+	   				{{ 'Published'|trans }}{{form_widget(form.published)}}
 	   			</label>
 			</div>
 		</p>
 		<div>
-			<h3>Tags :
-				<p>
-					<small>
-						Comma between each tag
-					</small>
-				</p>
+			<h3>{{ 'tag.Title'|trans }}
 			</h3>
 			<h4>
 				<ul class="tags" data-prototype="{{ form_widget(form.tags.vars.prototype.title)|e }}">
@@ -81,7 +77,7 @@
 			</h4>
 		</div>
 		<div>
-			<h3>Medias Complémentaire : </h3>
+			<h3>{{ 'media.Title'|trans }}</h3>
 			<ul class="medias" data-prototype="{{ form_widget(form.medias.vars.prototype)|e }}">
 				{% for media in form.medias%}
 					<div class="container">
@@ -115,7 +111,7 @@
 <div class = "col-6 col-sm-6 col-lg-3">
 	<input class="btn btn-default" type="submit"/>
 	<a href="{{ path('refactor_projects')}}" class="btn label-info" role="button">
-		<span class="glyphicon-class" style="color:white;">Annuler</span>
+		<span class="glyphicon-class" style="color:white;">{{ 'Cancel'|trans }}</span>
 	</a>
 </div>
 <script type="text/javascript">

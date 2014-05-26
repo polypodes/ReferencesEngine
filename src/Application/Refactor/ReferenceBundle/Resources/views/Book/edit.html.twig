@@ -7,7 +7,7 @@
 {#{ form_errors(formFiche) }#}
 
 {#% include "ApplicationRefactorReferenceBundle:Fiche:form.html.twig" %#}
-<!-- <button id="form_add_fiche">valider</button> -->
+<!-- <button id="form_add_fiche">{{ 'Validate'|trans }}</button> -->
 {#{form_end(formFiche)}#}
 <!-- </div> -->
 {{ form_start(form) }}
@@ -18,14 +18,14 @@
 		<div class="col-lg-4 new_project_button">
 			<div class="thumbnail project">
 	      		<div class="caption" style="text-align:center;">
-	      		{{form_row(form.title)}}
-	      		{{form_row(form.clientName)}}
-	      		{{form_row(form.projectName)}}
-	      		{{form_row(form.date)}}
-	      		{{form_row(form.published)}}
+	      		<p>{{ 'Title'|trans }} : {{form_widget(form.title)}}</p>
+	      		<p>{{ 'Customer'|trans }} : {{form_widget(form.clientName)}}</p>
+	      		<p>{{ 'Project'|trans }} : {{form_widget(form.projectName)}}</p>
+	      		<p>{{ 'Date'|trans }} : {{form_widget(form.date)}}</p>
+	      		<p>{{ 'Published'|trans }} : {{form_widget(form.published)}}</p>
 				</div>
 				<a href="{{ path('refactor_get_pdf_books', {'id': book.id}) }}" class="btn btn-success col-md-4 btn-sm " role="button">
-	      			<span class="glyphicon-class" style="color:white;">Make a PDF </span>
+	      			<span class="glyphicon-class" style="color:white;">{{ 'PDF'|trans }}</span>
 			    	<span class="glyphicon glyphicon-hand-left" style="margin-left:5px;"></span>
 		        </a>
 			</div>
@@ -75,7 +75,7 @@
 {{form_rest(form)}}
 </div>
 <div class = "col-6 col-sm-6 col-lg-3">
-	<input class="btn btn-default" type="submit"/>
+	<input class="btn btn-default" type="submit" value="{{ 'Validate'|trans }}"/>
 </div>
 </div>
 

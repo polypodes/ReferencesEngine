@@ -1,0 +1,43 @@
+'Symfony2 is great': 'J''aime Symfony2'
+Projects: Projets
+Project: Projet
+Image: Image
+Media: Mediathèque
+Language: Langue
+Suppress: Supprimer
+Date: Date
+Add: Ajouter
+Change: Modifier
+Search: Recherche
+Books: Cahiers
+Title: Titre
+Subtitle: Sous-titre
+Content: Contenu
+Published: Publié ?
+Validate: Valider
+Cancel: Annuler
+File: 'Choisissez un fichier'
+PDF: 'Créer le PDF'
+book.Search: 'Balise, Année'
+book.New: 'Créer le Cahier'
+book.Add: 'Ajouter au Cahier'
+book.Delete: 'Supprmer du Cahier'
+book.List: 'Liste des Cahiers'
+project.Search: 'Client'
+project.New: 'Nouveau Projet'
+project.Create: 'Créer le Projet'
+project.List: 'Liste des Projets'
+project.Choose: 'Choisissez un Projet'
+project.NotDeleted: "Le projet n'a pas été supprimé"
+tag.Add: 'Ajouter une balise'
+tag.Title: 'Balises:'
+media.Add: 'Ajouter un média'
+media.Selector: 'Choisissez un média'
+media.Title: 'Médias complémentaire:'
+render.Add: 'Ajouter une Créa'
+render.Selector: 'Choisissez une créa'
+render.Title: 'Creas possible :'
+Yes: Oui
+NoResult: "Pas de résultats"
+
+

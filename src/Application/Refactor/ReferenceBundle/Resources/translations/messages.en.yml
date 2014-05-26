@@ -1,0 +1,41 @@
+'Symfony2 is great': 'Symfony2 is great'
+Projects: Projects
+Project: Project
+Image: Image
+Media: Media
+Language: Language
+Suppress: Suppress
+Add: Add
+Change: Change
+Search: Search
+Books: Books
+Title: Title
+Subtitle: Subtitle
+Content: Content
+Published: Published
+Validate: Validate
+Cancel: Cancel
+File: 'Choose a file'
+PDF: 'Make a PDF'
+book.Search: 'Tags, Year'
+book.New: 'New Book'
+book.Add: 'Add to Book'
+book.Delete: 'Delete From Book'
+book.List: 'List of Books'
+project.Search: 'Customer'
+project.Create: 'Create the Project'
+project.New: 'New Project'
+project.List: 'Liste of Projects'
+project.Choose: 'Choose a Project'
+project.NotDeleted: "Project was not Suppress"
+tag.Add: 'Add a Tag'
+tag.Title: 'Tags :'
+media.Add: 'Add a media'
+media.Selector: 'Choose a media'
+media.Title: 'Complémentary Medias :'
+render.Add: 'Add a Render'
+render.Selector: 'Choose a Render'
+render.Title: 'Renders'
+Date: Date
+Yes : Yes
+NoResult: "No Result"

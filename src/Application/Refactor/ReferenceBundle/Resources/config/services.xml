@@ -33,5 +33,11 @@
             <argument type="service" id="sonata.media.manager.media" />
             <argument type="service" id="kernel" />
         </service>
+        <service id="refactor_locale.locale_listener"
+          class="Application\Refactor\ReferenceBundle\EventListener\LocaleListener">
+          <argument>%kernel.default_locale%</argument>
+
+          <tag name="kernel.event_subscriber" />
+      </service>
     </services>
 </container>

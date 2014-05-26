@@ -6,13 +6,13 @@
 	<h2>
 		<div class="row">
 		    <div class="col-lg-3">
-		    	Liste des Books :
+		    	{{ 'book.List'|trans }}
 		    </div>
 		    <div class="col-lg-6">
 		    <div class="col-lg-6">
-		    	<input type="text" class="form-control" id="book_search" placeholder="Client" onkeypress="return enter(event)">
+		    	<input type="text" class="form-control" id="book_search" placeholder="{{ 'book.Search'|trans }}" onkeypress="return enter(event)">
 		    	</div>
-  				<span type="button" class="sub btn btn-default" id="book_search_submit">Recherche</span>
+  				<span type="button" class="sub btn btn-default" id="book_search_submit">{{ 'Search'|trans }}</span>
 			</div>
 		</div>
 	</h2>
@@ -23,7 +23,7 @@
 			<div class="thumbnail"  onclick="location.href='{#{ path('refactor_show_projects', {'id': project.id}) }#}';" style="cursor:pointer;">
 	      		<div class="caption" style="text-align:center;">
 	      		<a href="{{ path('refactor_add_books') }}">
-				<button type="button" class="btn btn-primary btn-lg">Nouveau Cahier</button>
+				<button type="button" class="btn btn-primary btn-lg">{{ 'book.New'|trans }}</button>
 						   </a>
 						    </div>
 			</div>
@@ -36,11 +36,11 @@
 	        		<p>
 	        			<a href="{{ path('refactor_edit_books', {'id': book.id}) }}" class="btn label-warning" role="button">
 		        		<span class="glyphicon glyphicon-edit"></span>
-		        		<span class="glyphicon-class" style="color:white;">Modifier</span>
+		        		<span class="glyphicon-class" style="color:white;">{{ 'Change'|trans }}</span>
 	          			</a> 
 			        	<a class="label-danger btn btn-remove" role="button" data-id = "{{book.id}}" data-title="{{book.title}}">
 			        		<span class="glyphicon glyphicon-remove"></span>
-			        		<span class="glyphicon-class" style="color:white;" data-layout="center" data-type="confirm">Suprimer</span>
+			        		<span class="glyphicon-class" style="color:white;" data-layout="center" data-type="confirm">{{ 'Suppress'|trans }}</span>
 			        	</a>
 			        </p>
 			    </div>

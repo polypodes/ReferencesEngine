@@ -35,9 +35,9 @@ class SecurityController extends Controller
 
         $em  =$this->getDoctrine()->getManager();
         $user = $em->getRepository('ApplicationSonataUserBundle:User')->findOneByUsername($username);
-        $encoder_service = $this->get('security.encoder_factory');
+        $encoder_service = $this->get('security.encoder_factory');//get fos encoder
         $encoder = $encoder_service->getEncoder($user);
-        $encoded_pass = $encoder->encodePassword($password, $user->getSalt());
+        $encoded_pass = $encoder->encodePassword($password, $user->getSalt());//encod password
 
         if (!$user) {
             throw new AccessDeniedException("Wrong user");
@@ -45,9 +45,9 @@ class SecurityController extends Controller
 
         $created = date('c');
         $nonce = substr(md5(uniqid('nonce_', true)), 0, 16);
-        $nonceHigh = base64_encode($nonce);
-        $passwordDigest = base64_encode(sha1($nonce . $created . $encoded_pass, true));
-        $header = "UsernameToken Username=\"{$username}\", PasswordDigest=\"{$passwordDigest}\", Nonce=\"{$nonceHigh}\", Created=\"{$created}\"";
+        $nonceHigh = base64_encode($nonce);//generate Nonce
+        $passwordDigest = base64_encode(sha1($nonce . $created . $encoded_pass, true));//generate passwordDigest
+        $header = "UsernameToken Username=\"{$username}\", PasswordDigest=\"{$passwordDigest}\", Nonce=\"{$nonceHigh}\", Created=\"{$created}\"";//generate header
         $view->setHeader("Authorization", 'WSSE profile="UsernameToken"');
         $view->setHeader("x-wsse", "UsernameToken Username=\"{$username}\", PasswordDigest=\"{$passwordDigest}\", Nonce=\"{$nonceHigh}\", Created=\"{$created}\"");
         $data = array('x-wsse' => $header);
