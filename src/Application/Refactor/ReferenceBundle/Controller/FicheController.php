@@ -43,11 +43,19 @@ class FicheController extends Controller
             $project->getRenders()->clear();
         }
 
-        foreach ($form->get('tags')->getData() as $tag) {
-            $project->addTag($tag);
-            $tag->prePersist();
-            $em->persist($tag);
-        }
+        $data_tag= new ArrayCollection();
+        foreach ($form->get('tags')->getData() as $tagin) {
+            $tag=$em->getRepository('ApplicationRefactorReferenceBundle:Tag')->findOneByTitle($tagin->getTitle());
+            if(!$data_tag->contains($tag)){
+                if($tag == null){
+                    $tagin->prePersist();
+                    $em->persist($tagin);
+                    $tag=$tagin;
+                }
+                $project->addTag($tag);
+                $data_tag->add($tag);
+                }
+            }
         if ($liste_tags!=null) {
             foreach ($liste_tags as $tag) {
                 if ($project->getTags()->contains($tag) == false) 
@@ -174,12 +182,21 @@ class FicheController extends Controller
                 }else{
                     $projet->setImage($form->get('image')->getData());
                 }
-                foreach ($form->get('tags')->getData() as $tag) {
-                    $tag->prePersist();
-                    $em->persist($tag);
-                    $projet->addTag($tag);
+                $data_tag= new ArrayCollection();
+                foreach ($form->get('tags')->getData() as $tagin) {
+                    $tag=$em->getRepository('ApplicationRefactorReferenceBundle:Tag')->findOneByTitle($tagin->getTitle());
+                    if(!$data_tag->contains($tag)){
+                        if($tag == null){
+                            $tagin->prePersist();
+                            $em->persist($tagin);
+                            $tag=$tagin;
+                        }
+                        $projet->addTag($tag);
+                        $data_tag->add($tag);
+                    }
                 }
-
+                $data_media= new ArrayCollection();
+                $data_render= new ArrayCollection();
                 foreach ($form->get('medias') as $media) {
                     $media_data= $media->getData();
                     $media_selector= $media->get('media_selector')->getData();            
@@ -187,10 +204,10 @@ class FicheController extends Controller
                         $media_data->setContext('default');
                         $MediaManager->save($media_data);
                         $projet->addMedia($media_data);
-                        var_dump($projet->getMedias());
 
-                    }else{
+                    }elseif(!$data_media->contains($media_selector)){
                         $projet->addMedia($media_selector);
+                        $data_media->add($media_selector);
                     }     
                 }
                 foreach ($form->get('renders') as $render) {
@@ -200,9 +217,10 @@ class FicheController extends Controller
                         $render_data->setContext('default');
                         $render_data->setProviderName('sonata.media.provider.image');
                         $MediaManager->save($render_data);
-                    }elseif($projet->getRenders()->contains($render_selector)){
-                        $projet->addRender($render_selector);
-                    }
+                    }elseif(!$data_render->contains($render_selector)){
+                        $projet->addMedia($media_selector);
+                        $data_render->add($media_selector);
+                    }    
                 }
                 $projet->prePersist();
                 $em->persist($projet);

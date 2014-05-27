@@ -146,10 +146,14 @@ class BookController extends Controller
 
             if($form->isValid())
             {
-                foreach ($liste_projects as $project) {
-
+                $book = new Book();
+                $book->setTitle($form->get('title')->getData());
+                $book->setProjectName($form->get('projectName')->getData());
+                $book->setClientName($form->get('clientName')->getData());
+                $book->setPublished($form->get('published')->getData());
+                $book->setDate($form->get('date')->getData());
+                foreach($liste_projects as $project) {
                     $book->addFiche($project); 
-
                 }
                 foreach ($form->get('fiches') as $fiche) {
                     $fiche_selector= $fiche->get('fiche_selector')->getData();
@@ -159,9 +163,8 @@ class BookController extends Controller
                 }
                 $book->prePersist();
                 $em->persist($book);
-                // $em->flush();
-                var_dump($_POST);
-                // return $this->redirect($this->generateUrl('refactor_edit_books', array('id' => '3')));
+                $em->flush();
+                return $this->redirect($this->generateUrl('refactor_edit_books', array('id' => $book->getId())));
             }
         }
         return $this->render('ApplicationRefactorReferenceBundle:Book:add.html.twig', array(
