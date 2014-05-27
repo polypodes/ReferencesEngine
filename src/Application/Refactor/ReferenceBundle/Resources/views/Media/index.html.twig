@@ -5,9 +5,15 @@
 	<div class="row">
 	{% for media in medias %}
 	  	<div class="col-lg-4">
-	    	<div class="thumbnail" style="text-align:center;">
+	    	<div class="thumbnail" style="text-align:center; display: inline-table;">
+	    	<div class="caption">
+	    		<h4>{{ media.name}}</h4>
+	    		</div>
 	    		<div class="img">
-	    			{% media media, 'thumbnail' %} 
+	    			{% thumbnail media, 'thumbnail' with {'class': 'img-polaroid media-object'} %}
+	    		</div>
+	    		<div class="caption">
+	    		<em>{{ media.description}}</em>
 	    		</div>
 			</div>
 		</div>

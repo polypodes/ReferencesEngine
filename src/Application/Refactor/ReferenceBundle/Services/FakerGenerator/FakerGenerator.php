@@ -112,6 +112,7 @@ class FakerGenerator
 	        //save Media
 	        $media->setBinaryContent($image);
 	        $media->setName($faker->city());
+	        $media->setDescription($faker->paragraph($nb = 3));
 	        $media->setContext('default'); 
             $media->setProviderName('sonata.media.provider.image');
 	        $MediaManager->save($media);

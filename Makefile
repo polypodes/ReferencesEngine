@@ -32,6 +32,12 @@ createDb:
 	@php app/console doctrine:database:create
 	@php app/console doctrine:schema:update --force
 
+set:
+	@echo
+	@echo "Moving files image..."
+	@if [ -d ".web/uploads/sonatamedia" ]; then cp -a ./web/sonatamedia ./web/uploads/media; fi;
+
+
 clear:
 	@echo
 	@echo "Resetting cache..."
@@ -52,7 +58,7 @@ done:
 	@echo
 
 
-install: createDb clear done
+install: createDb set clear done
 
 reinstall: dropDb install
 
