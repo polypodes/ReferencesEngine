@@ -71,12 +71,12 @@ class FakerGenerator
 		$em = $this->em;
 
 		//check if dir exist
-		
+
 		$dir = $kernel->getRootDir()."/../web/tmp/";//route to save the fake binary content
-		if (file_exists($dir)) {
-		    echo "Le fichier existe.";
-		} else {
-		    echo "Le fichier n'existe pas.";
+		if (!file_exists($dir)) {
+		    if (!mkdir($dir, 0777, true)) {
+			    die('Something is broken...');
+			}
 		}
 
 		//Call Faker generator
