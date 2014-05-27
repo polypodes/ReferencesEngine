@@ -17,12 +17,12 @@ Validate: Validate
 Cancel: Cancel
 File: 'Choose a file'
 PDF: 'Make a PDF'
-book.Search: 'Tags, Year'
+book.Search: 'Customer'
 book.New: 'New Book'
 book.Add: 'Add to Book'
 book.Delete: 'Delete From Book'
 book.List: 'List of Books'
-project.Search: 'Customer'
+project.Search: 'Tags, Year'
 project.Create: 'Create the Project'
 project.New: 'New Project'
 project.List: 'Liste of Projects'
@@ -33,9 +33,12 @@ tag.Title: 'Tags :'
 media.Add: 'Add a media'
 media.Selector: 'Choose a media'
 media.Title: 'Complémentary Medias :'
+media.New: "Add a new Media"
 render.Add: 'Add a Render'
 render.Selector: 'Choose a Render'
 render.Title: 'Renders'
 Date: Date
 Yes : Yes
 NoResult: "No Result"
+Name: 'Name'
+Description: "Description"

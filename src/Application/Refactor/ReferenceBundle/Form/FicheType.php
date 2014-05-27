@@ -5,7 +5,7 @@ namespace Application\Refactor\ReferenceBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Application\Refactor\ReferenceBundle\Form\Mediatype;
+use Application\Refactor\ReferenceBundle\Form\MediaFichetype;
 use Application\Refactor\ReferenceBundle\Form\Rendertype;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
@@ -50,7 +50,7 @@ class FicheType extends AbstractType
 
             ))
             ->add('medias' , 'collection', array(
-            'type' => new MediaType(),
+            'type' => new MediaFicheType(),
             'allow_add' => true,
             'by_reference' => false,
             'allow_delete' =>true,

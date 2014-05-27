@@ -3,6 +3,10 @@ body { padding-top: 70px; }
 {
 	padding-top: 20px;
 }
+.project-img
+{
+	margin-top: 10px;
+}
 .project-img:hover
 {
 	opacity: 0.2;
@@ -14,7 +18,7 @@ body { padding-top: 70px; }
 }
 .project-mouseover
 {
-	height: 350px;
+	height: 300px;
 }
 .project-btn
 {
@@ -98,4 +102,11 @@ footer
 {
 	display: block;
 }*/
-
+h2
+{
+	margin-top: 10px;
+}
+.img
+{
+	margin-left: 15px;
+}

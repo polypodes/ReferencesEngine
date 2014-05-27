@@ -3,11 +3,23 @@
 {% block body %}
 <div class = "item-container">
 	<div class="row">
+	<div class="col-lg-4">
+	    	<div class="thumbnail" style="text-align:center;">
+	    		<a href="{{ path('refactor_add_medias') }}">
+					<span type="button" class="btn btn-primary btn-lg">{{ 'media.New'|trans }}</span>
+				</a>
+			</div>
+		</div>
 	{% for media in medias %}
 	  	<div class="col-lg-4">
-	    	<div class="thumbnail" style="text-align:center; display: inline-table;">
+	    	<div class="thumbnail" style="text-align:center;">
 	    	<div class="caption">
-	    		<h4>{{ media.name}}</h4>
+	    		<h4>{{ media.name}}
+	    		<a href="{{ path('refactor_edit_medias', {'id': media.id}) }}" class="btn btn-warning col-md-4 btn-sm " role="button">
+			        			<span class="glyphicon glyphicon-edit"></span>
+			        			<span class="glyphicon-class" style="color:white;">{{ 'Change'|trans }}</span>
+		          			</a>
+		          			</h4>
 	    		</div>
 	    		<div class="img">
 	    			{% thumbnail media, 'thumbnail' with {'class': 'img-polaroid media-object'} %}
