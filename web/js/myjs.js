@@ -32,7 +32,18 @@ function getTranslation()
   return data;
 }
 
+//get the height of thumbnail
 
+function equalHeight(group) {    
+    tallest = 0;    
+    group.each(function() {       
+        thisHeight = $(this).height();       
+        if(thisHeight > tallest) {          
+            tallest = thisHeight;       
+        }    
+    });    
+    group.each(function() { $(this).height(tallest); });
+}
 
 //Transform a string to an array with , as separator
 
@@ -195,6 +206,7 @@ function changeTypeInput(input, type)
 }
 
 $(document).ready(function () {
+  equalHeight($(".thumbnail")); 
   var translate= getTranslation();
 
   // Manage tags collection

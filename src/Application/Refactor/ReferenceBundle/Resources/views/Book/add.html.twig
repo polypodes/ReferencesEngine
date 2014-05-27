@@ -18,7 +18,9 @@
 			</div>
 			</div>
 		</div>
+		<ul class="projects" data-prototype="{{form_widget(form.fiches.vars.prototype)|e }}">
 		{% for project in projects %}
+		<li>
 	  	<div class="col-lg-4">
 	    	<div class="thumbnail project-mouseover project">
 	    		<input type="hidden" name="project[{{project.id}}]" value="{{project.id}}">
@@ -45,9 +47,11 @@
 			       		</p>
 			    </div>
 			</div>
-		</div>
+		</div></li>
 	{% endfor %}
-		<ul class="projects" data-prototype="{{form_widget(form.fiches.vars.prototype)|e }}">
+
+
+
 			{#{ include ('ApplicationRefactorReferenceBundle:Fiche:form.html.twig',{'formFiche' : (form.fiches.vars.prototype)|e}) }#}
 			{#{form_widget(form.fiches.vars.prototype.children.title)|e }#}{#{form_widget(form.fiches.vars.prototype)|e }#}
 		</ul>

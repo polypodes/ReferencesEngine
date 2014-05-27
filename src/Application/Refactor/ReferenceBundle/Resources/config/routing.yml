@@ -1,8 +1,8 @@
 refactor_books:
-    path:  /
+    path:  /books/
     defaults: { _controller: ApplicationRefactorReferenceBundle:Book:index}
 refactor_books_remove:
-    path:  /remove/{id}
+    path:  /books/remove/{id}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Book:remove}
     requirements:
         id:  \d+

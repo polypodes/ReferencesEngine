@@ -31,6 +31,7 @@ class FicheChooseType extends FicheType
             'attr' => array(
                 'class' => 'ficheSelector'
                 ),
+            'label' =>false,
             "required" =>false,
             "empty_value" =>'Choose a project',
             "empty_data" => null,

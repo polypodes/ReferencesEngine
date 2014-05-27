@@ -147,14 +147,21 @@ class BookController extends Controller
             if($form->isValid())
             {
                 foreach ($liste_projects as $project) {
-                  $book->addFiche($project); 
 
+                    $book->addFiche($project); 
+
+                }
+                foreach ($form->get('fiches') as $fiche) {
+                    $fiche_selector= $fiche->get('fiche_selector')->getData();
+                    if ($fiche_selector != null && $book->getFiches()->contains($fiche_selector) == false){
+                        $book->addFiche($fiche_selector);                    
+                    }
                 }
                 $book->prePersist();
                 $em->persist($book);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('refactor_edit_books', array('id' => $book->getId())));
+                // $em->flush();
+                var_dump($_POST);
+                // return $this->redirect($this->generateUrl('refactor_edit_books', array('id' => '3')));
             }
         }
         return $this->render('ApplicationRefactorReferenceBundle:Book:add.html.twig', array(

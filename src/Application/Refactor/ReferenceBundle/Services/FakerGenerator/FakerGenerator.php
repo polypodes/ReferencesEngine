@@ -96,10 +96,10 @@ class FakerGenerator
 		$nbMaxFicheByBookSet = 10;
 
 		// Create some Medias, only image, to add videos you neeed change the provider and set the BinaryContent to your url (ex:youtube) 
-
+		$datamedia=[];
         for ($i=0; $i < $nbMediaGenerated; $i++) {
 	        $media = new Media;
-	        $dir = $kernel->getRootDir()."/../web/uploads/media/tmp/";//route to save the fake binary content
+	        $dir = $kernel->getRootDir()."/../web/tmp/";//route to save the fake binary content
 	        $image=$faker->image($dir, '1280','960');// get BinaryContent, $image is the url of the file downloaded
 	        //save Media
 	        $media->setBinaryContent($image);
@@ -107,6 +107,7 @@ class FakerGenerator
 	        $media->setContext('default'); 
             $media->setProviderName('sonata.media.provider.image');
 	        $MediaManager->save($media);
+	        $datamedia[$i]=$media;
 	    }
 
 		//Create some tags
@@ -135,19 +136,19 @@ class FakerGenerator
 	        	$fiche->addTag($datatag[$value]);//set tags
 	        }
 
-	        $data_uniqueRendersArray=$this->getRandomUniqueInt('1', $nbMediaGenerated, $nbMinRenderByFicheSet, $nbMaxRenderByFicheSet);
+	        $data_uniqueRendersArray=$this->getRandomUniqueInt('0', $nbMediaGenerated-1, $nbMinRenderByFicheSet, $nbMaxRenderByFicheSet);
 	        foreach ($data_uniqueRendersArray as $uniqueRender =>$value) 
 	        {
-	        	$fiche->addRender($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById($value));//set renders
+	        	$fiche->addRender($datamedia[$value]);//set renders
 	        }
 
-	        $data_uniqueMediasArray=$this->getRandomUniqueInt('1', $nbMediaGenerated, $nbMinMediaByFicheSet, $nbMaxMediaByFicheSet);
+	        $data_uniqueMediasArray=$this->getRandomUniqueInt('0', $nbMediaGenerated-1, $nbMinMediaByFicheSet, $nbMaxMediaByFicheSet);
 	        foreach ($data_uniqueMediasArray as $uniqueMedia =>$value) 
 	        {
-	        	$fiche->addMedia($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById($value));//set medias
+	        	$fiche->addMedia($datamedia[$value]);//set medias
 	        }
 
-	        $fiche->setImage($em->getRepository('Application\Sonata\MediaBundle\Entity\Media')->findOneById(rand(1, $nbMediaGenerated)));//set main images
+	        $fiche->setImage($datamedia[(rand(0, $nbMediaGenerated-1))]);//set main images
 	        $datafiche[]=$fiche;
 	        $em->persist($fiche);
 	        $em->flush();
@@ -168,6 +169,14 @@ class FakerGenerator
 	        $em->persist($book);
 	        $em->flush();
 	    }
+
+	    //Delete image downloaded
+
+	    $files = glob($dir.'*'); // get all file names
+		foreach($files as $file){ // iterate files
+		  if(is_file($file))
+		    unlink($file); // delete file
+		}
 
         return(true);
 	}

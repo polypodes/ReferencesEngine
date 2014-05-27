@@ -4,6 +4,10 @@ application_refactor_reference:
     requirements:
         _locale: en|fr
 
+application_refactor_welcome:
+    path:  /
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Welcome:redirect}
+
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
     prefix: /media/gallery

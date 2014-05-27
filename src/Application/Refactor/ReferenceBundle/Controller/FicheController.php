@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\MediaBundle\Entity\MediaManager;
 use Application\Sonata\MediaBundle\Entity\Media;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+// use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Fiche Controller
@@ -156,8 +157,62 @@ class FicheController extends Controller
 
             if($form->isValid())
             {
-                $this->saveFiche($form, $fiche, null, null, null, $MediaManager, $em);
-                return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $fiche->getId())));
+                $projet = new Fiche();
+                $projet->setTitle($form->get('title')->getData());
+                $projet->setContent($form->get('content')->getData());
+                $projet->setPublished($form->get('published')->getData());
+                $projet->setTitle2($form->get('title2')->getData());
+                $projet->setDate($form->get('date')->getData());
+                if(is_uploaded_file($form->get('image_input')->getData()))
+                {
+                    $image= new Media();
+                    $image->setBinaryContent($form->get('image_input')->getData());
+                    $image->setContext('default'); 
+                    $image->setProviderName('sonata.media.provider.image');
+                    $projet->setImage($image);
+                    $MediaManager->save($image);
+                }else{
+                    $projet->setImage($form->get('image')->getData());
+                }
+                foreach ($form->get('tags')->getData() as $tag) {
+                    $tag->prePersist();
+                    $em->persist($tag);
+                    $projet->addTag($tag);
+                }
+
+                foreach ($form->get('medias') as $media) {
+                    $media_data= $media->getData();
+                    $media_selector= $media->get('media_selector')->getData();            
+                    if ($media_selector == null) {
+                        $media_data->setContext('default');
+                        $MediaManager->save($media_data);
+                        $projet->addMedia($media_data);
+                        var_dump($projet->getMedias());
+
+                    }else{
+                        $projet->addMedia($media_selector);
+                    }     
+                }
+                foreach ($form->get('renders') as $render) {
+                    $render_data= $render->getData();
+                    $render_selector= $render->get('render_selector')->getData();
+                    if ($render_selector == null) {
+                        $render_data->setContext('default');
+                        $render_data->setProviderName('sonata.media.provider.image');
+                        $MediaManager->save($render_data);
+                    }elseif($projet->getRenders()->contains($render_selector)){
+                        $projet->addRender($render_selector);
+                    }
+                }
+                $projet->prePersist();
+                $em->persist($projet);
+                $em->flush();
+                return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $projet->getId())));
+                // $url = $this->container->get('request')->headers->get('referer');
+                // if(empty($url)) {
+                //     $url = $this->container->get('router')->generate('_welcome');
+                // }
+                // return new RedirectResponse($url);
             }
         }
         return $this->render('ApplicationRefactorReferenceBundle:Fiche:add.html.twig', array(
