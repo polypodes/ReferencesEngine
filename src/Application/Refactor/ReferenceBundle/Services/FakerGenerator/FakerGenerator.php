@@ -70,6 +70,15 @@ class FakerGenerator
 		$kernel= $this->kernel;
 		$em = $this->em;
 
+		//check if dir exist
+		
+		$dir = $kernel->getRootDir()."/../web/tmp/";//route to save the fake binary content
+		if (file_exists($dir)) {
+		    echo "Le fichier existe.";
+		} else {
+		    echo "Le fichier n'existe pas.";
+		}
+
 		//Call Faker generator
 
 		$faker = Faker\Factory::create();
@@ -99,7 +108,6 @@ class FakerGenerator
 		$datamedia=[];
         for ($i=0; $i < $nbMediaGenerated; $i++) {
 	        $media = new Media;
-	        $dir = $kernel->getRootDir()."/../web/tmp/";//route to save the fake binary content
 	        $image=$faker->image($dir, '1280','960');// get BinaryContent, $image is the url of the file downloaded
 	        //save Media
 	        $media->setBinaryContent($image);
