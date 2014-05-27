@@ -2,11 +2,12 @@
 
 namespace Application\Refactor\ReferenceBundle\Form;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Application\Refactor\ReferenceBundle\Form\MediaType;
+use Sonata\MediaBundle\Form\Type\MediaType as Media;
 
-class MediaFicheType extends MediaType
+class MediaFicheType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,12 +15,7 @@ class MediaFicheType extends MediaType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
         $builder
-            ->remove('description')
-            ->remove('name')
-            ->remove('binaryContent')
-            ->remove('providerName')
             ->add('binaryContent', 'file' , array(
                 'label' => false,
                 'required' =>false,
@@ -52,6 +48,16 @@ class MediaFicheType extends MediaType
                 'mapped' => false,
                 'class' => 'Application\Sonata\MediaBundle\Entity\Media',
                 ));
+    }
+
+         /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Application\Sonata\MediaBundle\Entity\Media'
+        ));
     }
 
     /**

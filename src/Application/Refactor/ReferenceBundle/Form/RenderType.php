@@ -4,10 +4,10 @@ namespace Application\Refactor\ReferenceBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Application\Refactor\ReferenceBundle\Form\MediaType;
+use Application\Refactor\ReferenceBundle\Form\MediaEditType;
 
 
-class RenderType extends MediaType
+class RenderType extends MediaEditType
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {

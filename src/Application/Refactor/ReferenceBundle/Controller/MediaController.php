@@ -26,9 +26,36 @@ class MediaController extends Controller
     public function indexAction()
     {
     	$em  =$this->getDoctrine()->getManager();
+     //    $qb = $em->CreateQueryBuilder();
+     //    $medias= $qb->select('fiche.image')
+     //                    ->from('ApplicationRefactorReferenceBundle:Fiche', 'fiche')
+     //                    ->leftJoin('ApplicationSonataMediaBundle:Media', 'Media')
+     //                    ->getQuery()
+     //                    ->getResult();
+     //    var_dump($medias);
+        // $nots= $qb->select('media')
+        //                 ->from('ApplicationSonataMediaBundle:Media', 'media')
+        //                 ->where($qb->expr()->notIn('media', $nots))
+        //                 ->getQuery()
+        //                 ->getResult();
+
         $medias = $em->getRepository('ApplicationSonataMediaBundle:Media')->findAll();
+
+
+//         select *
+// from media__media
+// where id not in(
+// select media_id
+// from reference__fiche_media)
+// and id not in(
+// select media_id
+// from reference__fiche_render)
+// and id not in(
+// select image_id
+// from reference__fiche)
         return $this->render('ApplicationRefactorReferenceBundle:Media:index.html.twig', array(
-    	'medias' => $medias
+    	'medias' => $medias,
+        // 'media_supp' => $medias_supp
         ));
     }
 
