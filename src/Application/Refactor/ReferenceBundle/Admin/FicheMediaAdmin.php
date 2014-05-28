@@ -3,10 +3,7 @@
 namespace Application\Refactor\ReferenceBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 
 class FicheMediaAdmin extends Admin
 {
@@ -16,7 +13,8 @@ class FicheMediaAdmin extends Admin
 
         $formMapper
         //->add('fiche')
-        ->add('media', 'sonata_type_model_list',
+        ->add(
+            'media', 'sonata_type_model_list',
             array(
                 'required' => false
             ),

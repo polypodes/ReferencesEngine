@@ -5,18 +5,15 @@ namespace Application\Refactor\ReferenceBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Application\Refactor\ReferenceBundle\Form\MediaFichetype;
-use Application\Refactor\ReferenceBundle\Form\Rendertype;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Security\Core\SecurityContext;
 use Application\Refactor\ReferenceBundle\Form\DataTransformer\TagToTitleTransformer;
 
 class FicheType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -25,44 +22,54 @@ class FicheType extends AbstractType
             ->add('title2')
             ->add('date', 'date', array("attr" => array('class'=>'form-control')))
             ->add('content')
-            ->add('published','checkbox', array('required' => false))
-            ->add('image', 'entity', array(
+            ->add('published', 'checkbox', array('required' => false))
+            ->add(
+                'image', 'entity', array(
                 'class' => 'Application\Sonata\MediaBundle\Entity\Media',
 
-                ))
+                )
+            )
             // ->add('image' , 'sonata_media_type', array(
 
             //     'data_class' => 'Application\Sonata\MediaBundle\Entity\Media',
             // 'provider' => 'sonata.media.provider.image',
             // 'context'  => 'default'
             // ))
-            ->add('image_input', 'file', array(
+            ->add(
+                'image_input', 'file', array(
                 'mapped' => false,
                 'label' => false,
                 'required' => false
-                ))
+                )
+            )
 
-            ->add('tags' , 'collection', array(
-            'type' => new TagType(),
-            'allow_add' => true,
-            'by_reference' => false,
-            'allow_delete' =>true,
+            ->add(
+                'tags', 'collection', array(
+                'type' => new TagType(),
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' =>true,
 
-            ))
-            ->add('medias' , 'collection', array(
-            'type' => new MediaFicheType(),
-            'allow_add' => true,
-            'by_reference' => false,
-            'allow_delete' =>true,
+                )
+            )
+            ->add(
+                'medias', 'collection', array(
+                'type' => new MediaFicheType(),
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' =>true,
 
-            ))
-            ->add('renders' , 'collection', array(
-            'type' => new RenderType(),
-            'allow_add' => true,
-            'by_reference' => false,
-            'allow_delete' =>true,
+                )
+            )
+            ->add(
+                'renders', 'collection', array(
+                'type' => new RenderType(),
+                'allow_add' => true,
+                'by_reference' => false,
+                'allow_delete' =>true,
 
-            ))
+                )
+            )
             // ->add('image', 'choice', array(
             //     'choices' => array(
             //         'Upload' => array(
@@ -94,29 +101,28 @@ class FicheType extends AbstractType
         //     $builder->create('tags', 'text')
         //     ->addModelTransformer($transformer));
 
-
-
-        // $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+        // $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
         //     $form = $event->getForm();
         //     $data = $event->getData();
-        //     if($data->getImage()->getName() == "Ajouter une image"){
+        //     if ($data->getImage()->getName() == "Ajouter une image") {
         //         $form->remove('image');
         //     }
             // $form->add('image', 'text');
-            
+
         // });
 
-
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
             'data_class' => 'Application\Refactor\ReferenceBundle\Entity\Fiche'
-        ));
+            )
+        );
         // $resolver->setRequired(array(
         //     'em',
         // ));

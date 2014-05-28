@@ -7,22 +7,28 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FakerCommand extends ContainerAwareCommand
 {
+
     protected function configure()
     {
         $this
-            ->setName('generate:faker')// set the commande tool
-            ->setDescription('Genererate base of test') //set description
-        ;
-    }
+            ->setName('generate:faker')
+        // set the commande tool
+            ->setDescription('Genererate base of test');
+
+    }//end configure()
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($this->getContainer()->get('myreference.fakergenerator'))
-        {
-            $text = 'Database updated!'; //if command worked
+        if ($this->getContainer()->get('myreference.fakergenerator')) {
+            $text = 'Database updated!';
+            //if command worked
         } else {
-            $text = 'Oops! An Error Occurred'; //if not
+            $text = 'Oops! An Error Occurred';
+            //if not
         }
-        $output->writeln($text); //output
-    }
-}
+
+        $output->writeln($text);
+        //output
+
+    }//end execute()
+}//end class

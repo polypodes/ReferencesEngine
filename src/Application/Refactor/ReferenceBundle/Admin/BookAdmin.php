@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 
 class BookAdmin extends Admin
 {
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -21,9 +22,9 @@ class BookAdmin extends Admin
             ->add('clientName')
             ->add('projectName')
             ->add('date')
-            ->add('published')
-        ;
-    }
+            ->add('published');
+
+    }//end configureDatagridFilters()
 
     /**
      * @param ListMapper $listMapper
@@ -37,15 +38,17 @@ class BookAdmin extends Admin
             ->add('date')
             ->add('fiches')
             ->add('published')
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                    'delete' => array(),
-                )
-            ))
-        ;
-    }
+            ->add(
+                '_action', 'actions', array(
+                                       'actions' => array(
+                                                     'show'   => array(),
+                                                     'edit'   => array(),
+                                                     'delete' => array(),
+                                                    )
+                                      )
+            );
+
+    }//end configureListFields()
 
     /**
      * @param FormMapper $formMapper
@@ -58,20 +61,21 @@ class BookAdmin extends Admin
             ->add('clientName', null, array('label' => 'Client Name'))
             ->add('projectName', null, array('label' => 'Project Name', 'required' => false))
 
-            ->add('fiches', 'sonata_type_collection',
+            ->add(
+                'fiches', 'sonata_type_collection',
                 array(
-                    'label' => 'Fiches',
-                    'required' => false,
+                 'label'    => 'Fiches',
+                 'required' => false,
                 ),
                 array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
+                 'edit'     => 'inline',
+                 'inline'   => 'table',
+                 'sortable' => 'position',
                 )
             )
-            ->add('published', null, array('label' => 'Published', 'required' => false))
-        ;
-    }
+            ->add('published', null, array('label' => 'Published', 'required' => false));
+
+    }//end configureFormFields()
 
     /**
      * {@inheritdoc}
@@ -84,16 +88,15 @@ class BookAdmin extends Admin
             ->assertNotBlank()
             ->assertNotNull()
             ->assertLength(array('max' => 255))
-            ->end()
-        ;
+            ->end();
 
         $errorElement
             ->with('date')
             ->assertNotBlank()
             ->assertNotNull()
-            ->end()
-        ;
-    }
+            ->end();
+
+    }//end validate()
 
     /**
      * @param ShowMapper $showMapper
@@ -108,7 +111,7 @@ class BookAdmin extends Admin
             ->add('fiches')
             ->add('created_at')
             ->add('updated_at')
-            ->add('published')
-        ;
-    }
-}
+            ->add('published');
+
+    }//end configureShowFields()
+}//end class

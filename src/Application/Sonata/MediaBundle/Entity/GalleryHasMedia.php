@@ -23,6 +23,7 @@ use Sonata\MediaBundle\Entity\BaseGalleryHasMedia as BaseGalleryHasMedia;
  */
 class GalleryHasMedia extends BaseGalleryHasMedia
 {
+
     /**
      * @var integer $id
      */
@@ -36,5 +37,6 @@ class GalleryHasMedia extends BaseGalleryHasMedia
     public function getId()
     {
         return $this->id;
-    }
-}
+
+    }//end getId()
+}//end class

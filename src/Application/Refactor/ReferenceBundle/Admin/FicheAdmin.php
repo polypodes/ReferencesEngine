@@ -62,7 +62,8 @@ class FicheAdmin extends Admin
             ->add('title', null, array('label' => 'Title'))
             ->add('title2', null, array('label' => 'Subtitle', 'required' => false))
             ->add('date', 'genemu_jquerydate', array('label' => 'Date', 'widget' => 'single_text'))
-            ->add('content','sonata_formatter_type',
+            ->add(
+                'content', 'sonata_formatter_type',
                 array(
                     'label' => 'Description',
                     'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
@@ -77,7 +78,8 @@ class FicheAdmin extends Admin
                     'ckeditor_toolbar_icons' => $ckeditor_toolbar_icons,
                 )
             )
-            ->add('image', 'sonata_type_model_list',
+            ->add(
+                'image', 'sonata_type_model_list',
                 array(
                     'label' => 'Main image',
                 ),
@@ -88,7 +90,8 @@ class FicheAdmin extends Admin
                     )
                 )
             )
-            ->add('renders', 'sonata_type_collection',
+            ->add(
+                'renders', 'sonata_type_collection',
                 array(
                     'label' => 'Renders',
                     'required' => false,
@@ -105,7 +108,8 @@ class FicheAdmin extends Admin
                     )
                 )
             )
-            ->add('medias', 'sonata_type_collection',
+            ->add(
+                'medias', 'sonata_type_collection',
                 array(
                     'label' => 'Associated medias',
                     'required' => false,
@@ -120,7 +124,8 @@ class FicheAdmin extends Admin
                     )
                 )
             )
-            ->add('tags', 'sonata_type_collection',
+            ->add(
+                'tags', 'sonata_type_collection',
                 array(
                     'label' => 'Tags',
                     'required' => false,
@@ -183,13 +188,15 @@ class FicheAdmin extends Admin
             ->addIdentifier('title')
             ->add('date', 'date', array('format' => 'F Y'))
             ->add('published', 'boolean', array('editable' => true))
-            ->add('_action', 'actions', array(
+            ->add(
+                '_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
-            ))
+                )
+            )
         ;
     }
 

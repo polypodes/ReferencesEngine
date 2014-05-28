@@ -36,7 +36,7 @@
 			  	<li>
 			    	<div class="thumbnail project-mouseover project" >
 			    		<div class="project-img">
-			    		{% media project.vars.value.image, 'thumbnail' %} 
+			    		{% media project.vars.value.image, 'thumbnail' %}
 			    	</div>
 			      		<div class="caption project-btn">
 			      			<h2>{{project.vars.value.title}}
@@ -56,14 +56,14 @@
 					</li>
 				</div>
 
-				
+
 			{% endfor %}
 		</ul>
 	</div>
 </div>
 <!-- <div class = "col-6 col-sm-6 col-lg-12">
-<ul class="projects_add" data-prototype="{#{ include ("ApplicationRefactorReferenceBundle:Fiche:form.html.twig" , {'formFiche' : form.fiche_add.vars.prototype})|e}#}">	
-{#{ include ("ApplicationRefactorReferenceBundle:Fiche:form.html.twig" , {'formFiche' : form.fiche_add.vars.prototype})|e}#}			
+<ul class="projects_add" data-prototype="{#{ include ("ApplicationRefactorReferenceBundle:Fiche:form.html.twig" , {'formFiche' : form.fiche_add.vars.prototype})|e}#}">
+{#{ include ("ApplicationRefactorReferenceBundle:Fiche:form.html.twig" , {'formFiche' : form.fiche_add.vars.prototype})|e}#}
 			{#% for formFiche in form.fiche_add %#}
 			<li>
 				{#% include "ApplicationRefactorReferenceBundle:Fiche:form.html.twig" %#}

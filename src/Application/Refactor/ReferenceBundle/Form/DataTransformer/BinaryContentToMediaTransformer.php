@@ -4,10 +4,10 @@ namespace Application\Refactor\ReferenceBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
-use Application\Sonata\MediaBundle\Entity\Media;
 
-class TagToTitleTransformer implements DataTransformerInterface
+class BinaryContentToMediaTransformer implements DataTransformerInterface
 {
+
     /**
      * @var ObjectManager
      */
@@ -19,7 +19,8 @@ class TagToTitleTransformer implements DataTransformerInterface
     public function __construct(ObjectManager $om)
     {
         $this->om = $om;
-    }
+
+    }//end __construct()
 
     /**
      * Transforms an object (tag) to a string (itle).
@@ -30,16 +31,17 @@ class TagToTitleTransformer implements DataTransformerInterface
     public function transform($tag)
     {
         if (null === $tag) {
-            return "";
+            return '';
         }
 
         return $tag->getTitle();
-    }
+
+    }//end transform()
 
     /**
      * Transforms a string (title) to an object (tag).
      *
-     * @param  string $title
+     * @param  string                        $title
      * @return tag|null
      * @throws TransformationFailedException if object (tag) is not found.
      */
@@ -51,16 +53,18 @@ class TagToTitleTransformer implements DataTransformerInterface
 
         $tag = $this->om
             ->getRepository('ApplicationRefactorReferenceBundle:Tag')
-            ->findOneBy(array('title' => $title))
-        ;
+            ->findOneBy(array('title' => $title));
 
         if (null === $tag) {
-            throw new TransformationFailedException(sprintf(
-                'Le problème avec le titre "%s" ne peut pas être trouvé!',
-                $title
-            ));
+            throw new TransformationFailedException(
+                sprintf(
+                    'Le problème avec le titre "%s" ne peut pas être trouvé!',
+                    $title
+                )
+            );
         }
 
         return $tag;
-    }
-}
+
+    }//end reverseTransform()
+}//end class

@@ -1,9 +1,9 @@
-project : 
+project :
     type: rest
     resource:     "Application\Refactor\ReferenceBundle\Controller\FicheRestController"
     name_prefix:  api_
     prefix:       /get
-book : 
+book :
     type: rest
     resource:     "Application\Refactor\ReferenceBundle\Controller\BookRestController"
     name_prefix:  api_

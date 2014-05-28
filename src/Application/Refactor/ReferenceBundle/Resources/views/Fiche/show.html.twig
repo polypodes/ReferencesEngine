@@ -40,7 +40,7 @@
 	<p>
 		<div class="checkbox">
 	   		<label>
-	   			<input type="checkbox" 
+	   			<input type="checkbox"
 	   			{% if project.published == true %}
 	   				checked
 				{% endif %}
@@ -71,9 +71,9 @@
 				{% else %}
 				<a href="{{ path('sonata_media_download', {'id': media|sonata_urlsafeid }) }}">{{media.name }}</a>
 				{% endif %}
-			</p>	
+			</p>
 		{% endfor %}
-	
+
 	</div>
 </div>
 

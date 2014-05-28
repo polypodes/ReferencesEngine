@@ -12,8 +12,8 @@
 	      		<p>{{ 'Project'|trans }} : {{form_widget(form.projectName)}}</p>
 	      		<p>{{ 'Date'|trans }} : {{form_widget(form.date)}}</p>
 	      		<p>{{ 'Published'|trans }} : {{form_widget(form.published)}}</p>
-	    
-			
+
+
 
 			</div>
 			</div>
@@ -25,14 +25,14 @@
 	    	<div class="thumbnail project-mouseover project">
 	    		<input type="hidden" name="project[{{project.id}}]" value="{{project.id}}">
 	    		<div class="project-img">
-	    		{% media project.image, 'thumbnail' %} 
+	    		{% media project.image, 'thumbnail' %}
 	    	</div>
 	      		<div class="caption project-btn">
 	      			<h2>{{project.title}}
 	      				<div>
 	      					<small>{{project.title}}</small>
 	        			</div>
-	        		</h2>	
+	        		</h2>
 		          		<p>
 		        			<a href="{{ path('refactor_edit_projects', {'id': project.id}) }}" class="btn btn-warning col-md-4 btn-sm " role="button">
 			        			<span class="glyphicon glyphicon-edit"></span>
@@ -60,6 +60,6 @@
 		{{ form_rest(form) }}
 	</div>
 <input class="btn btn-default" type="submit" value="{{ 'Validate'|trans }}"/>
-					
+
 </div>
 {% endblock %}

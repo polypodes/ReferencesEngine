@@ -23,6 +23,7 @@ use Sonata\UserBundle\Document\BaseGroup as BaseGroup;
  */
 class Group extends BaseGroup
 {
+
     /**
      * @var integer $id
      */
@@ -36,5 +37,6 @@ class Group extends BaseGroup
     public function getId()
     {
         return $this->id;
-    }
-}
+
+    }//end getId()
+}//end class

@@ -21,10 +21,12 @@ use Behat\Gherkin\Node\PyStringNode,
 /**
  * Feature context.
  */
-class FeatureContext extends MinkContext //MinkContext if you want to test web
-                  implements KernelAwareInterface
+class FeatureContext extends MinkContext
+//MinkContext if you want to test web                   implements KernelAwareInterface
 {
+
     private $kernel;
+
     private $parameters;
 
     /**
@@ -35,7 +37,8 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
     public function __construct(array $parameters)
     {
         $this->parameters = $parameters;
-    }
+
+    }//end __construct()
 
     /**
      * Sets HttpKernel instance.
@@ -46,20 +49,21 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
-    }
 
-//
-// Place your definition and hook methods here:
-//
-//    /**
-//     * @Given /^I have done something with "([^"]*)"$/
-//     */
-//    public function iHaveDoneSomethingWith($argument)
-//    {
-//        $container = $this->kernel->getContainer();
-//        $container->get('some_service')->doSomethingWith($argument);
-//    }
-//
+    }//end setKernel()
+
+    //
+    // Place your definition and hook methods here:
+    //
+    //    /**
+    //     * @Given /^I have done something with "([^"]*)"$/
+    //     */
+    //    public function iHaveDoneSomethingWith($argument)
+    //    {
+    //        $container = $this->kernel->getContainer();
+    //        $container->get('some_service')->doSomethingWith($argument);
+    //    }
+    //
 
 
 
@@ -69,7 +73,8 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
     public function queJeSuisA($arg1)
     {
         $this->visit($arg1);
-    }
+
+    }//end queJeSuisA()
 
     /**
      * @Given /^je vais à "([^"]*)"$/
@@ -77,7 +82,9 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
     public function jeVaisA($arg1)
     {
         $this->visit($arg1);
-    }
+
+    }//end jeVaisA()
+
 
     /**
      * @Given /^je dois voir "([^"]*)"$/
@@ -85,5 +92,6 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
     public function jeDoisVoir($arg1)
     {
         $this->assertResponseContains($arg1);
-    }
-}
+
+    }//end jeDoisVoir()
+}//end class

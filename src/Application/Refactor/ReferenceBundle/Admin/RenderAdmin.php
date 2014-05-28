@@ -7,18 +7,18 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 class RenderAdmin extends Admin
 {
-	    /**
-     * @param  \Sonata\AdminBundle\Datagrid\DatagridMapper $datagridMapper
-     * @return void
-     */
+
+        /**
+         * @param  \Sonata\AdminBundle\Datagrid\DatagridMapper $datagridMapper
+         * @return void
+         */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('name')
             ->add('providerReference')
             ->add('enabled')
-            ->add('context')
-        ;
+            ->add('context');
 
         $providers = array();
 
@@ -27,14 +27,17 @@ class RenderAdmin extends Admin
             $providers[$name] = $name;
         }
 
-        $datagridMapper->add('providerName', 'doctrine_orm_choice', array(
-            'field_options'=> array(
-                'choices' => $providers,
-                'required' => false,
-                'multiple' => false,
-                'expanded' => false,
-            ),
-            'field_type'=> 'choice',
-        ));
-    }
-}
+        $datagridMapper->add(
+            'providerName', 'doctrine_orm_choice', array(
+                                                    'field_options' => array(
+                                                                        'choices'  => $providers,
+                                                                        'required' => false,
+                                                                        'multiple' => false,
+                                                                        'expanded' => false,
+                                                                       ),
+                                                    'field_type'    => 'choice',
+                                                   )
+        );
+
+    }//end configureDatagridFilters()
+}//end class

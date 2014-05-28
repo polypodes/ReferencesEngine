@@ -22,11 +22,13 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class ApplicationSonataAdminBundle extends Bundle
 {
+
     /**
      * {@inheritdoc}
      */
     public function getParent()
     {
         return 'SonataAdminBundle';
-    }
-}
+
+    }//end getParent()
+}//end class

@@ -7,9 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\VirtualProperty;
 
-use app\Faker\autoload;
 use Faker;
 
 /**
@@ -23,6 +21,7 @@ use Faker;
  */
 class Fiche
 {
+
     /**
      * @var integer
      *
@@ -30,7 +29,7 @@ class Fiche
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $id;
 
@@ -39,7 +38,7 @@ class Fiche
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $title;
 
@@ -48,7 +47,7 @@ class Fiche
      *
      * @ORM\Column(name="title2", type="string", length=255, nullable=true)
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $title2;
 
@@ -57,7 +56,7 @@ class Fiche
      *
      * @ORM\Column(name="date", type="date", nullable=false)
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $date;
 
@@ -66,7 +65,7 @@ class Fiche
      *
      * @ORM\Column(name="content", type="text", nullable=true)
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $content;
 
@@ -75,7 +74,7 @@ class Fiche
      *
      * @ORM\Column(name="raw_content", type="text", nullable=true)
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $rawContent;
 
@@ -84,7 +83,7 @@ class Fiche
      *
      * @ORM\Column(name="content_formatter", type="string", length=255, nullable=true)
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $contentFormatter;
 
@@ -93,7 +92,7 @@ class Fiche
      *
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $createdAt;
 
@@ -102,7 +101,7 @@ class Fiche
      *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $updatedAt;
 
@@ -111,7 +110,7 @@ class Fiche
      *
      * @ORM\Column(name="published", type="boolean", nullable=false)
      * @Expose
-     * @Groups({"Fiche"}) 
+     * @Groups({"Fiche"})
      */
     private $published;
 
@@ -120,7 +119,7 @@ class Fiche
      *
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      * })
      * @Groups({"sonata_api_read"})
      * @Expose
@@ -128,38 +127,34 @@ class Fiche
     private $image;
 
     /**
-    * @ORM\ManyToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Tag", cascade={"persist"})
-    * @ORM\JoinTable(name="reference__fiche_tag")
-    * @Groups({"Fiche"}) 
-    * @Expose
-    */
+     * @ORM\ManyToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Tag", cascade={"persist"})
+     * @ORM\JoinTable(name="reference__fiche_tag")
+     * @Groups({"Fiche"})
+     * @Expose
+     */
     private $tags;
+
      /**
-    * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, inversedBy="renders")
-    * @ORM\JoinTable(name="reference__fiche_render")
-    * @Groups({"sonata_api_read"})
-    * @Expose
-    */
+      * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, inversedBy="renders")
+      * @ORM\JoinTable(name="reference__fiche_render")
+      * @Groups({"sonata_api_read"})
+      * @Expose
+      */
     private $renders;
+
      /**
-    * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
-    * @ORM\JoinTable(name="reference__fiche_media")
-    * @Groups({"sonata_api_read"})
-    * @Expose
-    */
+      * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
+      * @ORM\JoinTable(name="reference__fiche_media")
+      * @Groups({"sonata_api_read"})
+      * @Expose
+      */
     private $medias;
-
-
-
-
-
-
-
 
     public function __toString()
     {
         return $this->getTitle();
-    }
+
+    }//end __toString()
 
     /**
      * Get id
@@ -169,12 +164,13 @@ class Fiche
     public function getId()
     {
         return $this->id;
-    }
+
+    }//end getId()
 
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Fiche
      */
     public function setTitle($title)
@@ -182,7 +178,8 @@ class Fiche
         $this->title = $title;
 
         return $this;
-    }
+
+    }//end setTitle()
 
     /**
      * Get title
@@ -192,12 +189,13 @@ class Fiche
     public function getTitle()
     {
         return $this->title;
-    }
+
+    }//end getTitle()
 
     /**
      * Set title2
      *
-     * @param string $title2
+     * @param  string $title2
      * @return Fiche
      */
     public function setTitle2($title2)
@@ -205,7 +203,8 @@ class Fiche
         $this->title2 = $title2;
 
         return $this;
-    }
+
+    }//end setTitle2()
 
     /**
      * Get title2
@@ -215,12 +214,13 @@ class Fiche
     public function getTitle2()
     {
         return $this->title2;
-    }
+
+    }//end getTitle2()
 
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param  \DateTime $date
      * @return Fiche
      */
     public function setDate($date)
@@ -228,7 +228,8 @@ class Fiche
         $this->date = $date;
 
         return $this;
-    }
+
+    }//end setDate()
 
     /**
      * Get date
@@ -238,12 +239,13 @@ class Fiche
     public function getDate()
     {
         return $this->date;
-    }
+
+    }//end getDate()
 
     /**
      * Set content
      *
-     * @param string $content
+     * @param  string $content
      * @return Fiche
      */
     public function setContent($content)
@@ -251,7 +253,8 @@ class Fiche
         $this->content = $content;
 
         return $this;
-    }
+
+    }//end setContent()
 
     /**
      * Get content
@@ -261,12 +264,13 @@ class Fiche
     public function getContent()
     {
         return $this->content;
-    }
+
+    }//end getContent()
 
     /**
      * Set rawContent
      *
-     * @param string $rawContent
+     * @param  string $rawContent
      * @return Fiche
      */
     public function setRawContent($rawContent)
@@ -274,7 +278,8 @@ class Fiche
         $this->rawContent = $rawContent;
 
         return $this;
-    }
+
+    }//end setRawContent()
 
     /**
      * Get rawContent
@@ -284,12 +289,13 @@ class Fiche
     public function getRawContent()
     {
         return $this->rawContent;
-    }
+
+    }//end getRawContent()
 
     /**
      * Set contentFormatter
      *
-     * @param string $contentFormatter
+     * @param  string $contentFormatter
      * @return Fiche
      */
     public function setContentFormatter($contentFormatter)
@@ -297,7 +303,8 @@ class Fiche
         $this->contentFormatter = $contentFormatter;
 
         return $this;
-    }
+
+    }//end setContentFormatter()
 
     /**
      * Get contentFormatter
@@ -307,12 +314,13 @@ class Fiche
     public function getContentFormatter()
     {
         return $this->contentFormatter;
-    }
+
+    }//end getContentFormatter()
 
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Fiche
      */
     public function setCreatedAt($createdAt)
@@ -320,7 +328,8 @@ class Fiche
         $this->createdAt = $createdAt;
 
         return $this;
-    }
+
+    }//end setCreatedAt()
 
     /**
      * Get createdAt
@@ -330,12 +339,13 @@ class Fiche
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
+
+    }//end getCreatedAt()
 
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Fiche
      */
     public function setUpdatedAt($updatedAt)
@@ -343,7 +353,8 @@ class Fiche
         $this->updatedAt = $updatedAt;
 
         return $this;
-    }
+
+    }//end setUpdatedAt()
 
     /**
      * Get updatedAt
@@ -353,12 +364,13 @@ class Fiche
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
+
+    }//end getUpdatedAt()
 
     /**
      * Set published
      *
-     * @param boolean $published
+     * @param  boolean $published
      * @return Fiche
      */
     public function setPublished($published)
@@ -366,7 +378,8 @@ class Fiche
         $this->published = $published;
 
         return $this;
-    }
+
+    }//end setPublished()
 
     /**
      * Get published
@@ -376,12 +389,13 @@ class Fiche
     public function getPublished()
     {
         return $this->published;
-    }
+
+    }//end getPublished()
 
     /**
      * Set image
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
      * @return Fiche
      */
     public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
@@ -389,7 +403,8 @@ class Fiche
         $this->image = $image;
 
         return $this;
-    }
+
+    }//end setImage()
 
     /**
      * Get image
@@ -399,7 +414,9 @@ class Fiche
     public function getImage()
     {
         return $this->image;
-    }
+
+    }//end getImage()
+
     /**
      * Constructor
      */
@@ -407,12 +424,13 @@ class Fiche
     {
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->date = new \DateTime;
-    }
+
+    }//end __construct()
 
     /**
      * Add tags
      *
-     * @param \Application\Refactor\ReferenceBundle\Entity\Tag $tags
+     * @param  \Application\Refactor\ReferenceBundle\Entity\Tag $tags
      * @return Fiche
      */
     public function addTag(\Application\Refactor\ReferenceBundle\Entity\Tag $tags)
@@ -420,7 +438,8 @@ class Fiche
         $this->tags[] = $tags;
 
         return $this;
-    }
+
+    }//end addTag()
 
     /**
      * Remove tags
@@ -430,7 +449,8 @@ class Fiche
     public function removeTag(\Application\Refactor\ReferenceBundle\Entity\Tag $tags)
     {
         $this->tags->removeElement($tags);
-    }
+
+    }//end removeTag()
 
     /**
      * Get tags
@@ -440,12 +460,13 @@ class Fiche
     public function getTags()
     {
         return $this->tags;
-    }
+
+    }//end getTags()
 
     /**
      * Add renders
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $renders
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $renders
      * @return Fiche
      */
     public function addRender(\Application\Sonata\MediaBundle\Entity\Media $renders)
@@ -453,7 +474,8 @@ class Fiche
         $this->renders[] = $renders;
 
         return $this;
-    }
+
+    }//end addRender()
 
     /**
      * Remove renders
@@ -463,7 +485,8 @@ class Fiche
     public function removeRender(\Application\Sonata\MediaBundle\Entity\Media $renders)
     {
         $this->renders->removeElement($renders);
-    }
+
+    }//end removeRender()
 
     /**
      * Get renders
@@ -473,12 +496,13 @@ class Fiche
     public function getRenders()
     {
         return $this->renders;
-    }
+
+    }//end getRenders()
 
     /**
      * Add medias
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $medias
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $medias
      * @return Fiche
      */
     public function addMedia(\Application\Sonata\MediaBundle\Entity\Media $medias)
@@ -486,7 +510,8 @@ class Fiche
         $this->medias[] = $medias;
 
         return $this;
-    }
+
+    }//end addMedia()
 
     /**
      * Remove medias
@@ -496,7 +521,8 @@ class Fiche
     public function removeMedia(\Application\Sonata\MediaBundle\Entity\Media $medias)
     {
         $this->medias->removeElement($medias);
-    }
+
+    }//end removeMedia()
 
     /**
      * Get medias
@@ -506,31 +532,34 @@ class Fiche
     public function getMedias()
     {
         return $this->medias;
-    }
+
+    }//end getMedias()
 
     public function prePersist()
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = $this->createdAt;
-    }
+
+    }//end prePersist()
 
     public function preUpdate()
     {
         $this->updatedAt = new \DateTime;
-    }
+
+    }//end preUpdate()
 
     public function getFake()
     {
         $faker = Faker\Factory::create();
-        $this->setTitle($faker->sentence($nbWords = 3));
+        $this->setTitle($faker->sentence($nbWords  = 3));
         $this->setTitle2($faker->sentence($nbWords = 6));
-        $this->setDate($faker->dateTime($max = 'now') );
+        $this->setDate($faker->dateTime($max       = 'now') );
         $this->setContent($faker->text);
         $this->setRawContent($faker->text);
         $this->setContentFormatter('null');
         $this->setPublished(true);
         $this->prePersist();
         $this->setCreatedAt($faker->dateTime($max = 'now') );
-    }
 
-}
+    }//end getFake()
+}//end class

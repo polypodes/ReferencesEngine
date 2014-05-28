@@ -22,11 +22,13 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class ApplicationSonataMediaBundle extends Bundle
 {
+
     /**
      * {@inheritdoc}
      */
     public function getParent()
     {
         return 'SonataMediaBundle';
-    }
-}
+
+    }//end getParent()
+}//end class

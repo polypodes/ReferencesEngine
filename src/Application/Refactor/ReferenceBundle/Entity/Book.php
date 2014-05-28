@@ -7,9 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\VirtualProperty;
 
-use app\Faker\autoload;
 use Faker;
 
 /**
@@ -23,6 +21,7 @@ use Faker;
  */
 class Book
 {
+
     /**
      * @var integer
      *
@@ -98,14 +97,12 @@ class Book
     private $published;
 
     /**
-    * @ORM\ManyToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Fiche", cascade={"persist"})
-    * @ORM\JoinTable(name="reference__fiche_book")
-    * @Expose
+     * @ORM\ManyToMany(targetEntity="Application\Refactor\ReferenceBundle\Entity\Fiche", cascade={"persist"})
+     * @ORM\JoinTable(name="reference__fiche_book")
+     * @Expose
      * @Groups({"Fiche"})
-    */
+     */
     private $fiches;
-
-
 
     /**
      * Get id
@@ -115,12 +112,13 @@ class Book
     public function getId()
     {
         return $this->id;
-    }
+
+    }//end getId()
 
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Book
      */
     public function setTitle($title)
@@ -128,7 +126,8 @@ class Book
         $this->title = $title;
 
         return $this;
-    }
+
+    }//end setTitle()
 
     /**
      * Get title
@@ -138,12 +137,13 @@ class Book
     public function getTitle()
     {
         return $this->title;
-    }
+
+    }//end getTitle()
 
     /**
      * Set clientName
      *
-     * @param string $clientName
+     * @param  string $clientName
      * @return Book
      */
     public function setClientName($clientName)
@@ -151,7 +151,8 @@ class Book
         $this->clientName = $clientName;
 
         return $this;
-    }
+
+    }//end setClientName()
 
     /**
      * Get clientName
@@ -161,12 +162,13 @@ class Book
     public function getClientName()
     {
         return $this->clientName;
-    }
+
+    }//end getClientName()
 
     /**
      * Set projectName
      *
-     * @param string $projectName
+     * @param  string $projectName
      * @return Book
      */
     public function setProjectName($projectName)
@@ -174,7 +176,8 @@ class Book
         $this->projectName = $projectName;
 
         return $this;
-    }
+
+    }//end setProjectName()
 
     /**
      * Get projectName
@@ -184,12 +187,13 @@ class Book
     public function getProjectName()
     {
         return $this->projectName;
-    }
+
+    }//end getProjectName()
 
     /**
      * Set date
      *
-     * @param \DateTime $date
+     * @param  \DateTime $date
      * @return Book
      */
     public function setDate($date)
@@ -197,7 +201,8 @@ class Book
         $this->date = $date;
 
         return $this;
-    }
+
+    }//end setDate()
 
     /**
      * Get date
@@ -207,12 +212,13 @@ class Book
     public function getDate()
     {
         return $this->date;
-    }
+
+    }//end getDate()
 
     /**
      * Set createdAt
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      * @return Book
      */
     public function setCreatedAt($createdAt)
@@ -220,7 +226,8 @@ class Book
         $this->createdAt = $createdAt;
 
         return $this;
-    }
+
+    }//end setCreatedAt()
 
     /**
      * Get createdAt
@@ -230,12 +237,13 @@ class Book
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
+
+    }//end getCreatedAt()
 
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      * @return Book
      */
     public function setUpdatedAt($updatedAt)
@@ -243,7 +251,8 @@ class Book
         $this->updatedAt = $updatedAt;
 
         return $this;
-    }
+
+    }//end setUpdatedAt()
 
     /**
      * Get updatedAt
@@ -253,12 +262,13 @@ class Book
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
+
+    }//end getUpdatedAt()
 
     /**
      * Set published
      *
-     * @param boolean $published
+     * @param  boolean $published
      * @return Book
      */
     public function setPublished($published)
@@ -266,7 +276,8 @@ class Book
         $this->published = $published;
 
         return $this;
-    }
+
+    }//end setPublished()
 
     /**
      * Get published
@@ -276,51 +287,57 @@ class Book
     public function getPublished()
     {
         return $this->published;
-    }
+
+    }//end getPublished()
 
     public function prePersist()
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = $this->createdAt;
-    }
+
+    }//end prePersist()
 
     public function preUpdate()
     {
         $this->updatedAt = new \DateTime;
-    }
+
+    }//end preUpdate()
 
     public function getFake()
     {
         $faker = Faker\Factory::create();
-        $this->setTitle($faker->sentence($nbWords=6));
+        $this->setTitle($faker->sentence($nbWords = 6));
         $this->setClientName($faker->name);
-        $this->setProjectName($faker->sentence($nbWords=6));
-        $this->setDate($faker->dateTime($max = 'now'));
-        $this->setUpdatedAt($faker->dateTime($max = 'now'));
-        $this->setCreatedAt($faker->dateTime($max = 'now'));
+        $this->setProjectName($faker->sentence($nbWords = 6));
+        $this->setDate($faker->dateTime($max            = 'now'));
+        $this->setUpdatedAt($faker->dateTime($max       = 'now'));
+        $this->setCreatedAt($faker->dateTime($max       = 'now'));
         $this->setPublished(true);
-    }
+
+    }//end getFake()
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->fiches = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
+
+    }//end __construct()
 
     /**
      * Add fiches
      *
-     * @param \Application\Refactor\ReferenceBundle\Entity\Fiche $fiches
+     * @param  \Application\Refactor\ReferenceBundle\Entity\Fiche $fiches
      * @return Book
      */
     public function addFiche(\Application\Refactor\ReferenceBundle\Entity\Fiche $fiches)
     {
         $this->fiches[] = $fiches;
-    
+
         return $this;
-    }
+
+    }//end addFiche()
 
     /**
      * Remove fiches
@@ -330,15 +347,17 @@ class Book
     public function removeFiche(\Application\Refactor\ReferenceBundle\Entity\Fiche $fiches)
     {
         $this->fiches->removeElement($fiches);
-    }
+
+    }//end removeFiche()
 
     /**
      * Get fiches
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getFiches()
     {
         return $this->fiches;
-    }
-}
+
+    }//end getFiches()
+}//end class

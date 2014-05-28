@@ -12,37 +12,44 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class WsseListener implements ListenerInterface
 {
+
     protected $securityContext;
+
     protected $authenticationManager;
+
     protected $logger;
 
-    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager/*, LoggerInterface $logger*/)
+    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager
+// , LoggerInterface $logger
+)
     {
-        $this->securityContext = $securityContext;
+        $this->securityContext       = $securityContext;
         $this->authenticationManager = $authenticationManager;
         // $this->logger = $logger;
-    }
+
+    }//end __construct()
 
     public function handle(GetResponseEvent $event)
     {
-        $request = $event->getRequest();
+        $request   = $event->getRequest();
         $wsseRegex = '/UsernameToken Username="([^"]+)", PasswordDigest="([^"]+)", Nonce="([^"]+)", Created="([^"]+)"/';
         if (!$request->headers->has('x-wsse') || 1 !== preg_match($wsseRegex, $request->headers->get('x-wsse'), $matches)) {
             // throw new AuthenticationException("Bad Header...");
-
             return;
         }
+
         $token = new WsseUserToken();
         $token->setUser($matches[1]);
 
-        $token->digest   = $matches[2];
-        $token->nonce    = $matches[3];
-        $token->created  = $matches[4];
+        $token->digest  = $matches[2];
+        $token->nonce   = $matches[3];
+        $token->created = $matches[4];
 
         try {
             $authToken = $this->authenticationManager->authenticate($token);
 
             $this->securityContext->setToken($authToken);
+
             return;
         } catch (AuthenticationException $failed) {
             $failedMessage = 'WSSE Login failed for '.$token->getUsername().'. Why ? '.$failed->getMessage();
@@ -52,10 +59,11 @@ class WsseListener implements ListenerInterface
             $response->setStatusCode(403);
             $response->setContent($failedMessage);
             $event->setResponse($response);
-
         }
+
         $response = new Response();
         $response->setStatusCode(403);
         $event->setResponse($response);
-    }
-}
+
+    }//end handle()
+}//end class

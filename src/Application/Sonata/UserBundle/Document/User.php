@@ -23,6 +23,7 @@ use Sonata\UserBundle\Document\BaseUser as BaseUser;
  */
 class User extends BaseUser
 {
+
     /**
      * @var integer $id
      */
@@ -36,5 +37,6 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
-    }
-}
+
+    }//end getId()
+}//end class

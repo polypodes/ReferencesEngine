@@ -23,6 +23,7 @@ use Sonata\MediaBundle\Document\BaseMedia as BaseMedia;
  */
 class Media extends BaseMedia
 {
+
     /**
      * @var integer $id
      */
@@ -36,5 +37,6 @@ class Media extends BaseMedia
     public function getId()
     {
         return $this->id;
-    }
-}
+
+    }//end getId()
+}//end class
