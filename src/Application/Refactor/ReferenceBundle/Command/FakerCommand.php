@@ -2,12 +2,8 @@
 namespace Application\Refactor\ReferenceBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Application\Refactor\ReferenceBundle\Model\Fiche;
-use Doctrine\Common\Annotations\AnnotationReader;
 
 class FakerCommand extends ContainerAwareCommand
 {
@@ -21,10 +17,12 @@ class FakerCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if($this->getContainer()->get('myreference.fakergenerator'))
+        if ($this->getContainer()->get('myreference.fakergenerator'))
+        {
             $text = 'Database updated!'; //if command worked
-        else
+        } else {
             $text = 'Oops! An Error Occurred'; //if not
+        }
         $output->writeln($text); //output
     }
 }

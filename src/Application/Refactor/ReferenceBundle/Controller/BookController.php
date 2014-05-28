@@ -22,11 +22,11 @@ class BookController extends Controller
      */
     public function indexAction()
     {
-    	$em  =$this->getDoctrine()->getManager();
+        $em  =$this->getDoctrine()->getManager();
         $books = $em->getRepository('ApplicationRefactorReferenceBundle:Book')->findAll();
 
         return $this->render('ApplicationRefactorReferenceBundle:Book:index.html.twig', array(
-    	'books' =>$books
+        'books' =>$books
         ));
     }
 
