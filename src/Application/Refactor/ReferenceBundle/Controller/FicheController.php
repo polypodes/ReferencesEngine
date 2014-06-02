@@ -117,7 +117,7 @@ class FicheController extends Controller
     }//end saveFiche()
 
     /**
-     * indexSortAction($sort)
+     * indexAction($sort)
      * List all the fiches by sort
      * @Secure(roles="ROLE_ADMIN")
      */
@@ -166,28 +166,7 @@ class FicheController extends Controller
     }//end indexAction()
 
 
-    /**
-     * indexAction()
-     * List all the fiches
-     * @Secure(roles="ROLE_ADMIN")
-     */
 
-    // public function indexAction()
-    // {
-    //        $em    = $this->getDoctrine()->getManager();
-    //     $projects = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findAll();
-
-    //     return $this->render(
-    //         'ApplicationRefactorReferenceBundle:Fiche:showList.html.twig', array('projects' => $projects)
-    //     );
-
-    // }//end indexAction()
-
-    /**
-     * removeAction($id)
-     * remove a fiche
-     * @Secure(roles="ROLE_ADMIN")
-     */
 
     public function removeAction($id)
     {
