@@ -117,21 +117,71 @@ class FicheController extends Controller
     }//end saveFiche()
 
     /**
-     * indexAction()
-     * List all the fiches
+     * indexSortAction($sort)
+     * List all the fiches by sort
      * @Secure(roles="ROLE_ADMIN")
      */
 
-    public function indexAction()
+    public function indexAction($sort)
     {
-           $em    = $this->getDoctrine()->getManager();
-        $projects = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findAll();
+        $repository = $this->getDoctrine()->getRepository('ApplicationRefactorReferenceBundle:Fiche');
+        if ($sort == "old"){
+            $query = $repository->createQueryBuilder('F')
+                                ->orderBy('F.date', 'ASC')
+                                ->getQuery();
+
+            $projects = $query->getResult();
+
+        } elseif ($sort == "recent"){
+            $query = $repository->createQueryBuilder('F')
+                            ->orderBy('F.date', 'DESC')
+                            ->getQuery();
+
+            $projects = $query->getResult();
+
+        } elseif ($sort == "asc"){
+            $query = $repository->createQueryBuilder('F')
+                            ->orderBy('F.title', 'ASC')
+                            ->getQuery();
+
+            $projects = $query->getResult();
+
+        } elseif ($sort == "desc"){
+            $query = $repository->createQueryBuilder('F')
+                            ->orderBy('F.title', 'DESC')
+                            ->getQuery();
+
+            $projects = $query->getResult();
+
+        } else {
+            $em    = $this->getDoctrine()->getManager();
+            $projects = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findAll();
+
+        }
 
         return $this->render(
             'ApplicationRefactorReferenceBundle:Fiche:showList.html.twig', array('projects' => $projects)
         );
 
     }//end indexAction()
+
+
+    /**
+     * indexAction()
+     * List all the fiches
+     * @Secure(roles="ROLE_ADMIN")
+     */
+
+    // public function indexAction()
+    // {
+    //        $em    = $this->getDoctrine()->getManager();
+    //     $projects = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findAll();
+
+    //     return $this->render(
+    //         'ApplicationRefactorReferenceBundle:Fiche:showList.html.twig', array('projects' => $projects)
+    //     );
+
+    // }//end indexAction()
 
     /**
      * removeAction($id)
@@ -320,7 +370,7 @@ class FicheController extends Controller
 
                 $this->saveFiche($form, $project, $liste_tags, $liste_medias, $liste_renders, $MediaManager, $em);
 
-                return $this->redirect($this->generateUrl('refactor_show_projects', array('id' => $id)));
+                return $this->redirect($this->generateUrl('refactor_edit_projects', array('id' => $id)));
             }
         }
 

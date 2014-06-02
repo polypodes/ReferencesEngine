@@ -10,6 +10,9 @@ all:
 	@if [ ! -d "./web/uploads/media" ]; then mkdir -p ./web/uploads/media; fi;
 	@chmod -R 0777 web/uploads
 	@php app/console assets:install web --symlink
+	@echo
+	@echo "Moving files image..."
+	@if [ -d ".web/uploads/sonatamedia" ]; then cp -a ./web/sonatamedia ./web/uploads/media; fi;
 
 help:
 	@echo
@@ -32,12 +35,6 @@ createDb:
 	@php app/console doctrine:database:create
 	@php app/console doctrine:schema:update --force
 
-set:
-	@echo
-	@echo "Moving files image..."
-	@if [ -d ".web/uploads/sonatamedia" ]; then cp -a ./web/sonatamedia ./web/uploads/media; fi;
-
-
 clear:
 	@echo
 	@echo "Resetting cache..."
@@ -58,7 +55,7 @@ done:
 	@echo
 
 
-install: createDb set clear done
+install: createDb clear done
 
 reinstall: dropDb install
 

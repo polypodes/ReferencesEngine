@@ -23,8 +23,8 @@ refactor_edit_books:
 
 
 refactor_projects:
-    path:  /projects/
-    defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:index}
+    path:  /projects/{sort}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:index, sort: null}
 refactor_remove_projects:
     path:  /projects/remove/{id}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:remove}

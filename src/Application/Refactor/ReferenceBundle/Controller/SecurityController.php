@@ -17,7 +17,28 @@ class SecurityController extends Controller
      *
      * @return FOSView
      * @throws AccessDeniedException
-     * @ApiDoc()
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Return a token",
+     *  requirements={
+     *      {
+     *          "name"="username",
+     *          "dataType"="string",
+     *          "description"="Your Username"
+     *      },
+     *      {
+     *          "name"="password",
+     *          "dataType"="string",
+     *          "description"="Your Password"
+     *      },
+     *  },
+     *  statusCodes={
+     *         200="Returned when successful",
+     *         404={
+     *           "Returned when the user is not found",
+     *         }
+     *     }
+     * )
      */
     public function postTokenCreateAction()
     {

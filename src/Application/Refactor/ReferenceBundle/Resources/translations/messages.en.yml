@@ -42,3 +42,8 @@ Yes : Yes
 NoResult: "No Result"
 Name: 'Name'
 Description: "Description"
+Ascending: "Ascending"
+Descending: "Descending"
+Recent: "Last"
+Old: "Old"
+Sort: "Sort"

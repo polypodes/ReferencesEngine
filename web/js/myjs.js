@@ -3,6 +3,32 @@
 // var $newLinkLiProject_add = $('<ul></ul>').append($addProject_addLink);
 
 
+//thumb order by date old
+
+function OrderByDateOld()
+{
+
+}
+
+function getArrayOfDataValue(value, dataclass)
+{
+  var DataArray= [];
+  var i;
+  i=0;
+  $(dataclass).each(function(){
+    DataArray[i]= $(this).data(value);
+    i++;
+  });
+  return DataArray;
+}
+
+function enter(e) {
+    if (e.keyCode == 13) {
+      $(".sub").trigger('click');
+      return false;
+    }
+}
+
 //hold press enter event
 
 function enter(e) {
@@ -357,15 +383,17 @@ $(document).ready(function () {
       if(thumbnail.css('border-width') == '1px')
       {
         nbProjectSelected++;
-        thumbnail.css('border-width', '10px');
+        thumbnail.css('border-width', '5px');
+        thumbnail.css('border-color', 'black');
         projects=setProject(projects, value);
         $(this).parents('.project').addClass('selected');
         $(this).children(':last-child').text(translate['book_delete']);
-      }else if(thumbnail.css('border-width') == '10px')
+      }else if(thumbnail.css('border-width') == '5          px')
       {
         nbProjectSelected--;
         projects=unsetProject(projects, value);
         thumbnail.css('border-width', '1px');
+        thumbnail.css('border-color', '#ddd');
         $(this).parents('.project').removeClass('selected');
         $(this).children('.glyphicon-class').text(translate['book_add']);
       }
@@ -397,6 +425,7 @@ $(document).ready(function () {
     });
   };
   $("#project_search_submit").on('click', function(){
+    data=getArrayOfDataValue('date', '.project_result');
     if($('#no_result').length){
       $('#no_result').remove();
     }
@@ -404,14 +433,14 @@ $(document).ready(function () {
             $('.project_result').hide();
             $('.selected').parent().show();
           };
-    var search= $(this).parent().find('#project_search').val();
+    var search= $(this).parent().parent().find('#project_search').val();
     var list= "";
     if (search != '') {
          var result= searchToArray(search);
       for(string in result){
-        list += '.'+result[string].toLowerCase();
+        $('.project_result[data-date="'+result[string]+'"]').show();
+      $('.project_result[data-tag="'+result[string]+'"]').show();
       }
-      $(list).show();
       if($('.project_result').is(':visible')){   
       }else{
         $('.new_project').after('<h1><p class="highlight col-lg-12" id="no_result">'+translate['noresult']+'</p></h1>');
@@ -443,7 +472,6 @@ $("#book_search_submit").on('click', function(){
         $('.book_result[data-name*="'+result[string]+'"]').show();
         list += '.'+result[string].toLowerCase();
       }
-      // $(list).show();
       if($('.book_result').is(':visible')){   
       }else{
         $('.new_book').after('<h1><p class="highlight col-lg-12" id="no_result">'+translate['noresult']+'</p></h1>');

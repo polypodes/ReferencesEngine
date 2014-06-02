@@ -19,7 +19,13 @@ class MediaType extends AbstractType
         $builder
             ->add('name', 'text')
             ->add('description', 'textarea')
-            ->add('binaryContent', 'file')
+            ->add(
+                'binaryContent', 'file', array(
+                                          'label'    => false,
+                                          'required' => false,
+                                          'attr'     => array('class' => 'providerInput')
+                                         )
+            )
             ->add(
                 'providerName', 'choice', array(
 

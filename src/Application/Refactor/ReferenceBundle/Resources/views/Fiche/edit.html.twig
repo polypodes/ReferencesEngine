@@ -82,8 +82,8 @@
 			<h3>{{ 'media.Title'|trans }}</h3>
 			<ul class="medias" data-prototype="{{ form_widget(form.medias.vars.prototype)|e }}">
 				{% for media in form.medias%}
-					<div class="container">
-						<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-3">
 							<li>
 					        	{% if media.vars.value is not empty and media.vars.value.providerReference %}
 					            	<div >

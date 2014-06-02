@@ -11,9 +11,12 @@ class RenderType extends MediaEditType
     {
         parent::buildForm($builder, $options);
         $builder
-           ->remove('providerName')
-        ->remove('media_selector')
-        ->add(
+            ->remove('providerName')
+            ->remove('media_selector')
+            ->remove('name')
+            ->remove('description')
+            ->add('binaryContent', 'file')
+            ->add(
             'render_selector', 'entity', array(
                                           'attr'        => array('class' => 'renderSelector'),
                                           'required'    => false,

@@ -8,11 +8,23 @@
 		    <div class="col-lg-6">
 		    <div class="col-lg-6">
     					<input type="text" class="form-control" id="project_search" placeholder="{{ 'project.Search'|trans }}" onkeypress="return enter(event)">
-    		</div>
-  						<span type="button" class="sub btn btn-default" id="project_search_submit">{{ 'Search'|trans }}</span>
-
-
-
+</div>
+  						<div class="btn-group">
+						  <span type="button" class="sub btn btn-default" id="project_search_submit">{{ 'Search'|trans }}</span>
+						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						    <span class="caret"></span>
+						    <span class="sr-only">Toggle Dropdown</span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu">
+						    <li style="margin-left=5px;">{{ 'Sort'|trans }}</li>
+						    <li class="divider"></li>
+						    <li><a href="{{ path('refactor_projects', {'sort': 'ASC'}) }}">{{ 'Ascending'|trans }}</a></li>
+						    <li><a href="{{ path('refactor_projects', {'sort': 'DESC'}) }}">{{ 'Descending'|trans }}</a></li>
+						    <li class="divider"></li>
+						    <li><a href="{{ path('refactor_projects', {'sort' : 'recent'}) }}">{{ 'Recent'|trans }}</a></li>
+						    <li><a href="{{ path('refactor_projects', {'sort': 'old'}) }}">{{ 'Old'|trans }}</a></li>
+						  </ul>
+						</div>
 			</div>
 			<div class="col-lg-2">
 				<form name="add_book" action="../books/add/" method="post">
@@ -38,7 +50,7 @@
 			</div>
 		</div>
 	{% for project in projects %}
-	  	<div class="col-lg-4 project_result {{project.date|date('Y')}}{% for tag in project.tags %} {{tag|lower}}{% endfor %}">
+	  	<div class="col-lg-4 project_result" data-date="{{project.date|date('Y')}}" data-tag="{% for tag in project.tags %} {{tag|lower}}{% endfor %}">
 	    	<div class="thumbnail project-mouseover project">
 	    		<input type="hidden" name="project[{{project.id}}]" value="{{project.id}}">
 	    		<div class="project-img">
