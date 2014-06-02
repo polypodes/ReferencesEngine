@@ -439,7 +439,7 @@ $(document).ready(function () {
          var result= searchToArray(search);
       for(string in result){
         $('.project_result[data-date="'+result[string]+'"]').show();
-      $('.project_result[data-tag="'+result[string]+'"]').show();
+        $('.project_result[data-tag*="'+result[string]+'"]').show();
       }
       if($('.project_result').is(':visible')){   
       }else{

@@ -41,8 +41,8 @@ class FicheRestController extends Controller
      */
     public function getFicheAction($id)
     {
-         $em      = $this->getDoctrine()->getManager();
-           $fiche = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findOneById($id);
+        $em      = $this->getDoctrine()->getManager();
+        $fiche   = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findOneById($id);
         if (!($fiche)) {
                throw $this->createNotFoundException();
         }
@@ -50,6 +50,51 @@ class FicheRestController extends Controller
         return array('fiche' => $fiche);
 
     }//end getFicheAction()
+
+        /**
+     * @return array
+     * @View(serializerGroups={"sonata_api_read", "Fiche"}, serializerEnableMaxDepthChecks=true)
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Return fiche with Tag ",
+     *  output={"class"="Application\Refactor\ReferenceBundle\Entity\Fiche", "groups"="Fiche"},
+     *  requirements={
+     *      {
+     *          "name"="tag",
+     *          "dataType"="string",
+     *          "requirement"="\w+",
+     *          "description"="Use a atg for fiche"
+     *      },
+     *  },
+     *  statusCodes={
+     *         200="Returned when successful",
+     *         403="Returned when the user is not authorized by the wsse",
+     *         404={
+     *           "Returned when the fiche is not found",
+     *         }
+     *     }
+     * )
+     *
+     */
+    public function getFichebytagAction($tag)
+    {
+        $em      = $this->getDoctrine()->getManager();
+        // $fiches   = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findByTag($tag);
+        $repository = $this->getDoctrine()->getRepository('ApplicationRefactorReferenceBundle:Fiche');
+        $query = $repository->createQueryBuilder('F')
+                            ->join('ApplicationRefactorReferenceBundle:Tag', 'T') 
+                            ->where('T.title = :tag')
+                            ->setParameter('tag', $tag)
+                            ->getQuery();
+
+        $fiche = $query->getResult();
+        if (!($fiche) || is_null($tag)) {
+               throw $this->createNotFoundException();
+        }
+
+        return array('fiches' => $fiche);
+
+    }//end getFicheByTagAction()
 
     /**
      * @return array

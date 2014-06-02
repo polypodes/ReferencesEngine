@@ -43,11 +43,7 @@ refactor_edit_projects:
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:edit}
     requirements:
         id:  \d+
-refactor_add_projects_ajax:
-    path:  /projects/add/ajax/
-    defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:add}
-    requirements:
-        _method: POST
+
 
 refactor_medias:
     path:  /medias/

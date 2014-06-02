@@ -15,7 +15,13 @@ class RenderType extends MediaEditType
             ->remove('media_selector')
             ->remove('name')
             ->remove('description')
-            ->add('binaryContent', 'file')
+            ->add(
+                'binaryContent', 'file', array(
+                                          'label'    => false,
+                                          'required' => false,
+                                          'attr'     => array('class' => 'providerInput')
+                                         )
+            )
             ->add(
             'render_selector', 'entity', array(
                                           'attr'        => array('class' => 'renderSelector'),
