@@ -36,7 +36,7 @@ class FakerGenerator
 
     public function getRandomUniqueInt($min, $max, $countmin, $countmax)
     {
-           $data_uniqueInt = [];
+           $data_uniqueInt = array();
         if ($max < $countmax) {
                return null;
         }
@@ -101,7 +101,7 @@ class FakerGenerator
            $nbMinFicheByBookSet   = 4;
            $nbMaxFicheByBookSet   = 10;
         // Create some Medias, only image, to add videos you neeed change the provider and set the BinaryContent to your url (ex:youtube)
-           $datamedia = [];
+           $datamedia = array();
         for ($i = 0; $i < $nbMediaGenerated; $i++) {
             $media = new Media;
             $image = $faker->image($dir, '1280', '960');
@@ -117,7 +117,7 @@ class FakerGenerator
         }
 
         //Create some tags
-           $datatag = [];
+           $datatag = array();
         for ($i = 0; $i < $nbTagGenerated; $i++) {
             $tag = new Tag();
             $tag->getFake();
@@ -127,7 +127,7 @@ class FakerGenerator
         }
 
         //Create some Fiches
-        $datafiche = [];
+        $datafiche = array();
         for ($i = 0; $i < $nbFicheGenerated; $i++) {
             $fiche = new Fiche();
             $fiche->getFake();
