@@ -8,6 +8,8 @@ MIT licensed by [Les Polypodes](http://www.lespolypodes.com) (Nantes, France)
 
 ## Install
 
+Current working branch is `dev` !
+
 ### Configure Vhost & domain
 
 Use / adapt the `./doc/apache2.vhost.conf` file,
