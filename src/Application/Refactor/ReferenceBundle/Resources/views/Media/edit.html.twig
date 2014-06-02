@@ -9,6 +9,9 @@
 			<div class="jumbotron col-lg-12" style="padding:20px;">
 			<div class="col-lg-6">
 	      		<p>{{ 'Name'|trans }} : {{form_widget(form.name)}}</p>
+	      		<a id ="single_1" rel="group" href="{% path media, 'reference' %}">
+						<img id ="Main_image"src="{% path media, 'big' %}" >
+				</a>
 	      		</div>
 	      		<div class="col-lg-6">
 	      		<p>{{ 'Description'|trans }} :</p>

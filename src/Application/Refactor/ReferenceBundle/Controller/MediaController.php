@@ -95,6 +95,7 @@ class MediaController extends Controller
             'ApplicationRefactorReferenceBundle:Media:edit.html.twig',
             array(
              'form' => $form->createView(),
+             'media' => $media
             )
         );
 
