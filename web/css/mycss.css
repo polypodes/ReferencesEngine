@@ -113,4 +113,6 @@ h2
 .img
 {
 	margin-left: 15px;
+	padding: 0px;
+	overflow: scroll;
 }

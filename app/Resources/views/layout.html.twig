@@ -29,8 +29,25 @@
             <li {% block project_active %}{% endblock %} ><a href="{{ path('refactor_projects')}}">{{ 'Projects'|trans }}</a></li>
             <li {% block book_active %}{% endblock %} ><a href="{{ path('refactor_books')}}">{{ 'Books'|trans }}</a></li>
             <li {% block media_active %}{% endblock %} ><a href="{{ path('refactor_medias')}}">{{ 'Media'|trans }}</a></li>
+            <li><a href="{{ path('nelmio_api_doc_index')}}">API</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.username }}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                      <a href="{{ path('fos_user_security_logout') }}">{{ 'Disconnection'|trans }}</a>
+                  </li> 
+                  <li>   
+                      <a href="{{ path('fos_user_profile_edit') }}">{{ 'Profile'|trans }}</a>
+                  </li>
+                
+              </ul>
+              
+            </li>
+            {% endif %}
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'Language'|trans }}<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -53,6 +70,7 @@
     <div class="container">
       {% block body %}
       {% endblock %}
+    </div>
     </div>
     <div id ='translate' data-translate-suppress="{{ 'Suppress'|trans }}" data-translate-tag-add="{{ 'tag.Add'|trans }}" data-translate-media-add="{{ 'media.Add'|trans }}" data-translate-render-add="{{ 'render.Add'|trans }}" data-translate-project-choose="{{ 'project.Choose'|trans }}" data-translate-yes="{{ 'Yes'|trans }}" data-translate-project-notdeleted="{{ 'project.NotDeleted'|trans }}" data-translate-book-add="{{ 'book.Add'|trans }}" data-translate-book-delete="{{ 'book.Delete'|trans }}" data-translate-noresult="{{ 'NoResult'|trans }}" data-translate-cancel="{{ 'Cancel'|trans }}" </div>
     {% block javascripts %}

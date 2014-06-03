@@ -135,7 +135,7 @@ class Fiche
     private $tags;
 
      /**
-      * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"}, inversedBy="renders")
+      * @ORM\ManyToMany(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"persist"})
       * @ORM\JoinTable(name="reference__fiche_render")
       * @Groups({"sonata_api_read"})
       * @Expose

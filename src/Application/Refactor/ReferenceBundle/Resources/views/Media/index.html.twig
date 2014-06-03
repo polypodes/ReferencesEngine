@@ -14,13 +14,14 @@
 	  	<div class="col-lg-4">
 	    	<div class="thumbnail" style="text-align:center;">
 	    	<div class="caption">
-
+	    		<p>
 	    		<h4 class="col-md-6">{{ media.name}}</h4>
 	    		<a href="{{ path('refactor_edit_medias', {'id': media.id}) }}" class="btn btn-info col-md-2 col-md-offset-3" role="button">
 			        			<span class="glyphicon glyphicon-pencil"></span>
 		          </a>
 
 	    		</div>
+	    		</p>
 	    		<p>
 	    		<div class="img">
 	    			{% thumbnail media, 'thumbnail' with {'class': 'img-polaroid media-object'} %}

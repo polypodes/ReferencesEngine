@@ -29,6 +29,7 @@ security:
                 failure_path:   null
             logout:
                 path:           /admin/logout
+                invalidate_session: false
             anonymous:          true
         wsse_secured: #firewall set up tu use wsse authentification in api
             pattern:   /api/get/.*
@@ -45,7 +46,8 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   null
-            logout:             true
+            logout:             
+                invalidate_session: false
             anonymous:          true
            #anonymous: ~
             #http_basic:
