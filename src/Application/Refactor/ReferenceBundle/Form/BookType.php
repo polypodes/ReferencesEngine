@@ -22,7 +22,7 @@ class BookType extends AbstractType
         $builder
             ->add('title')
             ->add('clientName')
-            ->add('projectName')
+            ->add('projectName', 'url')
             ->add('date')
             ->add(
                 'published', 'checkbox', array(

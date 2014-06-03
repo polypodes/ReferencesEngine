@@ -32,7 +32,7 @@
 	  	<div class="col-xs-6 col-md-3 book_result {{book.clientName|lower}}" data-name="{{book.clientName|lower}}">
 	    	<div class="thumbnail">
 	      		<div class="caption">
-	        		<h4>{{book.title}}<p><small><div class="testname">{{book.clientName}}</div></small></h4></p>
+	        		<h4>{{book.title}}<p><small><div class="testname">{{book.clientName}}</div></small></h4><a href="{{book.projectName}}" style="word-wrap: break-word;">{{book.projectName}}</a></p>
 	        		<p>
 	        			<a href="{{ path('refactor_edit_books', {'id': book.id}) }}" class="btn label-warning" role="button">
 		        		<span class="glyphicon glyphicon-edit"></span>
