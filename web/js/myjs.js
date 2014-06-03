@@ -297,6 +297,7 @@ $(document).ready(function () {
 		var self = $(this);
 		var id = $(this).data('id');
 		var title = $(this).data('title');
+    var url = $(this).data('url');
 		noty({
 			text        : translate['suppress']+' : "'+title+'" ?',
 			type        : self.data('type'),
@@ -305,7 +306,7 @@ $(document).ready(function () {
 			buttons     : [
 				{addClass: 'btn btn-primary', text: translate['yes'], onClick: function ($noty) {
 					$noty.close();
-					document.location.href=window.location.pathname+'/remove/'+id;
+					document.location.href=url;
 				}
 				},
 				{addClass: 'btn btn-danger', text: translate['cancel'], onClick: function ($noty) {

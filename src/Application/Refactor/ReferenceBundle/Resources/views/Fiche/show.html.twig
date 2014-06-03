@@ -1,5 +1,6 @@
 
 {% extends "::layout.html.twig" %}
+{% block project_active %}class="active"{% endblock %}
 {% block body %}
 <p>
 	<h2>
@@ -43,11 +44,11 @@
 		<div class="jumbotron col-lg-12" style="padding:20px;">
 			{% for render in project.renders %}
 				<div class="col-xs-6 col-md-3">
-					<div class="thumbnail">
-						<a class="fancybox" rel="group" href="{% path render, 'reference' %}" title="{{render.name }}">
+					<a class="fancybox" rel="group" href="{% path render, 'reference' %}" title="{{render.name }}">
+						<div class="thumbnail">
 							<img src="{% path render, 'small' %}">
-						</a>
-					</div>
+						</div>
+					</a>
 				</div>
 			{% endfor %}
 		</div>

@@ -38,7 +38,7 @@
 		        		<span class="glyphicon glyphicon-edit"></span>
 		        		<span class="glyphicon-class" style="color:white;">{{ 'Change'|trans }}</span>
 	          			</a>
-			        	<a class="label-danger btn btn-remove" role="button" data-id = "{{book.id}}" data-title="{{book.title}}">
+			        	<a class="label-danger btn btn-remove" role="button" data-url="{{ path('refactor_remove_books', {'id': book.id}) }}" data-id = "{{book.id}}" data-title="{{book.title}}">
 			        		<span class="glyphicon glyphicon-remove"></span>
 			        		<span class="glyphicon-class" style="color:white;" data-layout="center" data-type="confirm">{{ 'Suppress'|trans }}</span>
 			        	</a>

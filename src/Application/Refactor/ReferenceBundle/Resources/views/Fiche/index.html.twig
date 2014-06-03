@@ -75,7 +75,7 @@
 		          			</a>
 		          			<div class="col-md-4"> </div>
 
-				        	<a class="label-danger btn btn-remove col-md-4 btn-sm" role="button" data-id = "{{project.id}}" data-title="{{project.title}}">
+				        	<a class="label-danger btn btn-remove col-md-4 btn-sm" role="button" data-url="{{ path('refactor_remove_projects', {'id': project.id}) }}" data-id = "{{project.id}}" data-title="{{project.title}}">
 				        		<span class="glyphicon glyphicon-remove"></span>
 				        		<span class="glyphicon-class" style="color:white;" data-layout="center" data-type="confirm">{{ 'Suppress'|trans }}</span>
 				        	</a>

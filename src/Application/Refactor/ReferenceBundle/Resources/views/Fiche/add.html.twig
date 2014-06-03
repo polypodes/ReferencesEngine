@@ -1,4 +1,5 @@
 {% extends "::layout.html.twig" %}
+{% block project_active %}class="active"{% endblock %}
 {% block body %}
 {{ form_start(form, {'method': 'POST', 'attr' : {"class":"dropzone"}}) }}
 {{ form_errors(form) }}

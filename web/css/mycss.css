@@ -110,6 +110,12 @@ h2
 {
 	margin-top: 10px;
 }
+textarea
+{
+	margin: auto 0px;
+	width: 100%;
+	max-width: 100%;
+}
 .img
 {
 	margin-left: 15px;
