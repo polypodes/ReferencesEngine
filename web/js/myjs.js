@@ -303,9 +303,9 @@ $(document).ready(function () {
 			dismissQueue: true,
 			layout      : self.data('layout'),
 			buttons     : [
-				{addClass: 'btn btn-primary', text: 'Oui', onClick: function ($noty) {
+				{addClass: 'btn btn-primary', text: translate['yes'], onClick: function ($noty) {
 					$noty.close();
-					document.location.href='./remove/'+id;
+					document.location.href=window.location.pathname+'/remove/'+id;
 				}
 				},
 				{addClass: 'btn btn-danger', text: translate['cancel'], onClick: function ($noty) {
