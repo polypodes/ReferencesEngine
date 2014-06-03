@@ -29,9 +29,9 @@
 							</span>
 						</h3>
 					</p>
-				<p style="max-width=250px;">{{ 'Content'|trans }} : {{form_widget(form.content, {'attr' : { 'style' :'width:250px;max-width:250px;min-height:250px;'}})}}</p>
 				</div>
 			</div>
+			<p>{{ 'Content'|trans }} : {{form_widget(form.content)}}</p>
 		</div>
 		<div class = "jumbotron col-6 col-sm-6 col-lg-12">
 			<ul class="renders" data-prototype="{{ form_widget(form.renders.vars.prototype)|e }}">

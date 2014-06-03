@@ -33,7 +33,7 @@
 	<nobreak>
 		<h1>Content :</h1>
 		<div class="content">
-			{{project.content}}
+			<p>{{project.content | format_text(project.contentFormatter) | raw}}</p>
 		</div>
 	</nobreak>
 	<nobreak>
@@ -42,7 +42,7 @@
 			{% for render in project.renders %}
 				<span class ="render">
 					<img src=".{% path render, 'small' %}">
-					<a href="{{ app.request.host }}{{ path('sonata_media_download', {'id': render|sonata_urlsafeid }) }}">{{render.name }}</a>
+					<!-- <a href="{#{ app.request.host }#}{#{ path('sonata_media_download', {'id': render|sonata_urlsafeid }) }#}"> -->{{render.name }}<!-- </a> -->
 					<!-- <em>{#{render.name }#}</em> -->
 				</span>
 			{% endfor %}
@@ -54,7 +54,7 @@
 			{% for media in project.medias %}
 				<span class ="media">
 					<img src=".{% path media, 'small' %}" >
-					<a href="{{ app.request.host }}{{ path('sonata_media_download', {'id': media|sonata_urlsafeid }) }}">{{media.name }}</a>
+					<!-- <a href="{#{ app.request.host }#}{#{ path('sonata_media_download', {'id': media|sonata_urlsafeid }) }#}"> -->{{media.name }}<!-- </a> -->
 
 				</span>
 			{% endfor %}

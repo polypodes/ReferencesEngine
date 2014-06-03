@@ -555,7 +555,8 @@ class Fiche
         $this->setTitle2($faker->sentence($nbWords = 6));
         $this->setDate($faker->dateTime($max       = 'now') );
         $this->setContent($faker->text);
-        $this->setRawContent($faker->text);
+        $this->setContentFormatter('text');
+        $this->setRawContent($this->getContent());
         $this->setContentFormatter('null');
         $this->setPublished(true);
         $this->prePersist();

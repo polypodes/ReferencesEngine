@@ -17,11 +17,31 @@ class FicheType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $ckeditor_toolbar_icons = array(
+            1 => array('Bold', 'Italic', 'Underline',
+                '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
+                '-', 'Undo', 'Redo',
+                '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+                '-', 'Blockquote',
+                '-', 'Image', 'Link', 'Unlink', 'Table'),
+            2 => array('Maximize', 'Source')
+        );
         $builder
             ->add('title')
             ->add('title2')
             ->add('date', 'date', array("attr" => array('class'=>'form-control')))
-            ->add('content')
+            ->add('content', 'sonata_formatter_type', array(
+                'event_dispatcher' => $builder->getEventDispatcher(),
+                'format_field'   => 'contentFormatter',
+                'source_field'   => 'rawContent',
+                'source_field_options'      => array(
+                    'attr' => array('class' => 'span10', 'rows' => 20)
+                ),
+                'listener'       => true,
+                'target_field'   => 'content',
+                'ckeditor_context' => 'default',
+                'ckeditor_toolbar_icons' => $ckeditor_toolbar_icons,
+            ))
             ->add('published', 'checkbox', array('required' => false))
             ->add(
                 'image', 'entity', array(

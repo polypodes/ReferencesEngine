@@ -1,3 +1,4 @@
+
 {% extends "::layout.html.twig" %}
 {% block body %}
 <p>
@@ -34,9 +35,9 @@
 					</h3>
 					</p>
 					<p>{{project.date|date("d M Y")}}</p>
-					<p>{{project.content}}</p>
 				</div>
 			</div>
+			<p>{{project.content | format_text(project.contentFormatter) | raw}}</p>
 		</div>
 		{% if project.renders[0] is defined %}
 		<div class="jumbotron col-lg-12" style="padding:20px;">
