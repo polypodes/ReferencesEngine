@@ -388,7 +388,7 @@ $(document).ready(function () {
         projects=setProject(projects, value);
         $(this).parents('.project').addClass('selected');
         $(this).children(':last-child').text(translate['book_delete']);
-      }else if(thumbnail.css('border-width') == '5          px')
+      }else if(thumbnail.css('border-width') == '5px')
       {
         nbProjectSelected--;
         projects=unsetProject(projects, value);

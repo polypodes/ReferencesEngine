@@ -53,11 +53,11 @@
 	  	<div class="col-lg-4 project_result" data-date="{{project.date|date('Y')}}" data-tag="{% for tag in project.tags %} {{tag|lower}}{% endfor %}">
 	    	<div class="thumbnail project-mouseover project">
 	    		<input type="hidden" name="project[{{project.id}}]" value="{{project.id}}">
-	    		<div class="project-img" style="background-image = url({% path project.image, 'thumbnail' %})">
+	    		<div class="project-img" style="background-image : url({% path project.image, 'thumbnail' %});" >
 	    			{#% media project.image, 'thumbnail' %#}
 	    		</div>
 	      		<div class="caption project-btn">
-	      			<h2>{{project.title}}
+	      			<h2 onClick="window.location.href='{{ path('refactor_show_projects', {'id': project.id}) }}';" style="cursor: pointer;">{{project.title}}
 	      				<div>
 	      					<small>{{project.title2}}</small>
 	        			</div>

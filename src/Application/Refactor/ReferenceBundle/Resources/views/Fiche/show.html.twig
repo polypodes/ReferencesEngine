@@ -15,28 +15,42 @@
 		</div>
 	</h2>
 </p>
-<div class="jumbotron col-lg-9" style="padding:20px;">
-	<div class="container" style="padding:0px;">
+<div class="container col-lg-12">
+	<div class="col-lg-9">
+		<div class="jumbotron col-lg-12" style="padding:20px;">
+			<div class="container" style="padding:0px;">
 
-		<div class="col-6 col-sm-6 col-lg-8">
-			<a id ="single_1" rel="group" href="{% path project.image, 'reference' %}" title="{{project.title }}">
-	<img id ="Main_image" src="{% path project.image, 'big' %}" ></a>
+				<div class="col-6 col-sm-6 col-lg-8">
+					<a id ="single_1" rel="group" href="{% path project.image, 'reference' %}" title="{{project.title }}">
+					<img id ="Main_image" src="{% path project.image, 'big' %}" ></a>
+				</div>
+				<div class="col-6 col-sm-6 col-lg-4">
+					<p>
+					<h3>
+						<span class = "value-form">
+								{{project.title2}}
+						</span>
+				<!-- 		<a href="#" class="btn btn-default btn-xs btn-edit" role="button"><span class="glyphicon glyphicon-pencil"></span></a> -->
+					</h3>
+					</p>
+					<p>{{project.date|date("d M Y")}}</p>
+					<p>{{project.content}}</p>
+				</div>
+			</div>
 		</div>
-		<div class="col-6 col-sm-6 col-lg-4">
-			<p>
-			<h3>
-				<span class = "value-form">
-						{{project.title2}}
-				</span>
-		<!-- 		<a href="#" class="btn btn-default btn-xs btn-edit" role="button"><span class="glyphicon glyphicon-pencil"></span></a> -->
-			</h3>
-			</p>
-			<p>{{project.date|date("d M Y")}}</p>
-			<p>{{project.content}}</p>
+		<div class="jumbotron col-lg-12" style="padding:20px;">
+			{% for render in project.renders %}
+				<div class="col-xs-6 col-md-3">
+					<div class="thumbnail">
+						<a class="fancybox" rel="group" href="{% path render, 'reference' %}" title="{{render.name }}">
+							<img src="{% path render, 'small' %}">
+						</a>
+					</div>
+				</div>
+			{% endfor %}
 		</div>
 	</div>
-</div>
-<div class="col-6 col-sm-6 col-lg-3">
+	<div class="col-6 col-sm-6 col-lg-3">
 	<p>
 		<div class="checkbox">
 	   		<label>
@@ -76,22 +90,5 @@
 
 	</div>
 </div>
-
-<div class="row">
-	<div class="jumbotron col-lg-9" style="padding:20px;">
-		{% for render in project.renders %}
-			<div class="col-xs-6 col-md-3">
-				<div class="thumbnail">
-					<a class="fancybox" rel="group" href="{% path render, 'reference' %}" title="{{render.name }}">
-						<img src="{% path render, 'small' %}">
-					</a>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
-</div>
-
-
-
 
 {% endblock %}

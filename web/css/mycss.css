@@ -5,7 +5,11 @@ body { padding-top: 70px; }
 }
 .project-img
 {
-	margin: 10px;
+	margin: auto;
+	background-repeat: no-repeat; 
+	margin-top: 10px;
+	height: 240px;
+	width: 320px;
 }
 .project-img:hover
 {
@@ -28,7 +32,7 @@ ul
 {
 	list-style-type: none;
 	margin:0;
-padding:0;
+	padding:0;
 }
 .ui-autocomplete {
 	position: absolute;
