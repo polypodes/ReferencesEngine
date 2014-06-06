@@ -64,18 +64,23 @@ function equalHeight(group) {
     tallest = 0;    
     group.each(function() {       
         thisHeight = $(this).height();
-        thisImgHeight= $(this).find('.img').find('.media-object').height();
-        $(this).find('.img').width(320);
+        thisImg = $(this).find('.img')
+        thisImgHeight= thisImg.find('.media-object').height();
+        // thisImg.width(320);
+        if(thisImg.parent().width() < 330) {
+          thisImg.css('width', '100%');
+        }
         if(thisHeight > tallest) { 
-            if (thisHeight > 450) {
-                thisHeight=450;
-            };      
+            // if (thisHeight > 450) {
+            //     thisHeight=450;
+            // };      
             tallest = thisHeight;       
         } 
-        if(thisImgHeight < 320){
-          $(this).find('.img').css('height',thisImgHeight);
-        } else{
-          $(this).find('.img').css('height', '320');
+        if(thisImgHeight > 320){
+        console.log(thisImgHeight);
+        //   $(this).find('.img').css('height',thisImgHeight);
+        // } else{
+        //   $(this).find('.img').css('height', '320');
         }
     });    
     group.each(function() { $(this).height(tallest); });

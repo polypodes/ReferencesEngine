@@ -124,35 +124,38 @@ class FicheController extends Controller
 
     public function indexAction($sort)
     {
-        $repository = $this->getDoctrine()->getRepository('ApplicationRefactorReferenceBundle:Fiche');
-        if ($sort == "old"){
-            $query = $repository->createQueryBuilder('F')
-                                ->orderBy('F.date', 'ASC')
+        if ($sort != null){
+            $repository = $this->getDoctrine()->getRepository('ApplicationRefactorReferenceBundle:Fiche');
+
+            if ($sort == "old"){
+                $query = $repository->createQueryBuilder('F')
+                                    ->orderBy('F.date', 'ASC')
+                                    ->getQuery();
+
+                $projects = $query->getResult();
+
+            } elseif ($sort == "recent"){
+                $query = $repository->createQueryBuilder('F')
+                                ->orderBy('F.date', 'DESC')
                                 ->getQuery();
 
-            $projects = $query->getResult();
+                $projects = $query->getResult();
 
-        } elseif ($sort == "recent"){
-            $query = $repository->createQueryBuilder('F')
-                            ->orderBy('F.date', 'DESC')
-                            ->getQuery();
+            } elseif ($sort == "asc"){
+                $query = $repository->createQueryBuilder('F')
+                                ->orderBy('F.title', 'ASC')
+                                ->getQuery();
 
-            $projects = $query->getResult();
+                $projects = $query->getResult();
 
-        } elseif ($sort == "asc"){
-            $query = $repository->createQueryBuilder('F')
-                            ->orderBy('F.title', 'ASC')
-                            ->getQuery();
+            } elseif ($sort == "desc"){
+                $query = $repository->createQueryBuilder('F')
+                                ->orderBy('F.title', 'DESC')
+                                ->getQuery();
 
-            $projects = $query->getResult();
+                $projects = $query->getResult();
 
-        } elseif ($sort == "desc"){
-            $query = $repository->createQueryBuilder('F')
-                            ->orderBy('F.title', 'DESC')
-                            ->getQuery();
-
-            $projects = $query->getResult();
-
+            } 
         } else {
             $em    = $this->getDoctrine()->getManager();
             $projects = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findAll();

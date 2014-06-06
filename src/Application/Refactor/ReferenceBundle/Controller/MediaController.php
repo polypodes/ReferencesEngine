@@ -24,7 +24,7 @@ class MediaController extends Controller
      */
     public function indexAction()
     {
-           $em  = $this->getDoctrine()->getManager();
+        $em  = $this->getDoctrine()->getManager();
         $medias = $em->getRepository('ApplicationSonataMediaBundle:Media')->findAll();
 
         return $this->render(

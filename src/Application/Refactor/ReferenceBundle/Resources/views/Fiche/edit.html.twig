@@ -23,7 +23,6 @@
 					<a id ="single_1" rel="group" href="{% path image, 'reference' %}">
 						<img id ="Main_image"src="{% path image, 'big' %}" >
 					</a>
-					{{ 'Image'|trans }} : {{form_widget(form.image)}} {{form_widget(form.image_input)}}
 				</div>
 				<div class="col-6 col-sm-6 col-lg-4">
 					<p>
@@ -33,6 +32,15 @@
 							</span>
 						</h3>
 					</p>
+					<div class="col-lg-12">
+					{{ 'Image'|trans }} : {{form_widget(form.image)}} 
+				</div>
+				<div class="inputWrapper col-lg-12">
+					<p style="margin-bottom:20px;">
+					{{form_widget(form.image_input)}}
+					</p>
+					Drop Main Image here :
+				</div>
 				</div>
 			</div>
 			<p>{{ 'Content'|trans }} : {{form_widget(form.content)}}</p>

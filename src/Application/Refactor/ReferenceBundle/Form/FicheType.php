@@ -35,7 +35,7 @@ class FicheType extends AbstractType
                 'format_field'   => 'contentFormatter',
                 'source_field'   => 'rawContent',
                 'source_field_options'      => array(
-                    'attr' => array('class' => 'span10', 'rows' => 20)
+                    'attr' => array('class' => 'span10', 'rows' => 20, 'style' => 'width:100%;max-width:100%')
                 ),
                 'listener'       => true,
                 'target_field'   => 'content',
@@ -57,6 +57,7 @@ class FicheType extends AbstractType
             // ))
             ->add(
                 'image_input', 'file', array(
+                'attr'        => array('class' => 'drop_zone'),
                 'mapped' => false,
                 'label' => false,
                 'required' => false

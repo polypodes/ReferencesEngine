@@ -2,6 +2,7 @@ body { padding-top: 70px; }
 .item-container
 {
 	padding-top: 20px;
+	margin: auto;
 }
 .project-img
 {
@@ -116,9 +117,45 @@ textarea
 	width: 100%;
 	max-width: 100%;
 }
+.media-object
+{
+	margin: auto;
+
+}
 .img
 {
-	margin-left: 15px;
+	margin: auto;
+	width: 100%;
+	max-height: 320px;
 	padding: 0px;
 	overflow: scroll;
+}
+.inputWrapper {
+    border: 2px dashed #bbb;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 25px;
+	text-align: center;
+	margin-top: 20px;
+	font: 20pt bold 'Vollkorn';
+	color: #bbb;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+.drop_zone {
+    cursor: pointer;
+    font-size: 20px;
+    height: 500%;
+    width:500%;
+    padding-top: 100px;
+    position:absolute;
+    top: -95px;
+
+    left: -150px;
+   /* z-index: 99;
+    opacity: 0;
+    -moz-opacity: 0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0)*/
 }
