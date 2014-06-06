@@ -284,6 +284,8 @@ $(document).ready(function () {
       projects[i] = new Array(2);
   }
   var nbProjectSelected=0;
+
+  //fancybox is a js plugin to have an apercu of an image 
 	$(".fancybox").fancybox({
 		helpers: {
               title : {
@@ -298,12 +300,14 @@ $(document).ready(function () {
               }
           }
       });
+  //Action to delete project/book
 	$('.btn-remove').on('click',function () {
 		var self = $(this);
 		var id = $(this).data('id');
 		var title = $(this).data('title');
     var url = $(this).data('url');
 		noty({
+      //set messages
 			text        : translate['suppress']+' : "'+title+'" ?',
 			type        : self.data('type'),
 			dismissQueue: true,
@@ -311,18 +315,19 @@ $(document).ready(function () {
 			buttons     : [
 				{addClass: 'btn btn-primary', text: translate['yes'], onClick: function ($noty) {
 					$noty.close();
-					document.location.href=url;
+					document.location.href=url;//send to delete action
 				}
 				},
 				{addClass: 'btn btn-danger', text: translate['cancel'], onClick: function ($noty) {
 					$noty.close();
-					noty({force: true, text: translate['project_notdeleted'], type: 'error', layout: self.data('layout')});
+					noty({force: true, text: translate['project_notdeleted'], type: 'error', layout: self.data('layout')});//Cancel
 				}
 				}
 			]
 		});
 		return false;
 	});
+  //project index
 	$( ".project-mouseover" )
   .on( "mouseenter", function() {
     	$(this).children(".project-btn").show();
@@ -334,7 +339,7 @@ $(document).ready(function () {
   });
 
 
-
+//hold new tags
 	collectionTagsHolder.append($newLinkLiTag);
   $addTagLink.on('click', function(e) {
     e.preventDefault();
@@ -343,7 +348,7 @@ $(document).ready(function () {
   collectionTagsHolder.find('li.input').each(function() {
     addFormDeleteLink($(this));
   });
-
+  //hold new projects
   collectionProjectsHolder.append($newLinkLiProject);
   $addProjectLink.on('click', function(e) {
     e.preventDefault();
@@ -353,7 +358,7 @@ $(document).ready(function () {
     addFormDeleteLink($(this));
   });
 
-
+  //hold new medias
   collectionMediasHolder.append($newLinkLiMedia);
   $addMediaLink.on('click', function(e) {
     e.preventDefault();
@@ -362,6 +367,7 @@ $(document).ready(function () {
   collectionMediasHolder.find('li').each(function() {
     addFormDeleteLink($(this));
   });
+  //hold new renders
   collectionRendersHolder.append($newLinkLiRender);
   $addRenderLink.on('click', function(e) {
     e.preventDefault();
@@ -370,6 +376,7 @@ $(document).ready(function () {
   collectionRendersHolder.find('li').each(function() {
     addFormDeleteLink($(this));
   });
+  //hold type of input for the provider
   $(".providerSelector").each(function(){
       $(this).change(function(){
         var valueSelected=$('option:selected', this).text();
@@ -384,6 +391,7 @@ $(document).ready(function () {
         });
   });
   var i = 0;
+  //manage select of project in index of projects
   $(".selector").each(function(){
     var value = $(this).parent().parent().parent().find(':hidden').val();
     projects[i]= {
@@ -423,6 +431,7 @@ $(document).ready(function () {
     })
 
   })
+  //send to add book action
   $(".addBook").on('click', function(){
   for (var i = 0; i < projects.length; i++) {
     if(projects[i]['project_select'] == true)
@@ -440,6 +449,7 @@ $(document).ready(function () {
     }
     });
   };
+  //search at project index
   $("#project_search_submit").on('click', function(){
     data=getArrayOfDataValue('date', '.project_result');
     if($('#no_result').length){
@@ -456,6 +466,9 @@ $(document).ready(function () {
       for(string in result){
         $('.project_result[data-date="'+result[string]+'"]').show();
         $('.project_result[data-tag*="'+result[string]+'"]').show();
+        //if you want to add a new type of search :
+        //1. add an attr like data-value={{project.value}} inside the project index at the div of .project result
+        //2. add a line here $('.project_result[data-value*="'+result[string]+'"]').show(); and suppress "*" if you want a strict search
       }
       if($('.project_result').is(':visible')){   
       }else{
