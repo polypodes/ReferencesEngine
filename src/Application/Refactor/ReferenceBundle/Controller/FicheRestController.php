@@ -78,14 +78,15 @@ class FicheRestController extends Controller
      */
     public function getFichebytagAction($tag)
     {
-        $em      = $this->getDoctrine()->getManager();
-        // $fiches   = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findByTag($tag);
-        $repository = $this->getDoctrine()->getRepository('ApplicationRefactorReferenceBundle:Fiche');
-        $query = $repository->createQueryBuilder('F')
-                            ->join('ApplicationRefactorReferenceBundle:Tag', 'T') 
-                            ->where('T.title = :tag')
+        $em    = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+        $query = $qb->select('F')
+                            ->from('ApplicationRefactorReferenceBundle:Fiche', 'F')
+                            ->innerJoin('F.tags', 't','WITH', 't.title=:tag') 
                             ->setParameter('tag', $tag)
                             ->getQuery();
+
+        $fiche = $query->getResult();
 
         $fiche = $query->getResult();
         if (!($fiche) || is_null($tag)) {
