@@ -2,6 +2,8 @@
 
 How-to: http://polypodes.github.io/ReferencesEngine/
 
+## Current work: [dev branch](https://github.com/polypodes/ReferencesEngine/tree/dev) 
+
 ## Summary
 
 References Engine is a Symfony2-based References Books Generator.  
