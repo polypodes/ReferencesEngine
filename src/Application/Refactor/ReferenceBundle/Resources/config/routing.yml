@@ -9,11 +9,11 @@ refactor_remove_books:
 refactor_add_books:
     path:  /books/add/
     defaults: { _controller: ApplicationRefactorReferenceBundle:Book:add}
-refactor_show_books:
-    path:  /books/show/{id}
-    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:show}
-    requirements:
-        id:  \d+
+#refactor_show_books:
+#    path:  /books/show/{id}
+#    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:show}
+#    requirements:
+#        id:  \d+
 refactor_edit_books:
     path:  /books/edit/{id}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Book:edit}
