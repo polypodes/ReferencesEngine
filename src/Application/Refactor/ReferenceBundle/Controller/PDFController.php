@@ -81,7 +81,7 @@ class PDFController extends Controller
             'refactor_pdf_books', array('id' => $id),
             true
         );
-        $book     = $em->getRepository('ApplicationRefactorReferenceBundle:book')->findOneById($id);
+        $book     = $em->getRepository('ApplicationRefactorReferenceBundle:Book')->findOneById($id);
         $css      = "<style type='text/css'>".file_get_contents('css/mypdfcss.css').'</style>';
         $html     = file_get_contents($url);
         $html     = $this->bookAction($id);
