@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Refactor\ReferenceBundle\Form;
+namespace Application\Refactor\ReferenceBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,22 +21,21 @@ class MediaType extends AbstractType
             ->add('description', 'textarea')
             ->add(
                 'binaryContent', 'file', array(
-                                          'label'    => false,
-                                          'required' => false,
-                                          'attr'     => array('class' => 'providerInput')
-                                         )
+                    'label'    => false,
+                    'required' => false,
+                    'attr'     => array('class' => 'providerInput')
+                )
             )
             ->add(
                 'providerName', 'choice', array(
-
-                                           'choices' => array(
-                                                         'sonata.media.provider.image'       => 'Image',
-                                                         'sonata.media.provider.youtube'     => 'Youtube',
-                                                         'sonata.media.provider.dailymotion' => 'Dailymotion',
-                                                         'sonata.media.provider.vimeo'       => 'Vimeo',
-                                                         'sonata.media.provider.file'        => 'File',
-                                                        )
-                                          )
+                    'choices' => array(
+                        'sonata.media.provider.image'       => 'Image',
+                        'sonata.media.provider.youtube'     => 'Youtube',
+                        'sonata.media.provider.dailymotion' => 'Dailymotion',
+                        'sonata.media.provider.vimeo'       => 'Vimeo',
+                        'sonata.media.provider.file'        => 'File',
+                    )
+                )
             );
 
     }//end buildForm()

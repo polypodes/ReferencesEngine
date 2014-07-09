@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Refactor\ReferenceBundle\Form;
+namespace Application\Refactor\ReferenceBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,15 +30,18 @@ class FicheType extends AbstractType
             ->add('title')
             ->add('title2')
             ->add('date', 'date', array("attr" => array('class'=>'form-control')))
+            ->add('projectUrl', 'url', array(
+                'required' => false
+            ))
             ->add('content', 'sonata_formatter_type', array(
                 'event_dispatcher' => $builder->getEventDispatcher(),
-                'format_field'   => 'contentFormatter',
-                'source_field'   => 'rawContent',
+                'format_field' => 'contentFormatter',
+                'source_field' => 'rawContent',
                 'source_field_options'      => array(
                     'attr' => array('class' => 'span10', 'rows' => 20, 'style' => 'width:100%;max-width:100%')
                 ),
-                'listener'       => true,
-                'target_field'   => 'content',
+                'listener' => true,
+                'target_field' => 'content',
                 'ckeditor_context' => 'default',
                 'ckeditor_toolbar_icons' => $ckeditor_toolbar_icons,
             ))
@@ -57,38 +60,35 @@ class FicheType extends AbstractType
             // ))
             ->add(
                 'image_input', 'file', array(
-                'attr'        => array('class' => 'drop_zone'),
-                'mapped' => false,
-                'label' => false,
-                'required' => false
+                    'attr' => array('class' => 'drop_zone'),
+                    'mapped' => false,
+                    'label' => false,
+                    'required' => false
                 )
             )
 
             ->add(
                 'tags', 'collection', array(
-                'type' => new TagType(),
-                'allow_add' => true,
-                'by_reference' => false,
-                'allow_delete' =>true,
-
+                    'type' => new TagType(),
+                    'allow_add' => true,
+                    'by_reference' => false,
+                    'allow_delete' =>true,
                 )
             )
             ->add(
                 'medias', 'collection', array(
-                'type' => new MediaFicheType(),
-                'allow_add' => true,
-                'by_reference' => false,
-                'allow_delete' =>true,
-
+                    'type' => new MediaFicheType(),
+                    'allow_add' => true,
+                    'by_reference' => false,
+                    'allow_delete' =>true,
                 )
             )
             ->add(
                 'renders', 'collection', array(
-                'type' => new RenderType(),
-                'allow_add' => true,
-                'by_reference' => false,
-                'allow_delete' =>true,
-
+                    'type' => new RenderType(),
+                    'allow_add' => true,
+                    'by_reference' => false,
+                    'allow_delete' =>true,
                 )
             )
             // ->add('image', 'choice', array(
@@ -141,7 +141,7 @@ class FicheType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-            'data_class' => 'Application\Refactor\ReferenceBundle\Entity\Fiche'
+                'data_class' => 'Application\Refactor\ReferenceBundle\Entity\Fiche'
             )
         );
         // $resolver->setRequired(array(

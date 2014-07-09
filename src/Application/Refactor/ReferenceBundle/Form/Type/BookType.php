@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Refactor\ReferenceBundle\Form;
+namespace Application\Refactor\ReferenceBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,19 +22,21 @@ class BookType extends AbstractType
         $builder
             ->add('title')
             ->add('clientName')
-            ->add('projectName', 'url')
-            ->add('date')
+            ->add('date', 'date', array(
+                'input'  => 'datetime',
+                'widget' => 'single_text',
+            ))
             ->add(
                 'published', 'checkbox', array(
-                'required' => false
+                    'required' => false
                 )
             )
             ->add(
                 'fiches', 'collection', array(
-                'type' => new FicheChooseType,
-                'allow_add' => true,
-                'by_reference' => false,
-                'allow_delete' =>true,
+                    'type' => new FicheChooseType,
+                    'allow_add' => true,
+                    'by_reference' => false,
+                    'allow_delete' => true,
                 )
             )
             // ->add('fiche_add', 'collection', array(

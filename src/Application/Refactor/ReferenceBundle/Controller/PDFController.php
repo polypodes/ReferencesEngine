@@ -51,18 +51,18 @@ class PDFController extends Controller
 
     public function bookAction($id)
     {
-        $liste_project = new ArrayCollection();
+        $projects = new ArrayCollection();
         $em            = $this->getDoctrine()->getManager();
         $book          = $em->getRepository('ApplicationRefactorReferenceBundle:book')->findOneById($id);
         foreach ($book->getFiches() as $fiche) {
-            $liste_project->add($fiche);
+            $projects->add($fiche);
         }
 
         return $this->render(
             'ApplicationRefactorReferenceBundle:Pdf:book.html.twig', array(
-                                                                      'book'          => $book,
-                                                                      'liste_project' => $liste_project,
-                                                                     )
+                'book'          => $book,
+                'projects' => $projects,
+            )
         );
 
     }//end bookAction()
@@ -87,7 +87,7 @@ class PDFController extends Controller
         $html     = $this->bookAction($id);
         $html2pdf->pdf->SetAuthor($book->getClientName());
         $html2pdf->pdf->SetTitle($book->getTitle());
-        $html2pdf->pdf->SetSubject($book->getProjectName());
+        //$html2pdf->pdf->SetSubject($book->getProjectUrl());
         $html2pdf->writeHTML($css);
         $html2pdf->writeHTML($html, isset($_GET['vuehtml']));
         $html2pdf->createIndex('Summary', 25, 12, false, true, 1);

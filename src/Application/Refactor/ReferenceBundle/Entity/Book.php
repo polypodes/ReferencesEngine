@@ -52,15 +52,6 @@ class Book
     private $clientName;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="project_name", type="string", length=255, nullable=false)
-     * @Expose
-     * @Groups({"Book"})
-     */
-    private $projectName;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date", nullable=false)
@@ -103,6 +94,16 @@ class Book
      * @Groups({"Fiche"})
      */
     private $fiches;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->fiches = new \Doctrine\Common\Collections\ArrayCollection();
+
+    }//end __construct()
 
     /**
      * Get id
@@ -164,31 +165,6 @@ class Book
         return $this->clientName;
 
     }//end getClientName()
-
-    /**
-     * Set projectName
-     *
-     * @param  string $projectName
-     * @return Book
-     */
-    public function setProjectName($projectName)
-    {
-        $this->projectName = $projectName;
-
-        return $this;
-
-    }//end setProjectName()
-
-    /**
-     * Get projectName
-     *
-     * @return string
-     */
-    public function getProjectName()
-    {
-        return $this->projectName;
-
-    }//end getProjectName()
 
     /**
      * Set date
@@ -308,7 +284,7 @@ class Book
         $faker = Faker\Factory::create();
         $this->setTitle($faker->sentence($nbWords = 6));
         $this->setClientName($faker->name);
-        $this->setProjectName($faker->url());
+        $this->setProjectUrl($faker->url());
         $this->setDate($faker->dateTime($max            = 'now'));
         $this->setUpdatedAt($faker->dateTime($max       = 'now'));
         $this->setCreatedAt($faker->dateTime($max       = 'now'));
@@ -316,24 +292,16 @@ class Book
 
     }//end getFake()
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->fiches = new \Doctrine\Common\Collections\ArrayCollection();
-
-    }//end __construct()
 
     /**
      * Add fiches
      *
-     * @param  \Application\Refactor\ReferenceBundle\Entity\Fiche $fiches
+     * @param  \Application\Refactor\ReferenceBundle\Entity\Fiche $fiche
      * @return Book
      */
-    public function addFiche(\Application\Refactor\ReferenceBundle\Entity\Fiche $fiches)
+    public function addFiche(\Application\Refactor\ReferenceBundle\Entity\Fiche $fiche)
     {
-        $this->fiches[] = $fiches;
+        $this->fiches[] = $fiche;
 
         return $this;
 

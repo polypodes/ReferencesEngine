@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Refactor\ReferenceBundle\Form;
+namespace Application\Refactor\ReferenceBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 

@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sonata\MediaBundle\Entity\MediaManager;
 use Application\Sonata\MediaBundle\Entity\Media;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use Application\Refactor\ReferenceBundle\Form\MediaType;
-use Application\Refactor\ReferenceBundle\Form\MediaEditType;
+use Application\Refactor\ReferenceBundle\Form\Type\MediaType;
+use Application\Refactor\ReferenceBundle\Form\Type\MediaEditType;
 
 /**
  * Media Controller

@@ -1,5 +1,5 @@
 <?php
-namespace Application\Refactor\ReferenceBundle\Form;
+namespace Application\Refactor\ReferenceBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -26,14 +26,14 @@ class FicheChooseType extends FicheType
         ->remove('renders')
         ->add(
             'fiche_selector', 'entity', array(
-                                         'attr'        => array('class' => 'ficheSelector'),
-                                         'label'       => false,
-                                         'required'    => false,
-                                         'empty_value' => 'Choose a project',
-                                         'empty_data'  => null,
-                                         'mapped'      => false,
-                                         'class'       => 'Application\Refactor\ReferenceBundle\Entity\Fiche',
-                                        )
+                'attr'        => array('class' => 'ficheSelector'),
+                'label'       => false,
+                'required'    => false,
+                'empty_value' => 'Choose a project',
+                'empty_data'  => null,
+                'mapped'      => false,
+                'class'       => 'Application\Refactor\ReferenceBundle\Entity\Fiche',
+            )
         );
 
     }//end buildForm()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Refactor\ReferenceBundle\Form;
+namespace Application\Refactor\ReferenceBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,8 +19,8 @@ class TagType extends AbstractType
             // ->add('tag', 'entity', array('class' => 'Application\Refactor\ReferenceBundle\Entity\Tag'))
             ->add(
                 'title', 'text', array(
-                                  'attr' => array('class' => 'tagInput'),
-                                 )
+                    'attr' => array('class' => 'tagInput'),
+                )
             );
 
     }//end buildForm()

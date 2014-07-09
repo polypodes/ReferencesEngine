@@ -14,7 +14,7 @@ use Faker;
  * Fiche
  *
  * @ORM\Table(name="reference__fiche")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\Refactor\ReferenceBundle\Repository\FicheRepository")
  *
  * @ExclusionPolicy("all")
  *
@@ -87,6 +87,16 @@ class Fiche
      */
     private $contentFormatter;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="project_url", type="string", length=255, nullable=true)
+     * @Expose
+     * @Groups({"Book"})
+     */
+    private $projectUrl;
+
     /**
      * @var \DateTime
      *
@@ -149,6 +159,17 @@ class Fiche
       * @Expose
       */
     private $medias;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date = new \DateTime;
+
+    }//end __construct()
 
     public function __toString()
     {
@@ -318,6 +339,31 @@ class Fiche
     }//end getContentFormatter()
 
     /**
+     * Set projectUrl
+     *
+     * @param  string $projectUrl
+     * @return Book
+     */
+    public function setProjectUrl($projectUrl)
+    {
+        $this->projectUrl = $projectUrl;
+
+        return $this;
+
+    }//end setProjectUrl()
+
+    /**
+     * Get projectUrl
+     *
+     * @return string
+     */
+    public function getProjectUrl()
+    {
+        return $this->projectUrl;
+
+    }//end getProjectUrl()
+
+    /**
      * Set createdAt
      *
      * @param  \DateTime $createdAt
@@ -416,16 +462,6 @@ class Fiche
         return $this->image;
 
     }//end getImage()
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->date = new \DateTime;
-
-    }//end __construct()
 
     /**
      * Add tags
