@@ -46,7 +46,7 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   null
-            logout:             
+            logout:
                 invalidate_session: false
             anonymous:          true
            #anonymous: ~
@@ -69,4 +69,4 @@ security:
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/api/get.*, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/api/.*, role: IS_AUTHENTICATED_ANONYMOUSLY } # anonymously to get the token
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY } # secure application
+        - { path: ^/.*, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] } # secure application
