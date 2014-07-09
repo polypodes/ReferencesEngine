@@ -1,5 +1,5 @@
 
-{% extends "::layout.html.twig" %}
+{% extends "ApplicationRefactorReferenceBundle::layout.html.twig" %}
 {% block project_active %}class="active"{% endblock %}
 {% block body %}
 <p>
@@ -29,13 +29,16 @@
 				<div class="col-6 col-sm-6 col-lg-4">
 					<p>
 					<h3>
-						<span class = "value-form">
-								{{project.title2}}
+						<span class="value-form">
+							{{project.title2}}
 						</span>
-				<!-- 		<a href="#" class="btn btn-default btn-xs btn-edit" role="button"><span class="glyphicon glyphicon-pencil"></span></a> -->
+						<!--<a href="#" class="btn btn-default btn-xs btn-edit" role="button"><span class="glyphicon glyphicon-pencil"></span></a> -->
 					</h3>
 					</p>
 					<p>{{project.date|date("d M Y")}}</p>
+					{% if project.projectUrl %}
+					<p><a href="{{ project.projectUrl }}">{{ 'project.View' | trans}}</a></p>
+					{% endif %}
 				</div>
 			</div>
 			<p>{{project.content | format_text(project.contentFormatter) | raw}}</p>
@@ -55,32 +58,21 @@
 		{% endif %}
 	</div>
 	<div class="col-6 col-sm-6 col-lg-3">
-	<p>
-		<div class="checkbox">
-	   		<label>
-	   			<input type="checkbox"
-	   			{% if project.published == true %}
-	   				checked
-				{% endif %}
-				>
-				<h3>Project published</h3>
-	   		</label>
-		</div>
-	</p>
-	<div>
-		<h3>Tags :
-			<p><small>
-				Comma between each tag
-			</small></p>
-		</h3>
-		<h4>
-		{% for tag in project.tags %}
-		{{tag}},
-		{% endfor %}
-		</h4>
+
+		{% if not project.published %}
+		<p><em>{{ 'Unpublished' | trans }}</em></p>
+		{% endif %}
+
+	<div class="tags">
+		<h3>Tags :</h3>
+		<ul class="tag-list">
+			{% for tag in project.tags %}
+			<li class="tag {{tag | lower}}">{{tag}}</li>
+			{% endfor %}
+		</ul>
 	</div>
 	<div>
-		<h3>Medias Complémentaire</h3>
+		<h3>{{ 'media.Title' | trans }}</h3>
 		{% for media in project.medias %}
 			<p>
 				{% thumbnail media, 'small' %}

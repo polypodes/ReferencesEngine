@@ -9,11 +9,6 @@
 					{{book.clientName}}
 				</td>
 			</tr>
-			<tr>
-				<td style="width: 30%; text-align: left">
-					<small>{{book.projectName}}</small>
-				</td>
-				</tr>
 		</table>
 		<hr>
 	</page_header>
@@ -28,6 +23,6 @@
 	</page_footer>
 	<bookmark title="Summary" level="0" ></bookmark>
 </page>
-{% for project in liste_project %}
+{% for project in projects %}
 {% include "ApplicationRefactorReferenceBundle:Pdf:project.html.twig" with { project : project} %}
 {% endfor %}

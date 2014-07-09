@@ -1,17 +1,17 @@
-{% extends "::layout.html.twig" %}
+{% extends "ApplicationRefactorReferenceBundle::layout.html.twig" %}
 {% block project_active %}class="active"{% endblock %}
+
 {% block body %}
+
 {{ form_start(form, {'method': 'POST', 'attr' : {"class":"dropzone"}}) }}
-{{ form_errors(form) }}
-<p>
-	<h2>
-		<div class="row">
-		    <div class="col-lg-6">
-		    	{{ 'Title'|trans }} : {{form_widget(form.title)}}
-		    </div>
-		</div>
-	</h2>
-</p>
+	{{ form_errors(form) }}
+
+<div class="row">
+    <div class="col-lg-6">
+    	<h1>{{ 'Title'|trans }} : {{form_widget(form.title)}}</h1>
+    </div>
+</div>
+
 <div class="container col-lg-12">
 	<div class="col-lg-9">
 		<div class="jumbotron col-lg-12" style="padding:20px;">
@@ -28,6 +28,7 @@
 						</h3>
 					</p>
 				<p>{{ 'Date'|trans }} : {{form_widget(form.date)}}</p>
+				{{ form_row(form.projectUrl) }}
 				<p>{{ 'Content'|trans }} : {{form_widget(form.content)}}</p>
 				</div>
 			</div>

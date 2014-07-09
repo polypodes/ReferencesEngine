@@ -4,10 +4,10 @@ Project: Projet
 Image: Image
 Media: Mediathèque
 Language: Langue
-Suppress: Supprimer
+Delete: Supprimer
 Date: Date
 Add: Ajouter
-Change: Modifier
+Edit: Modifier
 Search: Recherche
 Books: Cahiers
 Title: Titre
@@ -19,28 +19,30 @@ Cancel: Annuler
 File: 'Choisissez un fichier'
 PDF: 'Créer le PDF'
 book.Search: 'Client'
-book.New: 'Créer le Cahier'
-book.Add: 'Ajouter au Cahier'
-book.Create: 'Créer le Cahier'
-book.Delete: 'Supprimer du Cahier'
-book.List: 'Liste des Cahiers'
-project.Search: 'Balise , Année'
-project.New: 'Nouveau Projet'
-project.Create: 'Créer le Projet'
-project.List: 'Liste des Projets'
-project.Choose: 'Choisissez un Projet'
+book.New: 'Créer le cahier'
+book.Add: 'Ajouter au cahier'
+book.Create: 'Créer le cahier'
+book.Delete: 'Supprimer du cahier'
+book.List: 'Liste des cahiers'
+project.Search: 'Mot-clé , Année'
+project.New: 'Nouveau projet'
+project.Create: 'Créer le projet'
+project.List: 'Liste des projets'
+project.Choose: 'Choisissez un projet'
 project.NotDeleted: "Le projet n'a pas été supprimé"
-tag.Add: 'Ajouter une balise'
-tag.Title: 'Balises:'
+project.View: 'Voir le projet'
+ProjectUrl: "URL du projet"
+tag.Add: 'Ajouter un mot-clé'
+tag.Title: 'Mots-clés'
 media.Add: 'Ajouter un média'
 media.New: "Nouveau Média"
 media.Selector: 'Choisissez un média'
-media.Title: 'Médias complémentaire:'
-render.Add: 'Ajouter une Créa'
+media.Title: 'Médias complémentaires'
+render.Add: 'Ajouter une créa'
 render.Selector: 'Choisissez une créa'
-render.Title: 'Creas possible :'
+render.Title: 'Créas'
 Yes: Oui
-NoResult: "Pas de résultats"
+NoResult: "Pas de résultat"
 Name: "Nom"
 Description: "Description"
 Ascending: "Croissant"
@@ -48,6 +50,6 @@ Descending: "Décroissant"
 Recent: "Derniers"
 Old: "Ancien"
 Sort: "Tri"
-Disconnection: "Déconnexion"
+Logout: "Déconnexion"
 Profile: "Profil"
 Display: "Afficher"

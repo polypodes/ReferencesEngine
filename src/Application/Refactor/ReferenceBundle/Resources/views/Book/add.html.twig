@@ -1,65 +1,61 @@
-{% extends "::layout.html.twig" %}
+{% extends "ApplicationRefactorReferenceBundle::layout.html.twig" %}
+
 {% block book_active %}class="active"{% endblock %}
+
 {% block body %}
 <div class = "item-container">
 	{{ form_start(form)}}
 	<div class="row">
 		<div class="col-lg-4">
 			<div class="thumbnail project">
-	      		<div class="caption" style="text-align:center;">
-	      		<p>{{ 'Title'|trans }} : {{form_widget(form.title)}}</p>
-	      		<p>{{ 'Customer'|trans }} : {{form_widget(form.clientName)}}</p>
-	      		<p>{{ 'Project'|trans }} : {{form_widget(form.projectName)}}</p>
-	      		<p>{{ 'Date'|trans }} : {{form_widget(form.date)}}</p>
-	      		<p>{{ 'Published'|trans }} : {{form_widget(form.published)}}</p>
 
+	      		{{ form_row(form.title) }}
+	      		{{ form_row(form.clientName) }}
+	      		{{ form_row(form.date) }}
+	      		{{ form_row(form.published) }}
 
-
-			</div>
+				<input class="btn btn-default" type="submit" value="{{ 'Validate'|trans }}"/>
 			</div>
 		</div>
+
 		<ul class="projects" data-prototype="{{form_widget(form.fiches.vars.prototype)|e }}">
-		{% for project in projects %}
-		<li>
-	  	<div class="col-lg-4">
-	    	<div class="thumbnail project-mouseover project">
-	    		<input type="hidden" name="project[{{project.id}}]" value="{{project.id}}">
-	    		<div class="project-img img">
-	    		{% media project.image, 'thumbnail' %}
-	    	</div>
-	      		<div class="caption project-btn">
-	      			<h2>{{project.title}}
-	      				<div>
-	      					<small>{{project.title}}</small>
-	        			</div>
-	        		</h2>
-		          		<p>
-		        			<a href="{{ path('refactor_edit_projects', {'id': project.id}) }}" class="btn btn-warning col-md-4 btn-sm " role="button">
-			        			<span class="glyphicon glyphicon-edit"></span>
-			        			<span class="glyphicon-class" style="color:white;">{{ 'Change'|trans }}</span>
-		          			</a>
-		          			<div class="col-md-4"> </div>
+			{% for project in projects %}
+			<li>
+			  	<div class="col-lg-4">
+			    	<div class="thumbnail project-mouseover project">
+			    		<input type="hidden" name="projects[]" value="{{project.id}}">
+			    		<div class="project-img img">
+				    		{% media project.image, 'thumbnail' %}
+				    	</div>
+			      		<div class="caption project-btn">
+			      			<h2>{{project.title}}</h2>
+		      				<div>
+		      					<small>{{project.title}}</small>
+		        			</div>
 
-				        	<a class="label-danger btn btn-remove col-md-4 btn-sm" role="button" data-id = "{{project.id}}" data-title="{{project.title}}">
-				        		<span class="glyphicon glyphicon-remove"></span>
-				        		<span class="glyphicon-class" style="color:white;" data-layout="center" data-type="confirm">{{ 'Suppress'|trans }}</span>
-				        	</a>
-			       		</p>
-			    </div>
-			</div>
-		</div></li>
-	{% endfor %}
+			          		<div>
+			        			<a href="{{ path('refactor_edit_projects', {'id': project.id}) }}" class="btn btn-warning col-md-4 btn-sm " role="button">
+				        			<span class="glyphicon glyphicon-edit"></span>
+				        			<span class="glyphicon-class" style="color:white;">{{ 'Change'|trans }}</span>
+			          			</a>
+			          			<div class="col-md-4"> </div>
 
+					        	<a class="label-danger btn btn-remove col-md-4 btn-sm" role="button" data-id = "{{project.id}}" data-title="{{project.title}}">
+					        		<span class="glyphicon glyphicon-remove"></span>
+					        		<span class="glyphicon-class" style="color:white;" data-layout="center" data-type="confirm">{{ 'Delete'|trans }}</span>
+					        	</a>
+				       		</div>
+					    </div>
+					</div>
+				</div>
+			</li>
+			{% endfor %}
 
-
-			{#{ include ('ApplicationRefactorReferenceBundle:Fiche:form.html.twig',{'formFiche' : (form.fiches.vars.prototype)|e}) }#}
-			{#{form_widget(form.fiches.vars.prototype.children.title)|e }#}{#{form_widget(form.fiches.vars.prototype)|e }#}
 		</ul>
 	</div>
-	<div style="display:none;">
-		{{ form_rest(form) }}
+	<div class="hidden">
+		{# form_rest(form) #}
 	</div>
-<input class="btn btn-default" type="submit" value="{{ 'Validate'|trans }}"/>
-
+	{{ form_end(form) }}
 </div>
 {% endblock %}

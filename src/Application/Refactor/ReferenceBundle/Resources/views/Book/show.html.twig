@@ -1,0 +1,88 @@
+{% extends "ApplicationRefactorReferenceBundle::layout.html.twig" %}
+
+{% block book_active %}class="active"{% endblock %}
+
+{% block body %}
+    <section class="book container">
+        <header class="page-header">
+            <h1 class="book-title">{{ book.title }} <small class="client-name">{{ book.clientName }}</small></h1>
+            <h2></h2>
+
+            <time class="book-date" datetime="{{ book.date | date('Y-m-d') }}">{{  book.date | date('d/m/Y') }}</time>
+        </header>
+        <nav data-spy="affix" data-offset-top="60" data-offset-bottom="200" style="right: 20px;">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="#">{{ 'Top' | trans }}</a></li>
+                {% for project in book.fiches %}
+                <li><a href="#project-{{ project.id }}">{{ project.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        {% for project in book.fiches %}
+        <article id="project-{{ project.id }}" class="book-project">
+            <header class="row">
+                <figure class="col-md-4">
+                    {% media project.image, 'thumbnail' with {'class': 'img-rounded'} %}
+                </figure>
+                <h1 class="project-title col-md-8">{{ project.title }}</h1>
+                <h2 class="project-title col-md-8">{{ project.title2 }}</h2>
+                <time class="project-date col-md-8" datetime="{{ project.date | date('Y-m-d') }}">{{  project.date | date('d/m/Y') }}</time>
+                {% if project.projectUrl %}
+                <p><a href="{{ project.projectUrl }}">{{ 'project.View' | trans}}</a></p>
+                {% endif %}
+
+                <ul class="tag-list list-inline col-md-8">
+                    {% for tag in project.tags %}
+                    <li class="tag label label-info {{ tag.slug }}">{{ tag.title }}</li>
+                    {% endfor %}
+                </ul>
+                <div class="project-content rte col-md-8">{{project.content | format_text(project.contentFormatter) | raw}}</div>
+            </header>
+
+            <section class="project-renders row">
+                <h3>{{ 'render.Title' | trans }}</h3>
+                {% for render in project.renders %}
+                <figure class="project-media-element col-md-3">
+                    <a href="{% path render, 'reference' %}">
+                        {% thumbnail render, 'thumbnail' with {'class': 'img-thumbnail'} %}
+                    </a>
+                    <figcaption>{{ render.description }}</figcaption>
+                </figure>
+                {% endfor %}
+            </section>
+            <section class="project-medias row">
+                <h3>{{ 'media.Title' | trans }}</h3>
+
+                {% for media in project.medias %}
+                <figure class="project-media-element thumbnail col-md-4">
+                    {# dump(media.providerName) #}
+                    {% if media.providerName == "sonata.media.provider.image" %}
+                    <a href="{% path media, 'reference' %}">
+                        {% thumbnail media, 'thumbnail' %}
+                    </a>
+                    {% elseif media.providerName == "sonata.media.provider.file" %}
+                    <a href="{% path media, 'reference' %}">
+                        {{ media.name }}
+                    </a>
+                    {% elseif media.providerName == "sonata.media.provider.youtube"  %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive" src="{{ '//www.youtube.com/embed/' ~ media.providerReference ~ '?feature=oembed' }}" allowfullscreen></iframe>
+                    </div>
+                    {% elseif media.providerName == "sonata.media.provider.dailymotion"  %}
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive" src="{{ '//www.dailymotion.com/embed/video/' ~ media.providerReference }}" allowfullscreen></iframe>
+                    </div>
+                    {% elseif media.providerName == "sonata.media.provider.vimeo"  %}
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <iframe class="embed-responsive" src="{{ '//player.vimeo.com/video/' ~ media.providerReference }}" allowfullscreen></iframe>
+                    </div>
+                    {% endif %}
+                    <figcaption class="caption">{{ media.description }}</figcaption>
+                </figure>
+                {% endfor %}
+            </section>
+        </article>
+        {% endfor %}
+    </section>
+{% endblock %}
