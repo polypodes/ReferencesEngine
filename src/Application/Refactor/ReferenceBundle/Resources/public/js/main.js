@@ -1,34 +1,3 @@
-jQuery(document).ready(function($){
-
-});
-
-//hold press enter event
-function enter(e) {
-    if (e.keyCode == 13) {
-        $(".sub").trigger('click');
-        return false;
-    }
-}
-
-//Get Translation
-
-function getTranslation()
-{
-    var data={
-        'suppress' : $('#translate').data('translate-suppress'),
-        'cancel' : $('#translate').data('translate-cancel'),
-        'tag_add' : $('#translate').data('translate-tag-add'),
-        'media_add' : $('#translate').data('translate-media-add'),
-        'render_add' : $('#translate').data('translate-render-add'),
-        'project_choose' : $('#translate').data('translate-project-choose'),
-        'yes' : $('#translate').data('translate-yes'),
-        'project_notdeleted' : $('#translate').data('translate-project-notdeleted'),
-        'book_add' : $('#translate').data('translate-book-add'),
-        'book_delete' : $('#translate').data('translate-book-delete'),
-        'noresult' : $('#translate').data('translate-noresult')
-    };
-    return data;
-}
 
 //get the height of thumbnail
 
@@ -129,7 +98,7 @@ function addFormDeleteLink($MediaFormLi)
 }
 
 $(document).ready(function () {
-    equalHeight($(".thumbnail"));
+    //equalHeight($(".thumbnail"));
 
     // Manage tags collection
 
@@ -172,7 +141,8 @@ $(document).ready(function () {
             }
         }
     });
-  //Action to delete project/book
+
+    //Action to delete project/book
     $('.btn-remove').on('click',function () {
         var self = $(this);
         var id = $(this).data('id');
@@ -212,45 +182,46 @@ $(document).ready(function () {
         });
 
 
-//hold new tags
+    //hold new tags
     collectionTagsHolder.append($newLinkLiTag);
-  $addTagLink.on('click', function(e) {
-    e.preventDefault();
-    addForm(collectionTagsHolder, $newLinkLiTag);
-  });
-  collectionTagsHolder.find('li.input').each(function() {
+    $addTagLink.on('click', function(e) {
+        e.preventDefault();
+        addForm(collectionTagsHolder, $newLinkLiTag);
+    });
+    collectionTagsHolder.find('li.input').each(function() {
+        addFormDeleteLink($(this));
+    });
+    //hold new projects
+    collectionProjectsHolder.append($newLinkLiProject);
+    $addProjectLink.on('click', function(e) {
+        e.preventDefault();
+        addForm(collectionProjectsHolder, $newLinkLiProject);
+    });
+    collectionProjectsHolder.find('li').each(function() {
     addFormDeleteLink($(this));
-  });
-  //hold new projects
-  collectionProjectsHolder.append($newLinkLiProject);
-  $addProjectLink.on('click', function(e) {
-    e.preventDefault();
-    addForm(collectionProjectsHolder, $newLinkLiProject);
-  });
-  collectionProjectsHolder.find('li').each(function() {
-    addFormDeleteLink($(this));
-  });
+    });
 
-  //hold new medias
-  collectionMediasHolder.append($newLinkLiMedia);
-  $addMediaLink.on('click', function(e) {
-    e.preventDefault();
-    addForm(collectionMediasHolder, $newLinkLiMedia);
-  });
-  collectionMediasHolder.find('li').each(function() {
-    addFormDeleteLink($(this));
-  });
-  //hold new renders
-  collectionRendersHolder.append($newLinkLiRender);
-  $addRenderLink.on('click', function(e) {
-    e.preventDefault();
-    addForm(collectionRendersHolder, $newLinkLiRender);
-  });
-  collectionRendersHolder.find('li').each(function() {
-    addFormDeleteLink($(this));
-  });
-  //hold type of input for the provider
-  $(".providerSelector").each(function(){
+    //hold new medias
+    collectionMediasHolder.append($newLinkLiMedia);
+    $addMediaLink.on('click', function(e) {
+        e.preventDefault();
+        addForm(collectionMediasHolder, $newLinkLiMedia);
+    });
+    collectionMediasHolder.find('li').each(function() {
+        addFormDeleteLink($(this));
+    });
+    //hold new renders
+    collectionRendersHolder.append($newLinkLiRender);
+    $addRenderLink.on('click', function(e) {
+        e.preventDefault();
+        addForm(collectionRendersHolder, $newLinkLiRender);
+    });
+    collectionRendersHolder.find('li').each(function() {
+        addFormDeleteLink($(this));
+    });
+
+    //hold type of input for the provider
+    $(".providerSelector").each(function(){
         $(this).change(function(){
             var valueSelected = $('option:selected', this).text();
             var input = $(this).parent().parent().children(':first-child').children('.providerInput');
@@ -261,10 +232,10 @@ $(document).ready(function () {
                 $(input).attr('type', 'file');
             }
         });
-  });
+    });
 
 
-    //manage select of project in index of projects
+    // Manage projects selection in index of projects
     $(".addToBook").on('click',function(e){
             e.preventDefault();
             var $this = $(this);
@@ -330,8 +301,32 @@ $(document).ready(function () {
             }
         });
     }
-    //search at project index
-    $("#project_search_submit").on('click', function(){
+    // search form on index pages
+    $('.search-form').on('submit', function(e) {
+        e.preventDefault();
+
+        var search = $('#search-field').val();
+
+        if (search === '') {
+            $('.no-result').remove();
+            $('.list-elem').show();
+        }
+        else {
+            $('.list-elem').hide();
+
+            var results = $('.list-elem[data-search*="'+search+'"]');
+            console.log(results.length);
+            if (results.length > 0) {
+                results.show();
+                $('.no-result').remove();
+            } else {
+                if ($('.no-result').length === 0) {
+                    $('<p class="no-result text-danger">'+translate['noresult']+'</p>').insertAfter('#new-elem');
+                }
+            }
+        }
+    });
+    /*$("#project_search_submit").on('click', function(){
         data = $('.project_result');
         if($('#no_result').length){
             $('#no_result').remove();
@@ -345,7 +340,7 @@ $(document).ready(function () {
         if (search !== '') {
             var result = search.split(',');
             for(var string in result){
-                $('.project_result[data-date="'+result[string]+'"]').show();
+                $('.project_result[data-date*="'+result[string]+'"]').show();
                 $('.project_result[data-tag*="'+result[string]+'"]').show();
                 //if you want to add a new type of search :
                 //1. add an attr like data-value={{project.value}} inside the project index at the div of .project result
@@ -393,5 +388,5 @@ $(document).ready(function () {
             }
             $('.book_result').show();
         }
-    });
+    });*/
 });

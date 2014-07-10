@@ -3,16 +3,16 @@
 {% block project_active %}class="active"{% endblock %}
 
 {% block body %}
-<section class="item-container col-lg-12">
-	<div class="row container">
-	    <h1 class="page-title col-lg-4">{{ 'project.List'|trans }}</h1>
+<section class="book-list container">
+    <header class="page-header row">
+        <h1 class="page-title col-md-3">{{ 'project.List'|trans }}</h1>
 
-	    <div class="col-lg-5">
-		    <div class="col-lg-6">
-				<input type="text" class="form-control" id="project_search" placeholder="{{ 'project.Search'|trans }}" onkeypress="return enter(event)">
-			</div>
+		<form action="" method="get" class="search-form form-inline col-md-9">
+			<label class="sr-only" for="search">{{ 'project.Search'|trans }}</label>
+			<input type="text" class="form-control col-md-3" id="search-field" name="search" placeholder="{{ 'project.Search'|trans }}">
+			<button type="submit" class="sub btn btn-default" id="search-submit">{{ 'Search'|trans }}</button>
+
 			<div class="btn-group">
-			  	<span type="button" class="sub btn btn-default" id="project_search_submit">{{ 'Search'|trans }}</span>
 			  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 				    <span class="caret"></span>
 				    <span class="sr-only">Toggle Dropdown</span>
@@ -27,35 +27,41 @@
 				    <li><a href="{{ path('refactor_projects', {'sort': 'old'}) }}">{{ 'Old'|trans }}</a></li>
 			  	</ul>
 			</div>
+		</form>
+
+
+    </header>
+
+	<form name="add_book" action="{{ path('refactor_add_books') }}" method="post" class="row">
+		<div class="row well">
+	  		<button type="submit" class="btn btn-primary disabled addBook pull-right">
+				{{ 'book.Create'|trans }}
+				<span class="numberProject">0</span>
+			</button>
 		</div>
-		<form name="add_book" action="{{ path('refactor_add_books') }}" method="post">
-			<div class="col-lg-2">
-		  		<button type="submit" class="btn btn-primary disabled addBook">
-					{{ 'book.Create'|trans }}
-					<span class="numberProject">0</span>
-				</button>
-			</div>
 
-			<article class="col-lg-4 new-project">
-				<div class="thumbnail project">
-			      	<a href="{{ path('refactor_add_projects') }}" class="btn btn-primary btn-lg">{{ 'project.New'|trans }}</a>
-				</div>
-			</article>
+		<article id="new-elem" class="col-md-4 text-center">
+	  		<a href="{{ path('refactor_add_projects') }}" class="thumbnail">
+				<button type="button" class="btn btn-primary btn-lg">{{ 'project.New'|trans }}</button>
+			</a>
+		</article>
+		{% for project in projects %}
+	  	<article class="list-elem col-md-4 text-center project" data-search="{{project.title|lower}} {{project.title2|lower}} {{project.date|date('Y')}} {{project.tags|join(' ')|lower}}">
+	  		<input type="checkbox" name="projects[]" value="{{project.id}}" class="checkbox hidden">
 
-			{% for project in projects %}
-		  	<article class="col-lg-4 project" data-date="{{project.date|date('Y')}}" data-tag="{% for tag in project.tags %}{{tag|lower}} {% endfor %}">
-	    		<input type="checkbox" name="projects[]" value="{{project.id}}" class="checkbox hidden">
-
-	    		<figure class="project-img">
+			<div class="thumbnail">
+	    		<figure>
 	    			<a href="{{ path('refactor_show_projects', {'id': project.id}) }}">
 	    				{% media project.image, 'thumbnail' %}
 	    			</a>
+	    			<figcaption>
+
+	    			</figcaption>
 	    		</figure>
 
-		    	<div class="project-details">
-		      		<h1><a href="{{ path('refactor_show_projects', {'id': project.id}) }}">{{project.title}}</a></h1>
-		      		<h2>{{project.title2}}</h2>
-
+		    	<div class="project-details thumbnail col-md-12">
+		    		<h1><a href="{{ path('refactor_show_projects', {'id': project.id}) }}">{{project.title}}</a></h1>
+					<h2>{{project.title2}}</h2>
 					<p>
 						<a href="#" class="btn btn-primary btn-lg btn-block selector addToBook" role="button">
 			    			<span class="glyphicon glyphicon-plus"></span>
@@ -75,9 +81,9 @@
 			        	</a>
 		       		</p>
 		       	</div>
-			</article>
-			{% endfor %}
-		</form>
-	</div>
+		    </div>
+		</article>
+		{% endfor %}
+	</form>
 </section>
 {% endblock %}

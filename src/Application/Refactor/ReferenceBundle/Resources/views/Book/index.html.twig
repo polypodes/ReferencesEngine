@@ -3,49 +3,41 @@
 {% block book_active %}class="active"{% endblock %}
 
 {% block body %}
-<div class = "item-container">
-	<div class="row container" style="margin:auto;">
-	    <h1 class="col-lg-3">
-	    	{{ 'book.List'|trans }}
-	    </h1>
-	    <div class="col-lg-6">
-		    <div class="col-lg-6">
-		    	<input type="text" class="form-control" id="book_search" placeholder="{{ 'book.Search'|trans }}" onkeypress="return enter(event)">
-	    	</div>
-			<span type="button" class="sub btn btn-default" id="book_search_submit">{{ 'Search'|trans }}</span>
-		</div>
-	</div>
+<section class="book-list container">
+    <header class="page-header row">
+        <h1 class="page-title col-md-3">{{ 'book.List'|trans }}</h1>
 
-	<div class="row container" style="margin:auto;">
-		<div class="col-xs-6 col-md-3 new_book">
-			<div class="thumbnail"  onclick="location.href='{#{ path('refactor_show_projects', {'id': project.id}) }#}';" style="cursor:pointer;">
-	      		<div class="caption" style="text-align:center;">
-		      		<a href="{{ path('refactor_add_books') }}">
-						<button type="button" class="btn btn-primary btn-lg">{{ 'book.New'|trans }}</button>
-					</a>
-				</div>
-			</div>
-		</div>
-	{% for book in books %}
-	  	<div class="col-xs-6 col-md-3 book_result {{book.clientName|lower}}" data-name="{{book.clientName|lower}}">
-	    	<div class="thumbnail">
-	      		<div class="caption">
-	        		<h2><a href="{{ path('refactor_show_books', {'id': book.id}) }}">{{book.title}}</a></h2>
-	        		<div class="client-name">{{book.clientName}}</div>
-	        		<p>
-	        			<a href="{{ path('refactor_edit_books', {'id': book.id}) }}" class="btn label-warning" role="button">
-		        		<span class="glyphicon glyphicon-edit"></span>
-		        		<span class="glyphicon-class" style="color:white;">{{ 'Edit'|trans }}</span>
-	          			</a>
-			        	<a class="label-danger btn btn-remove" role="button" data-url="{{ path('refactor_remove_books', {'id': book.id}) }}" data-id = "{{book.id}}" data-title="{{book.title}}">
-			        		<span class="glyphicon glyphicon-remove"></span>
-			        		<span class="glyphicon-class" style="color:white;" data-layout="center" data-type="confirm">{{ 'Delete'|trans }}</span>
-			        	</a>
-			        </p>
-			    </div>
-			</div>
-		</div>
-	{% endfor %}
+		<form action="" method="get" class="search-form form-inline col-md-9">
+			<label class="sr-only" for="search">{{ 'book.Search'|trans }}</label>
+			<input type="text" class="form-control col-md-3" id="search-field" name="search" placeholder="{{ 'book.Search'|trans }}">
+			<button type="submit" class="sub btn btn-default" id="search-submit">{{ 'Search'|trans }}</button>
+		</form>
+    </header>
+
+	<div class="row">
+		<article id="new-elem" class="col-md-3 text-center">
+	  		<a href="{{ path('refactor_add_books') }}" class="thumbnail">
+				<button type="button" class="btn btn-primary btn-lg">{{ 'book.New'|trans }}</button>
+			</a>
+		</article>
+		{% for book in books %}
+	  	<article class="list-elem col-md-3 book text-center {{book.clientName|lower}}" data-search="{{book.title|lower}} {{book.clientName|lower}} {{book.date|date('Y')}}">
+			<div class="thumbnail">
+				<h1><a href="{{ path('refactor_show_books', {'id': book.id}) }}">{{book.title}}</a></h1>
+				<div class="client-name">{{book.clientName}}</div>
+				<p>
+					<a href="{{ path('refactor_edit_books', {'id': book.id}) }}" class="btn label-warning" role="button">
+			    		<span class="glyphicon glyphicon-edit"></span>
+			    		<span class="glyphicon-class">{{ 'Edit'|trans }}</span>
+		  			</a>
+		        	<a class="label-danger btn btn-remove" role="button" data-url="{{ path('refactor_remove_books', {'id': book.id}) }}" data-id = "{{book.id}}" data-title="{{book.title}}">
+		        		<span class="glyphicon glyphicon-remove"></span>
+		        		<span class="glyphicon-class" data-layout="center" data-type="confirm">{{ 'Delete'|trans }}</span>
+		        	</a>
+		        </p>
+		    </div>
+		</article>
+		{% endfor %}
 	</div>
-</div>
+</section>
 {% endblock %}
