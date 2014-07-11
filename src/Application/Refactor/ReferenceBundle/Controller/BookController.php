@@ -56,7 +56,7 @@ class BookController extends Controller
      * add a book
      * @Secure(roles="ROLE_ADMIN")
      */
-    public function addAction()
+    public function addAction(Request $request)
     {
         $book = new Book();
         $form = $this->createForm(new BookType, $book);
@@ -65,8 +65,13 @@ class BookController extends Controller
 
         $projects = new ArrayCollection();
 
-        if (!empty($_POST['projects'])) {
-            $projectIds = $_POST['projects'];
+        // if book id is defined, redirect to editAction passing by request object
+        if (!empty($request->request->get('book_id'))) {
+            return $this->editAction($request, $request->request->get('book_id'));
+        }
+
+        if ($request->request->get('projects')) {
+            $projectIds = $request->request->get('projects');
             if (!is_array($projectIds)) $projectIds = array($projectIds);
 
             $projects = new ArrayCollection(
@@ -76,7 +81,6 @@ class BookController extends Controller
             //echo '<pre>'; var_dump($projects->count()); echo '</pre>';
         }
 
-        $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
             $form->bind($request);
 
@@ -119,29 +123,43 @@ class BookController extends Controller
      * @Secure(roles="ROLE_ADMIN")
      */
 
-    public function editAction($id)
+    public function editAction(Request $request, $id)
     {
         $em  =$this->getDoctrine()->getManager();
         $MediaManager = $this->container->get('sonata.media.manager.media');
         // $PDF = $this->forward('Application\Refactor\ReferenceBundle\Controller\PDFController:bookPDFAction'
         //, array('id' => $id));
         $book = $em->getRepository('ApplicationRefactorReferenceBundle:Book')->findOneById($id);
-        $liste_fiches = new ArrayCollection();
 
-        $liste_project = $book->getFiches();
+        $fiches = $book->getFiches();
 
-        foreach ($book->getFiches() as $project) {
-
-            $liste_fiches->add($project);//get all the fiche
-        }
         $form = $this->createForm(new BookType(), $book);
-        $request = $this->get('request');
+
+        if ($request->request->get('projects')) {
+            $projectIds = $request->request->get('projects');
+            if (!is_array($projectIds)) $projectIds = array($projectIds);
+
+            $postedProjects = new ArrayCollection(
+                $em->getRepository('ApplicationRefactorReferenceBundle:fiche')->findByIds($projectIds)
+            );
+
+            foreach ($postedProjects as $project) {
+                if (!$fiches->contains($project)) {
+                    $book->addFiche($project);
+                }
+            }
+            $em->persist($book);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('refactor_projects'));
+        }
+
         if ($request->getMethod() == 'POST') {
             $form->bind($request);
             if ($form->isValid()) {
                 $book->getFiches()->clear();
 
-                foreach ($liste_fiches as $fiche) {
+                foreach ($fiches as $fiche) {
                     if ($book->getFiches()->contains($fiche) == false) {
                         $book->removeFiche($fiche);
                     }
@@ -165,7 +183,7 @@ class BookController extends Controller
 
         return $this->render(
             'ApplicationRefactorReferenceBundle:Book:edit.html.twig', array(
-            'projects' => $liste_project,
+            'projects' => $projects,
             'book' => $book,
             'form' => $form->createView(),
             )

@@ -32,9 +32,15 @@
 
     </header>
 
-	<form name="add_book" action="{{ path('refactor_add_books') }}" method="post" class="row">
-		<div class="row well">
-	  		<button type="submit" class="btn btn-primary disabled addBook pull-right">
+	<form name="add_book" action="{{ path('refactor_add_books') }}" method="post" class="row form-inline">
+		<div class="row well text-right">
+			<select name="book_id" class="form-control" width="20">
+				<option value="0">{{'book.New'|trans}}</option>
+		  		{% for book in books %}
+			    <option value="{{book.id}}">{{ book.title }}</option>
+			    {% endfor %}
+		  	</select>
+			<button type="submit" class="btn btn-primary disabled addBook">
 				{{ 'book.Create'|trans }}
 				<span class="numberProject">0</span>
 			</button>

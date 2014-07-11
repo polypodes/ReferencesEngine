@@ -33,7 +33,6 @@ class FicheController extends Controller
     {
         $repo = $this->getDoctrine()->getRepository('ApplicationRefactorReferenceBundle:Fiche');
 
-
         switch ($sort) {
             case "old" :
                 $query = $repo->createQueryBuilder('F')
@@ -72,8 +71,10 @@ class FicheController extends Controller
 
         }
 
+        $books = $this->getDoctrine()->getRepository('ApplicationRefactorReferenceBundle:Book')->findAll();
+
         return $this->render(
-            'ApplicationRefactorReferenceBundle:Fiche:index.html.twig', array('projects' => $projects)
+            'ApplicationRefactorReferenceBundle:Fiche:index.html.twig', compact('projects', 'books')
         );
 
     }//end indexAction()
