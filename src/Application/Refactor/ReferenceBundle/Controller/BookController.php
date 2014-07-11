@@ -66,7 +66,7 @@ class BookController extends Controller
         $projects = new ArrayCollection();
 
         // if book id is defined, redirect to editAction passing by request object
-        if (!empty($request->request->get('book_id'))) {
+        if ($request->request->get('book_id')) {
             return $this->editAction($request, $request->request->get('book_id'));
         }
 
