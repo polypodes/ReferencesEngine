@@ -1,0 +1,119 @@
+ <section class="container add_book in">
+    <aside class="sidebar">
+        <h3>Tous les projets</h3>
+        <section class="presentation_style">
+            <article class="block" ng-click="changePresentation('block','all_projects')"><i class="fa fa-th"></i></article>
+            <article class="line"ng-click="changePresentation('line','all_projects')"><i class="fa fa-align-justify"></i></article>
+        </section>
+
+        <section class="search">
+            <input type="search" ng-model="search" placeholder="Tapez un mot clé, une date ..." class="search" ng-keyup="addCriteria($event)">
+        </section>
+        <div class="scrollable">
+            <section class="items {{presentation_type.all_projects}}">
+                <article class="item" ng-class="{'added' : project.added == true}" ng-repeat="project in projects  | filter : search" ng-click="addToList(project.id)">
+                    <div class="added">
+                        AJOUTÉ
+                    </div>
+
+                    <section class="project">
+                        <h4>{{project.title}}</h4>
+                        <div class="gradient"></div>
+                        
+                        <div class="image" style="background-image:url(http://lorempixel.com/400/{{300+$index}}/)"></div>
+                        <div class="desc">
+                        <h4>{{project.title}}</h4>
+                        <section class="tags">
+                            <span ng-repeat="tag in project.tags">{{tag}} </span>
+                        </section>
+                        <div class="date">
+                            <span>{{project.date}}</span>
+                        </div>
+                        <div class="books">
+                            <span>Dans {{project.books_count}} cahier</span>
+                        </div>
+                        </div>
+                        <div class="buttons">
+                            
+                        </div>
+                    </section>
+                </article>
+            </section>
+        </div>
+    </aside>
+    <aside class="my_projects">
+        <h3>Cahier</h3>
+        <section class="presentation_style">
+            <article class="block" ng-click="changePresentation('block','my_projects')"><i class="fa fa-th"></i></article>
+            <article class="line"ng-click="changePresentation('line','my_projects')"><i class="fa fa-align-justify"></i></article>
+        </section>
+        <p class="infos">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus error.</p>
+        <div class="scrollable">
+            <section class="items {{presentation_type.my_projects}}">
+                <article class="item" ng-click="openDetails('couv')">
+                    <section class="project">
+                        <div class="couv">
+                            Couverture
+                        </div>
+                    </section>
+                </article>
+                <section class="items_reorder" ui-sortable ng-model="projects_a">
+                    <article class="item" ng-repeat="project_a in projects_a" ng-click="openDetails($index)">
+                        <section class="project">
+                            
+                            <h4>{{project_a.title}}</h4>
+                            <div class="gradient"></div>
+
+                            <div class="image" style="background-image:url(http://lorempixel.com/400/{{300+$index}}/)"></div>
+                            <div class="desc">
+                                <h4>{{project_a.title}}</h4>
+                                <section class="tags">
+                                    <span ng-repeat="tag in project_a.tags">{{tag}} </span>
+                                </section>
+                                <div class="date">
+                                    <span>{{project_a.date}}</span>
+                                </div>
+                                <div class="books">
+                                    <span>Dans {{project_a.books_count}} cahier</span>
+                                </div>
+                            </div>
+                            <div class="buttons">
+                                
+                            </div>
+                        </section>
+                    </article>
+                </section>
+            </section>
+        </div>
+    </aside>
+    <section class="right_container">
+                
+                <h3>Couverture</h3>
+                <form action="#">
+                    <label>Titre du cahier</label>
+                    <input type="text" ng-model="book.btitle" ng-keyup="bookInfoKeypress()">
+                    <label>Description du cahier</label>
+                    <input type="text" ng-model="book.subtitle">
+                    <label>Infos complémentaires du cahier</label>
+                    <input type="text" ng-model="book.bottomline">
+                    <label>Image de fond</label>
+                    <input type="text" ng-model="book.image" ng-keyup="bookInfoKeypress()">
+                </form>
+                
+                <!-- <img src="" alt="" id="cover_generated"> -->
+                <h3>Theme</h3>
+                <ul class="themes">
+                    <li ng-repeat='theme in themes' ng-click="chooseTheme($index)" ng-class="{'actual' : theme_a.id == theme.id}">{{theme.title}}</li>
+                </ul>
+            </div>
+
+    </section>
+    <div class="right_bottom_container">
+        <div class="buttons">
+            <div class="button" ng-click="openEditor()">Prévisualiser</div>
+            <div class="button" ng-click="openEditor()">Enregistrer</div>
+        </div>
+    </div>
+<section class="editor" ng-class="{'hidden' : show_editor != true}" ng-include="'src/views/editor.html'">
+</section>
+</section>

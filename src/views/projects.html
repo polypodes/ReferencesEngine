@@ -1,0 +1,36 @@
+ <section class="container projects in">
+    <section class="white_head">
+        <h4>Filtrer les projets :</h4>
+        <section class="search">
+            <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag" ng-keyup="addCriteria($event)">
+        </section>
+    </section>
+    <section class="items">
+        <a ng-repeat="project in projects | filter : search" href="#/project/{{$index}}">
+            <article class="item">
+                <section class="project">
+                
+                    <h4>{{project.title}}</h4>
+                    <div class="gradient"></div>
+
+                    <div class="image" style="background-image:url(http://lorempixel.com/400/{{300+$index}}/)"></div>
+                    <div class="desc">
+                        <h4>{{project.title}}</h4>
+                        <section class="tags">
+                            <span ng-repeat="tag in project.tags">{{tag}}</span>
+                        </section>
+                        <div class="date">
+                            <span>{{project.date}}</span>
+                        </div>
+                        <div class="books">
+                            <span>Dans {{project.books_count}} cahier</span>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        
+                    </div>
+                </section>
+            </article>
+        </a>
+    </section>
+</section>

@@ -1,0 +1,28 @@
+<section class="container books in">
+    <section class="white_head">
+        <h4>Filtrer les cahiers :</h4>
+        <section class="search">
+            <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag" ng-keyup="addCriteria($event)">
+        </section>
+    </section>
+
+    <section class="items">
+        <a ng-repeat="book in books | filter : search" href="#/book/{{$index}}">
+            <article class="item">
+                <section class="book">
+                    <div class="gradient"></div>
+                    <div class="image" style="background-image:url(http://lorempixel.com/400/{{600+$index}}/)"></div>
+                    <div class="desc">
+                        <h4>{{book.title}}</h4>
+                        <div class="date">
+                            <span>{{book.date}}</span>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        
+                    </div>
+                </section>
+            </article>
+        </a>
+    </section>
+</section>

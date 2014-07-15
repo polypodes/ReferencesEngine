@@ -1,0 +1,46 @@
+<section class="container add_project in">
+    <div class="new_project_wysiwyg">
+        <div class="image"></div>
+        <div class="text">
+
+            <h3>
+                <input type="text" class="live_edit input_intro"  ng-model="project_data.intro">
+            </h3>
+            <h4>
+                <input type="text" class="live_edit input_title" ng-model="project_data.title">
+            </h4>
+            <h3 class="date">
+                <input type="text" class="live_edit input_date"  ng-model="project_data.date">
+            </h3>
+
+            <div class="live_edit desc">
+                <textarea  ng-model="project_data.desc"></textarea>
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div class="medias">
+        <h3>Médias complémentaires</h3>
+        <div flow-init="{target: 'upload/upload_image.php'}"
+             flow-files-submitted="$flow.upload()"
+             flow-file-success="$file.msg = $message">
+
+            <div>Ajouter des fichiers : <input type="file" flow-btn/></div>
+            
+            <div class="media" ng-repeat="file in $flow.files">
+                <!--  <h2>{{$index+1}}</h2>  -->                
+                <h3>{{file.name}}</h3>
+                <p>{{file.msg}}</p>
+                <p>{{file.relativePath}}</p>
+                <img flow-img="$flow.files[$index]" />
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+
+        </div>
+    </div>
+</section>

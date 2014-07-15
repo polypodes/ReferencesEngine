@@ -1,0 +1,10 @@
+11.07.2014: writing chunk 1
+11.07.2014: writing chunk 1
+11.07.2014: writing chunk 1
+11.07.2014: writing chunk 1
+11.07.2014: writing chunk 1
+11.07.2014: Error saving (move_uploaded_file) chunk 1 for file Capture d’écran 2014-07-03 à 17.30.50.png
+11.07.2014: writing chunk 1
+11.07.2014: writing chunk 1
+11.07.2014: writing chunk 1
+11.07.2014: writing chunk 1

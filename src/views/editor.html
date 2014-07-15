@@ -1,0 +1,28 @@
+<section class="editor">
+
+<section class="preview render">
+    <article class="cover">
+        <div class="cover_image" style="background-image:url({{book.image}})"></div>
+        <div class="cover_content">
+            <h1>{{book.btitle}}</h1>
+            <h2>{{book.subtitle}}</h2>
+            <h4>{{book.bottomline}}</h4>
+        </div>
+    </article>
+    <article class="item" ng-repeat="project_a in projects_a">
+        <section class="project">
+
+            <div class="project_image" style="background-image:url({{project_a.image}})"></div>
+            <div class="project_content">
+
+               <h4>{{project_a.intro}}</h4>
+               <h2>{{project_a.title}}</h2>
+               <h4>{{project_a.date}}</h4>
+               <div class="desc">
+                   {{project_a.desc}}
+               </div>
+        </section>
+    </article>
+</section>
+
+</section>
