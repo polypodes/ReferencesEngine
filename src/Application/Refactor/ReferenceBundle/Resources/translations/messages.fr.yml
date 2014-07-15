@@ -16,7 +16,7 @@ Content: Contenu
 Published: Publié ?
 Validate: Valider
 Cancel: Annuler
-File: 'Choisissez un fichier'
+File: 'Fichier'
 PDF: 'Créer le PDF'
 book.Search: 'Client'
 book.New: 'Nouveau cahier'
@@ -34,6 +34,8 @@ project.View: 'Voir le projet'
 ProjectUrl: "URL du projet"
 tag.Add: 'Ajouter un mot-clé'
 tag.Title: 'Mots-clés'
+media.Search: 'Nom…'
+media.List: 'Médiathèque'
 media.Add: 'Ajouter un média'
 media.New: "Nouveau Média"
 media.Selector: 'Choisissez un média'
@@ -53,3 +55,11 @@ Sort: "Tri"
 Logout: "Déconnexion"
 Profile: "Profil"
 Display: "Afficher"
+
+reference.projects_added_to_book: |
+    {1} 1 projet ajouté au cahier « %book_title% » |
+    ]1,Inf]  %count% projets ajouté au cahier « %book_title% »
+reference:
+    project:
+        deleted: Projet « %project_title% » supprimé
+        not_found: Projet « %id% » inconnu

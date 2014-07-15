@@ -100,4 +100,23 @@ class MediaController extends Controller
         );
 
     }//end editAction()
+
+    /**
+     * Remove a media
+     * @Secure(roles="ROLE_ADMIN")
+     */
+    public function removeAction($id)
+    {
+        $em  =$this->getDoctrine()->getManager();
+        $media = $em->getRepository('ApplicationSonataMediaBundle:Media')->findOneById($id);
+        var_dump($media);
+        exit;
+        if (!$media) {
+            throw $this->createNotFoundException('Media not found (id = '.$id.')');
+        }
+        $em->remove($media);
+        $em->flush();
+
+        return $this->redirect($this->generateURL('refactor_medias'));
+    }
 }//end class

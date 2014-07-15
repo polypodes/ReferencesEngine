@@ -1,6 +1,67 @@
-{% extends "::layout.html.twig" %}
+{% extends "ApplicationRefactorReferenceBundle::layout.html.twig" %}
 {% block media_active %}class="active"{% endblock %}
 {% block body %}
+<section class="media-list container">
+    <header class="page-header row">
+        <h1 class="page-title col-md-3">{{ 'media.List'|trans }}</h1>
+
+		<form action="" method="get" class="search-form form-inline col-md-9">
+			<label class="sr-only" for="search">{{ 'media.Search'|trans }}</label>
+			<input type="text" class="form-control col-md-3" id="search-field" name="search" placeholder="{{ 'media.Search'|trans }}">
+			<button type="submit" class="sub btn btn-default" id="search-submit">{{ 'Search'|trans }}</button>
+
+			<div class="btn-group">
+			  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				    <span class="caret"></span>
+				    <span class="sr-only">Toggle Dropdown</span>
+			  	</button>
+			  	<ul class="dropdown-menu" role="menu">
+				    <li style="margin-left=5px;">{{ 'Sort'|trans }}</li>
+				    <li class="divider"></li>
+				    <li><a href="{{ path('refactor_medias', {'sort': 'asc'}) }}">{{ 'Ascending'|trans }}</a></li>
+				    <li><a href="{{ path('refactor_medias', {'sort': 'desc'}) }}">{{ 'Descending'|trans }}</a></li>
+				    <li class="divider"></li>
+				    <li><a href="{{ path('refactor_medias', {'sort' : 'recent'}) }}">{{ 'Recent'|trans }}</a></li>
+				    <li><a href="{{ path('refactor_medias', {'sort': 'old'}) }}">{{ 'Old'|trans }}</a></li>
+			  	</ul>
+			</div>
+		</form>
+    </header>
+
+	<div class="row">
+		<article id="new-elem" class="col-md-4 text-center">
+	  		<a href="{{ path('refactor_add_medias') }}" class="thumbnail">
+				<button type="button" class="btn btn-primary btn-lg">{{ 'media.New'|trans }}</button>
+			</a>
+		</article>
+		{% for media in medias %}
+	  	<article class="media-elem col-md-4 text-center media" data-search="{{media.name|lower}} {{media.description|lower}}">
+			<div class="thumbnail">
+				<h1>{{media.name}}</h1>
+	    		<figure>
+	    			{% thumbnail media, 'thumbnail' %}
+	    		</figure>
+
+		    	<div class="media-details">
+		      		<p>
+		    			<a href="{{ path('refactor_edit_medias', {'id': media.id}) }}" class="btn btn-warning btn-sm " role="button">
+		        			<span class="glyphicon glyphicon-edit"></span>
+		        			<span class="glyphicon-class">{{ 'Edit'|trans }}</span>
+		      			</a>
+
+
+			        	<a class="label-danger btn btn-remove btn-sm" role="button" data-url="{{ path('refactor_remove_medias', {'id': media.id}) }}" data-id = "{{media.id}}" data-title="{{media.name}}">
+			        		<span class="glyphicon glyphicon-remove"></span>
+			        		<span class="glyphicon-class" data-layout="center" data-type="confirm">{{ 'Delete'|trans }}</span>
+			        	</a>
+		       		</p>
+		       	</div>
+		    </div>
+		</article>
+		{% endfor %}
+	</div>
+</section>
+
 <div class = "item-container">
 	<div class="row" style="margin:auto;">
 	<div class="col-md-4 col-lg-3">

@@ -34,28 +34,25 @@
 			</div>
 		</div>
 		<div class = "jumbotron col-6 col-sm-6 col-lg-12">
-		{{ 'render.Title'|trans }}
+			{{ 'render.Title'|trans }}
 			<ul class="renders" data-prototype="{{ form_widget(form.renders.vars.prototype)|e }}">
 				{% for render in form.renders%}
-						<div class="col-lg-3">
-							<li>
-					        	{% if render.vars.value is not empty and render.vars.value.providerReference %}
-					            	<div >
-					                	{% thumbnail render.vars.value, 'admin' with {'class': 'img-polaroid media-object'} %}
-					            	</div>
-						            {% if sonata_admin_enabled is defined and sonata_admin_enabled %}
-						                <a href="{{ url('admin_sonata_media_media_edit', {id: render.vars.value.id}) }}"><strong>{{ render.vars.value.name }}</strong></a>
-						            {% else %}
-						                <strong>{{ render.vars.value.name }}</strong>
-						            {% endif %}
-					    	    {% endif %}
-
-					   		</li>
-				   		</div>
-					    <div style="display:none">
+					<li>
+			        	{% if render.vars.value is not empty and render.vars.value.providerReference %}
+			            	<div >
+			                	{% thumbnail render.vars.value, 'admin' with {'class': 'img-polaroid media-object'} %}
+			            	</div>
+				            {% if sonata_admin_enabled is defined and sonata_admin_enabled %}
+				                <a href="{{ url('admin_sonata_media_media_edit', {id: render.vars.value.id}) }}"><strong>{{ render.vars.value.name }}</strong></a>
+				            {% else %}
+				                <strong>{{ render.vars.value.name }}</strong>
+				            {% endif %}
+			    	    {% endif %}
+						<div style="display:none">
 					    	{{form_widget(render)}}
 						</div>
-				{% endfor %}
+			   		</li>
+		   		</div>
    			</ul>
     	</div>
     </div>

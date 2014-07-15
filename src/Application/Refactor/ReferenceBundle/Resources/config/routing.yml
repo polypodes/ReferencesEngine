@@ -1,46 +1,45 @@
 refactor_books:
     path:  /books
     defaults: { _controller: ApplicationRefactorReferenceBundle:Book:index}
-refactor_remove_books:
-    path:  /books/remove/{id}
-    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:remove}
-    requirements:
-        id:  \d+
-refactor_add_books:
-    path:  /books/add/
-    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:add}
 refactor_show_books:
     path:  /books/show/{id}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Book:show}
     requirements:
         id:  \d+
+refactor_add_books:
+    path:  /books/add/
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:add}
 refactor_edit_books:
     path:  /books/edit/{id}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Book:edit}
     requirements:
         id:  \d+
-
+refactor_remove_books:
+    path:  /books/remove/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Book:remove}
+    requirements:
+        id:  \d+
 
 
 refactor_projects:
     path:  /projects/{sort}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:index, sort: null}
-refactor_remove_projects:
-    path:  /projects/remove/{id}
-    defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:remove}
-    requirements:
-        id:  \d+
-refactor_add_projects:
-    path:  /projects/add/
-    defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:add}
 refactor_show_projects:
     path:  /projects/show/{id}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:show}
     requirements:
         id:  \d+
+refactor_add_projects:
+    path:  /projects/add/
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:add}
 refactor_edit_projects:
     path:  /projects/edit/{id}
     defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:edit}
+    requirements:
+        id:  \d+
+refactor_remove_projects:
+    path:  /projects/remove/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Fiche:remove}
     requirements:
         id:  \d+
 
@@ -56,7 +55,11 @@ refactor_edit_medias:
     defaults: { _controller: ApplicationRefactorReferenceBundle:Media:edit}
     requirements:
         id:  \d+
-
+refactor_remove_medias:
+    path:  /medias/remove/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Media:remove}
+    requirements:
+        id:  \d+
 
 refactor_pdf_projects:
     path:  /pdf/project/{id}

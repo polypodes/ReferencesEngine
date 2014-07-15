@@ -33,6 +33,8 @@ project.View: 'View project'
 ProjectUrl: "Project URL"
 tag.Add: 'Add a tag'
 tag.Title: 'Tags'
+media.Search: 'Name…'
+media.List: 'Medias'
 media.Add: 'Add a media'
 media.Selector: 'Choose a media'
 media.Title: 'Complementary medias'
@@ -53,3 +55,10 @@ Sort: "Sort"
 Logout: "Logout"
 Profile: "Profile"
 Display: "Display"
+reference.projects_added_to_book: |
+    {1} One project added to « %book_title% » book |
+    ]1,Inf]  %count% projects added to « %book_title% » book
+reference:
+    project:
+        deleted: Projet « %project_title% » supprimé
+        not_found: Project « %id% » not found

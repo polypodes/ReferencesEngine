@@ -151,6 +151,20 @@ class BookController extends Controller
             $em->persist($book);
             $em->flush();
 
+            $tr =
+            $request
+                ->getSession()
+                ->getFlashBag()
+                ->add('success', $this->get('translator')->transChoice(
+                    'reference.projects_added_to_book',
+                    $postedProjects->count(),
+                    array(
+                        '%count%' => $postedProjects->count(),
+                        '%book_title%' => $book->getTitle()
+                    )
+                ))
+            ;
+
             return $this->redirect($this->generateUrl('refactor_projects'));
         }
 
@@ -183,9 +197,9 @@ class BookController extends Controller
 
         return $this->render(
             'ApplicationRefactorReferenceBundle:Book:edit.html.twig', array(
-            'projects' => $projects,
-            'book' => $book,
-            'form' => $form->createView(),
+                'projects' => $projects,
+                'book' => $book,
+                'form' => $form->createView(),
             )
         );
     }

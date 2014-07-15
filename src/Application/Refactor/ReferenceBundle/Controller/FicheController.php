@@ -90,7 +90,7 @@ class FicheController extends Controller
         $project = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findOneById($id);
 
         if (!$project) {
-            throw $this->createNotFoundException('Fiche not found (id = '.$id.')');
+            throw $this->createNotFoundException($this->get('translator')->trans('reference.project.not_found', array('%id%' => $id)));
         }
 
         return $this->render(
@@ -209,13 +209,20 @@ class FicheController extends Controller
     public function editAction($id)
     {
         $em            = $this->getDoctrine()->getManager();
-        $allMedia      = $em->getRepository('ApplicationSonataMediaBundle:Media')->findAll();
         $project       = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findOneById($id);
+
+        if (!$project) {
+            throw $this->createNotFoundException($this->get('translator')->trans('reference.project.not_found', array('%id%' => $id)));
+        }
+
+        $allMedia      = $em->getRepository('ApplicationSonataMediaBundle:Media')->findAll();
         $allTags       = $em->getRepository('ApplicationRefactorReferenceBundle:Tag')->findAll();
         $liste_tags    = new ArrayCollection();
         $liste_medias  = new ArrayCollection();
         $liste_renders = new ArrayCollection();
         $mediaManager  = $this->container->get('sonata.media.manager.media');
+
+
 
         foreach ($project->getTags() as $tag) {
             $liste_tags->add($tag);
@@ -363,14 +370,18 @@ class FicheController extends Controller
         $project = $em->getRepository('ApplicationRefactorReferenceBundle:Fiche')->findOneById($id);
 
         if (!$project) {
-            throw $this->createNotFoundException('Fiche not found (id = '.$id.')');
+            throw $this->createNotFoundException($this->get('translator')->trans('reference.project.not_found', array('%id%' => $id)));
         }
 
         $request
             ->getSession()
             ->getFlashBag()
-            ->add('success', sprintf('Fiche « %s » deleted', $project->getTitle()));
-            ;
+            ->add('success', $this->get('translator')->trans(
+                'reference.project.deleted',
+                array('%project_title%' => $project->getTitle())
+            ))
+        ;
+
 
         $em->remove($project);
         $em->flush();

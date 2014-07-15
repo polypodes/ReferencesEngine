@@ -171,7 +171,7 @@ $(document).ready(function () {
     });
 
     //project index
-    $( ".project-mouseover" )
+    /*$( ".project-mouseover" )
         .on( "mouseenter", function() {
             $(this).children(".project-btn").show();
             $(this).children(".project-img").hide();
@@ -180,7 +180,7 @@ $(document).ready(function () {
             $(this).children(".project-btn").hide();
             $(this).children(".project-img").show();
         });
-
+        */
 
     //hold new tags
     collectionTagsHolder.append($newLinkLiTag);
