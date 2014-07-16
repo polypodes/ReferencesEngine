@@ -1089,8 +1089,22 @@ aside.sidebar{
 				}
 			}
 		}
+		span.submit{
+			position: absolute;
+			bottom: 20px;
+			right: 20px;
+			padding:12px 20px;
+			background-color:@red;
+			font-size: 14px;
+			font-weight: 300;
+			color:#FFFFFF;
+			border-radius:3px;
+			&:hover{
+				background-color: darken(@red,5%);
+				cursor:pointer;
+			}
+		}
 	}
-	
 }
 
 .editor{
