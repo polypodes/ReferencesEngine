@@ -32,12 +32,12 @@ gulp.task('vendor', function() {
     var vendorFiles = [
         'src/js/vendor/jquery.min.js',
         'src/js/vendor/jquery.ui.min.js',
-        'src/js/vendor/Chart.min.js',
         'src/js/vendor/angular.min.js',
         'src/js/vendor/angular-route.min.js',
         'src/js/vendor/angular.ui.sortable.js',
-        'src/js/vendor/angular-progress.js',
-        'src/js/vendor/ng-localstorage.js'
+        'src/js/vendor/ng-upload.min.js',
+        'src/js/vendor/ng-localstorage.js',
+        'src/js/vendor/Chart.min.js'
     ];
 
     return gulp.src(vendorFiles)

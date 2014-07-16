@@ -8,3 +8,27 @@ App.directive('focusOn', function() {
       });
    };
 });
+App.directive('file', function() {
+    return {
+        require:"ngModel",
+        restrict: 'A',
+        link: function($scope, el, attrs, ngModel){
+            el.bind('change', function(event){
+                $('input.fileSubmit').trigger('click');
+                $scope.$apply();
+            });
+        }
+    };
+});
+App.directive('cover', function() {
+    return {
+        require:"ngModel",
+        restrict: 'A',
+        link: function($scope, el, attrs, ngModel){
+            el.bind('change', function(event){
+                $('input.fileSubmitCover').trigger('click');
+                $scope.$apply();
+            });
+        }
+    };
+});

@@ -22,6 +22,16 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
         category:0
     }
 
+    // Files
+    $scope.files = [];
+    $scope.cover="";
+    $scope.isUploading=false;
+
+    $scope.uploadImg=function(){
+        console.log('test')
+        $scope.isUploading=true;
+    }
+
     if($routeParams.project_id!=undefined){
         $scope.project_data = Projects.get_by_id($routeParams.project_id);
     }
@@ -70,5 +80,19 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
         $scope.project_data.tags.splice(index,1);
         return false;
     };
+
+    $scope.uploadCoverComplete = function(content) {
+     $scope.isUploading=false;
+        if(content.status=="success"){
+            $scope.cover="uploads/files/"+content.fileName;
+        }
+    }
+
+    $scope.uploadComplete = function(content) {
+     $scope.isUploading=false;
+        if(content.status=="success"){
+            $scope.files.push({path:"uploads/files/"+content.fileName});
+        }
+    }
 
 }]);

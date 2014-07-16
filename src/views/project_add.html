@@ -1,6 +1,16 @@
 <section class="container add_project in">
     <div class="new_project_wysiwyg">
-        <div class="image"></div>
+        <div class="image" style="background-image:url({{cover}})">
+            <div class="gradient"></div>
+            <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)">
+                <section>
+                    <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-cover></input>
+                    <i class="fa fa-angle-down"></i><span>Ajouter une couverture</span>
+                    <input type="submit" class="fileSubmitCover">
+                </section>
+            </form>
+
+        </div>
         <div class="text">
 
             <h3>
@@ -38,12 +48,25 @@
     </div>
     <div class="bottom_box">
         <div class="medias">
-            <h3>Médias complémentaires</h3>
+            <h3>Médias complémentaires {{isUploading}}</h3>
             <ul>
-                <li class="add"><div><i class="fa fa-angle-down"></i><span>Ajouter un média</span></div></li>
+                <li class="add">
+                    <div>
+                        <form action="uploads/upload.php" ng-upload="uploadComplete(content)">
+                            
+                            <section>
+                                <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-file></input>
+                                <i class="fa fa-angle-down"></i><span>Ajouter un média</span>
+                                <input type="submit" class="fileSubmit">
+                            </section>
+                        </form>
+                    </div>
+                </li>
+                <li ng-repeat="file in files" style="background-image:url({{file.path}})"></li>
             </ul>
         </div>
     </div>
+
 
     <span class="submit" ng-click="addProject()">
         Ajouter le projet
