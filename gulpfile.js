@@ -36,7 +36,8 @@ gulp.task('vendor', function() {
         'src/js/vendor/angular.min.js',
         'src/js/vendor/angular-route.min.js',
         'src/js/vendor/angular.ui.sortable.js',
-        'src/js/vendor/angular-progress.js'
+        'src/js/vendor/angular-progress.js',
+        'src/js/vendor/ng-localstorage.js'
     ];
 
     return gulp.src(vendorFiles)
@@ -77,7 +78,7 @@ gulp.task('watch', function() {
     // Livereload server
     var liveServer = liveReload();
 
-    gulp.watch('dist/js/app.min.js', ['scripts'])
+    gulp.watch('src/js/*.js', ['scripts'])
     .on('change', function(event){
         liveServer.changed(event.path);
         console.log('Reloading for JS');

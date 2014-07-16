@@ -1,5 +1,6 @@
 App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$location,Categories) {
 
+
 	$scope.pageTitle="";
 
     $scope.mainItems = [
@@ -12,22 +13,11 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 		{path: '/add_book', title: 'Ajouter un cahier'}
     ];
 
-    $scope.projectsItems = [
-		{path: '/projects', title: "Tous les projets"},
-		{path: '/projects/1', title: "Catégorie 1"},
-		{path: '/projects/2', title: "Catégorie 2"},
-		{path: '/projects/3', title: 'Catégorie 3'}
-    ];
-
-    $scope.booksItems = [
-		{path: '/books', title: "Tous les cahiers"},
-		{path: '/books/1', title: "Catégorie 1"},
-		{path: '/books/2', title: "Catégorie 2"},
-		{path: '/books/3', title: 'Catégorie 3'}
-    ];
-
     $scope.categoriesItems = Categories.get();
 
+    // Add "all" links
+
+    Categories.saveLocal($scope.categoriesItems);
 
 	$scope.isActive = function(item) {
 		if (item.path == $location.path()) {
@@ -37,13 +27,13 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 		return false;
 	};
 
-	$scope.$on('$locationChangeStart', function(next, current) { 
-	   // ngProgress.start();
-	 });
+	// $scope.$on('$locationChangeStart', function(next, current) { 
+	//    // ngProgress.start();
+	//  });
 
-	$scope.$on('$locationChangeSuccess', function(next, current) {
-	   	// ngProgress.complete();
-	 });
+	// $scope.$on('$locationChangeSuccess', function(next, current) {
+	//    	// ngProgress.complete();
+	//  });
 
 	$scope.inputCategory={
 		project:"",
@@ -59,6 +49,8 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 			}
 			$scope.categoriesItems.projects.push({id:(parseInt(last_id)+1),title:$scope.inputCategory.project,path:'/projects/'+(parseInt(last_id)+1)});
 			$scope.inputCategory.project="";
+
+			Categories.saveLocal($scope.categoriesItems);
 		}
 	};
 
@@ -71,6 +63,8 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 			}
 			$scope.categoriesItems.books.push({id:(parseInt(last_id)+1),title:$scope.inputCategory.book,path:'/books/'+(parseInt(last_id)+1)});
 			$scope.inputCategory.book="";
+
+			Categories.saveLocal($scope.categoriesItems);
 		}
 	};
 

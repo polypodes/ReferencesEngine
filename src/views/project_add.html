@@ -18,29 +18,41 @@
             </div>
 
         </div>
+        <section class="classification">
+            <div class="categories">
+            <h3>Catégories</h3>
+                <ul>
+                    <li ng-repeat="category in categories.projects" ng-click='selectCategory($index)' ng-class="{'selected' : project_data.category == category.id}">{{category.title}}</li>
+                </ul>
+            </div>
+            <div class="tags">
+            <h3>Mots clés</h3>
+                <input type="text" ng-model="addedTag" ng-keyup="addTag($event)" placeholder="Ajouter un mot clé">
+                <ul>
+                    <li ng-repeat="tag in project_data.tags">{{tag}} <span ng-click='deleteTag($index)'>X</span></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </section>
         <div class="clear"></div>
     </div>
+    <div class="bottom_box">
+        <div class="medias">
+            <h3>Médias complémentaires</h3>
+            <ul>
+                <li class="add"><div><i class="fa fa-angle-down"></i><span>Ajouter un média</span></div></li>
+            </ul>
+        </div>
+    </div>
     <div class="clear"></div>
-    <div class="medias">
+    <!-- <div class="medias">
         <h3>Médias complémentaires</h3>
-        <div flow-init="{target: 'upload/upload_image.php'}"
-             flow-files-submitted="$flow.upload()"
-             flow-file-success="$file.msg = $message">
-
-            <div>Ajouter des fichiers : <input type="file" flow-btn/></div>
-            
-            <div class="media" ng-repeat="file in $flow.files">
-                <!--  <h2>{{$index+1}}</h2>  -->                
-                <h3>{{file.name}}</h3>
-                <p>{{file.msg}}</p>
-                <p>{{file.relativePath}}</p>
-                <img flow-img="$flow.files[$index]" />
-            </div>
-
-            <div class="clear"></div>
-
-        </div>
-
-        </div>
+       
+    </div> -->
+    <div class="submit">
+        <button class="submit" ng-click="addProject()">
+            Ajouter le projet
+        </button>
+    </div>
     </div>
 </section>

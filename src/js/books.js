@@ -101,4 +101,5 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
 
 App.controller('BooksCtrl', ['$scope','Books','navService','$routeParams', function ($scope,Books,navService,$routeParams) {
     $scope.books = Books.get($routeParams.book_id);
+    Books.saveLocal($scope.books);
 }]);

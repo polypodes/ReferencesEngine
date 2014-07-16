@@ -6,7 +6,7 @@
         </section>
     </section>
     <section class="items">
-        <a ng-repeat="project in projects | filter : search" href="#/project/{{$index}}">
+        <a ng-repeat="project in projects | filter : search" href="#/project/{{project.id}}">
             <article class="item">
                 <section class="project">
                 
@@ -29,6 +29,7 @@
                     <div class="buttons">
                         
                     </div>
+                    
                 </section>
             </article>
         </a>
