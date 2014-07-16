@@ -68,4 +68,14 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 		}
 	};
 
+	$scope.deleteCategory=function(t,i){
+		if(t=='projects'){
+			$scope.categoriesItems.projects.splice(i,1);
+		}else if(t=='books'){
+			$scope.categoriesItems.books.splice(i,1);
+		}
+		Categories.saveLocal($scope.categoriesItems);
+	};
+
+
 }]);

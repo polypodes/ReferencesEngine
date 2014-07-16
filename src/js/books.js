@@ -6,10 +6,11 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
     // Fix width & heights
     utils.fixVScrollHeight();
 
-    var projects = Projects.get();
+    var projects = Projects.get(0);
     for(var i in projects){
         projects[i].added=false;
     }
+
 
     $scope.projects = projects;
     $scope.projects_a = [];
@@ -31,18 +32,20 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
     }
 
     $scope.addToList = function(id){
-        if(!$scope.projects[id].added){
-            $scope.projects[id].added=true;
-            $scope.projects_a.push($scope.projects[id]);
+        var i2=0;
+        for(var i in $scope.projects){
+            if(id==$scope.projects[i].id)
+                i2=i;
+        }
+
+        if(!$scope.projects[i2].added){
+            $scope.projects[i2].added=true;
+            $scope.projects_a.push($scope.projects[i2]);
         }else{
-            $scope.projects[id].added=false;
+            $scope.projects[i2].added=false;
             for(var i in $scope.projects_a){
-                if($scope.projects_a[i].id==$scope.projects[id].id){
-                    if(i==$scope.openedSlide){
-                        $scope.openedSlide="couv";
-                    }
-                    $scope.projects_a.remove(i);
-                }
+                if($scope.projects_a[i].id==$scope.projects[i2].id)
+                    $scope.projects_a.splice(i,1);
             }
         }
     }

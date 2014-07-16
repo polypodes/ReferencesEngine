@@ -12,11 +12,9 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
     //     {id:7,intro:"Projet web",title:"Site e-cigarette",date:"Juillet 2014",books_count:"1",desc:desc,tags:['css','nantes','open-source'],category:0}
     // ]; 
 
-    var projects = localStorageService.get('projects');
-
     return {
         get: function(id) {
-            console.log(id)
+            var projects = localStorageService.get('projects');
             if(id!=0){
                 var temp_projects=[];
                 for(var i in projects){
@@ -31,6 +29,7 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
             return temp_projects;
         },
         get_by_id : function(id) {
+            var projects = localStorageService.get('projects');
             for(var i in projects){
                 if(projects[i].id==id){
                     return projects[i];
