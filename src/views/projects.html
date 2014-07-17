@@ -6,15 +6,17 @@
         </section>
     </section>
     <section class="items">
-        <a ng-repeat="project in projects | filter : search" href="#/project/{{project.id}}">
-            <article class="item">
-                <section class="project">
-                
+        <div ng-repeat="project in projects | filter : search">
+           
+            <div class="item"> 
+                <span class="close" ng-click="deleteProject(project.id)">x</span>
+                <a class="project" href="#/project/{{project.id}}">
                     <h4>{{project.title}}</h4>
                     <div class="gradient"></div>
 
-                    <div class="image" style="background-image:url(http://lorempixel.com/400/{{300+$index}}/)"></div>
+                    <div class="image" style="background-image:url({{project.cover}})"></div>
                     <div class="desc">
+                        
                         <h4>{{project.title}}</h4>
                         <section class="tags">
                             <span ng-repeat="tag in project.tags">{{tag}}</span>
@@ -30,8 +32,8 @@
                         
                     </div>
                     
-                </section>
-            </article>
-        </a>
+                </a>
+            </div>
+        </div>
     </section>
 </section>

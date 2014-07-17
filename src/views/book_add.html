@@ -20,7 +20,7 @@
                         <h4>{{project.title}}</h4>
                         <div class="gradient"></div>
                         
-                        <div class="image" style="background-image:url(http://lorempixel.com/400/{{300+$index}}/)"></div>
+                        <div class="image" style="background-image:url({{project.cover}})"></div>
                         <div class="desc">
                         <h4>{{project.title}}</h4>
                         <section class="tags">
@@ -64,7 +64,7 @@
                             <h4>{{project_a.title}}</h4>
                             <div class="gradient"></div>
 
-                            <div class="image" style="background-image:url(http://lorempixel.com/400/{{300+$index}}/)"></div>
+                            <div class="image" style="background-image:url({{project_a.cover}})"></div>
                             <div class="desc">
                                 <h4>{{project_a.title}}</h4>
                                 <section class="tags">
@@ -89,21 +89,28 @@
     <section class="right_container">
                 
                 <h3>Couverture</h3>
-                <form action="#">
+                <section class="form">
                     <label>Titre du cahier</label>
                     <input type="text" ng-model="book.btitle" ng-keyup="bookInfoKeypress()">
                     <label>Description du cahier</label>
                     <input type="text" ng-model="book.subtitle">
                     <label>Infos complémentaires du cahier</label>
                     <input type="text" ng-model="book.bottomline">
-                    <label>Image de fond</label>
-                    <input type="text" ng-model="book.image" ng-keyup="bookInfoKeypress()">
-                </form>
+                    <label>Image de couverture</label>
+                    <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)"> 
+                        <section class="book_cover" style="background-image:url({{book.cover}})" ng-class="{'added' : book.cover != ''}">
+                            <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-file></input>
+                            <span>Ajouter un média</span>
+                            <input type="submit" class="fileSubmit">
+                        </section>
+                    </form>
+
+                </section>
                 
                 <!-- <img src="" alt="" id="cover_generated"> -->
                 <h3>Theme</h3>
                 <ul class="themes">
-                    <li ng-repeat='theme in themes' ng-click="chooseTheme($index)" ng-class="{'actual' : theme_a.id == theme.id}">{{theme.title}}</li>
+                    <li ng-repeat='theme in themes' ng-click="chooseTheme($index)" ng-class="{'actual' : book.theme.id == theme.id}">{{theme.title}}</li>
                 </ul>
             </div>
 

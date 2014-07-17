@@ -8,6 +8,8 @@ App.directive('focusOn', function() {
       });
    };
 });
+
+// File upload
 App.directive('file', function() {
     return {
         require:"ngModel",
@@ -32,3 +34,36 @@ App.directive('cover', function() {
         }
     };
 });
+
+App.factory('Notify',['$rootScope','$timeout', function($rootScope,$timeout) {
+    var msgs = [];
+    $rootScope.notify="opened";
+    return function(type,title,msg) {
+
+        $rootScope.notify={
+            state:"opened",
+            type:type,
+            title:title,
+            msg:msg
+        };
+
+        var timeout;
+        function initTimeout(){
+            console.log('reinit');
+            $timeout.cancel(timeout);
+            timeout = $timeout(function(){
+                $rootScope.notify.state="closed";
+            },2500);
+        }
+        initTimeout();
+
+        $('.info-box').hover(
+            function(){
+                $timeout.cancel(timeout);
+            },
+            function(){
+                initTimeout();
+            });
+
+    };
+  }]);

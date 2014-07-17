@@ -37,6 +37,7 @@ gulp.task('vendor', function() {
         'src/js/vendor/angular.ui.sortable.js',
         'src/js/vendor/ng-upload.min.js',
         'src/js/vendor/ng-localstorage.js',
+        'src/js/vendor/angular-animate.min.js',
         'src/js/vendor/Chart.min.js'
     ];
 

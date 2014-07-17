@@ -4,8 +4,8 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 	$scope.pageTitle="";
 
     $scope.mainItems = [
-		{path: '/overview', title: "Vue d'ensemble"},
-		{path: '/settings', title: 'Réglages'}
+		{path: '/overview', title: "Vue d'ensemble", icon:"fa-tachometer"},
+		{path: '/settings', title: 'Réglages', icon:"fa-cog"}
     ];
 
     $scope.addItems = [

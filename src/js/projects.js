@@ -1,8 +1,19 @@
-App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams', function ($scope,Projects,$routeParams) {
+App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify', function ($scope,Projects,$routeParams,Notify) {
+
     $scope.projects = Projects.get($routeParams.project_id);
+
+    $scope.deleteProject=function(id){
+        for(var i in $scope.projects){
+            if($scope.projects[i].id==id){
+                $scope.projects.splice(i,1);
+                Notify('success','Projet supprimé','Le projet a été supprimé avec succès');
+            }
+        }
+        Projects.saveLocal($scope.projects);
+    }
 }]);
 
-App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams', function ($scope,Projects,Categories,$routeParams) {
+App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams','Notify', function ($scope,Projects,Categories,$routeParams,Notify) {
 
     utils.fixBottomBoxHeight();
 
@@ -19,16 +30,15 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
         date:date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear(),
         desc:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci repellendus alias modi praesentium, delectus! Itaque odit ratione sit quisquam quia, cum quaerat ipsam mollitia vero deserunt. Asperiores atque nesciunt quidem.",
         tags:[],
-        category:0
+        category:0,
+        cover:"#",
+        files:[]
     }
 
     // Files
-    $scope.files = [];
-    $scope.cover="";
     $scope.isUploading=false;
 
     $scope.uploadImg=function(){
-        console.log('test')
         $scope.isUploading=true;
     }
 
@@ -82,16 +92,21 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
     };
 
     $scope.uploadCoverComplete = function(content) {
-     $scope.isUploading=false;
+        console.log(content);
+        $scope.isUploading=false;
         if(content.status=="success"){
-            $scope.cover="uploads/files/"+content.fileName;
+            $scope.project_data.cover="uploads/files/"+content.fileName;
+        }else{
+            Notify('error',"Erreur d'upload","Image de couverture refusée, verifiez la taille et l'extension de votre fichier.");
         }
     }
 
     $scope.uploadComplete = function(content) {
-     $scope.isUploading=false;
+        $scope.isUploading=false;
         if(content.status=="success"){
-            $scope.files.push({path:"uploads/files/"+content.fileName});
+            $scope.project_data.files.push({path:"uploads/files/"+content.fileName});
+        }else{
+            Notify('error',"Erreur d'upload","Upload refusé, verifiez la taille et l'extension de votre fichier.");
         }
     }
 

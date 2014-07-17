@@ -59,11 +59,28 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
         axis: 'y'
     };
 
-    $scope.book = {}; // Book infos
+    $scope.book = {
+        cover:'',
+        btitle:'Titre du cahier',
+        subtitle:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eum mollitia voluptatibus. Tempore impedit reprehenderit blanditiis praesentium ab, nemo nisi, quas eaque, voluptatem perferendis quidem, architecto exercitationem saepe facilis illo.',
+        bottomline:'Pour [NOM DU CLIENT] fait le [DATE]'
+    }; // Book infos
     $scope.couv_state = {}; // Couv state infos
 
     $scope.chooseTheme = function(id){
-        $scope.theme_a=$scope.themes[id]
+        $scope.book.theme=$scope.themes[id]
+    }
+
+    $scope.isUploading=false;
+    $scope.uploadImg = function(){
+        $scope.isUploading=true;
+    }
+    $scope.uploadCoverComplete = function(content) {
+     $scope.isUploading=false;
+        if(content.status=="success"){
+            $scope.book.cover="uploads/files/"+content.fileName;
+            console.log($scope.book.cover);
+        }
     }
 
     // COVER EDITION
@@ -96,8 +113,11 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
     }
 
     $scope.openEditor = function(){
-        $('link.template').attr('href','src/templates/'+$scope.theme_a.src+".css");
-        $scope.show_editor=true;
+        $scope.book.projects=$scope.projects_a;
+        console.log($scope.book);
+        console.log('saving');
+        // $('link.template').attr('href','src/templates/'+$scope.book.theme.src+".css");
+        // $scope.show_editor=true;
     }
 }]);
 
