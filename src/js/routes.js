@@ -9,10 +9,6 @@ App.config(['$routeProvider', function ($routeProvider) {
     templateUrl: 'src/views/project_add.html',
     controller: 'AddProjectCtrl'
   })
-  .when('/books', {
-    templateUrl: 'src/views/books.html',
-    controller: 'BooksCtrl'
-  })
   .when('/books/:book_id?', {
     templateUrl: 'src/views/books.html',
     controller: 'BooksCtrl'

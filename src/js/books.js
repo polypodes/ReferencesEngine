@@ -6,13 +6,15 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
     // Fix width & heights
     utils.fixVScrollHeight();
 
+    // Init projects
     var projects = Projects.get(0);
     for(var i in projects){
         projects[i].added=false;
     }
 
-
+    // All projects
     $scope.projects = projects;
+    // Projects added to the book
     $scope.projects_a = [];
 
     $scope.presentation_type = {
@@ -20,8 +22,10 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
         all_projects : "block"
     }
 
+    // Presentation 
+    // ------------
+
     $scope.themes = Themes.get();
-    $scope.theme_a = {};
 
     $scope.changePresentation = function(type,projects){
         if(projects=="my_projects"){
@@ -50,11 +54,6 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
         }
     }
 
-    $scope.openedSlide = "couv";
-    $scope.openDetails = function(id){
-        $scope.openedSlide=id;
-    }
-
     $scope.sortableOptions = {
         axis: 'y'
     };
@@ -63,13 +62,17 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
         cover:'',
         btitle:'Titre du cahier',
         subtitle:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eum mollitia voluptatibus. Tempore impedit reprehenderit blanditiis praesentium ab, nemo nisi, quas eaque, voluptatem perferendis quidem, architecto exercitationem saepe facilis illo.',
-        bottomline:'Pour [NOM DU CLIENT] fait le [DATE]'
+        bottomline:'Pour [NOM DU CLIENT] fait le [DATE]',
+        cover:'uploads/files/53c7c338ad51a.png',
+        theme:$scope.themes[0]
     }; // Book infos
     $scope.couv_state = {}; // Couv state infos
 
     $scope.chooseTheme = function(id){
-        $scope.book.theme=$scope.themes[id]
+        $scope.book.theme=$scope.themes[id];
+        $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css")
     }
+    $scope.chooseTheme(0);
 
     $scope.isUploading=false;
     $scope.uploadImg = function(){
@@ -83,42 +86,16 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http', function ($
         }
     }
 
-    // COVER EDITION
-    $scope.bookInfoKeypress = function(){
-        if($scope.book.btitle != undefined && $scope.book.image != undefined && $scope.book.btitle != "" && $scope.book.image != ""){
-            if($scope.couv_state.a4!="coverEditor"){
-                $scope.couv_state.a4="generated";
-            }
-            $scope.couv_state.pres="generated";
-            $scope.couv_state.web="generated";
-        }
-    }
-
-    $scope.previewBook = function(){
-        var n_book = {
-            book : {
-                couv : $scope.book,
-                couv_state : $scope.couv_state,
-                theme : $scope.theme_a
-            },
-            slides : $scope.projects_a
-        };
-
-        $http({
-            method  : 'POST',
-            url     : 'templating/generate_json.php',
-            data    : $.param({data:n_book}),  // pass in data as strings
-            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-        });
-    }
 
     $scope.openEditor = function(){
-        $scope.book.projects=$scope.projects_a;
-        console.log($scope.book);
-        console.log('saving');
-        // $('link.template').attr('href','src/templates/'+$scope.book.theme.src+".css");
-        // $scope.show_editor=true;
+        var book = $scope.book;
+        book.projects = $scope.projects_a;
+        $scope.show_editor=true;
+        console.log(book);
     }
+
+    $scope.projects_a = $scope.projects;
+
 }]);
 
 

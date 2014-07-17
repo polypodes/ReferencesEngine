@@ -2,26 +2,31 @@
 
 <section class="preview render">
     <article class="cover">
-        <div class="cover_image" style="background-image:url({{book.image}})"></div>
+        <div class="cover_image" style="background-image:url({{book.cover}})"></div>
         <div class="cover_content">
-            <h1>{{book.btitle}}</h1>
-            <h2>{{book.subtitle}}</h2>
-            <h4>{{book.bottomline}}</h4>
+            <h1 class="text">{{book.btitle}}</h1>
+            <h2 class="text">{{book.subtitle}}</h2>
+            <h4 class="text">{{book.bottomline}}</h4>
         </div>
+        <div class="gradient"></div>
     </article>
-    <article class="item" ng-repeat="project_a in projects_a">
-        <section class="project">
+    <article ng-repeat="project_a in projects_a">
+      <article class="item">
+          <section class="project">
 
-            <div class="project_image" style="background-image:url({{project_a.image}})"></div>
-            <div class="project_content">
+              <div class="project_image" style="background-image:url({{project_a.cover}})"></div>
+              <div class="project_content">
 
-               <h4>{{project_a.intro}}</h4>
-               <h2>{{project_a.title}}</h2>
-               <h4>{{project_a.date}}</h4>
-               <div class="desc">
-                   {{project_a.desc}}
-               </div>
-        </section>
+                 <h3>{{project_a.intro}}</h3>
+                 <h2>{{project_a.title}}</h2>
+                 <h4>{{project_a.date}}</h4>
+                 <div class="desc">
+                     {{project_a.desc}}
+                 </div>
+            </div>
+            <div class="gradient"></div>
+          </section>
+      </article>
     </article>
 </section>
 

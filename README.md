@@ -1,7 +1,7 @@
-refaktor
+Refaktor
 ========
 
-## Installation ##
+### Installation ###
 
 Installation des dépendances <code>npm install</code>
 

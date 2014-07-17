@@ -20,7 +20,7 @@
                         <h4>{{project.title}}</h4>
                         <div class="gradient"></div>
                         
-                        <div class="image" style="background-image:url({{project.cover}})"></div>
+                        <div class="image" back-img="{{project.cover}}"></div>
                         <div class="desc">
                         <h4>{{project.title}}</h4>
                         <section class="tags">
@@ -64,7 +64,7 @@
                             <h4>{{project_a.title}}</h4>
                             <div class="gradient"></div>
 
-                            <div class="image" style="background-image:url({{project_a.cover}})"></div>
+                            <div class="image" back-img="{{project_a.cover}}"></div>
                             <div class="desc">
                                 <h4>{{project_a.title}}</h4>
                                 <section class="tags">
@@ -98,7 +98,7 @@
                     <input type="text" ng-model="book.bottomline">
                     <label>Image de couverture</label>
                     <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)"> 
-                        <section class="book_cover" style="background-image:url({{book.cover}})" ng-class="{'added' : book.cover != ''}">
+                        <section class="book_cover" ng-style="{'background-image':'url('+book.cover+')'}" ng-class="{'added' : book.cover != ''}">
                             <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-file></input>
                             <span>Ajouter un média</span>
                             <input type="submit" class="fileSubmit">

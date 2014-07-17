@@ -1,6 +1,6 @@
 <section class="container add_project in">
     <div class="new_project_wysiwyg">
-        <div class="image" style="background-image:url({{project_data.cover}})">
+        <div class="image" ng-style="{'background-image':'url('+project_data.cover+')'}">
             <div class="gradient"></div>
             <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)">
                 <section>
@@ -48,7 +48,7 @@
     </div>
     <div class="bottom_box">
         <div class="medias">
-            <h3>Médias complémentaires {{isUploading}}</h3>
+            <h3>Médias complémentaires</h3>
             <ul>
                 <li class="add">
                     <div>
@@ -62,7 +62,11 @@
                         </form>
                     </div>
                 </li>
-                <li ng-repeat="file in project_data.files" style="background-image:url({{file.path}})"></li>
+                <li ng-repeat="file in project_data.files">
+                    <div ng-style="{'background-image':'url('+file.path+')'}">
+                    
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

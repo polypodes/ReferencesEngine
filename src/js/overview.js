@@ -2,12 +2,31 @@ App.controller('OverviewCtrl', ['$scope','Projects', function ($scope,Projects) 
     
     $scope.pageTitle="Vue d'ensemble";
 
+    // DATES GENERATING
+    var to = new Date();
+	var from = new Date();
+	from.setDate(from.getDate() - 14);
+
+	var day;
+	var dates = [];
+	var dates_values = [];
+
+	while(from <= to) {
+	    day = to.getDate()
+	    to = new Date(to.setDate(--day));
+	    var date = to.getDate()+'/'+(to.getMonth()+1)+'/'+to.getFullYear();
+	    dates.push(date);
+
+	    var val = Math.floor(Math.random()*201);
+	    dates_values.push(val);
+	}
+
     $('canvas#consultations').attr('width',$('.top .graph').width()-40);
 
     var ctx = document.getElementById("consultations").getContext("2d");
 
     var data = {
-	    labels: ["08/07", "09/07", "10/07", "11/07", "12/07", "13/07", "14/07", "15/07"],
+	    labels: dates,
 	    datasets: [
 	        {
 	            label: "Consultations",
@@ -17,7 +36,7 @@ App.controller('OverviewCtrl', ['$scope','Projects', function ($scope,Projects) 
 	            pointStrokeColor: "#fff",
 	            pointHighlightFill: "#fff",
 	            pointHighlightStroke: "rgba(220,220,220,1)",
-	            data: [30, 65, 59, 80, 81, 56, 55, 40]
+	            data: dates_values
 	        }
 	    ]
 	};
@@ -31,12 +50,12 @@ App.controller('OverviewCtrl', ['$scope','Projects', function ($scope,Projects) 
 	    pointDot : true,
 	    pointDotRadius : 4,
 	    pointDotStrokeWidth : 1,
-	    pointHitDetectionRadius : 20,
-	    datasetStroke : true,
+	    pointHitDetectionRadius : 30,
+	    showTooltips: false,
+	    responsive:true,
+	    datasetStroke : false,
 	    datasetStrokeWidth : 2,
-	    datasetFill : true,
-	    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-
+	    datasetFill : true
 	};
 
     var myLineChart = new Chart(ctx).Line(data, options);

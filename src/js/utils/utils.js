@@ -7,8 +7,7 @@ var utilsClass = function(){
     this.fixBottomBoxHeight=function(){
         var pos = $('.new_project_wysiwyg').height();
         var h = $(document).height();
-        var fh = h-(pos+100);
-        console.log(fh)
+        var fh = h-(pos+170);
         $('.bottom_box').css("height",fh+"px")
     }
 }

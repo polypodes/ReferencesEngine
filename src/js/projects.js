@@ -13,7 +13,7 @@ App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify', fun
     }
 }]);
 
-App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams','Notify', function ($scope,Projects,Categories,$routeParams,Notify) {
+App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams','Notify','$location', function ($scope,Projects,Categories,$routeParams,Notify,$location) {
 
     utils.fixBottomBoxHeight();
 
@@ -31,7 +31,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
         desc:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci repellendus alias modi praesentium, delectus! Itaque odit ratione sit quisquam quia, cum quaerat ipsam mollitia vero deserunt. Asperiores atque nesciunt quidem.",
         tags:[],
         category:0,
-        cover:"#",
+        cover:"dist/img/sample.png",
         files:[]
     }
 
@@ -70,6 +70,8 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
             $scope.projects[i]=finalProject;
 
         }
+        $location.path( "/projects/0" );
+        Notify('success','Projet ajouté','Le projet a été ajouté avec succès')
 
         Projects.saveLocal($scope.projects);
     }

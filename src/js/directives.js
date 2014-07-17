@@ -35,6 +35,17 @@ App.directive('cover', function() {
     };
 });
 
+// Background image
+App.directive('backImg', function(){
+    return function(scope, element, attrs){
+        var url = attrs.backImg;
+        element.css({
+            'background-image': 'url(' + url +')',
+            'background-size' : 'cover'
+        });
+    };
+});​
+
 App.factory('Notify',['$rootScope','$timeout', function($rootScope,$timeout) {
     var msgs = [];
     $rootScope.notify="opened";

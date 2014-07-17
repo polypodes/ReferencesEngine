@@ -6,6 +6,7 @@ var App = angular.module('App', ['ngRoute','ui.sortable','LocalStorageModule','n
   localStorageServiceProvider.setPrefix('_rfktor');
 }]);
 
+// Notification init
 App.run(['$rootScope', function($rootScope){
     $rootScope.notify = {
     	state:"closed",
