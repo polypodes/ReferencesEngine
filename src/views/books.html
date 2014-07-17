@@ -7,8 +7,9 @@
     </section>
 
     <section class="items">
+        <div ng-if="books.length==0">Aucun cahier</div>
         <div ng-repeat="book in books | filter : search">
-            <article class="item">
+            <article class="item book">
                 <span class="close" ng-click="deleteBook(book.id)">x</span>
                 <a class="book" href="#/book/{{book.id}}">
                     <div class="gradient"></div>
