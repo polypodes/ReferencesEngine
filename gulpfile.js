@@ -8,11 +8,13 @@ var minifyCss = require('gulp-minify-css');
 var prefixCss = require('gulp-autoprefixer');
 // JS tasks
 var uglifyJS = require('gulp-uglify');
+var jshint = require('gulp-jshint');
 // Various tasks
 var rename = require('gulp-rename');
 var liveReload = require('gulp-livereload');
 var concat = require('gulp-concat');
 var filesize = require('gulp-filesize');
+
 
 
 // Compile LESS
@@ -65,6 +67,7 @@ gulp.task('scripts', function() {
     ];
 
     return gulp.src(appFiles)
+        .pipe(jshint())
         .pipe(concat('app.min.js'))
         .pipe(uglifyJS())
         .pipe(filesize())
@@ -78,6 +81,12 @@ gulp.task('watch', function() {
 
     // Livereload server
     var liveServer = liveReload();
+
+    gulp.watch('src/js/utils/*.js', ['scripts'])
+    .on('change', function(event){
+        liveServer.changed(event.path);
+        console.log('Reloading for JS');
+    });
 
     gulp.watch('src/js/*.js', ['scripts'])
     .on('change', function(event){

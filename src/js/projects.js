@@ -11,6 +11,7 @@ App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify', fun
         }
         Projects.saveLocal($scope.projects);
     }
+
 }]);
 
 App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams','Notify','$location', function ($scope,Projects,Categories,$routeParams,Notify,$location) {

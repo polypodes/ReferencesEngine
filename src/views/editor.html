@@ -26,11 +26,14 @@
             </div>
             <div class="gradient"></div>
           </section>
+          <div class="pagination">Projet n°{{$index}}</div>
       </article>
-      <article class="item">
+      <article class="item" ng-if="project_a.files.length>0">
           <div class="medias">
-            test
+            <h3>{{project_a.title}} | Medias</h3>
+            <img ng-repeat="image in project_a.files" ng-src="{{image.path}}" alt="">
           </div>
+          <div class="pagination">Médias complémentaires - Projet n°{{$index+1}}</div>
       </article>
     </section>
 </section>

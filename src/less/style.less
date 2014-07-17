@@ -429,6 +429,12 @@ aside.sidebar{
 	@item_gutter:7px;
 	.items{
 		padding:20px 13px;
+
+		>div.ng-leave{
+			// animation: zoomOut 0.2s;
+			// animation-fill-mode: forwards;
+		}
+		
 		.item{
 			width: 20%;
 			float:left;
@@ -541,11 +547,13 @@ aside.sidebar{
 					}
 				}
 			}
+
 			.book{
 				background-color:@grey;
 				position: relative;
 				border-radius:4px;
 				overflow:hidden;
+				display: block;
 
 				.image{
 					width:100%;
@@ -583,11 +591,6 @@ aside.sidebar{
 							color:#FFFFFF;
 						}
 					}
-				}
-
-				transition:transform 0.2s;
-				&:hover{
-					transform:translateY(-5px);
 				}
 			}
 			

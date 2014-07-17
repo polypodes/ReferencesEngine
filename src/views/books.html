@@ -7,13 +7,14 @@
     </section>
 
     <section class="items">
-        <a ng-repeat="book in books | filter : search" href="#/book/{{$index}}">
+        <div ng-repeat="book in books | filter : search">
             <article class="item">
-                <section class="book">
+                <span class="close" ng-click="deleteBook(book.id)">x</span>
+                <a class="book" href="#/book/{{book.id}}">
                     <div class="gradient"></div>
                     <div class="image" back-img="{{book.cover}}"></div>
                     <div class="desc">
-                        <h4>{{book.title}}</h4>
+                        <h4>{{book.btitle}}</h4>
                         <div class="date">
                             <span>{{book.date}}</span>
                         </div>
@@ -21,8 +22,8 @@
                     <div class="buttons">
                         
                     </div>
-                </section>
+                </a>
             </article>
-        </a>
+        </div>
     </section>
 </section>

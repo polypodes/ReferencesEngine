@@ -6,6 +6,7 @@
         </section>
     </section>
     <section class="items">
+        <div ng-if="projects.length==0">Aucun projet</div>
         <div ng-repeat="project in projects | filter : search">
            
             <div class="item"> 
