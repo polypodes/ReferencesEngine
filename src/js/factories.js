@@ -24,7 +24,7 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
 
             return temp_projects;
         },
-        get_by_id : function(id) {
+        getById : function(id) {
             var projects = localStorageService.get('projects');
             checkExisting(projects);
             for(var i in projects){
@@ -36,6 +36,36 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
         saveLocal : function(data){
             localStorageService.set('projects',data);
             console.log('saved projects to localstorage')
+        },
+        add : function(data){
+            var projects = localStorageService.get('projects');
+
+            var last_id=0;
+
+            for(var i in projects){
+                last_id=projects[i].id;
+            }
+            data.id=last_id+1;
+
+            console.log(data.id);
+            projects.push(data);
+
+            console.log(projects);
+
+            localStorageService.set('projects',projects);
+
+            return data.id;
+        },
+        edit : function(id,data){
+            var projects = localStorageService.get('projects');
+
+            for(var i in projects){
+                if(projects[i].id==id)
+                    last_id=i;
+            }
+
+            projects[last_id]=data;
+            localStorageService.set('projects',projects);
         }
     };
 }]);

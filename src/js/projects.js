@@ -44,7 +44,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
     }
 
     if($routeParams.project_id!=undefined){
-        $scope.project_data = Projects.get_by_id($routeParams.project_id);
+        $scope.project_data = Projects.getById($routeParams.project_id);
     }
 
     $scope.addProject=function(){ 
@@ -54,28 +54,15 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
 
         if(finalProject.id==null){
             // Create a project, so find a new ID
-            for(var i in $scope.projects){
-                last_id=$scope.projects[i].id;
-            }
-            finalProject.id=last_id+1;
-            $scope.projects.push(finalProject);
-
-
+            Projects.add(finalProject);
+            Notify('success','Projet ajouté','Le projet a été ajouté avec succès')
         }else if($routeParams.project_id!=undefined){
-
             // Edit a projet, so edit an existing ID
-            for(var i in $scope.projects){
-                if($scope.projects[i].id==finalProject.id)
-                    last_id=i;
-            }
-            $scope.projects[i]=finalProject;
-
+            Projects.edit($routeParams.project_id,finalProject);
+            Notify('success','Projet modifié','Le projet a été modifié avec succès')
         }
-        
-        $location.path( "/projects/0" );
-        Notify('success','Projet ajouté','Le projet a été ajouté avec succès')
 
-        Projects.saveLocal($scope.projects);
+        $location.path( "/projects/0" );
     }
 
     $scope.selectCategory=function(index){
