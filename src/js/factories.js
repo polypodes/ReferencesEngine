@@ -337,6 +337,12 @@ App.factory('Stats', function () {
             new_visits : stats.views.total.today-stats.views.total.yesterday
         }
 
+        if(stats.views.variations.growth>=0)
+            stats.views.variations.growth="+"+stats.views.variations.growth;
+
+        if(stats.views.variations.new_visits>=0)
+            stats.views.variations.new_visits="+"+stats.views.variations.new_visits;
+
         return stats;
     }
   };
