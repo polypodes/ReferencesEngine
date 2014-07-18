@@ -13,6 +13,10 @@ App.config(['$routeProvider', function ($routeProvider) {
     templateUrl: 'src/views/books.html',
     controller: 'BooksCtrl'
   })
+  .when('/book/:book_id?/edit', {
+    templateUrl: 'src/views/editor.html',
+    controller: 'BookEditorCtrl'
+  })
   .when('/book/:book_id?', {
     templateUrl: 'src/views/book_add.html',
     controller: 'AddBookCtrl'

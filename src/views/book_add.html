@@ -12,9 +12,6 @@
         <div class="scrollable">
             <section class="items {{presentation_type.all_projects}}">
                 <article class="item" ng-class="{'added' : project.added == true}" ng-repeat="project in projects  | filter : search" ng-click="addToList(project.id)">
-                    <div class="added">
-                        AJOUTÉ
-                    </div>
 
                     <section class="project">
                         <h4>{{project.title}}</h4>
@@ -96,14 +93,27 @@
                     <input type="text" ng-model="book.subtitle">
                     <label>Infos complémentaires du cahier</label>
                     <input type="text" ng-model="book.bottomline">
-                    <label>Image de couverture</label>
-                    <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)"> 
-                        <section class="book_cover" ng-style="{'background-image':'url('+book.cover+')'}" ng-class="{'added' : book.cover != ''}">
-                            <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-file></input>
-                            <span>Ajouter un média</span>
-                            <input type="submit" class="fileSubmit">
-                        </section>
-                    </form>
+                    
+                    <div class="cols">
+                        <div class="col">
+                            <label>Image de couverture</label>
+                            <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)"> 
+                                <section class="book_cover" ng-style="{'background-image':'url('+book.cover+')'}" ng-class="{'added' : book.cover != ''}">
+                                    <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-file></input>
+                                    <span>Ajouter un média</span>
+                                    <input type="submit" class="fileSubmit">
+                                </section>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <label>Catégories</label>
+                            <ul class="categories">
+                                <li ng-repeat="category in categories.books" ng-click='selectCategory($index)' ng-class="{'selected' : book.category == category.id}">{{category.title}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    
 
                 </section>
                 
@@ -117,10 +127,7 @@
     </section>
     <div class="right_bottom_container">
         <div class="buttons">
-            <div class="button" ng-click="openEditor()">Prévisualiser</div>
-            <div class="button" ng-click="openEditor()">Enregistrer</div>
+            <div class="button" ng-click="saveBook()">{{buttonLegend}}</div>
         </div>
     </div>
-<section class="editor" ng-class="{'hidden' : show_editor != true}" ng-include="'src/views/editor.html'">
-</section>
 </section>

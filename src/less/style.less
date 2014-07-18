@@ -963,6 +963,37 @@ aside.sidebar{
 				}
 			}
 
+			.cols{
+				.col{
+					width:50%;
+					float:left;
+
+					label{
+						padding-bottom:10px;
+					}
+
+					ul.categories{
+						li{
+							font-size: 14px;
+							padding:8px 0;
+							font-weight: 300;
+							border-top: 1px solid lighten(#b8c3c8,20%);
+							padding-left: 10px;
+							color:darken(#b8c3c8,45%);
+							&.selected{
+								background-color: lighten(#b8c3c8,20%);
+								color:darken(#b8c3c8,55%);
+							}
+							&:hover{
+								cursor:pointer;
+							}
+						}
+						height: 150px;
+						overflow-y: scroll;
+					}					
+				}
+			}
+
 		}
 
 		.right_bottom_container{

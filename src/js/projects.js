@@ -71,6 +71,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
             $scope.projects[i]=finalProject;
 
         }
+        
         $location.path( "/projects/0" );
         Notify('success','Projet ajouté','Le projet a été ajouté avec succès')
 

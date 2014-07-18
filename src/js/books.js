@@ -1,4 +1,4 @@
-App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$routeParams','Notify', function ($scope,Projects,Themes,$http,Books,$routeParams,Notify){
+App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$routeParams','Notify','$location','Categories', function ($scope,Projects,Themes,$http,Books,$routeParams,Notify,$location,Categories){
 
     $scope.pageTitle="Ajouter un cahier";
 
@@ -7,9 +7,10 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
 
     // Init projects
     var projects = Projects.get(0);
+    $scope.categories = Categories.get();
+
     // All projects
     $scope.projects = projects;
-    // Projects added to the book
     $scope.projects_a = [];
 
     $scope.presentation_type = {
@@ -30,6 +31,9 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
         }
     }
 
+    // Add and drag & drop
+    // -------------------
+
     $scope.addToList = function(id){
         var i2=0;
         for(var i in $scope.projects){
@@ -49,24 +53,35 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
         }
     }
 
+    $scope.selectCategory=function(index){
+        $scope.book.category=$scope.categories.books[index].id;
+    }
+
     $scope.sortableOptions = {
         axis: 'y'
     };
 
-    $scope.book = {
-        cover:'',
-        btitle:'Titre du cahier',
-        subtitle:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eum mollitia voluptatibus. Tempore impedit reprehenderit blanditiis praesentium ab, nemo nisi, quas eaque, voluptatem perferendis quidem, architecto exercitationem saepe facilis illo.',
-        bottomline:'Pour [NOM DU CLIENT] fait le [DATE]',
-        cover:'uploads/files/53c7c338ad51a.png',
-        date:'date',
-        theme:$scope.themes[0]
-    }; // Book infos
+    // Sample data
+    // -----------
 
+    $scope.buttonLegend="Enregistrer le cahier";
+    // Existing or new ? 
     if($routeParams.book_id!=undefined){
-        $scope.book = Books.get_by_id($routeParams.book_id);
-        $scope.projects_a = $scope.book.projects;
+        $scope.book = Books.getById($routeParams.book_id);
+        $scope.buttonLegend="Modifier le cahier";
+    }else if($routeParams.book_id==null){
+        $scope.book = {
+            cover:'',
+            btitle:'Titre du cahier',
+            subtitle:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eum mollitia voluptatibus. Tempore impedit reprehenderit blanditiis praesentium ab, nemo nisi, quas eaque, voluptatem perferendis quidem, architecto exercitationem saepe facilis illo.',
+            bottomline:'Pour [NOM DU CLIENT] fait le [DATE]',
+            cover:'uploads/files/53c7e30f020cb.png',
+            date:'date',
+            category:0,
+            theme:$scope.themes[0],
+        };
     }
+
 
     for(var i in projects){
         projects[i].added=false;
@@ -84,8 +99,8 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
 
     $scope.chooseTheme = function(id){
         $scope.book.theme=$scope.themes[id];
-        $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css")
     }
+
     $scope.chooseTheme(0);
 
     $scope.isUploading=false;
@@ -100,17 +115,42 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
         }
     }
 
-
-    $scope.openEditor = function(){
+    $scope.saveBook = function(){
         var book = $scope.book;
-        book.projects = $scope.projects_a;
-        $scope.show_editor=true;
-        Books.add(book);
+
+        var projects_a_ids = [];
+        for(var i in $scope.projects_a){
+            projects_a_ids.push($scope.projects_a[i].id);
+        }
+        book.projects_a = projects_a_ids;
+
+        var last_id=0;
+
+        if(book.id==null){
+
+            // Create new a book
+            var id = Books.add(book);
+            Notify('success','Cahier ajouté','Le cahier a été ajouté à votre liste');
+
+        }else if($routeParams.book_id!=undefined){
+
+            // Edit a book
+            var id = book.id;
+            Books.edit(id,book);
+            Notify('success','Cahier ajouté','Le cahier a été modifié avec succès');
+
+        }
+        
         Notify('success','Cahier ajouté','Le cahier a été ajouté à votre liste');
+        $location.path('/book/'+id+'/edit');
     }
 
 }]);
 
+App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','Notify', function ($scope,Books,navService,$routeParams,Notify) {
+    $scope.book = Books.getById($routeParams.book_id);
+    $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css");
+}]);
 
 App.controller('BooksCtrl', ['$scope','Books','navService','$routeParams','Notify', function ($scope,Books,navService,$routeParams,Notify) {
     $scope.books = Books.get($routeParams.book_id);
