@@ -10,27 +10,27 @@
 					<tr class="head">
 						<th></th>
 						<th>Aujourd'hui</th>
-						<th>Total</th>
+						<th>Hier</th>
 					</tr>
 					<tr>
 						<td class="plateform">Web</td>
-						<td>52</td>
-						<td>438</td>
+						<td>{{stats.views.web.today}}</td>
+						<td>{{stats.views.web.yesterday}}</td>
 					</tr>
 					<tr>
 						<td class="plateform">PDF</td>
-						<td>21</td>
-						<td>898</td>
+						<td>{{stats.views.pdf.today}}</td>
+						<td>{{stats.views.pdf.yesterday}}</td>
 					</tr>
 					<tr>
 						<td class="plateform">Présentation</td>
-						<td>12</td>
-						<td>138</td>
+						<td>{{stats.views.pres.today}}</td>
+						<td>{{stats.views.pres.yesterday}}</td>
 					</tr>
 					<tr class="total">
 						<td class="plateform">Total</td>
-						<td>232</td>
-						<td>1.467</td>
+						<td>{{stats.views.total.today}}</td>
+						<td>{{stats.views.total.yesterday}}</td>
 					</tr>
 				</table>
 			</div>
@@ -38,13 +38,13 @@
 				<article>
 					<div class="vertical-align">
 						<h3>Croissance</h3>
-						<span class="n">-20%</span>
+						<span ng-class="{'n' : stats.views.variations.growth<0 , 'p' : stats.views.variations.growth>=0}">{{stats.views.variations.growth}}%</span>
 					</div>
 				</article>
 				<article>
 					<div class="vertical-align">
 						<h3>Nouvelles visites</h3>
-						<span class="p">+234</span>
+						<span ng-class="{'n' : stats.views.variations.new_visits<0 , 'p' : stats.views.variations.new_visits>=0}" >{{stats.views.variations.new_visits}}</span>
 					</div>
 				</article>
 			</div>

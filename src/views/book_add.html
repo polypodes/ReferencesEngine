@@ -95,7 +95,7 @@
                     <input type="text" ng-model="book.bottomline">
                     
                     <div class="cols">
-                        <div class="col">
+                        <div class="col image">
                             <label>Image de couverture</label>
                             <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)"> 
                                 <section class="book_cover" ng-style="{'background-image':'url('+book.cover+')'}" ng-class="{'added' : book.cover != ''}">

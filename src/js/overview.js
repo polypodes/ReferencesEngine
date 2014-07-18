@@ -1,32 +1,18 @@
-App.controller('OverviewCtrl', ['$scope','Projects', function ($scope,Projects) {
+App.controller('OverviewCtrl', ['$scope','Projects','Stats', function ($scope,Projects,Stats) {
     
     $scope.pageTitle="Vue d'ensemble";
+       
+       // Stats for dashboard
+    $scope.stats = Stats.getForDashboard();
+    console.log($scope.stats);
 
-    // DATES GENERATING
-    var to = new Date();
-	var from = new Date();
-	from.setDate(from.getDate() - 14);
-
-	var day;
-	var dates = [];
-	var dates_values = [];
-
-	while(from <= to) {
-	    day = to.getDate()
-	    to = new Date(to.setDate(--day));
-	    var date = to.getDate()+'/'+(to.getMonth()+1)+'/'+to.getFullYear();
-	    dates.push(date);
-
-	    var val = Math.floor(Math.random()*201);
-	    dates_values.push(val);
-	}
-
+	// Top left graph
     $('canvas#consultations').attr('width',$('.top .graph').width()-40);
 
     var ctx = document.getElementById("consultations").getContext("2d");
 
     var data = {
-	    labels: dates,
+	    labels: $scope.stats.views.timeline.labels,
 	    datasets: [
 	        {
 	            label: "Consultations",
@@ -36,7 +22,7 @@ App.controller('OverviewCtrl', ['$scope','Projects', function ($scope,Projects) 
 	            pointStrokeColor: "#fff",
 	            pointHighlightFill: "#fff",
 	            pointHighlightStroke: "rgba(220,220,220,1)",
-	            data: dates_values
+	            data: $scope.stats.views.timeline.data
 	        }
 	    ]
 	};
