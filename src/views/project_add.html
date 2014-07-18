@@ -39,7 +39,7 @@
             <h3>Mots clés</h3>
                 <input type="text" ng-model="addedTag" ng-keyup="addTag($event)" placeholder="Ajouter un mot clé">
                 <ul>
-                    <li ng-repeat="tag in project_data.tags">{{tag}} <span ng-click='deleteTag($index)'>X</span></li>
+                    <li ng-repeat="tag in project_data.tags track by $index">{{tag}} <span ng-click='deleteTag($index)'>X</span></li>
                 </ul>
             </div>
             <div class="clear"></div>
@@ -62,9 +62,9 @@
                         </form>
                     </div>
                 </li>
-                <li ng-repeat="file in project_data.files">
+                <li ng-repeat="file in project_data.files" class="added_file">
                     <div ng-style="{'background-image':'url('+file.path+')'}">
-                    
+                        <span class="delete" ng-click="deleteMedia($index)"><i class="fa fa-times"></i></span>
                     </div>
                 </li>
             </ul>

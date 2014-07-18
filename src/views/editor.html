@@ -2,7 +2,7 @@
   <section class="editor">
     <section class="preview render">
         <article class="cover">
-            <div class="cover_image" style="background-image:url({{book.cover}})"></div>
+            <div class="cover_image" ng-style="{'background-image':'url('+book.cover+')'}"></div>
             <div class="cover_content">
                 <h1 class="text">{{book.btitle}}</h1>
                 <h2 class="text">{{book.subtitle}}</h2>
@@ -14,12 +14,12 @@
           <article class="item">
               <section class="project">
 
-                  <div class="project_image" style="background-image:url({{project_a.cover}})"></div>
+                  <div class="project_image" ng-style="{'background-image':'url('+project_a.cover+')'}"></div>
                   <div class="project_content">
 
-                     <h3>{{project_a.intro}}</h3>
-                     <h2>{{project_a.title}}</h2>
-                     <h4>{{project_a.date}}</h4>
+                     <h3 class="text">{{project_a.intro}}</h3>
+                     <h2 class="text">{{project_a.title}}</h2>
+                     <h4 class="text">{{project_a.date}}</h4>
                      <div class="desc">
                          {{project_a.desc}}
                      </div>
@@ -29,9 +29,11 @@
               <div class="pagination">Projet n°{{$index}}</div>
           </article>
           <article class="item" ng-if="project_a.files.length>0">
-              <div class="medias">
+              <div class="medias medias-{{project_a.files.length}}">
                 <h3>{{project_a.title}} | Medias</h3>
-                <img ng-repeat="image in project_a.files" ng-src="{{image.path}}" alt="">
+                <div class="images">
+                  <div class="image" ng-repeat="image in project_a.files" ng-style="{'background-image':'url('+image.path+')'}"></div>
+                </div>
               </div>
               <div class="pagination">Médias complémentaires - Projet n°{{$index+1}}</div>
           </article>

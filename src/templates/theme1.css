@@ -61,7 +61,7 @@
 }
 
 /* Medias */
-.medias img{width:50%; height:auto;display:block;float:left;}
+.medias .image{width:50%; height:auto;display:block;float:left;height:200px;display: block;background-size:cover;}
 .medias h3{ padding: 20px; margin-top: 0;}
 
 .pagination{position: absolute;bottom:10px;right:10px;color:#000000;z-index:999;font-size:12px;}

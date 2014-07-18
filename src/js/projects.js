@@ -50,6 +50,13 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
     $scope.addProject=function(){ 
 
         var finalProject = $scope.project_data;
+
+        var validation = Projects.validate(finalProject);
+        if(validation!=true){
+            Notify('error',"Erreur lors de l'ajout",validation);
+            return false;
+        }
+
         var last_id=0;
 
         if(finalProject.id==null){
@@ -81,6 +88,12 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
         $scope.project_data.tags.splice(index,1);
         return false;
     };
+
+    // Medias
+
+    $scope.deleteMedia = function(index){
+        $scope.project_data.files.splice(index,1);
+    }
 
     $scope.uploadCoverComplete = function(content) {
         console.log(content);

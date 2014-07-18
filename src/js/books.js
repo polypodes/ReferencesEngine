@@ -68,6 +68,7 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
     // Existing or new ? 
     if($routeParams.book_id!=undefined){
         $scope.book = Books.getById($routeParams.book_id);
+        $scope.projects_a=$scope.book.projects_a;
         $scope.buttonLegend="Modifier le cahier";
     }else if($routeParams.book_id==null){
         $scope.book = {

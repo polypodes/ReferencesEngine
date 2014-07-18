@@ -1419,6 +1419,26 @@ aside.sidebar{
 				top: 0;
 				overflow-y:scroll;
 				li{
+					&.added_file{
+						.delete{
+							position: absolute;
+							right: 20px;
+							top: 5px;
+							color: #FFF;
+							text-shadow: 0 0 40px rgba(0,0,0,1);
+							opacity:0.3;
+							transition:all 0.3s;
+							&:hover{
+								cursor:pointer;
+							}
+						}
+						overflow: hidden;
+						&:hover{
+							.delete{
+								opacity: 1;
+							}
+						}
+					}
 					width: 25%;
 					height: 100%;
 					padding-right:10px;
