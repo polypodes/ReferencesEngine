@@ -66,7 +66,7 @@ class TagController extends Controller
             } else {
                 return $this->redirect($this->generateUrl(
                     'refactor_tags_edit',
-                    ['id' => $tag->getId()]
+                    array('id' => $tag->getId())
                 ));
             }
         }
