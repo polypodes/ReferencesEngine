@@ -1,14 +1,31 @@
 <section class="container books in">
     <section class="white_head">
-        <h4>Filtrer les cahiers :</h4>
         <section class="search">
-            <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag">
+            <h4>Filtrer les projets :</h4>
+            <section class="col">
+                <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag">
+            </section>
+            <section class="col cat_infos" ng-show="cat_id!=0">
+                <div class="big_button input-{{button_rename}}">
+                    <div class="legend text" ng-show="!button_rename" ng-click="toggleRenameInput()">Renommer
+                        <div class="icon">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                    </div>
+                    <div class="legend input" ng-show="button_rename">
+                        <input type="text" ng-model="cat_name" ng-keyup="changeCategoryName($event)" focus-on="inputRenameShown" />
+                        <div class="icon" ng-click="changeCategoryName($event)">
+                            <i class="fa fa-check-square-o"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </section>
     </section>
 
     <section class="items">
         <div ng-if="books.length==0">Aucun cahier</div>
-        <div ng-repeat="book in books | filter : search">
+        <div ng-repeat="book in books | filter : search" item-animation>
             <article class="item book">
                 <span class="close" ng-click="deleteBook(book.id)">x</span>
                 <a class="book" href="#/book/{{book.id}}">

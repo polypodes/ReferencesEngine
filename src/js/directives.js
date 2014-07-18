@@ -1,5 +1,4 @@
 
-
 App.directive('focusOn', function() {
    return function(scope, elem, attr) {
       scope.$on(attr.focusOn, function(e) {
@@ -10,6 +9,26 @@ App.directive('focusOn', function() {
       });
    };
 });
+
+App.directive('itemAnimation', function() {
+   return function(scope, elem, attr) {
+        // if(scope.$first){
+        //     elem.parent().append('<div class="loading">Chargement des éléments ...</div>');
+        // }
+        if(scope.$last){
+            
+            $(".items .item").each(function(i,el){
+                // if(i==1)
+                //     elem.parent().find('.loading').fadeOut();
+
+                setTimeout(function(){
+                    $(el).addClass('visible');
+                },i*50)
+            });
+        }
+   };
+});
+
 
 // File upload
 App.directive('file', function() {
@@ -62,7 +81,6 @@ App.factory('Notify',['$rootScope','$timeout', function($rootScope,$timeout) {
 
         var timeout;
         function initTimeout(){
-            console.log('reinit');
             $timeout.cancel(timeout);
             timeout = $timeout(function(){
                 $rootScope.notify.state="closed";

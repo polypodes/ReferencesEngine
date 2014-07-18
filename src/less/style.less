@@ -415,7 +415,10 @@ aside.sidebar{
 		&.in{
 			animation: page_in 0.4s;
 			animation-fill-mode: forwards;
+			transform: translate3d(0,0,0);
 		}
+
+		overflow-y: scroll;
 	}
 	
 	.white_head{
@@ -423,11 +426,89 @@ aside.sidebar{
 		padding:30px 20px;
 		border-bottom: 1px solid lighten(#b8c3c8,14%);
 
+		min-height: 130px;
+
 		h4{
 			font-weight:300;
 			font-size:16px;
 			margin-bottom:10px;
 			color:darken(#b8c3c8,40%);
+		}
+
+		.col{
+			float:left;
+
+			.big_button{
+				width: auto;
+				height: 34px;
+				font-weight: bold;
+				background-color: @green;
+				margin-top: 2px;
+				position: relative;
+				overflow: hidden;
+				transition:all 0.3s;
+
+				border-radius:4px;
+				
+				input{
+					transition:all 0.3s;
+				}
+
+				&.input-false{
+					input{
+						width: 75px;
+					}
+				}
+
+				&.input-true{
+					input{
+						width: 200px;
+					}
+				}
+				
+				.icon{
+					position: absolute;
+					right: 0;
+					top: 0;
+					width: 35px;
+					height: 35px;
+					background-color: darken(@green,15%);
+					color: #FFF;
+					padding: 9px;
+					i{
+						position: absolute;
+						top: 11px;
+						left: 11px;
+					}
+				}
+
+				.legend{
+					width: 100%;
+					height: 100%;
+					position: relative;
+					z-index: 9;
+					font-size:14px;
+					font-weight: 300;
+					padding: 0 10px 0 10px;
+					margin-right: 35px;
+					color:#FFF;
+					line-height: 34px;
+
+					input{
+						background-color: @green;
+						border:none;
+						padding: 6px 0;
+						color:darken(@green,30%);
+					}
+				}
+
+				&:hover{
+					cursor:pointer;
+				}
+			}
+		}
+		.col.cat_infos{
+			padding-left: 30px;
 		}
 	}
 	@item_gutter:7px;
@@ -449,6 +530,15 @@ aside.sidebar{
 			
 			transition: opacity 0.25s, transform 0.1s;
 			position: relative;
+			&.visible{
+				opacity:1 !important;
+			}
+			opacity:0;
+			&.notanim{
+				opacity: 1 !important;
+			}
+			visbility:hidden;
+			transform: translate3d(0,0,0);
 
 			&.book{
 				transform:translateY(0);
@@ -478,6 +568,8 @@ aside.sidebar{
 				position: relative;
 				border-radius: 4px;
 				overflow:hidden;
+
+				box-shadow: 0px 2px 14px 0px rgba(0, 0, 0, 0.1);
 
 				.image{
 					width:100%;
@@ -1369,6 +1461,9 @@ aside.sidebar{
 				padding-left: 20px;
 				margin-top: 20px;
 				
+				h3{
+					margin-bottom: 0px;
+				}
 				input{
 					border:0;
 					margin:0;
@@ -1399,7 +1494,7 @@ aside.sidebar{
 							padding:0;
 							margin:0;
 							width: 100% !important;
-							height: 128px;
+							height: 141px;
 							outline:none;
 							font-size:12px;
 						}
@@ -1593,7 +1688,7 @@ aside.sidebar{
 .clear{clear:both;}
 
 .gradient{
-	background: linear-gradient(to bottom,  rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%); /* W3C */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* W3C */
 	width:100%;
 	height:300px;
 	position: absolute;
@@ -1602,6 +1697,16 @@ aside.sidebar{
 	z-index:100;
 }
 
+.loading{
+	position: absolute;
+	top: 200px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 230px;
+	text-align: center;
+	z-index: -10;
+}
 // PROGRESS BAR
 
 /* Styling for the ngProgress itself */

@@ -76,7 +76,7 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
             btitle:'Titre du cahier',
             subtitle:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eum mollitia voluptatibus. Tempore impedit reprehenderit blanditiis praesentium ab, nemo nisi, quas eaque, voluptatem perferendis quidem, architecto exercitationem saepe facilis illo.',
             bottomline:'Pour [NOM DU CLIENT] fait le [DATE]',
-            cover:'uploads/files/53c7e30f020cb.png',
+            cover:"dist/img/sample.png",
             date:'date',
             category:0,
             theme:$scope.themes[0],
@@ -112,7 +112,6 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
      $scope.isUploading=false;
         if(content.status=="success"){
             $scope.book.cover="uploads/files/"+content.fileName;
-            console.log($scope.book.cover);
         }
     }
 
@@ -159,7 +158,10 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
     $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css");
 }]);
 
-App.controller('BooksCtrl', ['$scope','Books','navService','$routeParams','Notify', function ($scope,Books,navService,$routeParams,Notify) {
+App.controller('BooksCtrl', ['$scope','Books','navService','$routeParams','Notify','Categories', function ($scope,Books,navService,$routeParams,Notify,Categories) {
+   
+    var categories = Categories.get();
+    $scope.cat_id = $routeParams.book_id;
     $scope.books = Books.get($routeParams.book_id);
 
     $scope.deleteBook=function(id){
@@ -170,5 +172,21 @@ App.controller('BooksCtrl', ['$scope','Books','navService','$routeParams','Notif
             }
         }
         Books.saveLocal($scope.books);
+    }
+
+    $scope.cat_name=categories.books[$scope.cat_id].title;
+    $scope.button_rename=false;
+    $scope.toggleRenameInput=function(){
+        $scope.button_rename=!$scope.button_rename;
+        if($scope.button_rename==true)
+            $scope.$broadcast('inputRenameShown');
+    }
+
+    $scope.changeCategoryName=function(e){
+        if(e.which === 13 || e.type == "click" && $scope.cat_name != ""){
+            categories.books[$scope.cat_id].title=$scope.cat_name;
+            Categories.saveLocal(categories);
+            $scope.toggleRenameInput();
+        }
     }
 }]);

@@ -11,7 +11,7 @@
         </section>
         <div class="scrollable">
             <section class="items {{presentation_type.all_projects}}">
-                <article class="item" ng-class="{'added' : project.added == true}" ng-repeat="project in projects  | filter : search" ng-click="addToList(project.id)">
+                <article class="item" ng-class="{'added' : project.added == true}" ng-repeat="project in projects  | filter : search" ng-click="addToList(project.id)" item-animation>
 
                     <section class="project">
                         <h4>{{project.title}}</h4>
@@ -47,7 +47,7 @@
         <p class="infos">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus error.</p>
         <div class="scrollable">
             <section class="items {{presentation_type.my_projects}}">
-                <article class="item" ng-click="openDetails('couv')">
+                <article class="item notanim" ng-click="openDetails('couv')">
                     <section class="project">
                         <div class="couv">
                             Couverture
@@ -55,7 +55,7 @@
                     </section>
                 </article>
                 <section class="items_reorder" ui-sortable ng-model="projects_a">
-                    <article class="item" ng-repeat="project_a in projects_a" ng-click="openDetails($index)">
+                    <article class="item notanim" ng-repeat="project_a in projects_a" ng-click="openDetails($index)">
                         <section class="project">
                             
                             <h4>{{project_a.title}}</h4>

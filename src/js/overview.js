@@ -4,7 +4,6 @@ App.controller('OverviewCtrl', ['$scope','Projects','Stats', function ($scope,Pr
        
        // Stats for dashboard
     $scope.stats = Stats.getForDashboard();
-    console.log($scope.stats);
 
 	// Top left graph
     $('canvas#consultations').attr('width',$('.top .graph').width()-40);

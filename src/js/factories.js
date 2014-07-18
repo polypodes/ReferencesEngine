@@ -35,7 +35,6 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
         },
         saveLocal : function(data){
             localStorageService.set('projects',data);
-            console.log('saved projects to localstorage')
         },
         add : function(data){
             var projects = localStorageService.get('projects');
@@ -47,10 +46,7 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
             }
             data.id=last_id+1;
 
-            console.log(data.id);
             projects.push(data);
-
-            console.log(projects);
 
             localStorageService.set('projects',projects);
 
@@ -171,14 +167,12 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
                 }
             }
 
-            console.log(perf);
             book.projects_a=projects_a_temp;
 
             return book;
         },
         saveLocal : function(data){
             localStorageService.set('books',data);
-            console.log('saved books to localstorage')
         },
         add : function(data){
             var books = localStorageService.get('books');
@@ -343,7 +337,6 @@ App.factory('Stats', function () {
             new_visits : stats.views.total.today-stats.views.total.yesterday
         }
 
-        console.log(stats.views.variations.growth)
         return stats;
     }
   };

@@ -1,6 +1,4 @@
 App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$location,Categories) {
-
-
 	$scope.pageTitle="";
 
     $scope.mainItems = [
@@ -76,6 +74,5 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 		}
 		Categories.saveLocal($scope.categoriesItems);
 	};
-
 
 }]);
