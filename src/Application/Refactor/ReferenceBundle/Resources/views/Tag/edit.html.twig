@@ -1,0 +1,25 @@
+{% extends "ApplicationRefactorReferenceBundle::layout.html.twig" %}
+
+{% block tag_active %}class="active"{% endblock %}
+
+{% block body %}
+<section class="tag-list container">
+    <header class="page-header row">
+        <h1 class="page-title">{{ 'reference.tag.edit'|trans }}</h1>
+    </header>
+
+    {{ form_start(form, {'method': 'POST', 'attr' : {'class': 'row'}}) }}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.title) }}
+        {{ form_row(form.slug) }}
+
+        {{ form_widget(form.save, { 'label': 'Validate'|trans, attr: {'class': 'btn btn-primary'} }) }}
+        {{ form_widget(form.saveAndAddAnother, { 'label': 'SaveAndAddAnother'|trans, attr: {'class': 'btn btn-default'} }) }}
+        <a href="{{ path('refactor_tags') }}" class="btn btn-warning">{{ 'Close'|trans }}</a>
+
+    {{ form_end(form) }}
+
+    </div>
+</section>
+{% endblock %}

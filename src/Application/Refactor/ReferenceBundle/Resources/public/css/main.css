@@ -42,7 +42,7 @@ ul {
 /**
  * list element
  */
-.list-elem {
+.list-elem .thumbnail{
     height: 350px;
     /*width: 350px;*/
     text-align: center;
@@ -54,7 +54,7 @@ ul {
 
 .list-elem-details {
     display: none;
-    position: absolute;
+    position: absolute!important;
     top: 0;
     left: 0;
     background-color: #FFF;

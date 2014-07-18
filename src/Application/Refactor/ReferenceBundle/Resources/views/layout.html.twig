@@ -64,9 +64,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 {% block main_menu %}
                 <ul class="nav navbar-nav">
-                    <li {% block project_active %}{% endblock %}><a href="{{ path('refactor_projects')}}">{{'Projects'|trans}}</a></li>
-                    <li {% block book_active %}{% endblock %}><a href="{{ path('refactor_books')}}">{{'Books'|trans}}</a></li>
-                    <li {% block media_active %}{% endblock %}><a href="{{ path('refactor_medias')}}">{{'Media'|trans}}</a></li>
+                    <li {% block project_active %}{% endblock %}><a href="{{ path('refactor_projects')}}">{{'reference.project.title'|trans}}</a></li>
+                    <li {% block book_active %}{% endblock %}><a href="{{ path('refactor_books')}}">{{'reference.book.title'|trans}}</a></li>
+                    <li {% block tag_active %}{% endblock %}><a href="{{ path('refactor_tags')}}">{{'reference.tag.title'|trans}}</a></li>
+                    <li {% block media_active %}{% endblock %}><a href="{{ path('refactor_medias')}}">{{'reference.media.title'|trans}}</a></li>
                     <li><a href="{{ path('nelmio_api_doc_index')}}">API</a></li>
                 </ul>
                 {% endblock %}

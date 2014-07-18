@@ -52,7 +52,7 @@
 			</a>
 		</article>
 		{% for project in projects %}
-	  	<article class="list-elem col-md-4 text-center project" data-search="{{project.title|lower}} {{project.title2|lower}} {{project.date|date('Y')}} {{project.tags|join(' ')|lower}}">
+	  	<article class="list-elem col-md-4 project" data-search="{{project.title|lower}} {{project.title2|lower}} {{project.date|date('Y')}} {{project.tags|join(' ')|lower}}">
 	  		<input type="checkbox" name="projects[]" value="{{project.id}}" class="checkbox hidden">
 
 			<div class="thumbnail">

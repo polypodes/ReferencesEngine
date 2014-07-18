@@ -1,8 +1,5 @@
 'Symfony2 is great': 'Symfony2 is great'
-Projects: Projects
-Project: Project
 Image: Image
-Media: Media
 Language: Language
 Delete: Delete
 Add: Add
@@ -14,34 +11,47 @@ Subtitle: Subtitle
 Content: Content
 Published: Published
 Validate: Validate
+SaveAndAddAnother: Save and add another
 Cancel: Cancel
+Close: Close
 File: 'Choose a file'
 PDF: 'Make a PDF'
-book.Search: 'Customer'
-book.New: 'New book'
-book.Add: 'Add to book'
-book.Create: 'Create the book'
-book.Delete: 'Delete from book'
-book.List: 'List of books'
-project.Search: 'Tag, year'
-project.Create: 'Create the project'
-project.New: 'New project'
-project.List: 'Liste of projects'
-project.Choose: 'Choose a project'
-project.NotDeleted: "Project was not deleted"
-project.View: 'View project'
-ProjectUrl: "Project URL"
-tag.Add: 'Add a tag'
-tag.Title: 'Tags'
-media.Search: 'Name…'
-media.List: 'Medias'
-media.Add: 'Add a media'
-media.Selector: 'Choose a media'
-media.Title: 'Complementary medias'
-media.New: "Add a new media"
-render.Add: 'Add a render'
-render.Selector: 'Choose a render'
-render.Title: 'Renders'
+
+book:
+    Search: 'Customer'
+    New: 'New book'
+    Add: 'Add to book'
+    Create: 'Create the book'
+    Delete: 'Delete from book'
+    List: 'List of books'
+
+Projects: Projects
+Project: Project
+project:
+    Search: 'Tag, year'
+    Create: 'Create the project'
+    New: 'New project'
+    List: 'Liste of projects'
+    Choose: 'Choose a project'
+    NotDeleted: "Project was not deleted"
+    View: 'View project'
+    Url: "Project URL"
+
+
+Media: Media
+media:
+    Search: 'Name…'
+    List: 'Medias'
+    Add: 'Add a media'
+    Selector: 'Choose a media'
+    Title: 'Complementary medias'
+    New: "Add a new media"
+
+render:
+    Add: 'Add a render'
+    Selector: 'Choose a render'
+    Title: 'Renders'
+
 Date: Date
 Yes : Yes
 NoResult: "No Result"
@@ -55,10 +65,29 @@ Sort: "Sort"
 Logout: "Logout"
 Profile: "Profile"
 Display: "Display"
+
 reference.projects_added_to_book: |
     {1} One project added to « %book_title% » book |
     ]1,Inf]  %count% projects added to « %book_title% » book
 reference:
     project:
-        deleted: Projet « %project_title% » supprimé
+        title: Projects
+        deleted: Project « %project_title% » deleted
         not_found: Project « %id% » not found
+
+    book:
+        title: Books
+
+    media:
+        title: Medias
+
+    tag:
+        new: New tag
+        add: Add a tag
+        edit: Edit a tag
+        title: Tags
+        added: Tag « %tag_title% » added
+        modified: Tag « %tag_title% » modified
+        deleted: Tag « %tag_title% » deleted
+        not_found: Tag « %id% » not found
+        search: Tag

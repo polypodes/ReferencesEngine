@@ -16,12 +16,16 @@ class TagType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('tag', 'entity', array('class' => 'Application\Refactor\ReferenceBundle\Entity\Tag'))
-            ->add(
-                'title', 'text', array(
-                    'attr' => array('class' => 'tagInput'),
-                )
-            );
+            ->add('title', 'text', array(
+                //'attr' => array('class' => 'tagInput'),
+            ))
+            ->add('slug', 'text', array(
+                'required' => false
+            ))
+            ->add('save', 'submit')
+            ->add('saveAndAddAnother', 'submit')
+        ;
+
 
     }//end buildForm()
 

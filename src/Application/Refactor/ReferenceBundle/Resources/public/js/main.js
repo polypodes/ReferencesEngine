@@ -151,8 +151,7 @@ $(document).ready(function () {
 
         //set messages
         noty({
-
-            text        : translate['suppress']+' : "'+title+'" ?',
+            text        : translate['delete']+' « '+title+' » ?',
             type        : self.data('type'),
             dismissQueue: true,
             layout      : self.data('layout'),
@@ -163,24 +162,12 @@ $(document).ready(function () {
                 }},
                 {addClass: 'btn btn-danger', text: translate['cancel'], onClick: function ($noty) {
                     $noty.close();
-                    noty({force: true, text: translate['project_notdeleted'], type: 'error', layout: self.data('layout')});//Cancel
+                    //noty({force: true, text: translate['project_notdeleted'], type: 'error', layout: self.data('layout')});//Cancel
                 }}
             ]
         });
         return false;
     });
-
-    //project index
-    /*$( ".project-mouseover" )
-        .on( "mouseenter", function() {
-            $(this).children(".project-btn").show();
-            $(this).children(".project-img").hide();
-        })
-        .on( "mouseleave", function() {
-            $(this).children(".project-btn").hide();
-            $(this).children(".project-img").show();
-        });
-        */
 
     //hold new tags
     collectionTagsHolder.append($newLinkLiTag);

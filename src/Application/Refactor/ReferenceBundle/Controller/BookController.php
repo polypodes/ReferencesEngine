@@ -151,7 +151,6 @@ class BookController extends Controller
             $em->persist($book);
             $em->flush();
 
-            $tr =
             $request
                 ->getSession()
                 ->getFlashBag()

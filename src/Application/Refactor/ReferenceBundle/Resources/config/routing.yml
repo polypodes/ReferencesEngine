@@ -43,6 +43,23 @@ refactor_remove_projects:
     requirements:
         id:  \d+
 
+refactor_tags:
+    path: /tags
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Tag:index }
+refactor_tags_add:
+    path:  /tags/add/
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Tag:add }
+
+refactor_tags_edit:
+    path:  /tags/edit/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Tag:edit}
+    requirements:
+        id:  \d+
+refactor_tags_remove:
+    path:  /tags/remove/{id}
+    defaults: { _controller: ApplicationRefactorReferenceBundle:Tag:remove}
+    requirements:
+        id:  \d+
 
 refactor_medias:
     path:  /medias/

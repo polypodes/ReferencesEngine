@@ -33,7 +33,7 @@ twig:
         resources:
             - 'SonataFormatterBundle:Form:formatter.html.twig'
             # - 'SonataMediaBundle:Form:media_widgets.html.twig'
-            # - 'ApplicationRefactorReferenceBundle:Form:fields.html.twig'
+            #- 'ApplicationRefactorReferenceBundle:Form:fields.html.twig'
     exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 
 # Assetic Configuration

@@ -10,7 +10,7 @@ use Faker;
  * Tag
  *
  * @ORM\Table(name="reference__tag")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\Refactor\ReferenceBundle\Repository\TagRepository")
  */
 class Tag
 {

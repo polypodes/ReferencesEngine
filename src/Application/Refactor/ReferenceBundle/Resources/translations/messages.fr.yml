@@ -1,8 +1,6 @@
 'Symfony2 is great': 'J''aime Symfony2'
-Projects: Projets
-Project: Projet
 Image: Image
-Media: Mediathèque
+
 Language: Langue
 Delete: Supprimer
 Date: Date
@@ -15,34 +13,46 @@ Subtitle: Sous-titre
 Content: Contenu
 Published: Publié ?
 Validate: Valider
+SaveAndAddAnother: Enregistrer et ajouter un autre
 Cancel: Annuler
+Close: Fermer
 File: 'Fichier'
 PDF: 'Créer le PDF'
-book.Search: 'Client'
-book.New: 'Nouveau cahier'
-book.Add: 'Ajouter au cahier'
-book.Create: 'Créer le cahier'
-book.Delete: 'Supprimer du cahier'
-book.List: 'Liste des cahiers'
-project.Search: 'Mot-clé , Année'
-project.New: 'Nouveau projet'
-project.Create: 'Créer le projet'
-project.List: 'Liste des projets'
-project.Choose: 'Choisissez un projet'
-project.NotDeleted: "Le projet n'a pas été supprimé"
-project.View: 'Voir le projet'
-ProjectUrl: "URL du projet"
-tag.Add: 'Ajouter un mot-clé'
-tag.Title: 'Mots-clés'
-media.Search: 'Nom…'
-media.List: 'Médiathèque'
-media.Add: 'Ajouter un média'
-media.New: "Nouveau Média"
-media.Selector: 'Choisissez un média'
-media.Title: 'Médias complémentaires'
-render.Add: 'Ajouter une créa'
-render.Selector: 'Choisissez une créa'
-render.Title: 'Créas'
+
+book:
+    Search: 'Client'
+    New: 'Nouveau cahier'
+    Add: 'Ajouter au cahier'
+    Create: 'Créer le cahier'
+    Delete: 'Supprimer du cahier'
+    List: 'Liste des cahiers'
+
+Projects: Projets
+Project: Projet
+project:
+    Search: 'Mot-clé , Année'
+    New: 'Nouveau projet'
+    Create: 'Créer le projet'
+    List: 'Liste des projets'
+    Choose: 'Choisissez un projet'
+    NotDeleted: "Le projet n'a pas été supprimé"
+    View: 'Voir le projet'
+    Url: "URL du projet"
+
+Media: Mediathèque
+media:
+    Search: 'Nom…'
+    List: 'Médiathèque'
+    Add: 'Ajouter un média'
+    New: "Nouveau Média"
+    Selector: 'Choisissez un média'
+    Title: 'Médias complémentaires'
+
+render:
+    Add: 'Ajouter une créa'
+    Selector: 'Choisissez une créa'
+    Title: 'Créas'
+
 Yes: Oui
 NoResult: "Pas de résultat"
 Name: "Nom"
@@ -61,5 +71,23 @@ reference.projects_added_to_book: |
     ]1,Inf]  %count% projets ajouté au cahier « %book_title% »
 reference:
     project:
+        title: Projets
         deleted: Projet « %project_title% » supprimé
         not_found: Projet « %id% » inconnu
+
+    book:
+        title: Cahiers
+
+    media:
+        title: Médiathèque
+
+    tag:
+        new: Nouveau mot-clé
+        add: Ajouter un mot-clé
+        edit: Modifier un mot-clé
+        title: Mots-clés
+        added: Mot-clé « %tag_title% » ajouté
+        modified: Mot-clé « %tag_title% » modifié
+        deleted: Mot-clé « %tag_title% » supprimé
+        not_found: Mot-clé « %id% » inconnu
+        search: Mot-clé

@@ -1,0 +1,40 @@
+{% extends "ApplicationRefactorReferenceBundle::layout.html.twig" %}
+
+{% block tag_active %}class="active"{% endblock %}
+
+{% block body %}
+<section class="tag-list container">
+    <header class="page-header row">
+        <h1 class="page-title col-md-3">{{ 'reference.tag.title'|trans }}</h1>
+
+        <form action="" method="get" class="search-form form-inline col-md-9">
+            <label class="sr-only" for="search">{{ 'reference.tag.search'|trans }}</label>
+            <input type="text" class="form-control col-md-3" id="search-field" name="search" placeholder="{{ 'reference.tag.search'|trans }}">
+            <button type="submit" class="sub btn btn-default" id="search-submit">{{ 'Search'|trans }}</button>
+        </form>
+    </header>
+
+    <div class="">
+        <article id="new-elem" class="row">
+            <a href="{{ path('refactor_tags_add') }}" class="">
+                <button type="button" class="btn btn-primary btn-lg">{{ 'reference.tag.new'|trans }}</button>
+            </a>
+        </article>
+        {% for tag in tags %}
+        <article class="list-elem row tag" data-search="{{tag.title|lower}}">
+            <h1 class="col-md-6">{#<a href="# path('refactor_show_tags', {'id': tag.id}) ">#}{{tag.title}}{#</a>#}</h1>
+            <p class="col-md-6">
+                <a href="{{ path('refactor_tags_edit', {'id': tag.id}) }}" class="btn label-warning" role="button">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span class="glyphicon-class">{{ 'Edit'|trans }}</span>
+                </a>
+                <a class="label-danger btn btn-remove" role="button" data-url="{{ path('refactor_tags_remove', {'id': tag.id}) }}" data-id="{{tag.id}}" data-title="{{tag.title}}">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="glyphicon-class" data-layout="center" data-type="confirm">{{ 'Delete'|trans }}</span>
+                </a>
+            </p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

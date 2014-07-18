@@ -1,9 +1,16 @@
 {% block form_row %}
 {% spaceless %}
-    <div class="form_row">
+    <div class="form-group">
         {{ form_label(form) }}
         {{ form_errors(form) }}
-        {{ form_widget(form) }}
+        {{ form_widget(form, { 'attr' : { 'class': 'form-control' } }) }}
     </div>
 {% endspaceless %}
 {% endblock form_row %}
+
+{# block submit_widget %}
+{% spaceless %}
+    {% set attr = block('widget_attributes')|merge({'class': 'btn btn-default' }) %}
+    <button type="submit" {{ attr }}>{{ label }}</button>
+{% endspaceless %}
+{% endblock submit_widget #}
