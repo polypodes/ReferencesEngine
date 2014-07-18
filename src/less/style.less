@@ -9,8 +9,17 @@ body{
 @grey:#E6E6E6;
 @dark_grey:#232b2d;
 @green:#2eb398;
-
 @top_menu_height:80px;
+
+body,html,.ui_content{
+	width: 100%;
+	height: 100%;
+}
+.ui_content{
+	min-width:900px;
+	position: relative;
+}
+
 // Top menu
 .top-menu{
 	position: absolute;
@@ -573,7 +582,7 @@ aside.sidebar{
 
 				.image{
 					width:100%;
-					height:200px;
+					height:100%;
 					background-color: darken(@grey,5%);
 					background-size:cover;
 					background-position: center center;
@@ -660,10 +669,11 @@ aside.sidebar{
 				border-radius:4px;
 				overflow:hidden;
 				display: block;
+				height: 350px;
 
 				.image{
 					width:100%;
-					height:350px;
+					height:100%;
 					background-color: darken(@grey,5%);
 					background-size:cover;
 				}
@@ -1664,6 +1674,23 @@ aside.sidebar{
 		background-color:darken(@green,5%);
 	}
 
+}
+
+// MEDIA QUERIES
+@media screen and (min-width: 1000px) and (max-width: 1300px) {
+	.project{
+		height:170px !important;
+	}
+	.book:not(.item){
+		height:270px !important;
+	}
+}
+
+
+@media screen and (max-width: 1150px) {
+	.project{
+		height:140px !important;
+	}
 }
 
 .show{
