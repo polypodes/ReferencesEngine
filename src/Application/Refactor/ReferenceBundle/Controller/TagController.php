@@ -66,16 +66,16 @@ class TagController extends Controller
             } else {
                 return $this->redirect($this->generateUrl(
                     'refactor_tags_edit',
-                    ['id' => $tag->getId()]
+                    array('id' => $tag->getId())
                 ));
             }
         }
 
         return $this->render(
             'ApplicationRefactorReferenceBundle:Tag:add.html.twig',
-            [
+            array(
                 'form' => $form->createView()
-            ]
+            )
         );
     }
 
@@ -117,10 +117,10 @@ class TagController extends Controller
 
         return $this->render(
             'ApplicationRefactorReferenceBundle:Tag:edit.html.twig',
-            [
+            array(
                 'tag' => $tag,
                 'form' => $form->createView()
-            ]
+            )
         );
     }
 
