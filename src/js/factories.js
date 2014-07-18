@@ -205,6 +205,48 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
 
             books[last_id]=data;
             localStorageService.set('books',books);
+        },
+        validate : function(data){
+            // Validation rules
+            var bottomlineMaxLength=150,
+                btitleMinLength=2,
+                btitleMaxLength=100,
+                dateMaxLength=50,
+                bottomlineMaxLength=100,
+                subtitlelineMaxLength=500,
+                minProjects=1;
+
+            var msg=[];
+
+            if(data.cover=="dist/img/sample.png")
+                msg.push('ajoutez une photo de couverture');
+
+            if(data.btitle.length<btitleMinLength)
+                msg.push('titre trop court');
+            
+            if(data.btitle.length>btitleMaxLength)
+                msg.push('titre trop long');
+
+            if(data.projects_a.length<minProjects)
+                msg.push('ajoutez au moins un projet');
+
+            if(data.date.length>dateMaxLength)
+                msg.push('date trop longue');
+
+            if(data.bottomline.length>bottomlineMaxLength)
+                msg.push('informations complémentaires trop longues');
+
+            if(data.subtitle.length>subtitlelineMaxLength)
+                msg.push('description trop longue');
+
+
+            if(msg.length==0){
+                return true;
+            }else{
+                msg=msg.join(', ');
+                msg = msg.charAt(0).toUpperCase() + msg.slice(1) + ".";
+                return msg;
+            }
         }
     };
 }]);

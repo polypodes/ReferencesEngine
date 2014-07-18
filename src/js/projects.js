@@ -51,6 +51,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
 
         var finalProject = $scope.project_data;
 
+        // VALIDATION
         var validation = Projects.validate(finalProject);
         if(validation!=true){
             Notify('error',"Erreur lors de l'ajout",validation);

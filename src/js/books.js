@@ -125,6 +125,12 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
         }
         book.projects_a = projects_a_ids;
 
+        var validation = Books.validate(book);
+        if(validation!=true){
+            Notify('error',"Erreur lors de l'ajout",validation);
+            return false;
+        }        
+
         var last_id=0;
 
         if(book.id==null){
