@@ -38,24 +38,6 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
                 }
             }
 
-            var projects_a_temp=[];
-
-            var perf=0;
-            // Add the projects
-            for(var i2 in book.projects_a){
-                // Project to add id
-                var pid = book.projects_a[i2];
-                // Project to add content
-                for(var i3 in projects){
-                    if(projects[i3].id==pid)
-                        projects_a_temp.push(projects[i3]);
-
-                    perf++;
-                }
-            }
-
-            book.projects_a=projects_a_temp;
-
             return book;
         },
         saveLocal : function(data){
@@ -86,6 +68,7 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
 
             books[last_id]=data;
             localStorageService.set('books',books);
+            console.log(books[last_id]);
         },
         validate : function(data){
             // Validation rules

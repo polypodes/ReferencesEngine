@@ -1,5 +1,10 @@
 <section class="container add_project in">
   <section class="editor">
+    <section class="right_panel">
+      <div class="pages">
+        <article class="page0" ng-repeat="page in pages" ng-show="$index==activePage">{{page.text}}</article>
+      </div>
+    </section>
     <section class="preview render">
         <article class="cover">
             <div class="cover_image" ng-style="{'background-image':'url('+book.cover+')'}"></div>
@@ -26,18 +31,25 @@
                 </div>
                 <div class="gradient"></div>
               </section>
-              <div class="pagination">Projet n°{{$index}}</div>
+              <div class="pagination" ng-click="info()">Projet n°{{$index}}</div>
           </article>
           <article class="item" ng-if="project_a.files.length>0">
               <div class="medias medias-{{project_a.files.length}}">
                 <h3>{{project_a.title}} | Medias</h3>
                 <div class="images">
-                  <div class="image" ng-repeat="image in project_a.files" ng-style="{'background-image':'url('+image.path+')'}"></div>
+                  <div class="images_content" gridster="gridsterOpts">
+                    <div gridster-item="image" class="image" ng-repeat="image in project_a.files" ng-style="{'background-image':'url('+image.path+')'}"></div>
+                  </div>
                 </div>
               </div>
               <div class="pagination">Médias complémentaires - Projet n°{{$index+1}}</div>
           </article>
         </section>
     </section>
+  </section>
+  <section class="bottom_container">
+    <div class="buttons">
+        <div class="button ng-binding" ng-click="saveBook()">Enregistrer</div>
+    </div>
   </section>
 </section>

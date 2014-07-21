@@ -41,12 +41,14 @@ gulp.task('vendor', function() {
         'src/js/vendor/ng-localstorage.js',
         'src/js/vendor/angular-animate.min.js',
         'src/js/vendor/Chart.min.js',
+        'src/js/vendor/jquery.resize.js',
+        'src/js/vendor/angular-gridster.js',
         'src/js/vendor/utils.js'
     ];
 
     return gulp.src(vendorFiles)
         .pipe(concat('vendor.min.js'))
-        .pipe(uglifyJS())
+        // .pipe(uglifyJS())
         .pipe(filesize())
         .pipe(gulp.dest('dist/js'));
 });
@@ -80,13 +82,7 @@ gulp.task('watch', function() {
     // Livereload server
     var liveServer = liveReload();
 
-    gulp.watch('src/js/utils/*.js', ['scripts'])
-    .on('change', function(event){
-        liveServer.changed(event.path);
-        console.log('Reloading for JS');
-    });
-
-    gulp.watch('src/js/*.js', ['scripts'])
+    gulp.watch('src/js/**/*.*', ['scripts'])
     .on('change', function(event){
         liveServer.changed(event.path);
         console.log('Reloading for JS');

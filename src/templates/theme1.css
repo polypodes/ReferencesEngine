@@ -1,3 +1,13 @@
+/* reset */
+.render li{
+	width: auto !important;
+	height: auto !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	float:none !important;
+	position: relative !important;
+	border-radius:0px;
+}
 .render{
 	background-color:#FFFFFF;	
 }
@@ -61,7 +71,16 @@
 }
 
 /* Medias */
-.medias .image{width:50%; height:auto;display:block;float:left;height:200px;display: block;background-size:cover;}
+.medias .images{height:100%;width: 100%; position: absolute; padding-top: 50px;padding-bottom: 30px;top: 0;}
+.medias .images .images_content{height:100%;width: 100%; position: relative}
+.medias .image{position: absolute;display:block;display: block;background-size:cover;z-index:10;}
 .medias h3{ padding: 20px; margin-top: 0;}
 
+/* Grid creator */
+.medias .cell{
+	width: 25%;
+	float:left;
+	display: block;
+	border:1px solid black;
+}
 .pagination{position: absolute;bottom:10px;right:10px;color:#000000;z-index:999;font-size:12px;}
