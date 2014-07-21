@@ -40,7 +40,8 @@ gulp.task('vendor', function() {
         'src/js/vendor/ng-upload.min.js',
         'src/js/vendor/ng-localstorage.js',
         'src/js/vendor/angular-animate.min.js',
-        'src/js/vendor/Chart.min.js'
+        'src/js/vendor/Chart.min.js',
+        'src/js/vendor/utils.js'
     ];
 
     return gulp.src(vendorFiles)
@@ -54,16 +55,13 @@ gulp.task('vendor', function() {
 gulp.task('scripts', function() {
 
     var appFiles = [
-        'src/js/utils/utils.js',
-        'src/js/utils/coverEditor.js',
         'src/js/application.js',
-        'src/js/factories.js',
-        'src/js/directives.js',
-        'src/js/routes.js',
-        'src/js/nav.js',
-        'src/js/books.js',
-        'src/js/projects.js',
-        'src/js/overview.js'
+        'src/js/common/*.js',
+        'src/js/nav/*.js',
+        'src/js/category/*.js',
+        'src/js/overview/*.js',
+        'src/js/book/*.js',
+        'src/js/project/*.js'
     ];
 
     return gulp.src(appFiles)
