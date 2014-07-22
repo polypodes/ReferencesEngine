@@ -2,7 +2,7 @@
   <section class="editor">
     <section class="right_panel">
       <div class="pages">
-        <article class="page0" ng-repeat="page in pages" ng-show="$index==activePage">{{page.text}}</article>
+        <article class="page0" ng-repeat="page in pages" ng-show="$index==activePage" ng-animate="{enter: 'slide-in', leave: 'slide-out'}">{{page.text}}</article>
       </div>
     </section>
     <section class="preview render">
