@@ -85,7 +85,10 @@
     </aside>
     <section class="right_container">
                 
-                <h3>Couverture</h3>
+                <h3 class="toptitle">Création du cahier</h3>
+                <div class="exported" ng-if="book.exported==false">Non exporté</div>
+                <div class="exported ok" ng-if="book.exported!=false">Exporté : refaktor/{{book.exported}}</div>
+                <div class="clear"></div>
                 <section class="form">
                     <label>Titre du cahier</label>
                     <input type="text" ng-model="book.btitle" ng-keyup="bookInfoKeypress()">
@@ -107,6 +110,7 @@
                         </div>
                         <div class="col">
                             <label>Catégories</label>
+                            <div class="clear"></div>
                             <ul class="categories">
                                 <li ng-repeat="category in categories.books" ng-click='selectCategory($index)' ng-class="{'selected' : book.category == category.id}">{{category.title}}</li>
                             </ul>
@@ -127,7 +131,7 @@
     </section>
     <div class="right_bottom_container">
         <div class="buttons">
-            <div class="button" ng-click="saveBook()">{{buttonLegend}}</div>
+            <div class="button" ng-click="saveBook()">Prévisualiser</div>
         </div>
     </div>
 </section>

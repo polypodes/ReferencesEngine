@@ -1,4 +1,4 @@
-App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','Notify', function ($scope,Books,navService,$routeParams,Notify) {
+App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','Notify','$location','$http', function ($scope,Books,navService,$routeParams,Notify,$location,$http) {
     $scope.book = Books.getById($routeParams.book_id);
     $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css");
 
@@ -38,7 +38,7 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
       console.log($scope.book)
     }
 
-    $scope.saveBook = function(){
+    $scope.saveBook = function(showNotif){
         var book = $scope.book;
 
         var validation = Books.validate(book);
@@ -47,22 +47,15 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
             return false;
         }        
 
-        if(book.id==null){
-
-            // Create new a book
-            var id = Books.add(book);
-            Notify('success','Cahier ajouté','Le cahier a été ajouté à votre liste');
-
-        }else if($routeParams.book_id!=undefined){
+        if($routeParams.book_id!=undefined){
 
             // Edit a book
             var id = book.id;
             Books.edit(id,book);
-            Notify('success','Cahier ajouté','Le cahier a été modifié avec succès');
+            if(showNotif==true)
+              Notify('success','Cahier ajouté','Le cahier a été modifié avec succès');
 
         }
-        
-        Notify('success','Cahier modifié','Le cahier a été modifié avec succès');
     }
 
     $scope.pages = [
@@ -75,15 +68,90 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
 
     // Scroll spy
     $scope.activePage=0;
-    $('.preview').scroll(function(e){
-      var pageh = $('.item').height()+20;
-      var totop = Math.floor(($('.preview').scrollTop()-200)/pageh)+1;
+    var pageh = 820;
+    setTimeout(function(){
+      pageh = $('.item').height()+20;
+    },500);
 
-      if(totop!=$scope.activePage){
-        $scope.activePage=totop;
-        $scope.$apply();
+    var steps = [0];
+    var last_h=pageh;
+    steps.push(last_h);
+    for(var i in $scope.book.projects_a){
+      if($scope.book.projects_a[i].files.length!=0){
+        last_h+=2*pageh;
+      }else{
+        last_h+=pageh;
       }
+      steps.push(last_h);
+    } 
+
+    $('.preview').scroll(function(e){
+      var totop = Math.floor(($('.preview').scrollTop())+250);
+
+      for(var i=0; i<steps.length-1; i++){
+        
+        if(totop>=steps[i] && totop<steps[i+1]){
+          if($scope.activePage!=i){
+            $scope.activePage=i;
+            $scope.$apply();
+          }
+        }
+      }
+    
     })
 
+    $scope.goBack = function(){
+        $location.path('/book/'+$routeParams.book_id);
+    }
+
+    $scope.export = function(){
+
+      var ok = false;
+      var count = 0;
+
+      var v = "aeiouy".split(''),
+          c = "bcdfghjklmnpqrstvwxz".split(''),
+          pass = "";
+
+      function makeRequest(){
+        var pass = "";
+        for(var i=0; i<=8; i++){
+          if((i%2)==0){
+            pass+=v[Math.floor(Math.random()*(v.length))];
+          }else{
+            pass+=c[Math.floor(Math.random()*(c.length))];
+          }
+        }
+
+        var data = $.param({file_title:pass,data:$scope.book});
+
+        $http({
+            url: 'templating/export.php',
+            method: "POST",
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: data
+        })
+        .then(function(response) {
+            if(response.data['error']!='ok'){
+              count++;
+              if(count>=10){
+                Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ01");
+              }else{
+                makeRequest();
+              }
+            }else{
+              Notify('success','Votre cahier a été exporté',"Votre cahier a bien été exporté");
+              $scope.book.exported=pass;
+              $scope.saveBook(false);
+            }
+        }, 
+        function(response) { // optional
+          Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ02");
+        });
+      }
+
+      makeRequest();
+     
+    }
 
 }]); 
