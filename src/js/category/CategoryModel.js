@@ -7,12 +7,12 @@ App.factory('Categories',['localStorageService', function (localStorageService) 
         get: function(){
             for(var i in cats){
                 for(var j in cats[i]){
-                    if(cats[i][j].id!=null)
+                    if(cats[i][j].id!==null)
                         cats[i][j].path='/'+i+'/'+cats[i][j].id;
                 }
             }
 
-            if(cats==null){
+            if(cats===null){
                 cats = {
                     projects:[
                         {id:0,title:"Tous les projets",path:"/projects/"}
@@ -20,7 +20,7 @@ App.factory('Categories',['localStorageService', function (localStorageService) 
                     books:[
                         {id:0,title:"Tous les cahiers",path:"/books/"}
                     ]
-                }
+                };
             }
             return cats;
         },

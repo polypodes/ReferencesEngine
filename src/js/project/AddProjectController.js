@@ -6,7 +6,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
     $scope.projects = Projects.get(0);
 
     // Date
-    var date=new Date()
+    var date=new Date();
 
     // Initial data
     $scope.project_data = {
@@ -18,16 +18,16 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
         category:0,
         cover:"dist/img/sample.png",
         files:[]
-    }
+    };
 
     // Files
     $scope.isUploading=false;
 
     $scope.uploadImg=function(){
         $scope.isUploading=true;
-    }
+    };
 
-    if($routeParams.project_id!=undefined){
+    if($routeParams.project_id!==undefined){
         $scope.project_data = Projects.getById($routeParams.project_id);
     }
 
@@ -37,33 +37,33 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
 
         // VALIDATION
         var validation = Projects.validate(finalProject);
-        if(validation!=true){
+        if(validation!==true){
             Notify('error',"Erreur lors de l'ajout",validation);
             return false;
         }
 
         var last_id=0;
 
-        if(finalProject.id==null){
+        if(finalProject.id===null){
             // Create a project, so find a new ID
             Projects.add(finalProject);
-            Notify('success','Projet ajouté','Le projet a été ajouté avec succès')
-        }else if($routeParams.project_id!=undefined){
+            Notify('success','Projet ajouté','Le projet a été ajouté avec succès');
+        }else if($routeParams.project_id!==undefined){
             // Edit a projet, so edit an existing ID
             Projects.edit($routeParams.project_id,finalProject);
-            Notify('success','Projet modifié','Le projet a été modifié avec succès')
+            Notify('success','Projet modifié','Le projet a été modifié avec succès');
         }
 
         $location.path( "/projects/0" );
-    }
+    };
 
     $scope.selectCategory=function(index){
         $scope.project_data.category=$scope.categories.projects[index].id;
-    }
+    };
 
     // Tags
     $scope.addTag=function(e){
-        if(e.which === 13 && $scope.addedTag != ""){ 
+        if(e.which === 13 && $scope.addedTag !== ""){ 
             $scope.project_data.tags.push($scope.addedTag);
             $scope.addedTag="";
         }
@@ -78,7 +78,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
 
     $scope.deleteMedia = function(index){
         $scope.project_data.files.splice(index,1);
-    }
+    };
 
     $scope.uploadCoverComplete = function(content) {
         $scope.isUploading=false;
@@ -87,7 +87,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
         }else{
             Notify('error',"Erreur d'upload","Image de couverture refusée, verifiez la taille et l'extension de votre fichier.");
         }
-    }
+    };
 
     $scope.uploadComplete = function(content) {
         $scope.isUploading=false;
@@ -96,6 +96,6 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
         }else{
             Notify('error',"Erreur d'upload","Upload refusé, verifiez la taille et l'extension de votre fichier.");
         }
-    }
+    };
 
 }]);

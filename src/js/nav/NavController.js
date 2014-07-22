@@ -1,4 +1,4 @@
-App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$location,Categories) {
+App.controller('NavCtrl', ['$scope','$location','Categories','Notify', function ($scope,$location,Categories,Notify) {
 	$scope.pageTitle="";
 
     $scope.mainItems = [
@@ -36,10 +36,10 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 	$scope.inputCategory={
 		project:"",
 		book:""
-	}
+	};
 	// Events
 	$scope.addProjectCategory=function(e){
-		if(e.which === 13 || e.type == "click" && $scope.inputCategory.project != ""){
+		if(e.which === 13 || e.type == "click" && $scope.inputCategory.project !== ""){
 			var last_id=0;
 			for(var i in $scope.categoriesItems.projects){
 				if(typeof($scope.categoriesItems.projects[i])!='function')
@@ -53,7 +53,7 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 	};
 
 	$scope.addBookCategory=function(e){
-		if(e.which === 13 || e.type == "click" && $scope.inputCategory.book != ""){
+		if(e.which === 13 || e.type == "click" && $scope.inputCategory.book !== ""){
 			var last_id=0;
 			for(var i in $scope.categoriesItems.books){
 				if(typeof($scope.categoriesItems.books[i])!='function')
@@ -74,5 +74,9 @@ App.controller('NavCtrl', ['$scope','$location','Categories', function ($scope,$
 		}
 		Categories.saveLocal($scope.categoriesItems);
 	};
+
+		$scope.$on('$routeChangeStart', function(next, current) { 
+			Notify('close');
+		});
 
 }]);

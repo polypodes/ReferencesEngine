@@ -1,7 +1,7 @@
 <section class="container books in">
     <section class="white_head">
         <section class="search">
-            <h4>Filtrer les projets :</h4>
+            <h4>Filtrer les cahiers :</h4>
             <section class="col">
                 <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag">
             </section>
@@ -25,8 +25,7 @@
 
     <section class="items">
         <div ng-if="books.length==0">Aucun cahier</div>
-        <div ng-repeat="book in books | filter : search" item-animation>
-            <article class="item book">
+            <article class="item book" ng-repeat="book in books | filter : search" ng-animate="{enter: 'item-enter', leave: 'item-leave'}" item-animation>
                 <span class="close" ng-click="deleteBook(book.id)">x</span>
                 <a class="book" href="#/book/{{book.id}}">
                     <div class="gradient"></div>
@@ -42,6 +41,5 @@
                     </div>
                 </a>
             </article>
-        </div>
     </section>
 </section>

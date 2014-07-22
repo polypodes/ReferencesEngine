@@ -33,30 +33,26 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
            stop: function(event, uiWidget, $element) {} // optional callback fired when item is finished dragging
         }
     };
-    
-    $scope.info =function(){
-      console.log($scope.book)
-    }
 
     $scope.saveBook = function(showNotif){
         var book = $scope.book;
 
         var validation = Books.validate(book);
-        if(validation!=true){
+        if(validation!==true){
             Notify('error',"Erreur lors de l'ajout",validation);
             return false;
         }        
 
-        if($routeParams.book_id!=undefined){
+        if($routeParams.book_id!==undefined){
 
             // Edit a book
             var id = book.id;
             Books.edit(id,book);
-            if(showNotif==true)
+            if(showNotif===true)
               Notify('success','Cahier ajouté','Le cahier a été modifié avec succès');
 
         }
-    }
+    };
 
     $scope.pages = [
       {text:'cover'},
@@ -77,7 +73,7 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
     var last_h=pageh;
     steps.push(last_h);
     for(var i in $scope.book.projects_a){
-      if($scope.book.projects_a[i].files.length!=0){
+      if($scope.book.projects_a[i].files.length!==0){
         last_h+=2*pageh;
       }else{
         last_h+=pageh;
@@ -85,8 +81,11 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
       steps.push(last_h);
     } 
 
+    var decal = $(document).height()-pageh+300;
+    console.log(decal);
+
     $('.preview').scroll(function(e){
-      var totop = Math.floor(($('.preview').scrollTop())+250);
+      var totop = Math.floor(($('.preview').scrollTop())+decal);
 
       for(var i=0; i<steps.length-1; i++){
         
@@ -98,12 +97,8 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
         }
       }
     
-    })
-
-    $scope.goBack = function(){
-        $location.path('/book/'+$routeParams.book_id);
-    }
-
+    });
+    
     $scope.export = function(){
 
       var ok = false;
@@ -116,7 +111,7 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
       function makeRequest(){
         var pass = "";
         for(var i=0; i<=8; i++){
-          if((i%2)==0){
+          if((i%2)===0){
             pass+=v[Math.floor(Math.random()*(v.length))];
           }else{
             pass+=c[Math.floor(Math.random()*(c.length))];
@@ -132,7 +127,7 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
             data: data
         })
         .then(function(response) {
-            if(response.data['error']!='ok'){
+            if(response.data.error!='ok'){
               count++;
               if(count>=10){
                 Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ01");
@@ -152,6 +147,6 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
 
       makeRequest();
      
-    }
+    };
 
 }]); 

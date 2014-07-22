@@ -1,18 +1,20 @@
 App.factory('Projects',['localStorageService', function (localStorageService) {
 
     function checkExisting(data){
-        if(data==null){
+        if(data===null){
             localStorageService.set('projects',[]);
         }
     }
 
     return {
         get: function(id) {
+            id = parseInt(id);
+
             var projects = localStorageService.get('projects');
+            var temp_projects=[];
             checkExisting(projects);
 
-            if(id!=0){
-                var temp_projects=[];
+            if(id!==0){
                 for(var i in projects){
                     if(projects[i].category==id){
                         temp_projects.push(projects[i]);
@@ -99,7 +101,7 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
             if(data.files.length>mediasMaxNumber)
                 msg.push('trop de fichiers (maximum '+mediasMaxNumber+')');
 
-            if(msg.length==0){
+            if(msg.length===0){
                 return true;
             }else{
                 msg=msg.join(', ');

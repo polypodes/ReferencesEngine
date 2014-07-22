@@ -12,7 +12,7 @@ App.factory('Stats', function () {
         var dates_values = [];
 
         while(from <= to) {
-            day = to.getDate()
+            day = to.getDate();
             to = new Date(to.setDate(--day));
             var date = to.getDate()+'/'+(to.getMonth()+1)+'/'+to.getFullYear();
             dates.push(date);
@@ -51,13 +51,13 @@ App.factory('Stats', function () {
             today : stats.views.web.today+stats.views.pdf.today+stats.views.pres.today,
             yesterday : stats.views.web.yesterday+stats.views.pdf.yesterday+stats.views.pres.yesterday,
             total :  stats.views.web.total+stats.views.pdf.total+stats.views.pres.total
-        }
+        };
 
         // Calculating growth
         stats.views.variations = {
             growth : Math.ceil(((stats.views.total.today-stats.views.total.yesterday)/stats.views.total.yesterday)*100),
             new_visits : stats.views.total.today-stats.views.total.yesterday
-        }
+        };
 
         if(stats.views.variations.growth>=0)
             stats.views.variations.growth="+"+stats.views.variations.growth;

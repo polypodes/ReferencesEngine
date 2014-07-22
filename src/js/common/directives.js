@@ -4,8 +4,7 @@ App.directive('focusOn', function() {
       scope.$on(attr.focusOn, function(e) {
             setTimeout(function(){
                 elem[0].focus();
-            },1)
-            
+            },1);
       });
    };
 });
@@ -23,7 +22,7 @@ App.directive('itemAnimation', function() {
 
                 setTimeout(function(){
                     $(el).addClass('visible');
-                },i*50)
+                },i*50);
             });
         }
    };
@@ -65,37 +64,53 @@ App.directive('backImg', function(){
             'background-size' : 'cover'
         });
     };
-});​
+});
 
 // Notifications
 App.factory('Notify',['$rootScope','$timeout', function($rootScope,$timeout) {
+    
+    var timeout;
+    function initTimeout(){ 
+        $timeout.cancel(timeout);
+        timeout = $timeout(function(){
+            $rootScope.notify.state="closed";
+        },2500);
+    }
+
     var msgs = [];
     $rootScope.notify="opened";
+
     return function(type,title,msg) {
-
-        $rootScope.notify={
-            state:"opened",
-            type:type,
-            title:title,
-            msg:msg
-        };
-
-        var timeout;
-        function initTimeout(){ 
-            $timeout.cancel(timeout);
-            timeout = $timeout(function(){
+        if(type=='close'){
+            if($rootScope.notify.type=="question"){
                 $rootScope.notify.state="closed";
-            },2500);
-        }
-        initTimeout();
+            }
+        }else{ 
 
-        $('.info-box').hover(
-            function(){
-                $timeout.cancel(timeout);
-            },
-            function(){
+            $rootScope.dialogClick = function(choice){
+                $rootScope.$broadcast('clickDialog',{choice:choice});
+            };
+
+            $rootScope.notify={
+                state:"opened",
+                type:type,
+                title:title,
+                msg:msg
+            };
+
+            if(type!='question'){
                 initTimeout();
-            });
+
+                $('.info-box').hover(
+                    function(){
+                        $timeout.cancel(timeout);
+                    },
+                    function(){
+                        initTimeout();
+                    }
+                );
+            }
+        }
 
     };
 }]);

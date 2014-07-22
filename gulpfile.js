@@ -9,13 +9,30 @@ var prefixCss = require('gulp-autoprefixer');
 // JS tasks
 var uglifyJS = require('gulp-uglify');
 var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
 // Various tasks
 var rename = require('gulp-rename');
 var liveReload = require('gulp-livereload');
 var concat = require('gulp-concat');
 var filesize = require('gulp-filesize');
+var browserSync = require('browser-sync');
+var htmlhint = require("gulp-htmlhint");
 
 
+// Browsersync
+gulp.task('browser-sync', function () {
+   var files = [
+      '*.html',
+      'dist/css/*.css',
+      'dist/js/*.js'
+   ];
+
+   browserSync.init(files, {
+      server: {
+         baseDir: './'
+      }
+   });
+});
 
 // Compile LESS
 gulp.task('less', function() {
@@ -68,6 +85,7 @@ gulp.task('scripts', function() {
 
     return gulp.src(appFiles)
         .pipe(jshint())
+        .pipe(jshint.reporter(stylish))
         .pipe(concat('app.min.js'))
         .pipe(uglifyJS())
         .pipe(filesize())

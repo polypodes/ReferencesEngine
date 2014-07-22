@@ -1,26 +1,44 @@
 <section class="container add_project in">
   <section class="editor">
     <section class="right_panel">
-      <div class="pages">
-        <article class="page" ng-show="activePage==0" ng-animate="'page'">
-          <h2>Couverture</h2>
-        </article>
-        <article class="page" ng-repeat="project_a in book.projects_a track by project_a.id" ng-show="$index+1==activePage" ng-animate="'page'">
-          <h2>{{project_a.title}}</h2>
-          <p>Vous pouvez modifier ce projet pour ce cahier. Les modifications effectuées toucheront uniquement le projet présent dans ce cahier, et non pas le projet d'origine.</p>
-          <section class="form">
-            <label>Phrase d'introduction</label>
-            <input type="text" ng-model="project_a.intro">
-            <label>Titre du projet</label>
-            <input type="text" ng-model="project_a.title">
-            <label>Date</label>
-            <input type="text" ng-model="project_a.date">
-            <label>Description</label>
-            <input type="text" ng-model="project_a.desc">
-          </section>
-        </article>
+      <div class="right_panel_content">
+        <div class="pages">
+          <article class="page" ng-show="activePage==0" ng-animate="'page'">
+            <h2>Couverture</h2>
+            <p>Depuis cet écran, vous pouvez faire les derniers réglages concernant votre cahier. Les modifications effectuées toucheront uniquement les projets présents dans ce cahier, et non pas les projets d'origine.</p>
+            <section class="form">
+              <label>Titre du cahier</label>
+              <input type="text" ng-model="book.btitle">
+              <label>Description du cahier</label>
+              <textarea ng-model="book.subtitle"></textarea>
+              <label>Infos complémentaires</label>
+              <input type="text" ng-model="book.bottomline">
+            </section>
+          </article>
+          <article class="page" ng-repeat="project_a in book.projects_a track by project_a.id" ng-show="$index+1==activePage" ng-animate="'page'">
+            <h2>{{project_a.title}}</h2>
+            <p>Vous pouvez modifier ce projet pour ce cahier. Modifier le projet peut être utile si vous voulez adapter le texte pour un client ou un besoin spécifique. Les modifications effectuées toucheront uniquement le projet présent dans ce cahier, et non pas le projet d'origine.</p>
+            <section class="form">
+              <label>Phrase d'introduction</label>
+              <input type="text" ng-model="project_a.intro">
+              <label>Titre du projet</label>
+              <input type="text" ng-model="project_a.title">
+              <label>Date</label>
+              <input type="text" ng-model="project_a.date">
+              <label>Description</label>
+              <textarea type="text" ng-model="project_a.desc"></textarea>
+            </section>
+          </article>
+        </div>
+        <section class="bottom_container">
+          <div class="buttons">
+              <div class="button ng-binding" ng-click="saveBook(true)">Enregistrer</div>
+              <div class="button ng-binding" ng-click="export()">Exporter</div>
+          </div>
+        </section>
       </div>
     </section>
+    <!-- preview -->
     <section class="preview render">
         <article class="cover">
             <div class="cover_image" ng-style="{'background-image':'url('+book.cover+')'}"></div>
@@ -62,12 +80,5 @@
           </article>
         </section>
     </section>
-  </section>
-  <section class="bottom_container">
-    <div class="buttons">
-        <div class="button ng-binding" ng-click="goBack()">Retour</div>
-        <div class="button ng-binding" ng-click="saveBook(true)">Enregistrer</div>
-        <div class="button ng-binding" ng-click="export()">Exporter</div>
-    </div>
   </section>
 </section>

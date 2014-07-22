@@ -33,6 +33,10 @@ App.config(['$routeProvider', function ($routeProvider) {
     templateUrl: 'src/views/overview.html',
     controller: 'OverviewCtrl'
   })
+  .when('/settings', {
+    templateUrl: 'src/views/settings.html',
+    controller: 'SettingsCtrl'
+  })
   .otherwise({
     redirectTo: '/overview'
   });

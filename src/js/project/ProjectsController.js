@@ -12,22 +12,22 @@ App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify','Cat
             }
         }
         Projects.saveLocal($scope.projects);
-    }
+    };
 
     $scope.cat_name=categories.projects[$scope.cat_id].title;
     $scope.button_rename=false;
     $scope.toggleRenameInput=function(){
         $scope.button_rename=!$scope.button_rename;
-        if($scope.button_rename==true)
+        if($scope.button_rename===true)
             $scope.$broadcast('inputRenameShown');
-    }
+    };
 
     $scope.changeCategoryName=function(e){
-        if(e.which === 13 || e.type == "click" && $scope.cat_name != ""){
+        if(e.which === 13 || e.type == "click" && $scope.cat_name !== ""){
             categories.projects[$scope.cat_id].title=$scope.cat_name;
             Categories.saveLocal(categories);
             $scope.toggleRenameInput();
         }
-    }
+    };
 
 }]);

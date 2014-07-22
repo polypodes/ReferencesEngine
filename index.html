@@ -46,9 +46,19 @@
                     </div>
                 </section>
                 <section class="info-box {{notify.type}} {{notify.state}}">
-                    <section class="box-content">
+                    <section class="box-content" ng-if="!notify.msg.question">
                         <h3>{{notify.title}}</h3>
                         <p>{{notify.msg}}</p>
+                    </section>
+                    <section class="box-content" ng-if="notify.msg.question">
+                        <h3>{{notify.title}}</h3>
+                        <p>{{notify.msg.question}}</p>
+
+                        <div class="buttons">
+                            <div class="button" ng-click="dialogClick('yes')">{{notify.msg.yes}}</div>
+                            <div class="button" ng-click="dialogClick('no')">{{notify.msg.no}}</div>
+                        </div>
+
                     </section>
                 </section>
                 <aside class="sidebar">

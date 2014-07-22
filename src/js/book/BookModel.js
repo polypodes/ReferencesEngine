@@ -1,17 +1,19 @@
 App.factory('Books', ['localStorageService', function (localStorageService) {
 
     function checkExisting(data){
-        if(data==null){
+        if(data===null){
             localStorageService.set('books',[]);
         }
     }
 
     return {
         get: function(id) {
+            id=parseInt(id);
+            
             var books = localStorageService.get('books');
+            var temp_books=[];
             checkExisting(books);
-            if(id!=0){
-                var temp_books=[];
+            if(id!==0){
                 for(var i in books){
                     if(books[i].category==id){
                         temp_books.push(books[i]);
@@ -76,7 +78,6 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
                 btitleMinLength=2,
                 btitleMaxLength=100,
                 dateMaxLength=50,
-                bottomlineMaxLength=100,
                 subtitlelineMaxLength=500,
                 minProjects=1;
 
@@ -104,7 +105,7 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
                 msg.push('description trop longue');
 
 
-            if(msg.length==0){
+            if(msg.length===0){
                 return true;
             }else{
                 msg=msg.join(', ');
