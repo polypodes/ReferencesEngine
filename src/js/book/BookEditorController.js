@@ -3,6 +3,7 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
     $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css");
 
 
+
     $scope.gridsterOpts = {
         columns: 4, // the width of the grid, in columns
         rows: 4, // the width of the grid, in columns
@@ -98,7 +99,8 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
       }
     
     });
-    
+
+    $scope.exportBox=false;
     $scope.export = function(){
 
       var ok = false;
@@ -110,7 +112,7 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
 
       function makeRequest(){
         var pass = "";
-        for(var i=0; i<=8; i++){
+        for(var i=0; i<=5; i++){
           if((i%2)===0){
             pass+=v[Math.floor(Math.random()*(v.length))];
           }else{
@@ -146,7 +148,12 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
       }
 
       makeRequest();
+      $scope.exportBox=true;
      
+    };
+
+    $scope.closeExportedBox = function(){
+      $scope.exportBox=false;
     };
 
 }]); 
