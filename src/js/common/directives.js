@@ -11,15 +11,9 @@ App.directive('focusOn', function() {
 
 App.directive('itemAnimation', function() {
    return function(scope, elem, attr) {
-        // if(scope.$first){
-        //     elem.parent().append('<div class="loading">Chargement des éléments ...</div>');
-        // }
         if(scope.$last){
             
             $(".items .item").each(function(i,el){
-                // if(i==1)
-                //     elem.parent().find('.loading').fadeOut();
-
                 setTimeout(function(){
                     $(el).addClass('visible');
                 },i*50);
@@ -68,6 +62,8 @@ App.directive('backImg', function(){
 
 // Notifications
 App.factory('Notify',['$rootScope','$timeout', function($rootScope,$timeout) {
+    
+    $rootScope.notify.state="closed";
     
     var timeout;
     function initTimeout(){ 

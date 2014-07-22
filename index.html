@@ -23,8 +23,10 @@
         <div class="ui_content">
             <section ng-controller="NavCtrl">
                 <section class="top-menu" ng-init="pageTitle='Vue d\'ensemble';">
-                    <div class="brand">Refaktor</div>
-                    <div class="page">
+                    <div class="brand">Refaktor</div>  
+                    <div class="previous" ng-class="{isPrev: isPrev==true}" ng-click="goBack()"><</div>
+                    <div class="page" ng-class="{isPrev: isPrev==true}">
+                      
                         <h2>{{pageTitle}}</h2>
                     </div>
                     <div class="right_infos">

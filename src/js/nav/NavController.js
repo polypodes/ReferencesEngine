@@ -75,8 +75,20 @@ App.controller('NavCtrl', ['$scope','$location','Categories','Notify', function 
 		Categories.saveLocal($scope.categoriesItems);
 	};
 
-		$scope.$on('$routeChangeStart', function(next, current) { 
-			Notify('close');
-		});
+	var rc=0;
+	$scope.goBack=function(){
+		window.history.back();
+		rc-=2;
+	};
+
+	$scope.$on('$routeChangeSuccess', function(next, current) {
+		Notify('close');
+		if(rc>=1){
+			$scope.isPrev=true;	
+		}else{
+			$scope.isPrev=false;	
+		}
+		rc++;
+	});
 
 }]);
