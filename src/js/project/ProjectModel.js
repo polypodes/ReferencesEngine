@@ -27,6 +27,8 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
             return temp_projects;
         },
         getById : function(id) {
+            id=parseInt(id);
+
             var projects = localStorageService.get('projects');
             checkExisting(projects);
             for(var i in projects){
@@ -55,6 +57,8 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
             return data.id;
         },
         edit : function(id,data){
+            id=parseInt(id);
+            
             var projects = localStorageService.get('projects');
 
             for(var i in projects){

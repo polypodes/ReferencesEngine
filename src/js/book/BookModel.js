@@ -9,7 +9,7 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
     return {
         get: function(id) {
             id=parseInt(id);
-            
+
             var books = localStorageService.get('books');
             var temp_books=[];
             checkExisting(books);
@@ -26,6 +26,8 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
             return temp_books;
         },
         getById : function(id) {
+            id=parseInt(id);
+
             var books = localStorageService.get('books');
             var projects = localStorageService.get('projects');
 
@@ -61,6 +63,8 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
             return data.id;
         },
         edit : function(id,data){
+            id=parseInt(id);
+            
             var books = localStorageService.get('books');
 
             for(var i in books){

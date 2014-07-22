@@ -68,7 +68,7 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
     if($routeParams.book_id!==undefined){
         $scope.book = Books.getById($routeParams.book_id);
         $scope.projects_a=$scope.book.projects_a;
-    }else if($routeParams.book_id===null){
+    }else{
         $scope.book = {
             btitle:'Titre du cahier',
             subtitle:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eum mollitia voluptatibus. Tempore impedit reprehenderit blanditiis praesentium ab, nemo nisi, quas eaque, voluptatem perferendis quidem, architecto exercitationem saepe facilis illo.',
@@ -125,8 +125,8 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
 
         var id;
 
-        if(book.id===null){
-
+        if(!(book.hasOwnProperty('id'))){
+            
             // Create new a book
             id = Books.add(book);
             Notify('success','Cahier ajouté','Le cahier a été ajouté à votre liste. Vous pouvez effectuer les derniers réglages via la prévisualisation.');
@@ -136,7 +136,7 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
             // Edit a book
             id = book.id;
             Books.edit(id,book);
-            Notify('success','Cahier ajouté','Le cahier a été modifié avec succès. Vous pouvez effectuer les derniers réglages via la prévisualisation.');
+            Notify('success','Cahier modifié','Le cahier a été modifié avec succès. Vous pouvez effectuer les derniers réglages via la prévisualisation.');
 
         }
         

@@ -44,7 +44,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
 
         var last_id=0;
 
-        if(finalProject.id===null){
+        if(!(finalProject.hasOwnProperty('id'))){
             // Create a project, so find a new ID
             Projects.add(finalProject);
             Notify('success','Projet ajouté','Le projet a été ajouté avec succès');
