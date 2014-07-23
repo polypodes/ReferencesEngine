@@ -34,8 +34,8 @@ class SecurityController extends Controller
      *  },
      *  statusCodes={
      *         200="Returned when successful",
-     *         404={
-     *           "Returned when the user is not found",
+     *         401={
+     *           "Returned for any error encountered",
      *         }
      *     }
      * )
