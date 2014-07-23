@@ -1916,6 +1916,53 @@ section.form{
     	}
     }
 }
+
+.switch{
+	position: relative;
+	background-color:@grey;
+	float:left;
+	margin-right: 10px;
+	padding:10px;
+	color:#FFFFFF;
+
+	font-weight: 300;
+	font-size: 14px;
+
+	border-radius:3px;
+	width: 160px;
+	height: 35px;
+
+	overflow:hidden;
+
+	div{
+		display:inline-block;
+		position: absolute;
+		width: 50%;
+		&.online{
+			right: 0;
+			text-align: center;
+		}
+		&.offline{
+			left: 0;
+			text-align: center;
+		}
+		&.selector{
+			width: 50%;
+			height: 100%;
+			background-color: @green;
+			position: absolute;
+			top: 0;
+			transition:all 0.5s;
+			left:50%;
+			&.left{left:0;background-color:#e74c3c;}
+		}
+	}
+
+	&:hover{
+		cursor:pointer;
+	}
+}
+
 .button{
 	background-color:@green;
 	display: inline-block;

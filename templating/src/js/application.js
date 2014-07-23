@@ -25,7 +25,8 @@ $.ajax({
   dataType: 'json',
   timeout: 300,
   success: function(data){
-  	main.render(data.data);
+  	console.log(data)
+  	// main.render(data.data);
   },
   error: function(xhr, type){
     console.log('Ajax error!')

@@ -33,7 +33,8 @@
                     <div class="desc">
                         <h4>{{book.btitle}}</h4>
                         <div class="date">
-                            <span>{{book.date}}</span>
+                            <span ng-if="book.exported==false">Hors ligne</span>
+                            <span ng-if="book.exported!=false">En ligne : <i>books/{{book.exported}}</i></span>
                         </div>
                     </div>
                     <div class="buttons">

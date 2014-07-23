@@ -1,4 +1,4 @@
-<?php $rooturl = "http://sandbox.com/podfolio/v0_angular/templating"; ?>
+<?php $rooturl = "http://sandbox.com/podfolio/v1_angular/templating"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +33,7 @@
 
 	<script>
 		var id = "<?php echo $_GET['id']; ?>";
-		var book = "http://sandbox.com/podfolio/v0_angular/templating/book.json";
+		var book = "http://sandbox.com/podfolio/v1_angular/templating/data/"+id+".json";
 	</script>
 	<script src="<?= $rooturl; ?>/src/js/application.js"></script>
 </body>

@@ -103,13 +103,6 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
     $scope.exportBox=false;
     $scope.export = function(){
 
-      var ok = false;
-      var count = 0;
-
-      var v = "aeiouy".split(''),
-          c = "bcdfghjklmnpqrstvwxz".split(''),
-          pass = "";
-
       function makeRequest(){
         var pass = "";
         for(var i=0; i<=5; i++){
@@ -147,8 +140,39 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
         });
       }
 
-      makeRequest();
-      $scope.exportBox=true;
+      if(!$scope.book.exported){
+        var ok = false;
+        var count = 0;
+
+        var v = "aeiouy".split(''),
+            c = "bcdfghjklmnpqrstvwxz".split(''),
+            pass = "";
+
+        makeRequest();
+        $scope.exportBox=true;
+      }else{
+        var data = $.param({file:$scope.book.exported+".json"});
+
+        $http({
+          url: 'templating/dexport.php',
+          method: "POST",
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          data: data
+        })
+        .then(function(response) {
+          console.log(response);
+          if(response.data.error!='ok'){
+              Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ03");
+          }else{
+            Notify('success','Votre cahier a été mis hors ligne',"Celui-ci n'est désormais plus accessible aux visiteurs.");
+            $scope.book.exported=false;
+            $scope.saveBook(false);
+          }
+        }, 
+        function(response) { // optional
+          Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ02");
+        });
+      }
      
     };
 
