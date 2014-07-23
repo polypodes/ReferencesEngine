@@ -1,7 +1,7 @@
 <?php 
 	$file_title = $_POST['file_title'].".json";
 
-	if (file_exists('data/'.$file_title)){
+	if (file_exists('data/'.$file_title) AND $_POST['newbook']==false){
 		echo json_encode(array('error' => 'exists'));
 	}else{
 		$fp = fopen('data/'.$file_title, 'wb');

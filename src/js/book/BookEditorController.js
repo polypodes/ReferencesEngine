@@ -2,8 +2,6 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
     $scope.book = Books.getById($routeParams.book_id);
     $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css");
 
-
-
     $scope.gridsterOpts = {
         columns: 4, // the width of the grid, in columns
         rows: 4, // the width of the grid, in columns
@@ -35,12 +33,63 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
         }
     };
 
+
+    function makeRequest(pass){
+      console.log(pass);
+
+      var ok = false;
+      var count = 0;
+      var newBook = false;
+
+      var v = "aeiouy".split(''),
+          c = "bcdfghjklmnpqrstvwxz".split('');
+
+      if(typeof pass == 'undefined'){
+        pass = "";
+        for(var i=0; i<=5; i++){
+          if((i%2)===0){
+            pass+=v[Math.floor(Math.random()*(v.length))];
+          }else{
+            pass+=c[Math.floor(Math.random()*(c.length))];
+          }
+        }
+        newBook=true;
+      }
+
+      var data = $.param({file_title:pass,data:$scope.book,newbook:newBook});
+
+      $http({
+          url: 'templating/export.php',
+          method: "POST",
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          data: data
+      })
+      .then(function(response) {
+          if(response.data.error!='ok'){
+            count++;
+            if(count>=10){
+              Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ01");
+            }else{
+              makeRequest();
+            }
+          }else{
+            Notify('success','Votre cahier a été exporté',"Votre cahier a bien été exporté");
+            $scope.book.exported=pass;
+            if(!newBook)
+              $scope.saveBook(false);
+          }
+      }, 
+      function(response) { // optional
+        Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ02");
+      });
+    }
+
     $scope.saveBook = function(showNotif){
         var book = $scope.book;
 
         var validation = Books.validate(book);
         if(validation!==true){
-            Notify('error',"Erreur lors de l'ajout",validation);
+            Notify('error',"Erreur lors de l'enregistrement",validation);
             return false;
         }        
 
@@ -50,8 +99,12 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
             var id = book.id;
             Books.edit(id,book);
             if(showNotif===true)
-              Notify('success','Cahier ajouté','Le cahier a été modifié avec succès');
+              Notify('success','Cahier modifié','Le cahier a été modifié avec succès');
 
+            if(book.exported!==false && showNotif===true){
+              console.log('MAKEREQUEST')
+              makeRequest(book.exported);
+            }
         }
     };
 
@@ -83,7 +136,6 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
     } 
 
     var decal = $(document).height()-pageh+300;
-    console.log(decal);
 
     $('.preview').scroll(function(e){
       var totop = Math.floor(($('.preview').scrollTop())+decal);
@@ -103,51 +155,7 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
     $scope.exportBox=false;
     $scope.export = function(){
 
-      function makeRequest(){
-        var pass = "";
-        for(var i=0; i<=5; i++){
-          if((i%2)===0){
-            pass+=v[Math.floor(Math.random()*(v.length))];
-          }else{
-            pass+=c[Math.floor(Math.random()*(c.length))];
-          }
-        }
-
-        var data = $.param({file_title:pass,data:$scope.book});
-
-        $http({
-            url: 'templating/export.php',
-            method: "POST",
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            data: data
-        })
-        .then(function(response) {
-            if(response.data.error!='ok'){
-              count++;
-              if(count>=10){
-                Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ01");
-              }else{
-                makeRequest();
-              }
-            }else{
-              Notify('success','Votre cahier a été exporté',"Votre cahier a bien été exporté");
-              $scope.book.exported=pass;
-              $scope.saveBook(false);
-            }
-        }, 
-        function(response) { // optional
-          Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ02");
-        });
-      }
-
       if(!$scope.book.exported){
-        var ok = false;
-        var count = 0;
-
-        var v = "aeiouy".split(''),
-            c = "bcdfghjklmnpqrstvwxz".split(''),
-            pass = "";
-
         makeRequest();
         $scope.exportBox=true;
       }else{
@@ -160,7 +168,6 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
           data: data
         })
         .then(function(response) {
-          console.log(response);
           if(response.data.error!='ok'){
               Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ03");
           }else{
