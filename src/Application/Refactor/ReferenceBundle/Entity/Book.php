@@ -284,7 +284,6 @@ class Book
         $faker = Faker\Factory::create();
         $this->setTitle($faker->sentence($nbWords = 6));
         $this->setClientName($faker->name);
-        $this->setProjectUrl($faker->url());
         $this->setDate($faker->dateTime($max            = 'now'));
         $this->setUpdatedAt($faker->dateTime($max       = 'now'));
         $this->setCreatedAt($faker->dateTime($max       = 'now'));

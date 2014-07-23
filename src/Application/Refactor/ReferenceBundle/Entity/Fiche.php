@@ -593,6 +593,7 @@ class Fiche
         $this->setContent($faker->text);
         $this->setContentFormatter('text');
         $this->setRawContent($this->getContent());
+        $this->setProjectUrl($faker->url());
         $this->setPublished(true);
         $this->prePersist();
         $this->setCreatedAt($faker->dateTime($max = 'now') );
