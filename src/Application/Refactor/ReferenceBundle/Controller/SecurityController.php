@@ -6,7 +6,7 @@ use Application\Sonata\UserBundle\Entity\User;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\View\View as FOSView;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SecurityController extends Controller
@@ -44,20 +44,23 @@ class SecurityController extends Controller
     {
         $view    = FOSView::create();
         $request = $this->getRequest();
+        $realm = $this->getRequest()->getHost();
 
-        $username = $request->get('username');
-        $password = $request->get('password');
+        $username = $request->request->get('username');
+        $password = $request->request->get('password');
+
+        if((null === $username) || (null === $password)) {
+            throw new UnauthorizedHttpException($realm,'Bad payload.');
+        }
 
         $em   = $this->getDoctrine()->getManager();
         $user = $em->getRepository('ApplicationSonataUserBundle:User')->findOneByUsername($username);
         $encoder_service = $this->get('security.encoder_factory');
-        //get fos encoder
         $encoder      = $encoder_service->getEncoder($user);
         $encoded_pass = $encoder->encodePassword($password, $user->getSalt());
-        //encod password
 
         if (!$user) {
-            throw new AccessDeniedException('Wrong user');
+            throw new UnauthorizedHttpException($realm,'Bad payload');
         }
 
         $created   = date('c');
