@@ -20,3 +20,6 @@ composer.phar
 
 # Mac Files
 *.DS_Store
+
+# IDE, RAD
+.idea
