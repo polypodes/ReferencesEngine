@@ -32,6 +32,7 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sonata.media.manager.media" />
             <argument type="service" id="kernel" />
+            <argument type="service" id="fos_user.util.user_manipulator" />
         </service>
         <service id="refactor_locale.locale_listener"
           class="Application\Refactor\ReferenceBundle\EventListener\LocaleListener">

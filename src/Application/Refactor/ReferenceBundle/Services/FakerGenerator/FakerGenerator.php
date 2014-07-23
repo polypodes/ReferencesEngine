@@ -13,15 +13,16 @@ use Faker;
 class FakerGenerator
 {
 
-    public function __construct(EntityManager $em, MediaManager $MediaManager, $kernel)
+    public function __construct(EntityManager $em, MediaManager $MediaManager, $kernel, $manipulator)
     {
         //Get Service i need to persist
-           $this->em           = $em;
-           $this->MediaManager = $MediaManager;
+        $this->em           = $em;
+        $this->MediaManager = $MediaManager;
         // to save Media
-           $this->kernel = $kernel;
+        $this->kernel = $kernel;
+        $this->manipulator = $manipulator;
         //to get the root Dir
-           $this->getFake();
+        $this->getFake();
         //to generate the DB
 
     }//end __construct()
@@ -183,6 +184,9 @@ class FakerGenerator
                 // delete file
             }
         }
+
+        // generate a test user
+        $this->manipulator->create('test', 'test', 'test@test.com', true, true);
 
         return (true);
 
