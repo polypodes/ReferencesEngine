@@ -1,4 +1,4 @@
-App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categories','$timeout', function ($scope,Books,$routeParams,Notify,Categories,$timeout) {
+App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categories','$timeout','$location', function ($scope,Books,$routeParams,Notify,Categories,$timeout,$location) {
     
     for(var i in $scope.books)
         $scope.books[i].visible=false;
@@ -34,6 +34,12 @@ App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categorie
             }
         });
     };
+
+    if(!categories.books.hasOwnProperty($scope.cat_id)){
+        $location.path('books/0');
+        Notify('error',"Cette catégorie n'existe pas","La catégorie à laquelle vous tentez d'accéder n'existe pas");
+        return false;
+    }
 
     $scope.cat_name=categories.books[$scope.cat_id].title;
     $scope.button_rename=false;

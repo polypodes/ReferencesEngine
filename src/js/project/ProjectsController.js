@@ -1,4 +1,4 @@
-App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify','Categories','$timeout', function ($scope,Projects,$routeParams,Notify,Categories,$timeout) {
+App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify','Categories','$timeout','$location', function ($scope,Projects,$routeParams,Notify,Categories,$timeout,$location) {
 
     // Animation
     for(var i in $scope.projects)
@@ -27,6 +27,12 @@ App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify','Cat
         }
         Projects.saveLocal($scope.projects);
     };
+
+    if(!categories.projects.hasOwnProperty($scope.cat_id)){
+        $location.path('projects/0');
+        Notify('error',"Cette catégorie n'existe pas","La catégorie à laquelle vous tentez d'accéder n'existe pas");
+        return false;
+    }
 
     $scope.cat_name=categories.projects[$scope.cat_id].title;
     $scope.button_rename=false;

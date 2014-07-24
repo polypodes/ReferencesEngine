@@ -61,26 +61,18 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
         axis: 'y'
     };
 
-    // Sample data
-    // -----------
+    $scope.book = Books.getById($routeParams.book_id);
 
-    // Existing or new ? 
-    if($routeParams.book_id!==undefined){
-        $scope.book = Books.getById($routeParams.book_id);
-        $scope.projects_a=$scope.book.projects_a;
-    }else{
-        $scope.book = {
-            btitle:'Titre du cahier',
-            subtitle:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, eum mollitia voluptatibus. Tempore impedit reprehenderit blanditiis praesentium ab, nemo nisi, quas eaque, voluptatem perferendis quidem, architecto exercitationem saepe facilis illo.',
-            bottomline:'Pour [NOM DU CLIENT] fait le [DATE]',
-            cover:"dist/img/sample.png",
-            date:'date',
-            category:0,
-            theme:$scope.themes[0],
-            exported:false
-        };
+    console.log($scope.book);
+
+    // Test if exsits
+    if(typeof $routeParams.book_id=='undefined' || typeof $scope.book == 'undefined'){
+        $location.path('books/0');
+        Notify('error',"Ce cahier n'existe pas","Le cahier auquel vous tentez d'accéder n'existe pas");
+        return false;
     }
 
+    $scope.projects_a=$scope.book.projects_a;
 
     for(var i in projects){
         projects[i].added=false;

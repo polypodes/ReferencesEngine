@@ -29,6 +29,12 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
 
     if($routeParams.project_id!==undefined){
         $scope.project_data = Projects.getById($routeParams.project_id);
+
+        if(typeof $scope.project_data == 'undefined'){
+            $location.path('projects/0');
+            Notify('error',"Ce projet n'existe pas","Le projet auquel vous tentez d'accéder n'existe pas");
+            return false;
+        }
     }
 
     $scope.addProject=function(){ 

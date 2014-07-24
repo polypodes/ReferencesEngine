@@ -1,10 +1,7 @@
-App.controller('NavCtrl', ['$scope','$location','Categories','Notify', function ($scope,$location,Categories,Notify) {
+App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHelp', function ($scope,$location,Categories,Notify,instantHelp) {
 
 	$scope.instantHelp = function(){
-	  $("#helpme").joyride({
-	    autoStart: true,
-	    'tipLocation': 'top'
-	  });
+		instantHelp('page');
 	};
 
 	$scope.pageTitle="";

@@ -62,7 +62,7 @@
 
           if ($.isEmptyObject(settings)) {
             settings = $.extend(true, defaults, opts);
-
+            
             // non configurable settings
             settings.document = window.document;
             settings.$document = $(settings.document);

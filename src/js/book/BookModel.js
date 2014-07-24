@@ -26,23 +26,17 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
             return temp_books;
         },
         getById : function(id) {
+
             id=parseInt(id);
 
             var books = localStorageService.get('books');
-            var projects = localStorageService.get('projects');
-
             checkExisting(books);
 
-            var book={};
-
-            // Find the book
             for(var i in books){
                 if(books[i].id==id){
-                    book = books[i];
+                    return books[i];
                 }
             }
-
-            return book;
         },
         saveLocal : function(data){
             localStorageService.set('books',data);
