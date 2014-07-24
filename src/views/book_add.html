@@ -1,12 +1,23 @@
- <section class="container add_book in">
-    <aside class="sidebar">
+<ol id="helpme">
+    <li data-id="tip1">Ajoutez des projets à votre cahier en cliquant dessus.</li>
+    <li data-id="tip2">Vous pouvez afficher les cahiers en ligne ou en blocs selon votre convenance.</li>
+    <li data-id="tip3">Vous pouvez rechercher un projet par mot clé / titre / date ...</li>
+    <li data-id="tip4">Vos projets ajoutés s'affichent dans cette colonne.</li>
+    <li data-id="tip6">Remplissez les champs relatifs aux informations de votre cahier.</li>
+    <li data-id="tip7">Choisissez une image de couverture de grande taille et de bonen qualité, mais en veillant à ne pas dépasser la limite de 5mo.</li>
+    <li data-id="tip8">Choisissez la catégorie dans laquelle mettre le cahier. Vous pouvez créer une catégorie via le formulaire dans le menu de gauche.</li>
+    <li data-id="tip9">Pour finir, choisissez un thème et validez !</li>
+</ol>
+
+<section class="container add_book in">
+    <aside class="sidebar" id="tip1">
         <h3>Tous les projets</h3>
-        <section class="presentation_style">
+        <section class="presentation_style" id="tip2">
             <article class="block" ng-click="changePresentation('block','all_projects')"><i class="fa fa-th"></i></article>
-            <article class="line"ng-click="changePresentation('line','all_projects')"><i class="fa fa-align-justify"></i></article>
+            <article class="line" ng-click="changePresentation('line','all_projects')"><i class="fa fa-align-justify"></i></article>
         </section>
 
-        <section class="search">
+        <section class="search" id="tip3">
             <input type="search" ng-model="search" placeholder="Tapez un mot clé, une date ..." class="search">
         </section>
         <div class="scrollable">
@@ -38,7 +49,7 @@
             </section>
         </div>
     </aside>
-    <aside class="my_projects">
+    <aside class="my_projects" id="tip4">
         <h3>Cahier</h3>
         <section class="presentation_style">
             <article class="block" ng-click="changePresentation('block','my_projects')"><i class="fa fa-th"></i></article>
@@ -86,10 +97,10 @@
     <section class="right_container">
                 
                 <h3 class="toptitle">Création du cahier</h3>
-                <div class="exported" ng-if="book.exported==false">Non exporté</div>
-                <div class="exported ok" ng-if="book.exported!=false">Exporté : refaktor/{{book.exported}}</div>
+                <div class="exported" ng-if="book.exported==false">Hors ligne</div>
+                <div class="exported ok" ng-if="book.exported!=false">En ligne : refaktor/{{book.exported}}</div>
                 <div class="clear"></div>
-                <section class="form">
+                <section class="form" id="tip6">
                     <label>Titre du cahier</label>
                     <input type="text" ng-model="book.btitle" ng-keyup="bookInfoKeypress()">
                     <label>Description du cahier</label>
@@ -98,7 +109,7 @@
                     <input type="text" ng-model="book.bottomline">
                     
                     <div class="cols">
-                        <div class="col image">
+                        <div class="col image" id="tip7">
                             <label>Image de couverture</label>
                             <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)"> 
                                 <section class="book_cover" ng-style="{'background-image':'url('+book.cover+')'}" ng-class="{'added' : book.cover != ''}">
@@ -108,7 +119,7 @@
                                 </section>
                             </form>
                         </div>
-                        <div class="col">
+                        <div class="col" id="tip8">
                             <label>Catégories</label>
                             <div class="clear"></div>
                             <ul class="categories">
@@ -122,7 +133,7 @@
                 </section>
                 
                 <!-- <img src="" alt="" id="cover_generated"> -->
-                <h3>Theme</h3>
+                <h3 id="tip9">Theme</h3>
                 <ul class="themes">
                     <li ng-repeat='theme in themes' ng-click="chooseTheme($index)" ng-class="{'actual' : book.theme.id == theme.id}">{{theme.title}}</li>
                 </ul>

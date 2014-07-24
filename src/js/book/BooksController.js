@@ -1,4 +1,4 @@
-App.controller('BooksCtrl', ['$scope','Books','navService','$routeParams','Notify','Categories', function ($scope,Books,navService,$routeParams,Notify,Categories) {
+App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categories', function ($scope,Books,$routeParams,Notify,Categories) {
    
     var categories = Categories.get();
     $scope.cat_id = $routeParams.book_id;

@@ -9,6 +9,10 @@ App.config(['$routeProvider', function ($routeProvider) {
     templateUrl: 'src/views/project_add.html',
     controller: 'AddProjectCtrl'
   })
+  .when('/books/exported', {
+    templateUrl: 'src/views/books_exported.html',
+    controller: 'BooksExportedCtrl'
+  })
   .when('/books/:book_id?', {
     templateUrl: 'src/views/books.html',
     controller: 'BooksCtrl'

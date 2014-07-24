@@ -1,3 +1,9 @@
+<ol id="helpme">
+    <li data-id="tip1">Vos pages ajoutées sont visibles en format A4 dans cette colonne. Des formats web et présentation seront également générés.</li>
+    <li data-id="tip2">Ajustez les textes de vos pages dans cette colonne.</li>
+    <li data-id="tip3">Enregistrer votre projet grâce au bout enregistrer. Si celui-ci est en ligne, la version en ligne sera également mise à jour. Vous pouvez également régler la visbilité de votre projet grâce au bouton de droite. Si celui-ci est "en ligne", il sera visible par les visiteurs à une adresse qui vous sera donnée.</li>
+</ol>
+
 <section class="container add_project in">
   <section class="exported" ng-class="{show: exportBox==true}">
     <section class="box-content">
@@ -11,7 +17,7 @@
   </section>
   <section class="editor">
     <section class="right_panel">
-      <div class="right_panel_content">
+      <div class="right_panel_content" id="tip2">
         <div class="pages">
           <article class="page" ng-show="activePage==0" ng-animate="'page'">
             <h2>Couverture</h2>
@@ -40,7 +46,7 @@
             </section>
           </article>
         </div>
-        <section class="bottom_container">
+        <section class="bottom_container" id="tip3">
           <div class="buttons">
             <div class="switch" ng-click="export()">
                 <div class="selector" ng-class="{left: book.exported==false}"></div>
@@ -53,7 +59,7 @@
       </div>
     </section>
     <!-- preview -->
-    <section class="preview render">
+    <section class="preview render" id="tip1">
         <article class="cover">
             <div class="cover_image" ng-style="{'background-image':'url('+book.cover+')'}"></div>
             <div class="cover_content">

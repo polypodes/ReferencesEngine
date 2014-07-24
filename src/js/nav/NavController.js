@@ -1,4 +1,12 @@
 App.controller('NavCtrl', ['$scope','$location','Categories','Notify', function ($scope,$location,Categories,Notify) {
+
+	$scope.instantHelp = function(){
+	  $("#helpme").joyride({
+	    autoStart: true,
+	    'tipLocation': 'top'
+	  });
+	}
+
 	$scope.pageTitle="";
 
     $scope.mainItems = [
@@ -9,6 +17,10 @@ App.controller('NavCtrl', ['$scope','$location','Categories','Notify', function 
     $scope.addItems = [
 		{path: '/add_project', title: "Ajouter un projet"},
 		{path: '/add_book', title: 'Ajouter un cahier'}
+    ];
+
+    $scope.preBooksItems = [
+		{path: '/books/exported', title: "Cahiers en ligne"}
     ];
 
     $scope.categoriesItems = Categories.get();

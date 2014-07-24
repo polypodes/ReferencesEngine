@@ -1,4 +1,4 @@
-App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','Notify','$location','$http', function ($scope,Books,navService,$routeParams,Notify,$location,$http) {
+App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$location','$http', function ($scope,Books,$routeParams,Notify,$location,$http) {
     $scope.book = Books.getById($routeParams.book_id);
     $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css");
 
@@ -75,7 +75,7 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
           }else{
             Notify('success','Votre cahier a été exporté',"Votre cahier a bien été exporté");
             $scope.book.exported=pass;
-            if(!newBook)
+            if(newBook)
               $scope.saveBook(false);
           }
       }, 
@@ -102,7 +102,6 @@ App.controller('BookEditorCtrl', ['$scope','Books','navService','$routeParams','
               Notify('success','Cahier modifié','Le cahier a été modifié avec succès');
 
             if(book.exported!==false && showNotif===true){
-              console.log('MAKEREQUEST')
               makeRequest(book.exported);
             }
         }

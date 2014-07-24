@@ -1,9 +1,16 @@
+<ol id="helpme">
+    <li data-id="tip_add">Ajoutez des projets en survolant ce bouton, puis en cliquant sur "ajouter un projet".</li>
+    <li data-id="tip1">Triez vos projets en tapant un mot clé ou une date dans ce champs. Seuls les projets correspondants à la recherche seront affichés.</li>
+    <li data-id="tip_projects">Séléctionnez une catégorie grâce à ce menu. Vous pouvez également ajouter une catégorie via le formulaire ci-dessous, et supprimer une catégorie en cliquant sur le <i class="fa fa-minus-square-o"></i> s'affichant au survol.</li>
+    <li data-id="tip2">Vos projets correspondant à la catégorie et à la recherche s'affichent ici.</li>
+</ol>
+
  <section class="container projects in">
     <section class="white_head">
         <section class="search">
             <h4>Filtrer les projets :</h4>
             <section class="col">
-                <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag">
+                <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag" id="tip1">
             </section>
             <section class="col cat_infos" ng-show="cat_id!=0">
                 <div class="big_button input-{{button_rename}}">
@@ -25,7 +32,7 @@
     </section>
     <section class="items">
         <div ng-if="projects.length==0">Aucun projet</div>
-        <div ng-repeat="project in projects | filter : search" class="item" item-animation>
+        <div ng-repeat="project in projects | filter : search" class="item notanim" item-animation id="tip2" ng-animate="{enter: 'item-enter', leave: 'item-leave'}">
            
                 <span class="close" ng-click="deleteProject(project.id)">x</span>
                 <a class="project" href="#/project/{{project.id}}">

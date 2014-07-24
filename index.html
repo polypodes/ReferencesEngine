@@ -31,14 +31,15 @@
                     </div>
                     <div class="right_infos">
                         <div class="add">
-                            <div class="legend">Ajouter ...<div class="icon">></div></div>
+                            <div class="legend" id="tip_add">Ajouter ...<div class="icon">></div></div>
                             <ul>
                                 <li ng-repeat='item in addItems'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a></li>
                             </ul>
                         </div>
                         <div class="me">
                             <div class="icons">
-                                <i class="fa fa-refresh"></i>
+                                <i class="fa fa-life-ring help" ng-click="instantHelp()"></i>
+                                <!-- <i class="fa fa-refresh"></i> -->
                                 <i class="fa fa-cog"></i>
                                 <i class="fa fa-sign-out"></i>
                             </div>
@@ -65,22 +66,24 @@
                 </section>
                 <aside class="sidebar">
                     <ul>
-                        <li>
+                        <li id="tip_account">
                             Mon compte
                             <ul>
                                 <li ng-repeat='item in mainItems'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li id="tip_projects">
                             Projets
                             <ul>
                                 <li ng-repeat='item in categoriesItems.projects'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a><div class="close" ng-if="$index!=0" ng-click="deleteCategory('projects',$index)"><i class="fa fa-minus-square-o"></i></div></li>
                                 <li class="input"><input type="text" placeholder="Ajouter une catégorie" ng-keyup="addProjectCategory($event)" ng-model="inputCategory.project"><i class="fa fa-plus-square-o" ng-click="addProjectCategory($event)"></i></li>
                             </ul>
                         </li>
-                        <li>
+                        <li id="tip_books">
                             Cahiers
                             <ul>
+                                <li ng-repeat='item in preBooksItems'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a><div class="close" ng-if="$index!=0" ng-click="deleteCategory('books',$index)"></div></li>
+                                <li class="separator"></li>
                                 <li ng-repeat='item in categoriesItems.books'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a><div class="close" ng-if="$index!=0" ng-click="deleteCategory('books',$index)"><i class="fa fa-minus-square-o"></i></div></li>
                                 <li class="input"><input type="text" placeholder="Ajouter une catégorie" ng-keyup="addBookCategory($event)" ng-model="inputCategory.book"><i class="fa fa-plus-square-o" ng-click="addBookCategory($event)"></i></li>
                             </ul>

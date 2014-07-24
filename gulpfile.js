@@ -60,6 +60,9 @@ gulp.task('vendor', function() {
         'src/js/vendor/Chart.min.js',
         'src/js/vendor/jquery.resize.js',
         'src/js/vendor/angular-gridster.js',
+        'src/js/vendor/jquery.cookies.js',
+        'src/js/vendor/jquery.joyride-2.1.js',
+        'src/js/vendor/modernizr.min.js',
         'src/js/vendor/utils.js'
     ];
 

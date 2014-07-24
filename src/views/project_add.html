@@ -1,8 +1,16 @@
+<ol id="helpme">
+    <li data-id="tip1">Remplissez tous les champs ci-dessous en fonction de votre projet. Faites attention à ne pas mettre un texte trop long, celui-ci risquerait de mal s'afficher lors du rendu.</li>
+    <li data-id="tip2">Choisissez une catégorie parmis les catégories précédemment créées. Vous pouvez également créer une catégorie maintenant via le formulaire dans le menu gauche.</li>
+    <li data-id="tip3">Ajoutez des mots clés en écrivant le mot clé puis en appuyant sur entrée. Vous pouvez également les supprimer en cliquant sur le bouton à droite. Nous vous conseillons d'utiliser des mots clés sans espaces.</li>
+    <li data-id="tip4">Ajoutez des médias complémentaires (images). Veillez à ajouter des medias de bonne qualité, sans pour autant dépasser la limite des 5mo par fichier. Vous pouvez supprimer les médias en cliquant sur la croix en haut à droite de chaque média.</li>
+    <li data-id="tip5">Pour finir, ajoutez une couverture à votre projet. Cette image sera affichée en grand lors du rendu, alors veillez à ce qu'elle soit de meilleure qualité possible.</li>
+</ol>
+
 <section class="container add_project in">
     <div class="new_project_wysiwyg">
         <div class="image" ng-style="{'background-image':'url('+project_data.cover+')'}">
             <div class="gradient"></div>
-            <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)">
+            <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)" id="tip5">
                 <section>
                     <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-cover></input>
                     <i class="fa fa-angle-down"></i><span>Ajouter une couverture</span>
@@ -11,7 +19,7 @@
             </form>
 
         </div>
-        <div class="text">
+        <div class="text" id="tip1">
 
             <h3>
                 <input type="text" class="live_edit input_intro"  ng-model="project_data.intro">
@@ -29,13 +37,13 @@
 
         </div>
         <section class="classification">
-            <div class="categories">
+            <div class="categories" id="tip2">
             <h3>Catégories</h3>
                 <ul>
                     <li ng-repeat="category in categories.projects" ng-click='selectCategory($index)' ng-class="{'selected' : project_data.category == category.id}">{{category.title}}</li>
                 </ul>
             </div>
-            <div class="tags">
+            <div class="tags" id="tip3">
             <h3>Mots clés</h3>
                 <input type="text" ng-model="addedTag" ng-keyup="addTag($event)" placeholder="Ajouter un mot clé">
                 <ul>
@@ -46,7 +54,7 @@
         </section>
         <div class="clear"></div>
     </div>
-    <div class="bottom_box">
+    <div class="bottom_box" id="tip4">
         <div class="medias">
             <h3>Médias complémentaires</h3>
             <ul>

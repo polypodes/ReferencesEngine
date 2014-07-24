@@ -1,6 +1,13 @@
+<ol id="helpme">
+    <li data-id="tip_add">Ajoutez des cahiers en survolant ce bouton, puis en cliquant sur "ajouter un projet".</li>
+    <li data-id="tip1">Triez vos cahiers en tapant un mot clé ou une date dans ce champs. Seuls les cahiers correspondants à la recherche seront affichés.</li>
+    <li data-id="tip_books">Séléctionnez une catégorie grâce à ce menu. Vous pouvez également ajouter une catégorie via le formulaire ci-dessous, et supprimer une catégorie en cliquant sur le <i class="fa fa-minus-square-o"></i> s'affichant au survol.</li>
+    <li data-id="tip2">Vos cahiers correspondant à la catégorie et à la recherche s'affichent ici.</li>
+</ol>
+
 <section class="container books in">
     <section class="white_head">
-        <section class="search">
+        <section class="search" id="tip1">
             <h4>Filtrer les cahiers :</h4>
             <section class="col">
                 <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag">
@@ -25,7 +32,7 @@
 
     <section class="items">
         <div ng-if="books.length==0">Aucun cahier</div>
-            <article class="item book" ng-repeat="book in books | filter : search" ng-animate="{enter: 'item-enter', leave: 'item-leave'}" item-animation>
+            <article class="item book notanim" ng-repeat="book in books | filter : search" ng-animate="{enter: 'item-enter', leave: 'item-leave'}" item-animation id="tip2">
                 <span class="close" ng-click="deleteBook(book.id)">x</span>
                 <a class="book" href="#/book/{{book.id}}">
                     <div class="gradient"></div>

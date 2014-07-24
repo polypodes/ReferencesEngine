@@ -1,0 +1,31 @@
+<section class="container books_exported in">
+	<section class="white_head">
+        <section class="search">
+            <h4>Filtrer les cahiers :</h4>
+            <section class="col">
+                <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag">
+            </section>
+        </section>
+    </section>
+    <section class="books">
+    	<table>
+    		<tr class="head">
+    			<th>Titre</th>
+    			<th>Catégorie</th>
+    			<th>Date</th>
+    			<th>Nb. projets</th>
+    			<th>État</th>
+    			<th>Actions</th>
+    		</tr>
+    		<tr ng-repeat="book in books | filter : search">
+    			<td>{{book.btitle}}</td>
+    			<td>{{categories.books[book.category].title}}</td>
+    			<td>{{book.date}}</td>
+    			<td>{{book.projects_a.length}}</td>
+    			<td ng-if="book.exported!=false"><span class="exported">Exporté : books/{{book.exported}}</span></td>
+    			<td ng-if="book.exported==false"><span class="nexported">Non exporté</span></td>
+    			<td>Modifier | Voir</td>
+    		</tr>
+    	</table>
+    </section>
+</section>
