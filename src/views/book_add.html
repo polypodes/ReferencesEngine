@@ -22,7 +22,7 @@
         </section>
         <div class="scrollable">
             <section class="items {{presentation_type.all_projects}}">
-                <article class="item" ng-class="{'added' : project.added == true}" ng-repeat="project in projects  | filter : search" ng-click="addToList(project.id)" item-animation>
+                <article class="item visible" ng-class="{'added' : project.added == true}" ng-repeat="project in projects  | filter : search" ng-click="addToList(project.id)">
 
                     <section class="project">
                         <h4>{{project.title}}</h4>

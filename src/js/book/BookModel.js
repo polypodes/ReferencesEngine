@@ -68,7 +68,6 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
 
             books[last_id]=data;
             localStorageService.set('books',books);
-            console.log(books[last_id]);
         },
         validate : function(data){
             // Validation rules

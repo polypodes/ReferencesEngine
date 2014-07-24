@@ -35,7 +35,6 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
 
 
     function makeRequest(pass){
-      console.log(pass);
 
       var ok = false;
       var count = 0;
