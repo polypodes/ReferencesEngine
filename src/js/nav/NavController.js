@@ -5,7 +5,7 @@ App.controller('NavCtrl', ['$scope','$location','Categories','Notify', function 
 	    autoStart: true,
 	    'tipLocation': 'top'
 	  });
-	}
+	};
 
 	$scope.pageTitle="";
 

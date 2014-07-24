@@ -32,7 +32,7 @@
 
     <section class="items">
         <div ng-if="books.length==0">Aucun cahier</div>
-            <article class="item book notanim" ng-repeat="book in books | filter : search" ng-animate="{enter: 'item-enter', leave: 'item-leave'}" item-animation id="tip2">
+            <article class="item book notanim" ng-repeat="book in books | filter : search" ng-animate="{enter: 'item-enter', leave: 'item-leave'}" id="tip2">
                 <span class="close" ng-click="deleteBook(book.id)">x</span>
                 <a class="book" href="#/book/{{book.id}}">
                     <div class="gradient"></div>

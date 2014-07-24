@@ -1,5 +1,18 @@
-App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categories', function ($scope,Books,$routeParams,Notify,Categories) {
-   
+App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categories','$timeout', function ($scope,Books,$routeParams,Notify,Categories,$timeout) {
+    
+    for(var i in $scope.books)
+        $scope.books[i].visible=false;
+
+    $timeout(function(){
+
+         angular.forEach($scope.books, function(p, i) {
+           $timeout(function(){
+                $scope.books[i].visible='visible';
+            },i*50);
+         });
+
+    },200);
+
     var categories = Categories.get();
     $scope.cat_id = $routeParams.book_id;
     $scope.books = Books.get($routeParams.book_id);

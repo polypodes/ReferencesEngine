@@ -1,4 +1,18 @@
-App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify','Categories', function ($scope,Projects,$routeParams,Notify,Categories) {
+App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify','Categories','$timeout', function ($scope,Projects,$routeParams,Notify,Categories,$timeout) {
+
+    // Animation
+    for(var i in $scope.projects)
+        $scope.projects[i].visible=false;
+
+    $timeout(function(){
+
+         angular.forEach($scope.projects, function(p, i) {
+           $timeout(function(){
+                $scope.projects[i].visible='visible';
+            },i*50);
+         });
+
+    },200);
 
     var categories = Categories.get();
     $scope.cat_id = $routeParams.project_id;

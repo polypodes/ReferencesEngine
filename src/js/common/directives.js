@@ -9,18 +9,6 @@ App.directive('focusOn', function() {
    };
 });
 
-App.directive('itemAnimation', function() {
-   return function(scope, elem, attr) {
-        // if(scope.$last){
-        //     $(".items .item").each(function(i,el){
-        //         setTimeout(function(){
-        //             $(el).addClass('visible');
-        //         },i*50);
-        //     });
-        // }
-   };
-});
-
 
 // File upload
 App.directive('file', function() {

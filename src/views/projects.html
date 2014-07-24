@@ -32,7 +32,7 @@
     </section>
     <section class="items">
         <div ng-if="projects.length==0">Aucun projet</div>
-        <div ng-repeat="project in projects | filter : search" class="item notanim" item-animation id="tip2" ng-animate="{enter: 'item-enter', leave: 'item-leave'}">
+        <div ng-repeat="project in projects | filter : search" class="item {{project.visible}}" id="tip2" ng-animate="{enter: 'item-enter', leave: 'item-leave'}">
            
                 <span class="close" ng-click="deleteProject(project.id)">x</span>
                 <a class="project" href="#/project/{{project.id}}">
