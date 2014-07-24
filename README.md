@@ -20,3 +20,5 @@ Data de test (console) <code>utils.createSampleData()</code>
 - Comportement quand on supprime une catégorie avec des cahiers dedans
 - Comportement quand on supprime un projet qui est déjà dans un cahier
 - Instant help qui se recharge sur chaque page
+- Texte "medias complémentaires" sur add project qui se décale parfois
+- Structure de "templating"
