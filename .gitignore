@@ -4,6 +4,4 @@
 *.DS_Store
 *.swp
 *.out
-dist/js/*
-dist/css/*
 node_modules/*

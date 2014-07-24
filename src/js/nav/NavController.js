@@ -1,10 +1,8 @@
-App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHelp', function ($scope,$location,Categories,Notify,instantHelp) {
+App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHelp','$rootScope','NavigationService', function ($scope,$location,Categories,Notify,instantHelp,$rootScope,NavigationService) {
 
 	$scope.instantHelp = function(){
 		instantHelp('page');
 	};
-
-	$scope.pageTitle="";
 
     $scope.mainItems = [
 		{path: '/overview', title: "Vue d'ensemble", icon:"fa-tachometer"},
@@ -28,7 +26,6 @@ App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHe
 
 	$scope.isActive = function(item) {
 		if (item.path == $location.path()) {
-			$scope.pageTitle=item.title;
 			return true;
 		}
 		return false;
@@ -75,13 +72,36 @@ App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHe
 		}
 	};
 
-	$scope.deleteCategory=function(t,i){
+	$scope.deleteCategory=function(t,i,ind){
+		Categories.delete(t,i);
+		// remove from display
+
+		// check if user is on the page
+		var inC = false;
+
 		if(t=='projects'){
-			$scope.categoriesItems.projects.splice(i,1);
+			if ($scope.categoriesItems.projects[ind].path == $location.path())
+				inC = true;
+
+			$scope.categoriesItems.projects.splice(ind,1);
+
+			if(inC)
+				$location.path('projects/0');
+
 		}else if(t=='books'){
-			$scope.categoriesItems.books.splice(i,1);
+			if ($scope.categoriesItems.books[ind].path == $location.path())
+				inC = true;
+
+			$scope.categoriesItems.books.splice(ind,1);
+
+			if(inC)
+				$location.path('books/0');
+
 		}
-		Categories.saveLocal($scope.categoriesItems);
+
+	
+		
+		
 	};
 
 	var rc=0;

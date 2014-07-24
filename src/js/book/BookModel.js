@@ -41,6 +41,20 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
         saveLocal : function(data){
             localStorageService.set('books',data);
         },
+        delete : function(id){
+            id=parseInt(id);
+
+            var books = localStorageService.get('books');
+
+            // Delete from display
+            for(var i in books){
+                if(books[i].id==id){
+                    books.splice(i,1);
+                }
+            }
+
+            localStorageService.set('books',books);
+        },
         add : function(data){
             var books = localStorageService.get('books');
 

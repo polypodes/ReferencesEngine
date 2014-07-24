@@ -106,3 +106,12 @@ App.factory('instantHelp', function() {
         $("#helpme").joyride();
     };
 });
+
+App.factory('NavigationService', ['$rootScope', function($rootScope) {
+    $rootScope.pageInfos={};
+    return {
+        setPageTitle: function(t) {
+            $rootScope.pageInfos.pageTitle=t;
+        }
+    };
+}]);

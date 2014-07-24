@@ -1,4 +1,4 @@
-App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams','Notify','$location', function ($scope,Projects,Categories,$routeParams,Notify,$location) {
+App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams','Notify','$location','NavigationService', function ($scope,Projects,Categories,$routeParams,Notify,$location,NavigationService) {
 
     utils.fixBottomBoxHeight();
 
@@ -28,6 +28,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
     };
 
     if($routeParams.project_id!==undefined){
+        NavigationService.setPageTitle('Modifier un projet');
         $scope.project_data = Projects.getById($routeParams.project_id);
 
         if(typeof $scope.project_data == 'undefined'){
@@ -35,6 +36,8 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
             Notify('error',"Ce projet n'existe pas","Le projet auquel vous tentez d'accéder n'existe pas");
             return false;
         }
+    }else{
+        NavigationService.setPageTitle('Ajouter un projet');
     }
 
     $scope.addProject=function(){ 

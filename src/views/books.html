@@ -8,11 +8,12 @@
 <section class="container books in">
     <section class="white_head">
         <section class="search" id="tip1">
-            <h4>Filtrer les cahiers :</h4>
             <section class="col">
+                <h4>Filtrer les cahiers :</h4>
                 <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag">
             </section>
             <section class="col cat_infos" ng-show="cat_id!=0">
+                <h4>&nbsp;</h4>
                 <div class="big_button input-{{button_rename}}">
                     <div class="legend text" ng-show="!button_rename" ng-click="toggleRenameInput()">Renommer
                         <div class="icon">
@@ -25,6 +26,14 @@
                             <i class="fa fa-check-square-o"></i>
                         </div>
                     </div>
+                </div>
+            </section>
+            <section class="col sort">
+                <h4>Classer les cahiers :</h4>
+                <div class="buttons">
+                    <span class="button" ng-click="predicate = 'title'" ng-class="{active: predictate=='title'}">Titre <i class="fa fa-caret-up"></i></span>
+                    <span class="button" ng-click="predicate = 'id'" ng-class="{active: predictate=='id'}">Date d'ajout <i class="fa fa-caret-up"></i></span>
+                    <span class="button" ng-click="predicate = 'category'" ng-class="{active: predictate=='category'}">Categorie <i class="fa fa-caret-up"></i></span>
                 </div>
             </section>
         </section>

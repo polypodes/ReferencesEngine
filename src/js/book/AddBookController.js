@@ -1,4 +1,4 @@
-App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$routeParams','Notify','$location','Categories', function ($scope,Projects,Themes,$http,Books,$routeParams,Notify,$location,Categories){
+App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$routeParams','Notify','$location','Categories','NavigationService', function ($scope,Projects,Themes,$http,Books,$routeParams,Notify,$location,Categories,NavigationService){
 
     $scope.pageTitle="Ajouter un cahier";
 
@@ -75,16 +75,19 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
 
     // Test if exsits
     if($routeParams.book_id!==undefined){
+        NavigationService.setPageTitle('Modifier un cahier');
+
         $scope.book = Books.getById($routeParams.book_id);
+        $scope.projects_a=$scope.book.projects_a;
 
         if(typeof $scope.book == 'undefined'){
             $location.path('books/0');
             Notify('error',"Ce cahier n'existe pas","Le cahier auquel vous tentez d'accéder n'existe pas");
             return false;
         }
+    }else{
+        NavigationService.setPageTitle('Ajouter un cahier');
     }
-
-    $scope.projects_a=$scope.book.projects_a;
 
     for(var i in projects){
         projects[i].added=false;
@@ -121,6 +124,7 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
         var book = $scope.book;
         book.projects_a = $scope.projects_a;
 
+        console.log(book);
         var validation = Books.validate(book);
         if(validation!==true){
             Notify('error',"Erreur lors de l'ajout",validation);

@@ -69,6 +69,31 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
             projects[last_id]=data;
             localStorageService.set('projects',projects);
         },
+        delete: function(id){
+            id=parseInt(id);
+
+            var projects = localStorageService.get('projects');
+            var books = localStorageService.get('books');
+
+            // Delete the project
+            for(var i in projects){
+                if(projects[i].id==id){
+                    projects.splice(i,1);
+                }
+            }
+
+            // Delete the project in books
+            for(var j in books){
+                for(var k in books[j].projects_a){
+                    if(books[j].projects_a[k].id == id){
+                        books[j].projects_a.splice(k,1);
+                    }
+                }                
+            }
+
+            localStorageService.set('projects',projects);
+            localStorageService.set('books',books);
+        },
         validate : function(data){
             // Validation rules
             var titleMinLength=3,

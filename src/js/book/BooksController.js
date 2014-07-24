@@ -1,5 +1,7 @@
-App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categories','$timeout','$location', function ($scope,Books,$routeParams,Notify,Categories,$timeout,$location) {
+App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categories','$timeout','$location','NavigationService', function ($scope,Books,$routeParams,Notify,Categories,$timeout,$location,NavigationService) {
     
+    NavigationService.setPageTitle('Cahiers');
+
     for(var i in $scope.books)
         $scope.books[i].visible=false;
 
@@ -24,18 +26,27 @@ App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categorie
         $scope.$on('clickDialog',function(e,choice){
             Notify('close');
             if(choice.choice == "yes"){
+
+                Books.delete(id);
+
+                // Delete from display
                 for(var i in $scope.books){
                     if($scope.books[i].id==id){
                         $scope.books.splice(i,1);
                         Notify('success','Cahier supprimé','Le cahier a été supprimé avec succès');
                     }
                 }
-                Books.saveLocal($scope.books);
             }
         });
     };
 
-    if(!categories.books.hasOwnProperty($scope.cat_id)){
+    var ok = false;
+    for (var i2 in categories.books){
+        if(categories.books[i2].id==$scope.cat_id)
+            ok=i2;
+    }
+
+    if(!ok){
         $location.path('books/0');
         Notify('error',"Cette catégorie n'existe pas","La catégorie à laquelle vous tentez d'accéder n'existe pas");
         return false;

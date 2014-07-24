@@ -1,4 +1,7 @@
-App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$location','$http', function ($scope,Books,$routeParams,Notify,$location,$http) {
+App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$location','$http','NavigationService', function ($scope,Books,$routeParams,Notify,$location,$http,NavigationService) {
+ 
+    NavigationService.setPageTitle('Prévisualiser un cahier');
+   
     $scope.book = Books.getById($routeParams.book_id);
     $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css");
 
