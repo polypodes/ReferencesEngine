@@ -24,3 +24,6 @@ Data de test (console) <code>utils.createSampleData()</code>
 - [x] Instant help qui se recharge sur chaque page
 - [x] Texte "medias complémentaires" sur add project qui se décale parfois
 - [x] Titre des pages quand on crée un projet ou un cahier
+
+### Bugs mineurs ###
+- [ ] Faire venir les pages du haut quand on scrolle vers le haut sur la page bookeditor

@@ -199,9 +199,8 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
       
       $scope.exportFinal = function(){
           makeRequest($scope.bookUrl,false);
-          $scope.exportBox=true;
       };
-      
+
       return false;
      
     };

@@ -1253,6 +1253,14 @@ aside.sidebar{
 			right: 22px;
 			top:22px;
 		}
+		p.bookurl{
+			float:left;
+			color:darken(@grey,40%);
+			font-size: 14px;
+			font-style: italic;
+			margin-right: 20px;
+			margin-top: 10px;
+		}
 	}
 
 	.overview{
@@ -1474,6 +1482,10 @@ aside.sidebar{
 			transition: all 0.2s;
 
 			.box-content{
+
+				&.zi1{z-index:10;}
+				&.zi2{z-index:20;}
+
 				width: 50%;
 				left: 25%;
 				height: auto;
@@ -1539,6 +1551,9 @@ aside.sidebar{
 						color:black;
 						cursor:pointer;
 					}
+				}
+				.buttons{
+					padding:10px 0 35px 0;
 				}
 			}
 		}

@@ -124,7 +124,6 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
         var book = $scope.book;
         book.projects_a = $scope.projects_a;
 
-        console.log(book);
         var validation = Books.validate(book);
         if(validation!==true){
             Notify('error',"Erreur lors de l'ajout",validation);
