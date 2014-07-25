@@ -46,8 +46,10 @@ App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categorie
 
     var ok = false;
     for (var i2 in categories.books){
-        if(categories.books[i2].id==$scope.cat_id)
+        if(categories.books[i2].id==$scope.cat_id){
             ok=i2;
+            NavigationService.setPageTitle('Cahiers | '+categories.books[i2].title);
+        }
     }
 
     if(!ok){

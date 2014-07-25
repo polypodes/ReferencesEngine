@@ -9,11 +9,12 @@
 
 	$data = json_decode(curl_exec($curl),true);
 
+	if($data==null){
+		die("Ce cahier n'existe pas");
+	}
 	curl_close($curl);
 
-	// echo "<pre>";
-	// print_r($data);
-	// echo "</pre>";
+	
 
 ?>
 <!DOCTYPE html>

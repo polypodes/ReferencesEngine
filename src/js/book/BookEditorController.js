@@ -36,29 +36,28 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
         }
     };
 
-
-    function makeRequest(pass){
-
-      var ok = false;
-      var count = 0;
-      var newBook = false;
-
+    function getRandomUrl(){
       var v = "aeiouy".split(''),
           c = "bcdfghjklmnpqrstvwxz".split('');
 
-      if(typeof pass == 'undefined'){
-        pass = "";
-        for(var i=0; i<=5; i++){
-          if((i%2)===0){
-            pass+=v[Math.floor(Math.random()*(v.length))];
-          }else{
-            pass+=c[Math.floor(Math.random()*(c.length))];
-          }
+      pass = "";
+      for(var i=0; i<=5; i++){
+        if((i%2)===0){
+          pass+=v[Math.floor(Math.random()*(v.length))];
+        }else{
+          pass+=c[Math.floor(Math.random()*(c.length))];
         }
-        newBook=true;
       }
 
-      var data = $.param({file_title:pass,data:$scope.book,newbook:newBook});
+      return pass;
+    }
+
+    function makeRequest(pass,overwrite){
+
+      var ok = false;
+      var count = 0;
+      
+      var data = $.param({file_title:pass,data:$scope.book,overwrite:overwrite});
 
       $http({
           url: 'templating/export.php',
@@ -67,18 +66,20 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
           data: data
       })
       .then(function(response) {
-          if(response.data.error!='ok'){
+          if(response.data.error!='ok' && overwrite!==true){
             count++;
             if(count>=10){
               Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ01");
             }else{
-              makeRequest();
+              makeRequest(pass,overwrite);
             }
           }else{
-            Notify('success','Votre cahier a été exporté',"Votre cahier a bien été exporté");
+            Notify('success','Votre cahier a été enregistré en ligne',"Votre cahier a bien été enregistré en ligne");
             $scope.book.exported=pass;
-            if(newBook)
-              $scope.saveBook(false);
+            $scope.exportBoxSuccess=true;
+
+            // Edit a book
+            Books.edit($scope.book.id,$scope.book);
           }
       }, 
       function(response) { // optional
@@ -87,9 +88,8 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
     }
 
     $scope.saveBook = function(showNotif){
-        var book = $scope.book;
 
-        var validation = Books.validate(book);
+        var validation = Books.validate($scope.book);
         if(validation!==true){
             Notify('error',"Erreur lors de l'enregistrement",validation);
             return false;
@@ -98,13 +98,15 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
         if($routeParams.book_id!==undefined){
 
             // Edit a book
-            var id = book.id;
-            Books.edit(id,book);
+            Books.edit($scope.book.id,$scope.book);
+
             if(showNotif===true)
               Notify('success','Cahier modifié','Le cahier a été modifié avec succès');
 
-            if(book.exported!==false && showNotif===true){
-              makeRequest(book.exported);
+            if($scope.book.exported!==false && showNotif===true){
+              var exported = $scope.book.exported;
+
+              makeRequest(exported,true);
             }
         }
     };
@@ -154,11 +156,17 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
     });
 
     $scope.exportBox=false;
+    $scope.exportBoxSuccess=false;
+
     $scope.export = function(){
 
+      // reset scope show variables
+      $scope.exportBox=false;
+      $scope.exportBoxSuccess=false;
+
       if(!$scope.book.exported){
-        makeRequest();
         $scope.exportBox=true;
+        $scope.bookUrl=getRandomUrl();
       }else{
         var data = $.param({file:$scope.book.exported+".json"});
 
@@ -181,6 +189,12 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
           Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ02");
         });
       }
+      
+      $scope.exportFinal = function(){
+          makeRequest($scope.bookUrl,false);
+          $scope.exportBox=true;
+      }
+      return false;
      
     };
 
