@@ -23,8 +23,6 @@ App.controller('BooksCtrl', ['$scope','Books','$routeParams','Notify','Categorie
     $scope.sorting = 'id';
     $scope.reverse = false;
 
-    console.log($scope.books)
-
     $scope.deleteBook=function(id){
 
         Notify('question','Voulez-vous vraiment supprimer ce cahier ?',{question:'Vous vous apprêtez à supprimer un cahier. Cette action est irréversible. Voulez-vous vraiment faire ça ?',yes:'Oui',no:'non'});

@@ -3,7 +3,7 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
     NavigationService.setPageTitle('Prévisualiser un cahier');
    
     $scope.book = Books.getById($routeParams.book_id);
-    $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+".css");
+    $('link.template').attr('href',"src/templates/"+$scope.book.theme.src+"/style.css");
 
     $scope.gridsterOpts = {
         columns: 4, // the width of the grid, in columns

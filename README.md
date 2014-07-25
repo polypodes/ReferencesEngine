@@ -21,6 +21,6 @@ Data de test (console) <code>utils.createSampleData()</code>
 - [x] Comportement quand on supprime une catégorie avec des projets dedans --> on met tout dans la catégorie "all"
 - [x] Comportement quand on supprime une catégorie avec des cahiers dedans --> on met tout dans la catégorie "all"
 - [x] Comportement quand on supprime un projet qui est déjà dans un cahier --> on supprime toutes les instances qui sont dans les cahiers
-- [ ] Instant help qui se recharge sur chaque page
+- [x] Instant help qui se recharge sur chaque page
 - [x] Texte "medias complémentaires" sur add project qui se décale parfois
-- [ ] Titre des pages quand on crée un projet ou un cahier
+- [x] Titre des pages quand on crée un projet ou un cahier

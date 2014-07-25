@@ -837,6 +837,18 @@ aside.sidebar{
 				}
 				tr.head{
 					background-color: darken(@grey,1%);
+
+					th:hover{
+						cursor:pointer;
+					}
+				}
+				a{
+					color:darken(@grey,40%);
+					text-decoration: none;
+
+					&:hover{
+						text-decoration: underline;
+					}
 				}
 			}
 		}

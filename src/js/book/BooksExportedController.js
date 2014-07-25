@@ -3,4 +3,9 @@ App.controller('BooksExportedCtrl', ['$scope','Books','$routeParams','Notify','C
 	
 	$scope.categories = Categories.get();
     $scope.books = Books.get(0);
+
+    // sorting
+    $scope.sorting = 'id';
+    $scope.reverse = false;
+    
 }]);

@@ -21,9 +21,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Project</title>
-	<link type="text/css" rel="stylesheet" media="screen" href="<?= $rooturl;?>src/templates/<?= $data['theme']['src']; ?>.css">
-	
+
+	<!-- Main style -->
+	<link type="text/css" rel="stylesheet" media="screen" href="<?= $rooturl;?>src/templates/<?= $data['theme']['src']; ?>/style.css">
 	<link type="text/css" rel="stylesheet" media="screen" href="<?= $rooturl; ?>templating/src/style/style.css">
+	
+
+	<!-- Additional files -->
+	<?php 
+	foreach ($data['theme']['files'] as $f) {
+		if($f=="jquery"){
+			echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>';
+		}else{
+			echo "<script src='".$rooturl."src/templates/".$data['theme']['src']."/".$f."'></script>";
+		}
+	}
+	?>
 </head>
 <body>
 

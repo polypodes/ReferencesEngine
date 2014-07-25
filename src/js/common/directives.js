@@ -100,6 +100,7 @@ App.factory('Notify',['$rootScope','$timeout', function($rootScope,$timeout) {
 
 App.factory('instantHelp', function() {
     return function() {
+        $('#helpme').joyride('destroy');
         $("#helpme").joyride({
             'tipLocation': 'top'
         });

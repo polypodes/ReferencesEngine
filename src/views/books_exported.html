@@ -10,21 +10,27 @@
     <section class="books">
     	<table>
     		<tr class="head">
-    			<th>Titre</th>
-    			<th>Catégorie</th>
-    			<th>Date</th>
-    			<th>Nb. projets</th>
-    			<th>État</th>
+                <th ng-click="sorting = 'id'; reverse=!reverse">#
+                    <i class="fa fa-caret-up" ng-show="reverse==false && sorting=='id'"></i><i class="fa fa-caret-down" ng-show="reverse!=false && sorting=='id'"></i>
+                </th>
+    			<th ng-click="sorting = 'btitle'; reverse=!reverse">Titre
+                    <i class="fa fa-caret-up" ng-show="reverse==false && sorting=='btitle'"></i><i class="fa fa-caret-down" ng-show="reverse!=false && sorting=='btitle'"></i>
+                </th>
+    			<th ng-click="sorting = 'category'; reverse=!reverse">Catégorie
+                    <i class="fa fa-caret-up" ng-show="reverse==false && sorting=='category'"></i><i class="fa fa-caret-down" ng-show="reverse!=false && sorting=='category'"></i>
+                </th>
+    			<th ng-click="sorting = 'exported'; reverse=!reverse">État
+                    <i class="fa fa-caret-up" ng-show="reverse==false && sorting=='exported'"></i><i class="fa fa-caret-down" ng-show="reverse!=false && sorting=='exported'"></i>
+                </th>
     			<th>Actions</th>
     		</tr>
-    		<tr ng-repeat="book in books | filter : search">
+    		<tr ng-repeat="book in books | filter : search | orderBy:sorting:reverse">
+                <td>{{book.id}}</td>
     			<td>{{book.btitle}}</td>
     			<td>{{categories.books[book.category].title}}</td>
-    			<td>{{book.date}}</td>
-    			<td>{{book.projects_a.length}}</td>
     			<td ng-if="book.exported!=false"><span class="exported">Exporté : books/{{book.exported}}</span></td>
     			<td ng-if="book.exported==false"><span class="nexported">Non exporté</span></td>
-    			<td>Modifier | Voir</td>
+    			<td><a href="#/book/{{book.id}}/edit">Voir</a></td>
     		</tr>
     	</table>
     </section>
