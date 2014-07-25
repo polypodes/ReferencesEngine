@@ -12,6 +12,20 @@
                 <h4>Filtrer les cahiers :</h4>
                 <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag">
             </section>
+            <section class="col sort">
+                <h4>Classer les projets :</h4>
+                <div class="buttons" ng-init="sorting = 'id'">
+                    <span class="button" ng-click="sorting = 'id'; reverse=!reverse" ng-class="{active: sorting=='id'}">
+                        Date d'ajout <i class="fa fa-caret-up" ng-if="reverse==false && sorting=='id'"></i><i class="fa fa-caret-down" ng-if="reverse!=false && sorting=='id'"></i>
+                    </span>
+                    <span class="button" ng-click="sorting = 'btitle'; reverse=!reverse" ng-class="{active: sorting=='btitle'}">
+                        Titre <i class="fa fa-caret-up" ng-if="reverse==false && sorting=='btitle'"></i><i class="fa fa-caret-down" ng-if="reverse!=false && sorting=='btitle'"></i>
+                    </span>
+                    <span class="button" ng-click="sorting = 'category'; reverse=!reverse" ng-class="{active: sorting=='category'}">
+                        Categorie <i class="fa fa-caret-up" ng-if="reverse==false && sorting=='category'"></i><i class="fa fa-caret-down" ng-if="reverse!=false && sorting=='category'"></i>
+                    </span>
+                </div>
+            </section>
             <section class="col cat_infos" ng-show="cat_id!=0">
                 <h4>&nbsp;</h4>
                 <div class="big_button input-{{button_rename}}">
@@ -28,20 +42,12 @@
                     </div>
                 </div>
             </section>
-            <section class="col sort">
-                <h4>Classer les cahiers :</h4>
-                <div class="buttons">
-                    <span class="button" ng-click="predicate = 'title'" ng-class="{active: predictate=='title'}">Titre <i class="fa fa-caret-up"></i></span>
-                    <span class="button" ng-click="predicate = 'id'" ng-class="{active: predictate=='id'}">Date d'ajout <i class="fa fa-caret-up"></i></span>
-                    <span class="button" ng-click="predicate = 'category'" ng-class="{active: predictate=='category'}">Categorie <i class="fa fa-caret-up"></i></span>
-                </div>
-            </section>
         </section>
     </section>
 
     <section class="items">
         <div ng-if="books.length==0">Aucun cahier</div>
-            <article class="item book notanim" ng-repeat="book in books | filter : search" ng-animate="{enter: 'item-enter', leave: 'item-leave'}" id="tip2">
+            <article class="item book notanim" ng-repeat="book in books | filter : search | orderBy:sorting:reverse" ng-animate="{enter: 'item-enter', leave: 'item-leave'}" id="tip2">
                 <span class="close" ng-click="deleteBook(book.id)">x</span>
                 <a class="book" href="#/book/{{book.id}}">
                     <div class="gradient"></div>

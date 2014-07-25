@@ -13,6 +13,20 @@
                 <h4>Filtrer les projets :</h4>
                 <input type="search" ng-model="search" placeholder="Tapez un mot-clé, une date ..." class="add_tag" id="tip1">
             </section>
+            <section class="col sort">
+                <h4>Classer les projets :</h4>
+                <div class="buttons" >
+                    <span class="button" ng-click="sorting = 'id'; reverse=!reverse" ng-class="{active: sorting=='id'}">
+                        Date d'ajout <i class="fa fa-caret-up" ng-if="reverse==false && sorting=='id'"></i><i class="fa fa-caret-down" ng-if="reverse!=false && sorting=='id'"></i>
+                    </span>
+                    <span class="button" ng-click="sorting = 'title'; reverse=!reverse" ng-class="{active: sorting=='title'}">
+                        Titre <i class="fa fa-caret-up" ng-if="reverse==false && sorting=='title'"></i><i class="fa fa-caret-down" ng-if="reverse!=false && sorting=='title'"></i>
+                    </span>
+                    <span class="button" ng-click="sorting = 'category'; reverse=!reverse" ng-class="{active: sorting=='category'}">
+                        Categorie <i class="fa fa-caret-up" ng-if="reverse==false && sorting=='category'"></i><i class="fa fa-caret-down" ng-if="reverse!=false && sorting=='category'"></i>
+                    </span>
+                </div>
+            </section>
             <section class="col cat_infos" ng-show="cat_id!=0">
                 <h4>&nbsp;</h4>
                 <div class="big_button input-{{button_rename}}">
@@ -29,14 +43,6 @@
                     </div>
                 </div>
             </section>
-            <section class="col sort">
-                <h4>Classer les projets :</h4>
-                <div class="buttons">
-                    <span class="button" ng-click="predicate = 'title'" ng-class="{active: predictate=='title'}">Titre <i class="fa fa-caret-up"></i></span>
-                    <span class="button" ng-click="predicate = 'id'" ng-class="{active: predictate=='id'}">Date d'ajout <i class="fa fa-caret-up"></i></span>
-                    <span class="button" ng-click="predicate = 'category'" ng-class="{active: predictate=='category'}">Categorie <i class="fa fa-caret-up"></i></span>
-                </div>
-            </section>
         </section>
   
     </section>
@@ -45,7 +51,7 @@
 
     <section class="items">
         <div ng-if="projects.length==0">Aucun projet</div>
-        <div ng-repeat="project in projects | filter : search | orderBy:predicate" class="item {{project.visible}}" id="tip2" ng-animate="{enter: 'item-enter', leave: 'item-leave'}">
+        <div ng-repeat="project in projects | filter : search | orderBy:sorting:reverse" class="item {{project.visible}}" id="tip2" ng-animate="{enter: 'item-enter', leave: 'item-leave'}">
            
                 <span class="close" ng-click="deleteProject(project.id)">x</span>
                 <a class="project" href="#/project/{{project.id}}">

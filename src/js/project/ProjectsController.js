@@ -19,7 +19,8 @@ App.controller('ProjectsCtrl', ['$scope','Projects','$routeParams','Notify','Cat
     $scope.cat_id = $routeParams.project_id;
     $scope.projects = Projects.get($routeParams.project_id);
 
-    $scope.predictate='id';
+    $scope.sorting = 'id';
+    $scope.reverse = false;
 
     $scope.deleteProject=function(id){
 
