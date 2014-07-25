@@ -1,4 +1,4 @@
-App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$location','$http','NavigationService', function ($scope,Books,$routeParams,Notify,$location,$http,NavigationService) {
+App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$location','$http','NavigationService','$cookieStore', function ($scope,Books,$routeParams,Notify,$location,$http,NavigationService,$cookieStore) {
  
     NavigationService.setPageTitle('Prévisualiser un cahier');
    
@@ -166,8 +166,15 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
 
       if(!$scope.book.exported){
         $scope.exportBox=true;
-        $scope.bookUrl=getRandomUrl();
+        if($cookieStore.get('bTempUrl_'+$scope.book.id)){
+          $scope.bookUrl=$cookieStore.get('bTempUrl_'+$scope.book.id);
+        }else{
+          $scope.bookUrl=getRandomUrl();
+        }
       }else{
+
+        $cookieStore.put('bTempUrl_'+$scope.book.id,$scope.book.exported);
+
         var data = $.param({file:$scope.book.exported+".json"});
 
         $http({
@@ -193,7 +200,8 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
       $scope.exportFinal = function(){
           makeRequest($scope.bookUrl,false);
           $scope.exportBox=true;
-      }
+      };
+      
       return false;
      
     };
