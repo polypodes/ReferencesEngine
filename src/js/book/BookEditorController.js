@@ -55,7 +55,6 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
     function makeRequest(pass,overwrite){
 
       var ok = false;
-      var count = 0;
       
       var data = $.param({file_title:pass,data:$scope.book,overwrite:overwrite});
 
@@ -66,13 +65,12 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
           data: data
       })
       .then(function(response) {
+          console.log('response ------');
+          console.log(response.data.error);
+          console.log(overwrite);
           if(response.data.error!='ok' && overwrite!==true){
-            count++;
-            if(count>=10){
-              Notify('error','Erreur interne',"Une erreur s'est produite, contactez un administrateur ... Code d'erreur : REQ01");
-            }else{
-              makeRequest(pass,overwrite);
-            }
+            Notify('error','Nom déjà utilisé',"Ce nom est déjà utilisé, veuillez en choisir un autre !");
+            return false;
           }else{
             Notify('success','Votre cahier a été enregistré en ligne',"Votre cahier a bien été enregistré en ligne");
             $scope.book.exported=pass;

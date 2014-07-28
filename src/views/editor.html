@@ -6,7 +6,7 @@
 
 <section class="container add_project in">
   <section class="exported" ng-class="{show: exportBox==true}">
-    <section class="box-content zi2" ng-if="exportBoxSuccess">
+    <section class="box-content zi2" ng-show="exportBoxSuccess">
       <div class="close" ng-click="closeExportedBox()">x</div>
       <h2>Votre cahier a bien été exporté</h2>
       <p>Votre cahier a été exporté à l'adresse suivante :</p>
@@ -14,7 +14,7 @@
       <input type="text" value="polypod.es/{{book.exported}}:pdf" disabled class="smallurl">
       <input type="text" value="polypod.es/{{book.exported}}:pres" disabled class="smallurl nm">
     </section>
-    <section class="box-content zi1" ng-if="!exportBoxSuccess">
+    <section class="box-content zi1" ng-show="!exportBoxSuccess">
       <div class="close" ng-click="closeExportedBox()">x</div>
       <h2>Choisissez une url courte</h2>
       <p>Choisissez un identifiant facilement mémorisable pour votre projet</p>

@@ -1,7 +1,5 @@
 App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$routeParams','Notify','$location','Categories','NavigationService', function ($scope,Projects,Themes,$http,Books,$routeParams,Notify,$location,Categories,NavigationService){
 
-    $scope.pageTitle="Ajouter un cahier";
-
     // Fix width & heights
     utils.fixVScrollHeight();
 

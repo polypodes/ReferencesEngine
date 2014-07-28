@@ -4,16 +4,16 @@
 			<div class="col">
 				<h3>Entreprise</h3>
 				<label>Nom de l'entreprise</label>
-				<input type="text">
+				<input type="text" ng-model="settings.company_name">
 				<label>Nom de l'enreprise abrégé (apparaitra dans l'URL, exemple : 'poly')</label>
-				<input type="text">
+				<input type="text" ng-model="settings.company_slug">
 				<label>Logo de l'entreprise</label>
 				<input type="text">
 			</div>
 			<div class="col">
 				<h3>Compte</h3>
 				<label>Pseudo</label>
-				<input type="text">
+				<input type="text" ng-model="settings.user_name">
 				<label>Fréquence des mises à jour serveur</label>
 				<select>
 					<option value="">10 secondes</option>
@@ -23,6 +23,10 @@
 					<option value="">1 minute 30</option>
 				</select>
 			</div>
+			<div class="clear"></div>
+
+			<div class="button" ng-click="saveSettings()">Enregistrer</div>
+
 		</section>
 	</section>
 </section>

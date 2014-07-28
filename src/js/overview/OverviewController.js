@@ -1,5 +1,6 @@
-App.controller('OverviewCtrl', ['$scope','Projects','Stats', function ($scope,Projects,Stats) {
+App.controller('OverviewCtrl', ['$scope','Projects','Stats','NavigationService', function ($scope,Projects,Stats,NavigationService) {
     
+    NavigationService.setPageTitle("Vue d'ensemble");
     $scope.pageTitle="Vue d'ensemble";
        
        // Stats for dashboard
@@ -27,20 +28,8 @@ App.controller('OverviewCtrl', ['$scope','Projects','Stats', function ($scope,Pr
 	};
 
 	var options = {
-	    scaleShowGridLines : true,
-	    scaleGridLineColor : "rgba(0,0,0,.05)",
-	    scaleGridLineWidth : 1,
-	    bezierCurve : true,
-	    bezierCurveTension : 0.4,
-	    pointDot : true,
-	    pointDotRadius : 4,
-	    pointDotStrokeWidth : 1,
 	    pointHitDetectionRadius : 10,
-	    showTooltips: true,
-	    responsive:true,
-	    datasetStroke : false,
-	    datasetStrokeWidth : 2,
-	    datasetFill : true
+	    responsive:true
 	};
 
     var myLineChart = new Chart(ctx).Line(data, options);
