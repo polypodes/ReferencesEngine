@@ -22,10 +22,10 @@
 }
 
 /* Animations */
-.animate{transition:-webkit-transform 0.8s;z-index:5;}
+.animate{transition:-webkit-transform 0.7s;z-index:5;}
 .previous{-webkit-transform: translateX(-100%);}
 .next{-webkit-transform: translateX(100%);}
-.active{-webkit-transform: translateX(0%);transition:-webkit-transform 0.5s;z-index:50;}
+.active{-webkit-transform: translateX(0%);transition:-webkit-transform 0.7s;z-index:50;}
 
 
 
@@ -80,10 +80,10 @@
 
 /* Medias */
 .medias {background-color: #fafafa;}
-.medias .images{height:100%;width: 100%; position: absolute; padding-top: 50px;padding-bottom: 30px;top: 0;}
+.medias .images{height:100%;width: 100%; position: absolute; padding-top: 50px;padding-bottom: 0;top: 0;}
 .medias .images .images_content{height:100%;width: 100%; position: relative}
-.medias .image{position: absolute;display:block;display: block;background-size:cover;z-index:10; padding:10px;}
-.medias h3{ padding: 20px; margin-top: 0;}
+.medias .image{position: absolute;display:block;display: block;background-size:cover;z-index:10;}
+.medias h3{ padding: 17px; margin-top: 0;}
 
 /* Grid creator */
 .medias .cell{

@@ -16,6 +16,8 @@ Data de test (console) <code>utils.createSampleData()</code>
 - [ ] Générer un PDF de cahier
 - [ ] Import/export de thèmes et faire une doc pour les créer
 - [ ] Exporter les projets et les cahiers pour pouvoir les importer dans une autre instance
+- [ ] Passer toutes les tailles en em dans le thème
+- [ ] Gérer le redimensionnement de la fenêtre
 
 ### Bugs ###
 - [x] Animation à l'apparition des books et projets
