@@ -23,7 +23,14 @@
         <div class="ui_content">
             <section ng-controller="NavCtrl">
                 <section class="top-menu">
-                    <div class="brand">Refaktor</div>  
+                    <div class="brand" style="-webkit-app-region: drag">
+                        <div class="wbuttons">
+                            <div class="wbutt" ng-click="topButton('red')"></div>
+                            <div class="wbutt" ng-click="topButton('orange')"></div>
+                            <div class="wbutt" ng-click="topButton('green')"></div>
+                        </div>
+                        Refaktor
+                    </div>  
                     <div class="previous" ng-class="{isPrev: isPrev==true}" ng-click="goBack()"><</div>
                     <div class="page" ng-class="{isPrev: isPrev==true}">
                       
@@ -75,16 +82,16 @@
                         <li id="tip_projects">
                             Projets
                             <ul>
-                                <li ng-repeat='item in categoriesItems.projects'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a><div class="close" ng-if="$index!=0" ng-click="deleteCategory('projects',item.id,$index)"><i class="fa fa-minus-square-o"></i></div></li>
+                                <li ng-repeat='item in categoriesItems.projects track by $index'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a><div class="close" ng-if="$index!=0" ng-click="deleteCategory('projects',item.id,$index)"><i class="fa fa-minus-square-o"></i></div></li>
                                 <li class="input"><input type="text" placeholder="Ajouter une catégorie" ng-keyup="addProjectCategory($event)" ng-model="inputCategory.project"><i class="fa fa-plus-square-o" ng-click="addProjectCategory($event)"></i></li>
                             </ul>
                         </li>
                         <li id="tip_books">
                             Cahiers
                             <ul>
-                                <li ng-repeat='item in preBooksItems'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a><div class="close" ng-if="$index!=0" ng-click="deleteCategory('books',item.id)"></div></li>
+                                <li ng-repeat='item in preBooksItems track by $index'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a><div class="close" ng-if="$index!=0" ng-click="deleteCategory('books',item.id)"></div></li>
                                 <li class="separator"></li>
-                                <li ng-repeat='item in categoriesItems.books'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a><div class="close" ng-if="$index!=0" ng-click="deleteCategory('books',item.id,$index)"><i class="fa fa-minus-square-o"></i></div></li>
+                                <li ng-repeat='item in categoriesItems.books track by $index'><a href="#{{item.path}}" ng-class="{active: isActive(item)}">{{item.title}}</a><div class="close" ng-if="$index!=0" ng-click="deleteCategory('books',item.id,$index)"><i class="fa fa-minus-square-o"></i></div></li>
                                 <li class="input"><input type="text" placeholder="Ajouter une catégorie" ng-keyup="addBookCategory($event)" ng-model="inputCategory.book"><i class="fa fa-plus-square-o" ng-click="addBookCategory($event)"></i></li>
                             </ul>
                         </li>

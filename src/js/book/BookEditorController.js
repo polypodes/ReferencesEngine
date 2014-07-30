@@ -207,4 +207,10 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
       $scope.exportBox=false;
     };
 
+    // PRESENTATION 
+
+    $scope.presentBook = function(){
+      window.location.href = "present.html#/p/"+$routeParams.book_id;
+    }
+
 }]); 

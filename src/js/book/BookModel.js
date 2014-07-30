@@ -1,8 +1,8 @@
-App.factory('Books', ['localStorageService', function (localStorageService) {
+App.factory('Books', ['dataStorageService', function (dataStorageService) {
 
     function checkExisting(data){
         if(data===null){
-            localStorageService.set('books',[]);
+            dataStorageService.set('books',[]);
         }
     }
 
@@ -10,7 +10,7 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
         get: function(id) {
             id=parseInt(id);
 
-            var books = localStorageService.get('books');
+            var books = dataStorageService.get('books');
             var temp_books=[];
             checkExisting(books);
             if(id!==0){
@@ -29,7 +29,7 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
 
             id=parseInt(id);
 
-            var books = localStorageService.get('books');
+            var books = dataStorageService.get('books');
             checkExisting(books);
 
             for(var i in books){
@@ -39,12 +39,12 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
             }
         },
         saveLocal : function(data){
-            localStorageService.set('books',data);
+            dataStorageService.set('books',data);
         },
         delete : function(id){
             id=parseInt(id);
 
-            var books = localStorageService.get('books');
+            var books = dataStorageService.get('books');
 
             // Delete from display
             for(var i in books){
@@ -53,10 +53,10 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
                 }
             }
 
-            localStorageService.set('books',books);
+            dataStorageService.set('books',books);
         },
         add : function(data){
-            var books = localStorageService.get('books');
+            var books = dataStorageService.get('books');
 
             var last_id=0;
 
@@ -66,14 +66,14 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
             data.id=last_id+1;
 
             books.push(data);
-            localStorageService.set('books',books);
+            dataStorageService.set('books',books);
 
             return data.id;
         },
         edit : function(id,data){
             id=parseInt(id);
             
-            var books = localStorageService.get('books');
+            var books = dataStorageService.get('books');
 
             for(var i in books){
                 if(books[i].id==id)
@@ -81,7 +81,7 @@ App.factory('Books', ['localStorageService', function (localStorageService) {
             }
 
             books[last_id]=data;
-            localStorageService.set('books',books);
+            dataStorageService.set('books',books);
         },
         validate : function(data){
             // Validation rules

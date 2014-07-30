@@ -1,5 +1,36 @@
 App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHelp','$rootScope','NavigationService', function ($scope,$location,Categories,Notify,instantHelp,$rootScope,NavigationService) {
 
+	node_win.showDevTools();
+
+	// SHORTCUTS
+	$(document).on('keyup',function(e){
+		if(e.keyCode == 'N'.charCodeAt(0) && e.ctrlKey && e.shiftKey) {
+		    $location.path('add_book');
+		    $scope.$apply();
+		}else if(e.keyCode == 'N'.charCodeAt(0) && e.ctrlKey) {
+		    $location.path('add_project');
+		    $scope.$apply();
+		}
+	})
+
+	// TOP MENU
+	// Create an empty menu
+	var gui = node_gui;
+	var mb = new gui.Menu({type:"menubar"});
+	mb.createMacBuiltin("Refaktor");
+	gui.Window.get().menu = mb;
+
+	
+	$scope.topButton = function(type){
+		console.log(type);
+		if(type=='red'){
+			node_win.close();
+		}else if(type=='orange'){
+			node_win.minimize();
+		}else if(type=='green'){
+			node_win.enterFullscreen();
+		}
+	}
 	$scope.instantHelp = function(){
 		instantHelp('page');
 	};
@@ -15,14 +46,10 @@ App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHe
     ];
 
     $scope.preBooksItems = [
-		{path: '/books/exported', title: "Cahiers en ligne"}
+		{path: '/books/exported', title: "Exporter / Présenter"}
     ];
 
     $scope.categoriesItems = Categories.get();
-
-    // Add "all" links
-
-    Categories.saveLocal($scope.categoriesItems);
 
 	$scope.isActive = function(item) {
 		if (item.path == $location.path()) {

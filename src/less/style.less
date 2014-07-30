@@ -17,6 +17,55 @@ body,html,.ui_content{
 	width: 100%;
 	height: 100%;
 }
+// .topbar{
+// 	height:29px;
+// 	position:relative;
+// 	width: 100%;
+// 	background-color: darken(@green,6%);
+// 	-webkit-app-region: drag;
+// 	-webkit-user-select: none;
+// 	.close{
+// 		position: absolute;
+// 		width: 15px;
+// 		height: 15px;
+// 		background-color: #FFF;
+// 		top:7px;
+// 		left:7px;
+// 		border-radius: 10px;
+// 		&:hover{
+// 			background-color: #e74c3c;
+// 			cursor:pointer;
+// 		}
+
+// 	}
+// }
+
+.wbuttons{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+
+	.wbutt{
+		width: 12px;
+		height: 12px;
+		background-color: darken(@green,18%);
+		float:left;
+		border-radius:100px;
+		margin-right: 7px;
+	}
+
+	.wbutt:nth-child(2){background-color: darken(@green,12%);}
+	.wbutt:nth-child(3){background-color: darken(@green,8%);}
+
+	.wbutt:nth-child(1):hover{background-color:#e74c3c}
+	.wbutt:nth-child(2):hover{background-color:#f1c40f}
+	.wbutt:nth-child(3):hover{background-color:#2ecc71}
+
+	.wbutt:hover{
+		cursor:pointer;
+	}
+}
+
 .ui_content{
 	min-width:900px;
 	position: relative;
@@ -45,6 +94,7 @@ body,html,.ui_content{
 		background-color: @green;
 		z-index: 300;
 		position: relative;
+		padding-top: 5px;
 	}
 	.previous{
 		position:absolute;
@@ -75,7 +125,7 @@ body,html,.ui_content{
 		top:0;
 		height: @top_menu_height;
 		line-height: @top_menu_height;
-		font-size: 36px;
+		font-size: 26px;
 		font-weight: 300;
 		color: lighten(@dark_grey,10%);
 		transition:all 0.2s;
@@ -732,7 +782,7 @@ aside.sidebar{
 				border-radius:4px;
 				overflow:hidden;
 				display: block;
-				height: 350px;
+				height: 280px;
 
 				.image{
 					width:100%;
@@ -1145,23 +1195,32 @@ aside.sidebar{
 					cursor:pointer !important;
 				}
 				&.added{
-					color:#FFFFFF;
-					text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+					color:#BEC4C7;
+					font-weight:300;
 				}
 			}
 
 			ul.themes{
 				margin: 15px 0;
+				overflow-y: scroll;
+				height: 60px;
 				li{
 					display: inline-block;
-					height: 100px;
+					height: 60px;
 					width: 100px;
-					background-color:@grey;
+					background-color:rgba(247,247,247,0.05);
+					border-radius:5px;
 					margin-right:20px;
 					text-align: center;
-					line-height: 100px;
+					line-height: 58px;
+					border:1px dotted #d5dbde;
+					color:#A6ACAF;
+					font-size:13px;
+					font-weight:300;
 					&.actual{
-						background-color: green;
+						background-color: @green;
+						color:#fff;
+						border:1px solid @green;
 					}
 					&:hover{
 						cursor:pointer;
@@ -1672,7 +1731,7 @@ aside.sidebar{
 				}
 
 				width:50%;
-				min-height:500px;
+				height:400px;
 				background-color: darken(@grey,5%);
 				background-size: cover;
 				background-position: center center;
@@ -1769,7 +1828,7 @@ aside.sidebar{
 					}
 					&.desc{
 						width: 100%;
-						margin-top:30px;
+						margin-top:20px;
 						line-height: 130%;
 						padding-right: 20px;
 						textarea{
@@ -1777,7 +1836,7 @@ aside.sidebar{
 							padding:0;
 							margin:0;
 							width: 100% !important;
-							height: 141px;
+							height: 60px;
 							outline:none;
 							font-size:12px;
 						}
@@ -1797,7 +1856,6 @@ aside.sidebar{
 
 
 			ul{
-				padding:30px 0 0px 0;
 				width: 100%;
 				height: 100%;
 				position: absolute;
@@ -1862,13 +1920,15 @@ aside.sidebar{
 							width: 100%;
 							display:table-cell;
 							vertical-align: middle;
-							padding-bottom: 25px;
 							section{
 								position: relative;
 							}
+							form{
+								margin-top: -20px;
+							}
 						}
 						i{
-							font-size: 80px;
+							font-size: 60px;
 							display:block;
 							margin:0 auto;
 							transition:transform 1s;
@@ -1924,8 +1984,8 @@ aside.sidebar{
 		padding: 20px 20px 0 20px;
 
 		article{
-			width: 550px;
-			height: 777.85px;
+			width: 460px;
+			height: 630px;
 			display: block;
 			border: 1px solid darken(@grey,5%);
 			margin-bottom: 20px;
@@ -1979,7 +2039,7 @@ section.form{
     width: 100%;
     height: 100%;
     position: absolute;
-    padding-left: 590px;
+    padding-left: 500px;
     .right_panel_content{
     	position: relative;
     	width: 100%;
@@ -2106,17 +2166,17 @@ section.form{
 // MEDIA QUERIES
 @media screen and (min-width: 1000px) and (max-width: 1300px) {
 	.project{
-		height:170px !important;
+		height:170px;
 	}
 	.book:not(.item){
-		height:270px !important;
+		height:270px;
 	}
 }
 
 
 @media screen and (max-width: 1150px) {
 	.project{
-		height:140px !important;
+		height:140px;
 	}
 }
 

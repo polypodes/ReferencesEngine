@@ -47,13 +47,12 @@ table {
 	border-spacing: 0;
 }
 
-*, *:before, *:after {-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+*, *:before, *:after {-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;-webkit-user-select: none;}
 
 body,html{width: 100%;height: 100%;margin:0;padding:0;}
 .render{position:relative;width: 100%;height: 100%;}
 .item,.cover,.projects,.medias{height:100%;}
 .image{position: absolute;display:block;display: block;background-size:cover;z-index:10;}
-
 .imagecontent{
 	position: relative;
 	width: 100%;
@@ -62,6 +61,25 @@ body,html{width: 100%;height: 100%;margin:0;padding:0;}
 	background-size: cover;
 	background-position: center center;
 }
+
+div.big_container{height: 100%;}
+div.big_container.files{height:200%;}
+div.big_container.files .item{height:50%;}
+
+/* PRESENTATION ONLY */
+.render.presentation{height: 100%;overflow: hidden;position: relative;z-index:5;}
+.render.presentation .item,.render.presentation .cover{position: absolute;top: 0;left: 0;width: 100%;height: 100% !important; background-color: #fff;}
+
+/* PRESENTATION TOPBAR */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,600);
+.topbar_presentation{height: 40px;width: 100%;position: absolute;top:0;left:0;background-color: #232b2d;z-index:10; -webkit-transition:all 0.3s;}
+.topbar_presentation.hidden{-webkit-transform:translateY(-80px);}
+.topbar_presentation .left{height: 40px;float:left;padding-left: 0;}
+.topbar_presentation .left .butt{border-right:1px solid #485255;}
+.topbar_presentation .right{height: 40px;float:right;padding-right: 0;}
+.topbar_presentation .right .butt{border-left:1px solid #485255;}
+.topbar_presentation .butt{color:#FFFFFF; font-size:12px; line-height:40px;display:inline-block; padding: 0 12px; font-family:'Open Sans', sans-serif;}
+.topbar_presentation .butt:hover{cursor:pointer;}
 
 .row-0{top:0%;}
 .row-1{top:20%;}

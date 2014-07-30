@@ -10,9 +10,9 @@
     <div class="new_project_wysiwyg">
         <div class="image" ng-style="{'background-image':'url('+project_data.cover+')'}">
             <div class="gradient"></div>
-            <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)" id="tip5">
+            <form id="tip5">
                 <section>
-                    <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-cover></input>
+                    <input type="file" name="file" class="file" ng-click="uploadImg('cover')" ng-model="file" data-uploadimg accept=".jpg,.jpeg,.png,.gif"></input>
                     <i class="fa fa-angle-down"></i><span>Ajouter une couverture</span>
                     <input type="submit" class="fileSubmitCover">
                 </section>
@@ -56,14 +56,13 @@
     </div>
     <div class="bottom_box" id="tip4">
         <div class="medias">
-            <h3>Médias complémentaires</h3>
             <ul>
                 <li class="add">
                     <div>
-                        <form action="uploads/upload.php" ng-upload="uploadComplete(content)">
+                        <form>
                             
                             <section>
-                                <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-file></input>
+                                <input type="file" name="file" class="file" ng-click="uploadImg('media')" ng-model="file" data-uploadimg accept=".jpg,.jpeg,.png,.gif"></input>
                                 <i class="fa fa-angle-down"></i><span>Ajouter un média</span>
                                 <input type="submit" class="fileSubmit">
                             </section>

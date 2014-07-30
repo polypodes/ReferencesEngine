@@ -106,16 +106,14 @@ App.controller('AddBookCtrl', ['$scope','Projects','Themes','$http','Books','$ro
     };
 
     $scope.chooseTheme(0);
-
     $scope.isUploading=false;
-    $scope.uploadImg = function(){
-        $scope.isUploading=true;
-    };
-    $scope.uploadCoverComplete = function(content) {
-     $scope.isUploading=false;
-        if(content.status=="success"){
-            $scope.book.cover="uploads/files/"+content.fileName;
-        }
+
+    $scope.uploadImg=function(type){
+
+        var listener = $scope.$on('fileUploaded',function(e,p){
+            $scope.book.cover=p;
+            listener();
+        })
     };
 
     $scope.saveBook = function(){

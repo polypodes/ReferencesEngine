@@ -1,7 +1,7 @@
 
-App.factory('Categories',['localStorageService', function (localStorageService) {
+App.factory('Categories',['dataStorageService', function (dataStorageService) {
     
-    var cats = localStorageService.get('categories');
+    var cats = dataStorageService.get('categories');
 
     return {
         get: function(){
@@ -12,7 +12,7 @@ App.factory('Categories',['localStorageService', function (localStorageService) 
                 }
             }
 
-            if(cats===null){
+            if(cats.length==0){
                 cats = {
                     projects:[
                         {id:0,title:"Tous les projets",path:"/projects/"}
@@ -25,12 +25,14 @@ App.factory('Categories',['localStorageService', function (localStorageService) 
             return cats;
         },
         saveLocal : function(data){
-            localStorageService.set('categories',data);
+            console.log('SAVELOCAL');
+            console.log(data);
+            dataStorageService.set('categories',data);
         },
         delete : function(t,i){
             i=parseInt(i);
 
-            var cats = localStorageService.get('categories');
+            var cats = dataStorageService.get('categories');
 
             /* jshint ignore:start */
             if(t=='projects'){
@@ -41,13 +43,13 @@ App.factory('Categories',['localStorageService', function (localStorageService) 
                 }
 
                 // replace all projects to "all"
-                var projects = localStorageService.get('projects');
+                var projects = dataStorageService.get('projects');
                 for(var j in projects){
                     if(projects[j].category == i){
                         projects[j].category=0;
                     }
                 }
-                localStorageService.set('projects',projects);
+                dataStorageService.set('projects',projects);
 
             }else if(t=='books'){
 
@@ -57,18 +59,18 @@ App.factory('Categories',['localStorageService', function (localStorageService) 
                 }
 
                 // replace all books to "all"
-                var books = localStorageService.get('books');
+                var books = dataStorageService.get('books');
                 for(var j in books){
                     if(books[j].category == i){
                         books[j].category=0;
                     }
                 }
-                localStorageService.set('books',books);
+                dataStorageService.set('books',books);
 
             }
             /* jshint ignore:end */
             
-            localStorageService.set('categories',cats);
+            dataStorageService.set('categories',cats);
 
         }
     };

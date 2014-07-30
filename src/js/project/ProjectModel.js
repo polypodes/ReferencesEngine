@@ -1,8 +1,8 @@
-App.factory('Projects',['localStorageService', function (localStorageService) {
+App.factory('Projects',['dataStorageService', function (dataStorageService) {
 
     function checkExisting(data){
         if(data===null){
-            localStorageService.set('projects',[]);
+            dataStorageService.set('projects',[]);
         }
     }
 
@@ -10,7 +10,7 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
         get: function(id) {
             id = parseInt(id);
 
-            var projects = localStorageService.get('projects');
+            var projects = dataStorageService.get('projects');
             var temp_projects=[];
             checkExisting(projects);
 
@@ -29,7 +29,7 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
         getById : function(id) {
             id=parseInt(id);
 
-            var projects = localStorageService.get('projects');
+            var projects = dataStorageService.get('projects');
             checkExisting(projects);
             for(var i in projects){
                 if(projects[i].id==id){
@@ -38,10 +38,10 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
             }
         },
         saveLocal : function(data){
-            localStorageService.set('projects',data);
+            dataStorageService.set('projects',data);
         },
         add : function(data){
-            var projects = localStorageService.get('projects');
+            var projects = dataStorageService.get('projects');
 
             var last_id=0;
 
@@ -52,14 +52,14 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
 
             projects.push(data);
 
-            localStorageService.set('projects',projects);
+            dataStorageService.set('projects',projects);
 
             return data.id;
         },
         edit : function(id,data){
             id=parseInt(id);
             
-            var projects = localStorageService.get('projects');
+            var projects = dataStorageService.get('projects');
 
             for(var i in projects){
                 if(projects[i].id==id)
@@ -67,13 +67,13 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
             }
 
             projects[last_id]=data;
-            localStorageService.set('projects',projects);
+            dataStorageService.set('projects',projects);
         },
         delete: function(id){
             id=parseInt(id);
 
-            var projects = localStorageService.get('projects');
-            var books = localStorageService.get('books');
+            var projects = dataStorageService.get('projects');
+            var books = dataStorageService.get('books');
 
             // Delete the project
             for(var i in projects){
@@ -91,8 +91,8 @@ App.factory('Projects',['localStorageService', function (localStorageService) {
                 }                
             }
 
-            localStorageService.set('projects',projects);
-            localStorageService.set('books',books);
+            dataStorageService.set('projects',projects);
+            dataStorageService.set('books',books);
         },
         validate : function(data){
             // Validation rules

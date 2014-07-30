@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:700,400italic,400,300);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,400,800,700,600,300);
 
 .render{
 	font-family:"Open Sans", sans-serif;
@@ -21,15 +21,23 @@
 	position: relative;
 }
 
+/* Animations */
+.animate{transition:-webkit-transform 0.8s;z-index:5;}
+.previous{-webkit-transform: translateX(-100%);}
+.next{-webkit-transform: translateX(100%);}
+.active{-webkit-transform: translateX(0%);transition:-webkit-transform 0.5s;z-index:50;}
+
+
+
 /* Cover page */
 .cover{}
 
 .render .cover .cover_image{position:absolute;width:100%;height:100%;left: 0;top: 0; z-index:4;background-size:cover;background-position:left center;}
-.render .cover .cover_content{position: absolute;left: 0;width: 100%;height: 100%; padding:40px;z-index:10;}
+.render .cover .cover_content{position: absolute;left: 0;bottom:60px; padding:0 10px;z-index:10;}
 
-.render .cover .cover_content .text{color:#fff;text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);}
-.render .cover .cover_content h1{font-size:36px;line-height:150%;padding:30px 0;}
-.render .cover .cover_content h2{font-size:14px;line-height:150%;}
+.render .cover .cover_content .text{color:#fff;padding:0 50px;}
+.render .cover .cover_content h1{font-size:80px;line-height:150%;font-weight:600;text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);margin-bottom: 15px;}
+.render .cover .cover_content h2{font-size:22px;line-height:150%;font-weight: 300; font-style:italic; opacity:0.8;}
 .render .cover .cover_content h4{font-size:12px;line-height:150%; position:absolute; bottom:15px;}
 
 .render .cover .gradient{
@@ -40,29 +48,24 @@
 
 	z-index:7;
 
-	background: -moz-linear-gradient(top,  rgba(0,0,0,0.23) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.23)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.23) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(0,0,0,0.23) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(0,0,0,0.23) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(0,0,0,0.23) 0%,rgba(0,0,0,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.3)), color-stop(100%,rgba(0,0,0,0.45))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.45) 100%); /* Chrome10+,Safari5.1+ */
 }
 
 /* Items */
 .render .item{}
 .render .item .project{}
-.render .item .project .project_image{position: absolute;top: 0%;width: 100%;height: 50%;padding:20px;background-size:cover;background-position:center center;}
-.render .item .project .project_content{position: absolute;top: 50%;width: 100%;height: 50%;padding:20px;}
-.render .item .project .project_content h3{font-size: 12px; font-size: 12px; font-weight: 700; color: #9C9C9C; text-transform: uppercase; margin:13px 0 15px 0;}
-.render .item .project .project_content h2{line-height:60px;font-size: 36px}
-.render .item .project .project_content h4{font-size: 16px;}
-.render .item .project .project_content div.desc{ font-size: 12px;line-height: 150%; padding-top: 30px;}
+.render .item .project .project_image{position: absolute;top: 0%;width: 100%;height: 100%;padding:20px;background-size:cover;background-position:center center;}
+.render .item .project .project_content{position: absolute;bottom: 0;width: 100%; z-index:999;}
+.render .item .project .project_content h3{padding: 0 20px;font-size: 12px; font-size: 22px; font-weight: 300; color: #fff; margin:13px 0 0px 0;opacity: 0.6;max-width: 40%}
+.render .item .project .project_content h2{padding: 0 20px;font-size:80px;line-height:150%;font-weight:600;text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);margin-bottom: 50px;color:#FFF;}
+.render .item .project .project_content h4{font-size: 16px; color:#000;padding: 0 20px;position: relative;margin-bottom: -37px;opacity: 0.35;}
+.render .item .project .project_content div.desc{ font-size: 16px;line-height: 150%; padding: 50px 20px 50px 20px;background-color: #fff;font-weight: 300;font-style: italic;}
 .render .item .project .gradient{
 	position: absolute;
 	top: 0;
 	width: 100%;
-	height: 50%;
+	height: 100%;
 
 	z-index:7;
 

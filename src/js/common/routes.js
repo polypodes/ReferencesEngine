@@ -46,3 +46,13 @@ App.config(['$routeProvider', function ($routeProvider) {
   });
 
 }]);
+
+presentApp.config(['$routeProvider', function ($routeProvider) {
+
+  $routeProvider
+  .when('/p/:book_id', {
+    templateUrl: 'src/views/present.html',
+    controller: 'PresentationCtrl'
+  });
+
+}]);

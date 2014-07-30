@@ -1,4 +1,4 @@
-App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams','Notify','$location','NavigationService', function ($scope,Projects,Categories,$routeParams,Notify,$location,NavigationService) {
+App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams','Notify','$location','NavigationService','$rootScope', function ($scope,Projects,Categories,$routeParams,Notify,$location,NavigationService,$rootScope) {
 
     utils.fixBottomBoxHeight();
 
@@ -23,8 +23,19 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
     // Files
     $scope.isUploading=false;
 
-    $scope.uploadImg=function(){
+    $scope.uploadImg=function(type){
         $scope.isUploading=true;
+
+        var listener = $scope.$on('fileUploaded',function(e,p){
+            console.log(p);
+            if(type=='cover'){
+                $scope.project_data.cover=p;
+            }else if(type=='media'){
+                $scope.project_data.files.push({path:p});
+            }
+            
+            listener();
+        })
     };
 
     if($routeParams.project_id!==undefined){
@@ -51,7 +62,9 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
             return false;
         }
 
-        var last_id=0;
+        $rootScope.$on('filewritten',function(){
+            $location.path( "/projects/0" );
+        });
 
         if(!(finalProject.hasOwnProperty('id'))){
             // Create a project, so find a new ID
@@ -63,7 +76,7 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
             Notify('success','Projet modifié','Le projet a été modifié avec succès');
         }
 
-        $location.path( "/projects/0" );
+        
     };
 
     $scope.selectCategory=function(index){
@@ -95,15 +108,6 @@ App.controller('AddProjectCtrl', ['$scope','Projects','Categories','$routeParams
             $scope.project_data.cover="uploads/files/"+content.fileName;
         }else{
             Notify('error',"Erreur d'upload","Image de couverture refusée, verifiez la taille et l'extension de votre fichier.");
-        }
-    };
-
-    $scope.uploadComplete = function(content) {
-        $scope.isUploading=false;
-        if(content.status=="success"){
-            $scope.project_data.files.push({path:"uploads/files/"+content.fileName});
-        }else{
-            Notify('error',"Erreur d'upload","Upload refusé, verifiez la taille et l'extension de votre fichier.");
         }
     };
 

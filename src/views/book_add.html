@@ -111,9 +111,9 @@
                     <div class="cols">
                         <div class="col image" id="tip7">
                             <label>Image de couverture</label>
-                            <form action="uploads/upload.php" ng-upload="uploadCoverComplete(content)"> 
+                            <form> 
                                 <section class="book_cover" ng-style="{'background-image':'url('+book.cover+')'}" ng-class="{'added' : book.cover != ''}">
-                                    <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-file></input>
+                                    <input type="file" name="file" class="file" ng-click="uploadImg()" ng-model="file" data-uploadimg accept=".jpg,.jpeg,.png,.gif"></input>
                                     <span>Ajouter un média</span>
                                     <input type="submit" class="fileSubmit">
                                 </section>

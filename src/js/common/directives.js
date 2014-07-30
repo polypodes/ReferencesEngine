@@ -1,4 +1,3 @@
-
 App.directive('focusOn', function() {
    return function(scope, elem, attr) {
       scope.$on(attr.focusOn, function(e) {
@@ -11,25 +10,27 @@ App.directive('focusOn', function() {
 
 
 // File upload
-App.directive('file', function() {
+App.directive('uploadimg', function() {
     return {
         require:"ngModel",
         restrict: 'A',
-        link: function($scope, el, attrs, ngModel){
-            el.bind('change', function(event){
-                $('input.fileSubmit').trigger('click');
-                $scope.$apply();
-            });
-        }
-    };
-});
-App.directive('cover', function() {
-    return {
-        require:"ngModel",
-        restrict: 'A',
-        link: function($scope, el, attrs, ngModel){
+        link: function($scope, el, attrs, ngModel){            
             el.bind('change', function(event){
                 $('input.fileSubmitCover').trigger('click');
+
+                var file = $(this).val();
+                var ext = node_path.extname(file);
+                imageData = node_fs.readFileSync(file);
+
+                if(ext==".png" || ext==".jpg" || ext==".jpeg" || ext==".gif"){
+                    var filename="_img"+uniqid()+ext;
+                    var path = dataPath+"/"+filename;
+                    node_fs.writeFileSync(path, imageData, 'binary');
+
+                    path = path.replace(" ","%20"); // spaces
+                    $scope.$broadcast('fileUploaded',("file://"+path));
+                }
+
                 $scope.$apply();
             });
         }
@@ -115,4 +116,37 @@ App.factory('NavigationService', ['$rootScope', function($rootScope) {
             $rootScope.pageInfos.pageTitle=t;
         }
     };
+}]);
+
+App.factory('dataStorageService',['$rootScope', function($rootScope){
+
+    return {
+        set : function(id,data) {
+
+            var filename="_data"+id+".json";
+            var path = dataPath+"/"+filename;
+
+            console.log('SET '+filename);
+            node_fs.writeFileSync(path, angular.toJson(data,true));
+            $rootScope.$emit('filewritten',true);
+        },
+        get: function(id) {
+
+            var filename="_data"+id+".json";
+            var path = dataPath+"/"+filename;
+
+            if (!node_fs.existsSync(path)){
+                node_fs.writeFile(path, angular.toJson([],true));
+                console.log('write new');
+            }
+
+            console.log('GET '+filename);
+            
+            var data = node_fs.readFileSync(path,"utf-8");
+            $rootScope.$emit('filereaded',true);
+
+            var data = angular.fromJson(data);
+            return data;
+        }
+    }
 }]);

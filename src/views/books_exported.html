@@ -28,9 +28,9 @@
                 <td>{{book.id}}</td>
     			<td>{{book.btitle}}</td>
     			<td>{{categories.books[book.category].title}}</td>
-    			<td ng-if="book.exported!=false"><span class="exported">Exporté : books/{{book.exported}}</span></td>
-    			<td ng-if="book.exported==false"><span class="nexported">Non exporté</span></td>
-    			<td><a href="#/book/{{book.id}}/edit">Voir</a></td>
+    			<td ng-if="book.exported!=false"><span class="exported">En ligne : books/{{book.exported}}</span></td>
+    			<td ng-if="book.exported==false"><span class="nexported">Hors ligne</span></td>
+    			<td><a href="#/book/{{book.id}}/edit">Voir</a> | <a href="#/book/{{book.id}}/edit">Exporter</a> | <a href="present.html#/p/{{book.id}}">Présenter</a></td>
     		</tr>
     	</table>
     </section>
