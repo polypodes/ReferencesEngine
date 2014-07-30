@@ -37,7 +37,7 @@ presentApp.controller('PresentationCtrl', ['$scope','$routeParams','Presentation
         $scope.book=book;
 
         // Init variables
-        $scope.activePage=1;
+        $scope.activePage=0;
         $scope.showFiles=false;
         $('#themestyle').attr('href','src/templates/'+initial_book.theme.src+'/style.css');
 
@@ -107,6 +107,14 @@ presentApp.controller('PresentationCtrl', ['$scope','$routeParams','Presentation
         };
         $scope.toggleFullscreen = function(){
             node_win.toggleKioskMode();
+        };
+
+        $scope.exportBook=function(){
+            var render ="<html><head><body><section class='render'>"+$('.render').html()+"</section></body></html>";
+            
+            var page = phantom.create();
+
+            console.log(page)
         };
         
     }

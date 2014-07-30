@@ -73,6 +73,8 @@ function uniqid(prefix, more_entropy) {
 
 var node_fs = require('fs');
 var node_path = require('path');
+var phantomjs = require('phantomjs');
+var phantom = require('phantom');
 var node_gui = require('nw.gui');
 var node_win = node_gui.Window.get();
 var dataPath = node_gui.App.dataPath;
