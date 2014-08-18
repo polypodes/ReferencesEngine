@@ -1,0 +1,31 @@
+{
+  "projects": [
+    {
+      "id": 0,
+      "title": "Tous les projets",
+      "path": "/projects/0"
+    },
+    {
+      "id": 1,
+      "title": "Sites web",
+      "path": "/projects/1"
+    },
+    {
+      "id": 2,
+      "title": "Applications",
+      "path": "/projects/2"
+    },
+    {
+      "id": 3,
+      "title": "Branding",
+      "path": "/projects/3"
+    }
+  ],
+  "books": [
+    {
+      "id": 0,
+      "title": "Tous les cahiers",
+      "path": "/books/0"
+    }
+  ]
+}
