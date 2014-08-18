@@ -110,11 +110,18 @@ presentApp.controller('PresentationCtrl', ['$scope','$routeParams','Presentation
         };
 
         $scope.exportBook=function(){
-            var render ="<html><head><body><section class='render'>"+$('.render').html()+"</section></body></html>";
-            
-            var page = phantom.create();
+            var b_mainCSS = node_fs.readFileSync('templating/src/style/style.css', "utf8");
+            var b_themeCSS = node_fs.readFileSync("src/templates/"+initial_book.theme.src+"/style.css", "utf8");
 
-            console.log(page)
+            // console.log(b_mainCSS);
+
+            var b_header = "<html><head><style>"+b_mainCSS+"</style></head><body>";
+            var b_content = $('.render').html();
+            var b_footer = "</body></html>";
+
+            var html = b_header+b_content+b_footer;
+            wkhtmltopdf(html,{output: 'out.pdf'});
+            console.log(b_content)
         };
         
     }

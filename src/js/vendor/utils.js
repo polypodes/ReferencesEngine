@@ -66,10 +66,9 @@ function uniqid(prefix, more_entropy) {
       .toFixed(8)
       .toString();
   }
-
+  
   return retId;
 }
-
 
 var node_fs = require('fs');
 var node_path = require('path');
@@ -78,6 +77,7 @@ var phantom = require('phantom');
 var node_gui = require('nw.gui');
 var node_win = node_gui.Window.get();
 var dataPath = node_gui.App.dataPath;
+var wkhtmltopdf = require('wkhtmltopdf');
 
 node_fs.mkdirParent = function(dirPath, mode, callback) {
     node_fs.mkdir(dirPath, mode, function(error) {

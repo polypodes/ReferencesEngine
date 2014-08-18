@@ -41,6 +41,10 @@ App.config(['$routeProvider', function ($routeProvider) {
     templateUrl: 'src/views/settings.html',
     controller: 'SettingsCtrl'
   })
+  .when('/install', {
+    templateUrl: 'src/views/install.html',
+    controller: 'InstallCtrl'
+  })
   .otherwise({
     redirectTo: '/overview'
   });

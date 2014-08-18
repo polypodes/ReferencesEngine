@@ -122,7 +122,7 @@ App.factory('dataStorageService',['$rootScope', function($rootScope){
 
     return {
         set : function(id,data) {
-
+            console.log(dataPath);
             var filename="_data"+id+".json";
             var path = dataPath+"/"+filename;
 

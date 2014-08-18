@@ -26,8 +26,8 @@
   "window": {
     "title": "Refaktor",
     "icon": "link.png",
-    "toolbar": true,
-    "frame": true,
+    "toolbar": false,
+    "frame": false,
     "width": 1200,
     "height": 750,
     "position": "mouse",

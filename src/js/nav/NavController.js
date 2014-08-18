@@ -1,6 +1,21 @@
 App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHelp','$rootScope','NavigationService', function ($scope,$location,Categories,Notify,instantHelp,$rootScope,NavigationService) {
 
 	node_win.showDevTools();
+	
+	var isFirstLaunch=Categories.checkIfFirstLaunch();
+	console.log(isFirstLaunch);
+
+	if(isFirstLaunch){
+		$location.path('install');
+	}else{
+		$scope.categoriesItems = Categories.get();
+	}
+
+	$rootScope.$on('refreshCategories',function(){
+		console.log('refresh');
+		$scope.categoriesItems = Categories.get();
+	})
+
 
 	// SHORTCUTS
 	$(document).on('keyup',function(e){
@@ -48,8 +63,6 @@ App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHe
     $scope.preBooksItems = [
 		{path: '/books/exported', title: "Exporter / Présenter"}
     ];
-
-    $scope.categoriesItems = Categories.get();
 
 	$scope.isActive = function(item) {
 		if (item.path == $location.path()) {
@@ -125,10 +138,6 @@ App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHe
 				$location.path('books/0');
 
 		}
-
-	
-		
-		
 	};
 
 	var rc=0;
@@ -146,5 +155,4 @@ App.controller('NavCtrl', ['$scope','$location','Categories','Notify','instantHe
 		}
 		rc++;
 	});
-
 }]);

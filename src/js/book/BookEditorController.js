@@ -85,6 +85,21 @@ App.controller('BookEditorCtrl', ['$scope','Books','$routeParams','Notify','$loc
       });
     }
 
+    $scope.exportBook = function(){
+      var b_mainCSS = node_fs.readFileSync('templating/src/style/style.css', "utf8");
+      var b_themeCSS = node_fs.readFileSync("src/templates/"+$scope.book.theme.src+"/style.css", "utf8");
+
+      console.log(b_themeCSS);
+      
+      var b_header = "<html><head><style>"+b_mainCSS+"</style></head><body>";
+      var b_content = $('.preview.render').html();
+      var b_footer = "</body></html>";
+
+      var html = b_header+b_content+b_footer;
+      wkhtmltopdf(html,{output: 'out.pdf'});
+      console.log('ended')
+    }
+
     $scope.saveBook = function(showNotif){
 
         var validation = Books.validate($scope.book);

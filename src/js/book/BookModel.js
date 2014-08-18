@@ -1,18 +1,11 @@
 App.factory('Books', ['dataStorageService', function (dataStorageService) {
 
-    function checkExisting(data){
-        if(data===null){
-            dataStorageService.set('books',[]);
-        }
-    }
-
     return {
         get: function(id) {
             id=parseInt(id);
 
             var books = dataStorageService.get('books');
             var temp_books=[];
-            checkExisting(books);
             if(id!==0){
                 for(var i in books){
                     if(books[i].category==id){
@@ -30,7 +23,6 @@ App.factory('Books', ['dataStorageService', function (dataStorageService) {
             id=parseInt(id);
 
             var books = dataStorageService.get('books');
-            checkExisting(books);
 
             for(var i in books){
                 if(books[i].id==id){

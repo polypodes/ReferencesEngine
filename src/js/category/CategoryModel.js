@@ -1,10 +1,20 @@
 
 App.factory('Categories',['dataStorageService', function (dataStorageService) {
-    
-    var cats = dataStorageService.get('categories');
 
     return {
+        checkIfFirstLaunch: function(){
+            var filename="_datacategories.json";
+            var path = dataPath+"/"+filename;
+
+            if(node_fs.existsSync(path)){
+                return false;
+            }else{
+                return true;
+            }
+        },
         get: function(){
+            var cats = dataStorageService.get('categories');
+
             for(var i in cats){
                 for(var j in cats[i]){
                     if(cats[i][j].id!==null)
@@ -12,16 +22,6 @@ App.factory('Categories',['dataStorageService', function (dataStorageService) {
                 }
             }
 
-            if(cats.length==0){
-                cats = {
-                    projects:[
-                        {id:0,title:"Tous les projets",path:"/projects/"}
-                    ],
-                    books:[
-                        {id:0,title:"Tous les cahiers",path:"/books/"}
-                    ]
-                };
-            }
             return cats;
         },
         saveLocal : function(data){

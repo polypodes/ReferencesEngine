@@ -1,18 +1,11 @@
 App.factory('Projects',['dataStorageService', function (dataStorageService) {
 
-    function checkExisting(data){
-        if(data===null){
-            dataStorageService.set('projects',[]);
-        }
-    }
-
     return {
         get: function(id) {
             id = parseInt(id);
 
             var projects = dataStorageService.get('projects');
             var temp_projects=[];
-            checkExisting(projects);
 
             if(id!==0){
                 for(var i in projects){
@@ -30,7 +23,6 @@ App.factory('Projects',['dataStorageService', function (dataStorageService) {
             id=parseInt(id);
 
             var projects = dataStorageService.get('projects');
-            checkExisting(projects);
             for(var i in projects){
                 if(projects[i].id==id){
                     return projects[i];

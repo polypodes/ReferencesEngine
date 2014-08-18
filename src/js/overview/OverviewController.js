@@ -34,5 +34,4 @@ App.controller('OverviewCtrl', ['$scope','Projects','Stats','NavigationService',
 
     var myLineChart = new Chart(ctx).Line(data, options);
 
-
 }]);
