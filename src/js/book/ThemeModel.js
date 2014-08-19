@@ -6,15 +6,16 @@ App.factory('Themes', ['dataStorageService', function (dataStorageService) {
 
     return {
         get: function() {
-            var themes = dataStorageService.get('themes');
-            if(themes.length==0){
-                createSampleData();
-                console.log('creating')
-            }
+            // var themes = dataStorageService.get('themes');
+            // if(themes.length==0){
+            //     createSampleData();
+            //     console.log('creating')
+            // }
+            var themes = [{id:0,title:"MediumStyle",src:"theme1",files:['main.js','jquery']}];
             return themes;
         },
         save : function(data){
-            dataStorageService.set('themes',data);
+            // dataStorageService.set('themes',data);
         }
     };
 }]);
